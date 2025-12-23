@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imBg"
+    android:background="#F5F5F5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    tools:background="@color/green"
+    tools:ignore="MissingDefaultResource">
+
+
+    <com.zyyoona7.wheel.WheelView
+        android:id="@+id/wheelview"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        app:wv_normalTextColor="#AFAFAF"
+        app:wv_selectedTextColor="#494949"
+        app:wv_textSize="56dp" />
+
+    <TextView
+        android:id="@+id/bgText"
+        android:layout_width="120dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        app:bl_corners_radius="10dp"
+        app:bl_stroke_color="#C3C3C3"
+        app:bl_stroke_width="5dp"
+        tools:background="@color/red" />
+
+
+    <ImageView
+        android:id="@+id/tvSpace"
+        android:layout_width="70dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-32dp"
+        android:background="#F5F5F5" />
+
+    <TextView
+        android:id="@+id/tvMyUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-35dp"
+        android:text="公里"
+        android:textColor="#838282"
+        android:textSize="16dp" />
+</FrameLayout>

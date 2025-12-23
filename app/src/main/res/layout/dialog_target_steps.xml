@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    android:paddingRight="20dp"
+    android:gravity="center"
+    android:paddingLeft="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/dialog_background_color"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingTop="@dimen/padding_15"
+            android:paddingBottom="@dimen/padding_15"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/set_target"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/target_steps"
+            android:background="@drawable/skip_background"
+            android:textColor="@color/black"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/padding_30"
+            android:layout_marginRight="@dimen/padding_30"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5"
+            android:layout_marginTop="@dimen/padding_10"
+            android:layout_marginBottom="@dimen/padding_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="@dimen/padding_20"
+            android:layout_marginRight="@dimen/padding_20"
+            android:layout_gravity="center_horizontal"
+            android:text="建议每日行走3000~6000步"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/deny"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_10"
+                android:paddingBottom="@dimen/padding_10"
+                android:layout_margin="@dimen/padding_20"
+                android:text="@string/tt_cancel"
+                android:textColor="@color/black"
+                android:background="@drawable/dialog_deny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/auth"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_10"
+                android:paddingBottom="@dimen/padding_10"
+                android:text="@string/dialog_ok"
+                android:textColor="@color/white"
+                android:background="@drawable/dialog_auth"
+                android:layout_margin="@dimen/padding_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

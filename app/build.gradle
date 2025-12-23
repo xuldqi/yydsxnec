@@ -1,0 +1,162 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.greenrobot.greendao'
+
+
+
+
+android {
+    compileSdkVersion 31
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    defaultConfig {
+        applicationId "com.dn.sports"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1215
+        versionName "1.2.15"
+        flavorDimensions "UMENG_CHANNEL"
+        flavorDimensions "app_name"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters  'armeabi-v7a',"arm64-v8a"
+        }
+    }
+
+    signingConfigs {
+//        debug {
+//            storeFile file("step")
+//            storePassword "step01"
+//            keyPassword "step01"
+//            keyAlias "step"
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+//        }
+        release {
+            storeFile file("sport.jks")
+            storePassword "hj123456"
+            keyPassword "hj123456"
+            keyAlias "key0"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.dn.sports.bean'
+        targetGenDir 'src/main/java'
+    }
+
+
+    buildTypes {
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+            signingConfig signingConfigs.release
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+//            outputFileName = "steps" + "_${defaultConfig.versionName}_${releaseTime()}_"+name+".apk"
+            outputFileName = "steps_release.apk"
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    buildToolsVersion = '28.0.3'
+
+//    productFlavors {
+//        oppo {
+//            applicationId "com.dn.sports"
+//            manifestPlaceholders = [UMENG_CHANNEL: "oppo",
+//                                    app_name:"微刻运动"]
+//            multiDexEnabled = true
+//        }
+//    }
+}
+
+def static releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    // 友盟统计SDK
+    implementation  'com.umeng.umsdk:common:9.4.7'// 必选
+    implementation  'com.umeng.umsdk:asms:1.4.0'// 必选
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
+    implementation files('libs/retrofit-2.1.0.jar')
+    implementation files('libs/okhttp-3.4.1.jar')
+    implementation files('libs/okio-1.9.0.jar')
+    implementation files('libs/tmsdk.jar')
+    implementation files('libs/android-query-full.0.26.7.jar')
+    // 穿山甲广告SDK - 使用本地aar (新版本6.x API变化大，需要全面重构才能升级)
+    implementation files('libs/open_ad_sdk.aar')
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.18'
+    implementation files('libs/fastjson-1.2.28.jar')
+    implementation files('libs/gson-2.8.2.jar')
+    implementation 'com.noober.background:core:1.6.5'
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
+    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:7.2.0'
+    implementation ("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.8"){
+        exclude group: 'androidx.recyclerview:recyclerview'
+        exclude group: 'androidx.lifecycle:lifecycle-runtime:2.4.0'
+    }
+    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation("org.greenrobot:eventbus:3.3.1")
+    implementation "com.github.zyyoona7.WheelPicker:pickerview:2.0.7"
+    implementation 'com.github.angcyo:DslSpan:1.1.0'
+    implementation 'com.guolindev.permissionx:permissionx:1.6.1'
+    implementation   'io.github.lucksiege:pictureselector:v3.0.3'
+    implementation   'com.github.bumptech.glide:glide:4.13.2'
+    implementation         'com.github.bumptech.glide:compiler:4.13.2'
+    implementation  'jp.wasabeef:glide-transformations:4.0.1'
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation 'com.meituan.android.walle:library:1.1.7'
+
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+
+}
+
+configurations {
+    all*.exclude group: 'com.google.code.gson'
+    all*.exclude group: 'com.squareup.okhttp3'
+    all*.exclude group: 'com.squareup.okio'
+    all*.exclude group: 'retrofit2'
+    all*.exclude group: 'okio'
+    all*.exclude group: 'com.android.support',module:'support-v13'
+}

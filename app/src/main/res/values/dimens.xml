@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_1">1dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_3">3dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_6">6dp</dimen>
+    <dimen name="padding_7">7dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_11">11dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_14">14dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_25">25dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
+    <dimen name="padding_40">40dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+    <dimen name="padding_60">60dp</dimen>
+    <dimen name="padding_70">70dp</dimen>
+    <dimen name="padding_80">80dp</dimen>
+    <dimen name="padding_90">90dp</dimen>
+    <dimen name="padding_100">100dp</dimen>
+    <dimen name="padding_110">110dp</dimen>
+
+    <dimen name="text_click_back_r">5dp</dimen>
+    <dimen name="eye_click_back_r">7dp</dimen>
+    <dimen name="common_tab_r">3dp</dimen>
+    <dimen name="common_btn_r">20dp</dimen>
+    <dimen name="switch_btn_w">50dp</dimen>
+    <dimen name="switch_btn_h">30dp</dimen>
+    <dimen name="tab_left_right">8dp</dimen>
+    <dimen name="common_title_h">50dp</dimen>
+
+    <dimen name="WheelItemTextSize">14sp</dimen>
+    <dimen name="WheelSelectedItemTextSize">20sp</dimen>
+    <dimen name="WheelItemSpace">12dp</dimen>
+    <dimen name="WheelIndicatorSize">2dp</dimen>
+    <dimen name="WheelMargins">8dp</dimen>
+    <dimen name="WheelItemHeightSpace">16dp</dimen>
+    <dimen name="WheelItemWidthSpace">32dp</dimen>
+
+    <dimen name="progressbar_h">3dp</dimen>
+</resources>

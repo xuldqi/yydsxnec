@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_actionbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="28dp"
+        android:background="#f5f5f5">
+
+        <RelativeLayout
+            android:id="@+id/laySharePic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#f5f5f5"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:background="@color/green">
+
+            <ImageView
+                android:id="@+id/imShare"
+                android:layout_width="match_parent"
+                android:layout_height="451dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/bg_sport" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="35dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/ic_app" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/app_name"
+                    android:textColor="#999999"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imShare"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="-127dp"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                tools:text="03/26" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDate"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="3dp"
+                android:text="2023"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+
+            <TextView
+                android:id="@+id/tvStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDate"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="37dp"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                tools:text="5600" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvStep"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="4dp"
+                android:text="今日步数"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+
+            <TextView
+                android:id="@+id/tvHeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDate"
+                android:layout_marginLeft="205dp"
+                android:layout_marginTop="37dp"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                tools:text="5600" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvHeat"
+                android:layout_marginLeft="205dp"
+                android:layout_marginTop="4dp"
+                android:text="消耗热量"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/laySharePic"
+            android:layout_marginTop="25dp"
+            android:background="#f5f5f5"
+            android:orientation="vertical"
+            tools:background="@color/red">
+
+            <TextView
+                android:id="@+id/btReset"
+                android:layout_width="200dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="本地上传图片"
+                android:textSize="13dp"
+                app:bl_corners_radius="40dp"
+                app:bl_solid_color="@color/white"
+                tools:background="@color/white" />
+
+            <TextView
+                android:id="@+id/btConfirm"
+                android:layout_width="243dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:text="保存到本地"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:bl_corners_radius="40dp"
+                app:bl_solid_color="#F37866"
+                tools:background="#F37866" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

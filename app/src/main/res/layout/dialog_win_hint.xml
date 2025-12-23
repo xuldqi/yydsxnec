@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/dialog_background_color"
+        android:gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingTop="@dimen/padding_15"
+            android:paddingBottom="@dimen/padding_15"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/wx_hint_title"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/wx_hint_content"
+            android:textColor="@color/black"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingRight="@dimen/padding_20"
+            android:layout_marginTop="@dimen/padding_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="(因部分系统机制问题，可能出现需多次同步才能获取到步数的情况。 )"
+            android:textColor="@color/gray"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingRight="@dimen/padding_20"
+            android:layout_marginBottom="@dimen/padding_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/deny"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_10"
+                android:paddingBottom="@dimen/padding_10"
+                android:layout_margin="@dimen/padding_20"
+                android:text="@string/tt_cancel"
+                android:textColor="@color/white"
+                android:background="@drawable/dialog_deny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/auth"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_10"
+                android:paddingBottom="@dimen/padding_10"
+                android:text="@string/auth"
+                android:textColor="@color/white"
+                android:background="@drawable/dialog_auth"
+                android:layout_margin="@dimen/padding_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

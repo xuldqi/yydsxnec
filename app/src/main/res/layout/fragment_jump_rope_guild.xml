@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="1.高晓燃烧卡路里：跳绳是一种高强度的有氧运动，可以快速燃烧 体内的卡路里,每分钟跳绳可以 燃烧约10-16卡路里。
+         \n\n2.全身综合锻炼：通过跳绳，可以 有效锻炼和强化身体的肌肉。\n\n 3.提高心肺耐力：持续的跳绳锻炼可以增强心脏和肺部的功能，提高氧气的吸收和利 用能力，增加身体的耐力水平。\n\n 4.方便灵活：跳绳是一项简单、方便、灵活的运动，不需要大型器 械或者特殊场地。它可 以在室内或者户外进行，适合各种场合和时间。 \n\n5.增强协调性和平衡力:跳绳需要身体的协调性和平
+衡力。这对于
+改善身体的姿势和稳定性，预防运动伤害具有积极的影
+响。"
+            android:textColor="#894439"
+            android:textSize="14dp"
+            />
+    </LinearLayout>
+</ScrollView>

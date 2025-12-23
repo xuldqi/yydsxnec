@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title_layout" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f5f5f5" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="7dp"
+        app:bl_corners_topLeftRadius="20dp"
+        app:bl_corners_topRightRadius="20dp"
+        app:bl_solid_color="@color/white">
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magicIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="13dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="3dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="23dp"
+                android:layout_height="3dp"
+                android:layout_marginRight="2dp"
+                app:bl_corners_radius="3dp"
+                app:bl_solid_color="#AFAFAF">
+
+
+                <ImageView
+                    android:id="@+id/left"
+                    android:layout_width="23dp"
+                    android:layout_height="3dp"
+                    app:bl_corners_radius="3dp"
+                    app:bl_solid_color="#F37866" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="23dp"
+                android:layout_height="3dp"
+                android:layout_marginLeft="2dp"
+                app:bl_corners_radius="3dp"
+                app:bl_solid_color="#AFAFAF">
+
+
+                <ImageView
+                    android:id="@+id/right"
+                    android:visibility="gone"
+                    android:layout_width="23dp"
+                    android:layout_height="3dp"
+                    app:bl_corners_radius="3dp"
+                    app:bl_solid_color="#F37866" />
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f5f5f5"
+        android:paddingLeft="@dimen/padding_5"
+        android:paddingRight="@dimen/padding_5" />
+
+    <ImageView
+        android:id="@+id/add_record"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#f5f5f5"
+        android:paddingBottom="60dp"
+        android:scaleType="center"
+        android:src="@mipmap/icon_add_body" />
+
+</LinearLayout>

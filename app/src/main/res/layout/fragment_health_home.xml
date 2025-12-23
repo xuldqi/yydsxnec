@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_health_fg"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tvHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="健康"
+            android:textColor="#343434"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvHead"
+            android:text="还差2000步达成目标"
+            android:textColor="#706661"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/btMange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingTop="6dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="6dp"
+            android:text="目标管理"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:bl_corners_radius="10dp"
+            app:bl_solid_color="#FF7049"
+            tools:background="#FF7049" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:id="@+id/layFrame"
+                android:layout_width="match_parent"
+                android:layout_height="260dp">
+
+                <com.dn.sports.utils.RingProgressBar
+                    android:id="@+id/ringProgressBar"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="90dp"
+                    android:gravity="center_horizontal"
+                    android:text="今日步数"
+                    android:textColor="#343434"
+                    android:textSize="14dp" />
+
+
+                <TextView
+                    android:id="@+id/tvTodayNums"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:gravity="center_horizontal"
+                    android:text="3000"
+                    android:textColor="#251F1F"
+                    android:textSize="46dp" />
+
+                <TextView
+                    android:id="@+id/tvTarget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="178dp"
+                    android:alpha="0.5"
+                    android:gravity="center_horizontal"
+                    android:text="目标: 5000"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/bgJumpGuild"
+                android:layout_width="350dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="14dp"
+                android:background="@mipmap/jump_entry">
+
+                <TextView
+                    android:id="@+id/tvjump"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="87dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0"
+                    android:textColor="#FED33D"
+                    android:textSize="16dp" />
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layChangeOrder"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:drawableLeft="@mipmap/bg_change_order"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:bl_corners_radius="26dp"
+                app:bl_solid_color="@color/white">
+
+
+                <TextView
+                    android:id="@+id/btChangeOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@mipmap/bg_change_order"
+                    android:drawablePadding="3dp"
+                    android:text="编辑卡片"
+                    android:textColor="#303030"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_actionbar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:bl_corners_radius="16dp"
+        app:bl_solid_color="@color/white"
+        tools:background="@color/red">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:text="显示通知栏"
+            android:textColor="#302F39"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <CheckedTextView
+            android:id="@+id/testFeedMessageCheckBox"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:background="@drawable/debug_selector"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical"
+        app:bl_corners_radius="16dp"
+        app:bl_solid_color="@color/white"
+        tools:background="@color/red">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_user" />
+
+
+            <TextView
+                android:id="@+id/tvUserTips"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="用户协议"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imUser"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="10dp"
+            android:background="#F0F0F0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_private" />
+
+
+            <TextView
+                android:id="@+id/tvPrivacyTips"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="隐私声明"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imPrivacy"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="10dp"
+            android:background="#F0F0F0" />
+
+        <!-- 已收集个人信息清单 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_private" />
+
+            <TextView
+                android:id="@+id/tvPrivacyInfoList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="已收集个人信息清单"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imPrivacyInfoList"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="10dp"
+            android:background="#F0F0F0" />
+
+        <!-- 第三方SDK共享清单 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_private" />
+
+            <TextView
+                android:id="@+id/tvSdkShareList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="第三方SDK共享清单"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imSdkShareList"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical"
+        app:bl_corners_radius="16dp"
+        app:bl_solid_color="@color/white"
+        tools:background="@color/red">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_contart" />
+
+
+            <TextView
+                android:id="@+id/tvContactTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="联系我们"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvContact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="1993323469@qq.com"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imContact"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="10dp"
+            android:background="#F0F0F0" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/icon_info" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:text="版本信息"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvVision"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="v1.0.4"
+                android:textColor="#414141"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:visibility="invisible"
+                android:layout_height="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@mipmap/right_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

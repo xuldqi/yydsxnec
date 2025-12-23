@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_gravity="center"
+    android:background="@mipmap/bg_feature_jump"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="23"
+        android:textColor="@color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tvJump"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:text="跳绳600下"
+        android:textColor="@color/white"
+        android:textSize="7dp" />
+
+    <ImageView
+        android:id="@+id/imFinished"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_margin="1dp"
+        android:background="@mipmap/bg_jump_finished" />
+
+</FrameLayout>

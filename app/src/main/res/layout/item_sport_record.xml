@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@mipmap/bg_card_order_item">
+
+
+    <ImageView
+        android:id="@+id/imSport"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="12dp"
+        android:background="@mipmap/icon_indicator_selected"
+        android:src="@mipmap/icon_room_out_run" />
+
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_toRightOf="@+id/imSport"
+        android:text="户外跑"
+        android:textColor="#44464D"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvType"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/imSport"
+        android:text="户外跑"
+        android:textColor="#858585"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="43dp"
+        android:layout_toRightOf="@+id/tvTime"
+        android:text="02分35秒"
+        android:textColor="#858585"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/tvDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="43dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
+        android:text="0公里"
+        android:textColor="#44464D"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:background="@mipmap/icon_remove" />
+
+
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="main_back">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="prison_center_color">#444D4D4D</color>
+    <color name="gray">#9C9C9C</color>
+    <color name="data_gray">#CECECE</color>
+    <color name="dialog_background_color">#C6353535</color>
+    <color name="permission_check">#FF9800</color>
+    <color name="lock_progress_color">#9200FF1F</color>
+    <color name="green">#309417</color>
+    <color name="count_down">#febea2</color>
+    <color name="common_background_color">#f4f4f4</color>
+    <color name="lock_phone_color">#2c2c2c</color>
+    <color name="prison_hint_color">#aaffffff</color>
+    <color name="blue">#304EFF</color>
+    <color name="app_common_color">#19a2ff</color>
+    <color name="path_color">#80304EFF</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#E91E63</color>
+    <color name="common_btn_color">#009688</color>
+    <color name="dialog_background_content_color">#ffffff</color>
+    <color name="common_tab">#DFDFDF</color>
+    <color name="task_tab">#F4F4F4</color>
+    <color name="orange">#FF9800</color>
+
+    <color name="get_coin_back">#ff5252</color>
+
+    <color name="bills_textcolor">#898E94</color>
+    <color name="spline_color">#fe5d36</color>
+    <color name="orange1">#f88b00</color>
+    <color name="gray4">#b5b5b5</color>
+
+    <color name="common_text_gray">#999999</color>
+    <color name="common_top_bg">#AE9459</color>
+    <color name="common_tab_btn">#C6AD64</color>
+    <color name="common_char_line">#e5d7b0</color>
+    <color name="common_line_chartview_scal">#bababa</color>
+    <color name="common_point_line">#ECECEC</color>
+
+    <color name="eye_progress_f">#ff7171</color>
+    <color name="line_color">#28ff00</color>
+    <color name="color_F37866">#F37866</color>
+    <color name="color_494949">#494949</color>
+    <color name="color_636364">#636364</color>
+    <color name="color_3E3C3B">#3E3C3B</color>
+
+
+
+    <color name="default_window_bg">#ffffff</color>
+    <color name="common_white">#FFFFFF</color>
+    <color name="common_half_alpha">#55000000</color>
+    <color name="title">#B22222</color>
+    <color name="tt_trans_half_black">#FF1A1A1A</color>
+
+    <color name="demo_draw_btn_back">#D33F57</color>
+    <color name="demo_white">#ffffff</color>
+</resources>

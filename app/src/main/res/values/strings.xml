@@ -1,0 +1,224 @@
+<resources>
+    <string name="app_name">微刻运动</string>
+    <string name="tab_step">走路</string>
+    <string name="tab_daily">日常</string>
+    <string name="tab_target">目标</string>
+    <string name="tab_sport">运动</string>
+    <string name="tab_user">我的</string>
+
+    <string name="user_xy">用户协议</string>
+    <string name="user_ys">用户隐私声明</string>
+    <string name="common_problem">常见问题</string>
+    <string name="share_friends">数据分享</string>
+    <string name="rate_us">给软件评分</string>
+    <string name="contact_us">联系我们</string>
+    <string name="already_copy">已复制到剪切板</string>
+    <string name="settings_hint">一些通常的信息</string>
+    <string name="permission">权限设置</string>
+    <string name="task_ad">做任务领金币</string>
+    <string name="demo_reward_feedback">反馈</string>
+
+    <string name="copy">复制</string>
+    <string name="exit_app">再点击一次退出程序</string>
+    <string name="video_double_coin">看完视频奖励翻倍</string>
+    <string name="already_sign">已签到</string>
+    <string name="go_sign">去签到</string>
+    <string name="sign">签到</string>
+    <string name="no_sign">未签到</string>
+    <string name="no_sign_date">未到时间</string>
+    <string name="sign_already">今日已签到</string>
+    <string name="sign_ok">签到成功，获取金币奖励</string>
+    <string name="wx_steps">同步微信步数成功：</string>
+    <string name="wx_steps_hint">请用小程序同步微信步数，获取实时步数</string>
+    <string name="today_target_steps">今日目标步数</string>
+    <string name="everyday_target_steps">每日目标步数</string>
+    <string name="get_coin">领取金币</string>
+    <string name="step">步</string>
+    <string name="get_coin_hint">每1500步可以换取80金币</string>
+    <string name="my_coin">我的金币</string>
+    <string name="coin">金币</string>
+    <string name="get_coin_s">领取金币</string>
+    <string name="get_coin_in_ad">恭喜您获得%1$s</string>
+    <string name="double_coin_hint">奖励已翻倍，额外获得%1$s金币</string>
+    <string name="get_money_hint">提现成功，请前往支付宝账单查看奖励。</string>
+    <string name="double_coin_fail_hint">翻倍失败</string>
+    <string name="get_step_target_reward">领取步数达标奖励</string>
+    <string name="get_sync_step_reward">同步步数成功，前往任务领取奖励</string>
+    <string name="get_random_coin_reward">获取随机金币</string>
+    <string name="get_reward_failed">获取失败，请稍后再试</string>
+    <string name="coin_record_list">金币获取记录</string>
+    <string name="already_luck_reward">今日已抽奖，请明日再来。</string>
+    <string name="get_coin_in_ad_activity">%1$s金币≈<font color='#FF0000'>%2$s元</font></string>
+    <string name="unit_money">元</string>
+    <string name="today_mason">今日任务</string>
+    <string name="mason_get_coin">立刻领取</string>
+    <string name="go_to_achieve">去完成</string>
+    <string name="mason_achievement">成就殿堂</string>
+    <string name="mason_achievement_hint">成就越高，赚的越多</string>
+    <string name="mason_video">看创意视频赚金币</string>
+    <string name="mason_task_ad">做海量任务领取金币</string>
+    <string name="mason_video_hint">海量视频，上不封顶</string>
+    <string name="mason_task_ad_hint">完成任务越多赚的越多</string>
+    <string name="mason_invite_friend">邀请好友赚金币</string>
+    <string name="mason_invite_friend_hint">邀请升级奖励无上限</string>
+    <string name="mason_write_code">填写邀请码</string>
+    <string name="mason_write_code_hint">填写你邀请人的邀请码</string>
+    <string name="mason_target_step">目标步数</string>
+    <string name="mason_target_step_hint">设置步数越多赚的越多</string>
+    <string name="mason_get_first_money">完成第一笔体现奖励</string>
+    <string name="mason_get_first_money_hint">提现红包到微信，零钱花不完</string>
+
+    <string name="suggest_step_num">建议每日步行范围3000到10000步</string>
+    <string name="set_target">设置目标</string>
+    <string name="get_target_reward">领取达成奖励</string>
+    <string name="step_number_record">步行记录</string>
+    <string name="deny">拒绝</string>
+    <string name="auth">允许</string>
+    <string name="wx_hint_title">读取微信运动步数</string>
+    <string name="wx_hint_content">允许App读取微信运动步数</string>
+    <string name="dialog_ok">确定</string>
+    <string name="first_for_user_hint_title">用户隐私政策须知</string>
+    <string name="first_for_user_hint">
+    1.为了使您在使用本软件时，能获得正常的服务和体验，我们将使用部分必要信息;\n
+    2.我们会使用手机状态、在最上层显示应用、存储和读取信息、修改设置项等，您有权拒绝和撤回授权；\n
+    3.未经您的允许我们不会获取和使用您的任何信息；\n
+    4.如果您点击看一看，我们只会系统允许使用必要权限，不会使用其他信息。</string>
+    <string name="first_for_user_hint5">查看《用户协议》和</string>
+    <string name="first_for_user_hint6">《隐私申明》</string>
+
+    <string name="target_steps_hint">1.设置每天的目标步数\n2.达成每日步数领取奖励\n3.设置越多奖励越多\n</string>
+
+    <string name="save">保存</string>
+    <string name="unregister_user">未登录用户</string>
+    <string name="quick_login">立即登录</string>
+    <string name="invite_friend">邀请好友</string>
+    <string name="current_coin">当前金币</string>
+    <string name="total_coin">累计金币</string>
+    <string name="current_money">可提现金额(元)</string>
+    <string name="luck_reward">幸运大抽奖</string>
+    <string name="my_info">我的信息</string>
+    <string name="task_error">获取任务出错</string>
+    <string name="sure_get_coin">确定领取</string>
+    <string name="already_get_coin">已领取</string>
+    <string name="watch_all_ad_get_coin">看完视频领取金币</string>
+    <string name="already_get_coin_hint">您已领取过奖励啦</string>
+    <string name="deny_permission">拒绝权限将导致某些功能无法正常使用</string>
+    <string name="my_invite_code">我的邀请码</string>
+    <string name="my_invite_code_hint">注：1. 请勿用违规手段邀请好友，否则平台有权清除奖励。2. 受邀好友需要在下载应用的24小时内在设置中填入邀请码，否则邀请失效。</string>
+    <string name="icon">头像</string>
+    <string name="nick_name">昵称</string>
+    <string name="account">账户</string>
+    <string name="sex">性别</string>
+    <string name="location">所在地</string>
+    <string name="mobile">手机</string>
+    <string name="modify_success">修改成功</string>
+    <string name="modify_error">修改失败</string>
+    <string name="today_sgin">签到领取奖励</string>
+    <string name="today_sgin_hint">每日签到</string>
+    <string name="sgin_date">签到记录</string>
+    <string name="sgin_success">签到成功</string>
+    <string name="sgin_failed">签到失败</string>
+    <string name="get_money">提现</string>
+    <string name="get_money_record">提现记录</string>
+    <string name="sgin_total_money">当前金额:</string>
+    <string name="get_money_num_title">提现说明</string>
+    <string name="get_money_num_hint">1. 使用支付宝提现，一般两小时到帐，请自行查询账单\n2. 提现金额需为整数，最低一元提现，无手续费\n3. 每日提现次数无限制，可多次提现</string>
+    <string name="sign_hint_text">今天还没有签到，要去签到吗？</string>
+    <string name="no_video_ad">当前网络不畅，稍后再来</string>
+    <string name="my_money">我的钱包</string>
+    <string name="total_money">累计奖励</string>
+    <string name="get_money_num">提现金额</string>
+    <string name="get_all_money_num">全部提现</string>
+    <string name="share_to_app_title">快速分享给好友</string>
+    <string name="today_data">今日数据</string>
+    <string name="share1">1.发送邀请\n【分享给好友】</string>
+    <string name="share2">2.下载应用\n【填写邀请码】</string>
+    <string name="share3">3.获取奖励\n【查奖励记录】</string>
+    <string name="accept_invite">接受邀请</string>
+    <string name="write_invite_code">填写邀请码</string>
+    <string name="data_title_1">里程</string>
+    <string name="data_title_2">时长</string>
+    <string name="data_title_3">卡路里</string>
+    <string name="write_invite_code_hint">下载应用后的24小时内输入有效</string>
+    <string name="luck_reward_times">你还有%1$s次抽奖机会</string>
+    <string name="luck_reward_times_title">抽奖规则</string>
+    <string name="sync_task_ad_title">任务成功，获取金币:</string>
+    <string name="luck_reward_times_hint">1.用户参与抽奖活动表示同意接受此规则。\n2.用户每日拥有一次抽奖机会。\n3.获取奖励后可以通过看视频翻倍。\n4.奖励可在钱包内奖励记录查看。</string>
+    <string name="ad_desc">1.每日奖励数量和金额有限，先到先得。\n2.获得奖励需看完视频。\n3.每个用户每天仅可参加1次。\n4.获得奖励后后将直接进入钱包。</string>
+    <string name="tt_cancel">取消</string>
+    <string-array name="loc_list">
+        <item name="item_1">北京市</item>
+        <item name="item_2">广东省</item>
+        <item name="item_3">山东省</item>
+        <item name="item_4">江苏省</item>
+        <item name="item_5">河南省</item>
+        <item name="item_6">上海市</item>
+        <item name="item_7">河北省</item>
+        <item name="item_8">浙江省</item>
+        <item name="item_9">陕西省</item>
+        <item name="item_10">湖南省</item>
+        <item name="item_11">重庆市</item>
+        <item name="item_12">福建省</item>
+        <item name="item_13">天津市</item>
+        <item name="item_14">云南省</item>
+        <item name="item_15">四川省</item>
+        <item name="item_16">广西壮族自治区</item>
+        <item name="item_17">安徽省</item>
+        <item name="item_18">海南省</item>
+        <item name="item_19">江西省</item>
+        <item name="item_20">湖北省</item>
+        <item name="item_21">山西省</item>
+        <item name="item_22">辽宁省</item>
+        <item name="item_23">台湾省</item>
+        <item name="item_24">黑龙江</item>
+        <item name="item_25">内蒙古自治区</item>
+        <item name="item_26">贵州省</item>
+        <item name="item_27">甘肃省</item>
+        <item name="item_28">青海省</item>
+        <item name="item_29">新疆维吾尔自治区</item>
+        <item name="item_30">西藏区</item>
+        <item name="item_31">吉林省</item>
+        <item name="item_32">宁夏回族自治区</item>
+        <item name="item_36">澳门特别行政区</item>
+        <item name="item_37">香港特别行政区</item>
+    </string-array>
+
+    <string-array name="common_problem">
+        <item name="item_1">步数数据来源于移动设备记录的步数。\n
+记录的步数有可能和其它APP不一致，是因为步数获取触发时机和频率不同，会导致微小的误差。\n
+根据中国居民膳食指南2016版建议，“每周5天中等强度、累计150分钟以上，主动身体活动最好每天6000步”\n
+6000步是身体的主动运动，不包含日常的活动消耗，如做家务、拖地等不在此内。有减肥需求的人活动量在40分钟以上。
+        </item>
+
+    </string-array>
+
+    <string-array name="names">
+        <item>谢谢支持</item>
+        <item>5金币</item>
+        <item>10金币</item>
+        <item>15金币</item>
+        <item>20金币</item>
+        <item>5金币</item>
+        <item>10金币</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>#fef9f7</item>
+        <item>#F50BE9</item>
+        <item>#FFC107</item>
+        <item>#F50BE9</item>
+        <item>#FFC107</item>
+        <item>#F50BE9</item>
+        <item>#FFC107</item>
+    </string-array>
+
+    <string-array name="icons">
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+        <item>random_icon_background</item>
+    </string-array>
+</resources>

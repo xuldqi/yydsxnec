@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5"
+
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+
+    <LinearLayout
+        android:id="@+id/wheel_content"
+        android:layout_marginTop="113dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_10">
+
+        <com.dn.sports.view.CustomWheelView
+            android:id="@+id/wheelPickerH"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            app:wv_normalTextColor="#AFAFAF"
+            app:wv_selectedTextColor="#494949"
+            app:wv_cyclic="true"
+            app:wv_textSize="56dp" />
+
+        <com.dn.sports.view.CustomWheelView
+            android:id="@+id/wheelPickerM"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            app:wv_cyclic="true"
+            app:wv_normalTextColor="#AFAFAF"
+            app:wv_selectedTextColor="#494949"
+            app:wv_textSize="56dp" />
+
+        <com.dn.sports.view.CustomWheelView
+            android:id="@+id/wheelPickerS"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="250dp"
+            app:wv_cyclic="true"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            app:wv_normalTextColor="#AFAFAF"
+            app:wv_selectedTextColor="#494949"
+            app:wv_textSize="56dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/count_time"
+        android:layout_marginTop="110dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/count_time_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginBottom="120dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_10">
+
+        <ImageView
+            android:id="@+id/start_or_pause"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:src="@mipmap/start" />
+
+        <ImageView
+            android:id="@+id/stop"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:src="@mipmap/stop"
+            android:visibility="gone" />
+    </LinearLayout>
+</FrameLayout>

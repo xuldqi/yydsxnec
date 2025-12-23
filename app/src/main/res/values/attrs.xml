@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="halfVisibleItemCount" format="integer"/>
+    <attr name="itemTextSize" format="dimension"/>
+    <attr name="itemMaximumWidthText" format="string"/>
+    <attr name="itemTextColor" format="color"/>
+    <attr name="textGradual" format="boolean"/>
+    <attr name="selectedTextColor" format="color"/>
+    <attr name="selectedTextSize" format="dimension"/>
+    <attr name="currentItemPosition" format="integer"/>
+    <attr name="itemWidthSpace" format="dimension"/>
+    <attr name="itemHeightSpace" format="dimension"/>
+    <attr name="zoomInSelectedItem" format="boolean"/>
+    <attr name="wheelCyclic" format="boolean"/>
+    <attr name="wheelCurtain" format="boolean"/>
+    <attr name="wheelCurtainColor" format="color"/>
+    <attr name="wheelCurtainBorder" format="boolean"/>
+    <attr name="wheelCurtainBorderColor" format="color"/>
+    <attr name="indicatorText" format="string"/>
+    <attr name="indicatorTextSize" format="dimension"/>
+    <attr name="indicatorTextColor" format="color"/>
+    <declare-styleable name="WheelPicker">
+        <attr name="halfVisibleItemCount"/>
+        <attr name="itemTextSize"/>
+        <attr name="itemMaximumWidthText"/>
+        <attr name="itemTextColor"/>
+        <attr name="textGradual"/>
+        <attr name="selectedTextColor"/>
+        <attr name="selectedTextSize"/>
+        <attr name="currentItemPosition"/>
+        <attr name="itemWidthSpace"/>
+        <attr name="itemHeightSpace"/>
+        <attr name="zoomInSelectedItem"/>
+        <attr name="wheelCyclic"/>
+        <attr name="wheelCurtain"/>
+        <attr name="wheelCurtainColor"/>
+        <attr name="wheelCurtainBorder" />
+        <attr name="wheelCurtainBorderColor"/>
+        <attr name="indicatorText"/>
+        <attr name="indicatorTextSize"/>
+        <attr name="indicatorTextColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="YearPicker">
+        <attr name="startYear" format="integer"/>
+        <attr name="endYear" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="MonthPicker">
+    </declare-styleable>
+
+    <declare-styleable name="DatePicker">
+        <attr name="halfVisibleItemCount"/>
+        <attr name="itemTextSize"/>
+        <attr name="itemTextColor"/>
+        <attr name="textGradual"/>
+        <attr name="selectedTextColor"/>
+        <attr name="selectedTextSize"/>
+        <attr name="itemWidthSpace"/>
+        <attr name="itemHeightSpace"/>
+        <attr name="zoomInSelectedItem"/>
+        <attr name="wheelCyclic"/>
+        <attr name="wheelCurtain"/>
+        <attr name="wheelCurtainColor"/>
+        <attr name="wheelCurtainBorder"/>
+        <attr name="wheelCurtainBorderColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="HourAndMinutePicker">
+        <attr name="halfVisibleItemCount"/>
+        <attr name="itemTextSize"/>
+        <attr name="itemTextColor"/>
+        <attr name="textGradual"/>
+        <attr name="selectedTextColor"/>
+        <attr name="selectedTextSize"/>
+        <attr name="itemWidthSpace"/>
+        <attr name="itemHeightSpace"/>
+        <attr name="zoomInSelectedItem"/>
+        <attr name="wheelCyclic"/>
+        <attr name="wheelCurtain"/>
+        <attr name="wheelCurtainColor"/>
+        <attr name="wheelCurtainBorder"/>
+        <attr name="wheelCurtainBorderColor"/>
+    </declare-styleable>
+
+
+    <style name="prog_dialog" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowFrame">@null</item><!-- 没有边框-->
+        <item name="android:windowIsFloating">true</item><!-- 浮在ACTIVITY上-->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+    <style name="progressDialog" parent="@style/prog_dialog">
+        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景透明-->
+        <item name="android:windowNoTitle">true</item>                          <!-- 没有标题-->
+    </style>
+
+
+    <attr name="progressColor" format="color" />
+    <attr name="progressBackColor" format="color" />
+    <attr name="progress" format="integer" />
+    <attr name="minProgress" format="integer" />
+    <attr name="maxProgress" format="integer" />
+
+    <declare-styleable name="ProgressButton">
+        <attr name="progressColor" />
+        <attr name="progressBackColor" />
+        <attr name="buttonColor" format="color" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="progress" />
+        <attr name="minProgress" />
+        <attr name="maxProgress" />
+        <attr name="progressMargin" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RulerView">
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="lineColor" format="color" />
+        <attr name="lineSpaceWidth" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineMaxHeight" format="dimension" />
+        <attr name="lineMidHeight" format="dimension" />
+        <attr name="lineMinHeight" format="dimension" />
+        <attr name="textMarginTop" format="dimension" />
+        <attr name="alphaEnable" format="boolean" />
+        <attr name="minValue" format="float"/>
+        <attr name="maxValue" format="float"/>
+        <attr name="selectorValue" format="float"/>
+        <attr name="perValue" format="float"/>
+    </declare-styleable>
+</resources>
