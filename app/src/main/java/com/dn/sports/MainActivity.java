@@ -462,7 +462,7 @@ public class MainActivity extends BaseActivity {
                 startService(it);
             }
         }
-        showAds();
+//        showAds();
         SharedPreferenceUtil.Companion.getInstance(this).put("firstOpen", false);
     }
 

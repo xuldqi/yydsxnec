@@ -239,14 +239,43 @@ public class StartLogoActivity extends FragmentActivity {
                 if (byteLogoAd != null && byteLogoAd.isAdLoaded()) {
                     // 使用全屏视频广告（插屏）展示方式
                     byteLogoAd.showAd(StartLogoActivity.this, 0);
-                    
-                    // 设置广告展示后延迟跳转
-                    adHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            hidePost();
-                        }
-                    }, 3000);
+
+                    // 设置广告交互监听，在广告关闭或跳过时才跳转
+                    if (byteLogoAd.getFullScreenVideoAd() != null) {
+                        byteLogoAd.getFullScreenVideoAd().setFullScreenVideoAdInteractionListener(new com.bytedance.sdk.openadsdk.TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {
+                            @Override
+                            public void onAdShow() {
+                                EyeLog.logi("LogoActivityAd-->onAdShow");
+                            }
+
+                            @Override
+                            public void onAdVideoBarClick() {
+                                EyeLog.logi("LogoActivityAd-->onAdVideoBarClick");
+                                isClicked = true;
+                                adHandler.removeCallbacksAndMessages(null);
+                            }
+
+                            @Override
+                            public void onAdClose() {
+                                EyeLog.logi("LogoActivityAd-->onAdClose");
+                                hidePost();
+                            }
+
+                            @Override
+                            public void onVideoComplete() {
+                                EyeLog.logi("LogoActivityAd-->onVideoComplete");
+                            }
+
+                            @Override
+                            public void onSkippedVideo() {
+                                EyeLog.logi("LogoActivityAd-->onSkippedVideo");
+                                hidePost();
+                            }
+                        });
+                    } else {
+                        // 如果获取不到广告对象，直接跳转
+                        hidePost();
+                    }
                 }
             }
         });
