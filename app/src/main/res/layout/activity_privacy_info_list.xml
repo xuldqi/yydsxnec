@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="• 设备标识符（AndroidId）\n• 设备型号、品牌\n• 操作系统版本"
+                    android:text="• 设备标识符（IMEI、IMSI、AndroidId、OAID、ICCID、MEID、Mac地址）\n• 设备型号、品牌、制造商\n• 操作系统版本、屏幕分辨率"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="用途：用于识别设备、保障账号安全"
+                    android:text="用途：用于广告风控、统计分析、识别唯一设备、保障账号安全"
                     android:textColor="#999999"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -133,6 +133,42 @@
                     android:layout_marginTop="4dp"
                     android:text="采集时机：仅在您主动使用户外运动功能（跑步、健走、徒步、登山）时采集，不会在后台自动采集位置"
                     android:textColor="#FF6B00"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 传感器信息 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:bl_corners_radius="12dp"
+                app:bl_solid_color="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="传感器信息"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="• 加速度、重力、陀螺仪传感器"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="用途：识别设备摇晃、辅助判断运动状态及反作弊"
+                    android:textColor="#999999"
                     android:textSize="12sp" />
             </LinearLayout>
 

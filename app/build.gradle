@@ -15,8 +15,8 @@ android {
         applicationId "com.dn.sports"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1216
-        versionName "1.2.16"
+        versionCode 1217
+        versionName "1.2.17"
         flavorDimensions "UMENG_CHANNEL"
         flavorDimensions "app_name"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
