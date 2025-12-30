@@ -49,18 +49,19 @@ object AdManagerImpl : AdManager {
                 TTAdConstant.NETWORK_STATE_3G
             ) //允许直接下载的网络状态集合
             .supportMultiProcess(false) //是否支持多进程
-            // 隐私合规：添加自定义隐私控制器，禁止SDK收集敏感信息
+            // 隐私合规：添加自定义隐私控制器
+            // 注意：完全禁止所有信息采集会导致广告无法展示
             .customController(object : TTCustomController() {
-                // 禁止SDK获取手机状态信息(IMEI等)
+                // 禁止SDK获取手机状态信息(IMEI等) - 这是最敏感的信息
                 override fun isCanUsePhoneState(): Boolean = false
-                // 禁止SDK获取位置信息
+                // 禁止SDK获取位置信息 - 广告不需要位置
                 override fun isCanUseLocation(): Boolean = false
-                // 禁止SDK获取WiFi状态信息(BSSID/SSID)
-                override fun isCanUseWifiState(): Boolean = false
-                // 禁止SDK写入外部存储
-                override fun isCanUseWriteExternal(): Boolean = false
-                // 禁止SDK获取AndroidId
-                override fun isCanUseAndroidId(): Boolean = false
+                // 允许SDK获取WiFi状态信息 - 广告需要网络信息
+                override fun isCanUseWifiState(): Boolean = true
+                // 允许SDK写入外部存储 - 缓存广告素材
+                override fun isCanUseWriteExternal(): Boolean = true
+                // 允许SDK获取AndroidId - 广告需要设备标识
+                override fun isCanUseAndroidId(): Boolean = true
             })
             .build()
     }

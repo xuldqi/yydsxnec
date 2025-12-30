@@ -1,9 +1,12 @@
 package com.dn.sports.map;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.provider.Settings;
 
 public class MapHelper {
@@ -64,6 +67,14 @@ public class MapHelper {
         }
 
     public static final boolean isGPSPen(final Context context) {
+        // 隐私合规整改：Android 12+需要先检查权限才能查询位置服务状态
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) 
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        
         LocationManager locationManager
                 = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）

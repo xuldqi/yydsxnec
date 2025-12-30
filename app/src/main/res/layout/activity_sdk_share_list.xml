@@ -200,7 +200,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- 百度定位SDK -->
+            <!-- 百度地图/定位SDK -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -256,6 +256,74 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="隐私政策：https://map.baidu.com/zt/client/privacy/"
+                    android:textColor="#1E90FF"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 百度鹰眼轨迹SDK -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:bl_corners_radius="12dp"
+                app:bl_solid_color="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="百度鹰眼轨迹SDK"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="提供方：百度在线网络技术（北京）有限公司"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="共享信息类型："
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="• 位置信息（GPS坐标、运动轨迹点）\n• 设备标识信息（Android ID）\n• 设备信息（设备型号、系统版本）\n• 运动轨迹数据（坐标、时间戳、速度）"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="使用目的：户外运动时实时记录运动轨迹、生成运动路线图"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="使用场景：仅在用户主动开始户外运动（跑步、健走、徒步等）时启用"
+                    android:textColor="#FF6B00"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="隐私政策：https://lbsyun.baidu.com/index.php?title=open/privacy"
                     android:textColor="#1E90FF"
                     android:textSize="12sp" />
             </LinearLayout>

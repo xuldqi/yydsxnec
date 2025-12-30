@@ -42,9 +42,7 @@ public class YSXYActivity extends BaseActivity {
                 content.setText(readContent("user_eye_xy_1.txt"));
                 ((TextView)findViewById(R.id.title) ).setText("用户协议");
             } else if (type == 2) {
-//                webview.loadUrl("https://www.dailynet.cn/smessage/wbyd.html");
-                webview.loadUrl("https://www.dailynet.cn/smessage/wkydxec.html  ");
-
+                webview.loadUrl("https://www.dailynet.cn/smessage/wkydxec.html");
                 webview.setVisibility(View.VISIBLE);
                 ((TextView)findViewById(R.id.title) ).setText("隐私协议");
             }

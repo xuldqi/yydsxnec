@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
 import androidx.fragment.app.FragmentActivity;
 
-import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.dn.sports.adcoinLogin.AdConfigure;
 import com.dn.sports.adcoinLogin.StepUserManager;
 import com.dn.sports.adcoinLogin.chuanshanjia.LogoAd;
@@ -40,6 +40,7 @@ import java.lang.ref.WeakReference;
 public class StartLogoActivity extends FragmentActivity {
 
     private boolean isClicked = false;
+    private boolean hasShownAd = false; // 防止广告重复展示
     private RelativeLayout adLayout;
     private LinearLayout skipContainer;
     private TextView skip;
@@ -210,8 +211,14 @@ public class StartLogoActivity extends FragmentActivity {
 
     }
 
-    private void showLogoAd() {//todo 注释穿山甲
-//        showByteJumpLogoAd();
+    private void showLogoAd() {
+        // 防止广告重复展示
+        if (hasShownAd) {
+            hideDelay();
+            return;
+        }
+        hasShownAd = true;
+        showByteJumpLogoAd();
     }
 
     private LogoAd byteLogoAd;
@@ -222,6 +229,7 @@ public class StartLogoActivity extends FragmentActivity {
             @Override
             public void adError(String error) {
                 super.adError(error);
+                EyeLog.loge("LogoActivityAd-->adError: " + error);
                 hideDelay();
             }
 
@@ -229,36 +237,16 @@ public class StartLogoActivity extends FragmentActivity {
             public void adLoad() {
                 super.adLoad();
                 if (byteLogoAd != null && byteLogoAd.isAdLoaded()) {
-                    View view = byteLogoAd.getmTtSplashAd().getSplashView();
-                    adLayout.removeAllViews();
-                    adLayout.addView(view);
-                    byteLogoAd.getmTtSplashAd()
-                            .setSplashInteractionListener(new TTSplashAd.AdInteractionListener() {
-                                @Override
-                                public void onAdClicked(View view, int i) {
-                                    EyeLog.logd("LogoActivityAd-->byte adClick:");
-                                    isClicked = true;
-                                    adHandler.removeCallbacksAndMessages(null);
-                                }
-
-                                @Override
-                                public void onAdShow(View view, int i) {
-                                    EyeLog.logd("LogoActivityAd-->byte onAdShow:");
-                                }
-
-                                @Override
-                                public void onAdSkip() {
-                                    EyeLog.logd("LogoActivityAd-->byte onAdSkip:");
-                                    hidePost();
-                                }
-
-                                @Override
-                                public void onAdTimeOver() {
-                                    EyeLog.logd("LogoActivityAd-->byte onAdTimeOver:");
-                                    hidePost();
-                                }
-                            });
-
+                    // 使用全屏视频广告（插屏）展示方式
+                    byteLogoAd.showAd(StartLogoActivity.this, 0);
+                    
+                    // 设置广告展示后延迟跳转
+                    adHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            hidePost();
+                        }
+                    }, 3000);
                 }
             }
         });

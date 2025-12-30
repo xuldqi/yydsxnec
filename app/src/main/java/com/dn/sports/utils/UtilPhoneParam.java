@@ -5,7 +5,6 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
-import android.telephony.cdma.CdmaCellLocation;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -114,166 +113,31 @@ public class UtilPhoneParam {
 	 * @author zhuofq  
 	 * @param context
 	 * @return	boolean
+	 * @deprecated 此方法仅检查SIM卡状态，不采集敏感信息
 	 */
+	@Deprecated
 	public static boolean isSimReady(Context context) {
-		TelephonyManager telMgr = (TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		if (telMgr.getSimState() == TelephonyManager.SIM_STATE_READY)
-			return true;
-		else
-			return false;
-	}
-
-	/**
-	 * 获取手机IMSI,获取不了则以0替代
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return	String
-	 */
-	public static String getIMSI(Context context) {
 		try {
-			TelephonyManager telMgr;
-			telMgr = (TelephonyManager) context
+			TelephonyManager telMgr = (TelephonyManager) context
 					.getSystemService(Context.TELEPHONY_SERVICE);
-			String imsi = telMgr.getSubscriberId();
-			if (imsi == null) {
-				imsi = "0";
-			}
-			return imsi;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "0";
-		}
-	}
-	
-	/**
-	 * 获取手机MEID
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return	String
-	 */
-	public static String getMEID(Context context) {
-		try {
-			TelephonyManager telMgr;
-			telMgr = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-			String meid = telMgr.getDeviceId();
-			if (meid == null) {
-				meid = "";
-			}
-			return meid;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-	}
-
-	/**
-	 * 获取SIM所属运营商
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return 0 异常 1 移动 2 联通 3 电信
-	 */
-	public static int getTelCnpny(Context context) {
-		try {
-			int telCnpny = 0;
-			TelephonyManager telMgr;
-			telMgr = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-			String imsi = telMgr.getSubscriberId();
-			if (imsi != null) {
-				if (imsi.startsWith("46000") || imsi.startsWith("46002")) {
-					telCnpny = 1;
-				} else if (imsi.startsWith("46001")) {
-					telCnpny = 2;
-				} else if (imsi.startsWith("46003") || imsi.startsWith("46011")) {
-					telCnpny = 3;
-				}
-			}
-			return telCnpny;
-		} catch (Exception e) {
-			return 0;
-		}
-	}
-
-	/**
-	 * 是否为电信用户
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return	boolean
-	 */
-	public static boolean isCtImsi(Context context) {
-		return (getTelCnpny(context) == 3);
-	}
-
-//	public static final String DEFAULT_SID = "13824";// 默认返回北京的SID
-
-	/**
-	 * 获取手机SID
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return
-	 */
-	public static String getSID(Context context) {
-		try {
-			TelephonyManager telMgr;
-			telMgr = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-			CdmaCellLocation celllocation = (CdmaCellLocation) telMgr
-					.getCellLocation();
-			int sid = celllocation.getSystemId();
-			if (sid == -1)
-				return null;
-
-			return "" + sid;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	/**
-	 * 是否为 CDMA 手机
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return boolean
-	 */
-	public static boolean isCTUser(Context context) {
-		boolean ret = false;
-		try {
-			String sid = getSID(context);
-			if (sid == null)
+			if (telMgr.getSimState() == TelephonyManager.SIM_STATE_READY)
+				return true;
+			else
 				return false;
-
-			int intSid = Integer.valueOf(sid);
-			if (intSid > 0)
-				ret = true;
 		} catch (Exception e) {
+			return false;
 		}
-		return ret;
 	}
-	
-	/**
-	 * 是否为 CDMA 手机
-	 * 
-	 * @author zhuofq  
-	 * @param context
-	 * @return	boolean
-	 */
-	public static boolean isCDMAPhone(Context context) {
-		TelephonyManager tm = (TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		if (tm != null && tm.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
-			return true;
-		}
-		return false;
-	}
+
+	// 隐私合规整改：已移除以下敏感信息采集方法
+	// - getIMSI(): 获取用户IMSI识别码
+	// - getMEID(): 获取设备MEID/DeviceId 
+	// - getTelCnpny(): 获取SIM运营商信息
+	// - isCtImsi(): 判断是否电信用户
+	// - getSID(): 获取基站SID
+	// - isCTUser(): 判断是否CDMA用户
+	// - isCDMAPhone(): 判断是否CDMA手机
+	// 上述方法未被实际使用，为符合隐私合规要求已移除
 	
 	/**
 	 * 获取内置存储剩余总大小

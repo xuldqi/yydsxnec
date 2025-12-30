@@ -15,8 +15,8 @@ android {
         applicationId "com.dn.sports"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1215
-        versionName "1.2.15"
+        versionCode 1216
+        versionName "1.2.16"
         flavorDimensions "UMENG_CHANNEL"
         flavorDimensions "app_name"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -88,7 +88,7 @@ android {
         abortOnError false
     }
 
-    buildToolsVersion = '28.0.3'
+
 
 //    productFlavors {
 //        oppo {
