@@ -113,19 +113,32 @@ class ShareAppActivity : BaseActivity() {
     }
 
     private fun checkStorgePermission(onAgree: () -> Unit, onDenid: () -> Unit) {
-        PermissionX
-            .init(this)
-            .permissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            .request { allGranted, grantedList, deniedList ->
-                if (allGranted) {
-                    onAgree.invoke()
-                } else {
-                    onDenid.invoke()
+        if (com.dn.sports.common.CheckPermission.checkWritePermission(this)) {
+            onAgree.invoke()
+        } else {
+            android.app.AlertDialog.Builder(this)
+                .setTitle("存储权限申请说明")
+                .setMessage("我们需要存储权限来保存您的运动数据图片到系统相册。\n\n您可以在系统设置中随时关闭此权限。")
+                .setPositiveButton("同意") { _, _ ->
+                    PermissionX.init(this)
+                        .permissions(
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        .request { allGranted, _, _ ->
+                            if (allGranted) {
+                                onAgree.invoke()
+                            } else {
+                                onDenid.invoke()
+                            }
+                        }
                 }
-            }
+                .setNegativeButton("拒绝") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+        }
     }
 
 

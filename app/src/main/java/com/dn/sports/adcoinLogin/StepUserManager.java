@@ -195,9 +195,9 @@ public class StepUserManager {
         String m = (String)Utils.get(context,IS_TODAY_FIRST_TIME,"");
         reCheckSteps = true;
         if(!m.equals(currentDate)){
-            //是第一次打开
+            //是第一次打开，初始化为0，等待传感器真实数据 (Initialize to 0, wait for real sensor data)
             isTodayFirstTime = true;
-            todaySteps = new Random().nextInt(450)+50;
+            todaySteps = 0;
             Utils.put(StepApplication.getInstance(),TODAY_TODAY_STEP_NUM,todaySteps);
 
             DbHelper.saveTodayCount(todaySteps);

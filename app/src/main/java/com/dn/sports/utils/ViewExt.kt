@@ -43,6 +43,14 @@ fun View.round(cornerRadius: Int) {
 
 fun View.clickDelay(spaceTime: Long = SPACE_TIME, clickAction: () -> Unit) {
     this.setOnClickListener {
+        // 核心体验提升：物理震动反馈 (Tactile Haptic Feedback)
+        it.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+        
+        // 核心视觉提升：按压缩放动效 (Visual Scale Feedback)
+        it.animate().scaleX(0.92f).scaleY(0.92f).setDuration(100).withEndAction {
+            it.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+        }.start()
+
         if (this.hashCode() != ViewExt.ViewClickDelay.hash) {
             ViewExt.ViewClickDelay.hash = this.hashCode()
             ViewExt.ViewClickDelay.lastClickTime = System.currentTimeMillis()

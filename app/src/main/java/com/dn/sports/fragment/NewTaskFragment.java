@@ -48,6 +48,7 @@ public class NewTaskFragment extends BaseFragment {
 
     @Override
     public void initViewAction(View view) {
+        view.findViewById(R.id.root).setPadding(0, com.dn.sports.utils.Utils.getStatusBarHeight(getActivity()), 0, 0);
         initShowVideoAd();
         initShowVideoAd2();
         initTaskVideoAd();

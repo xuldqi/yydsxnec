@@ -54,7 +54,7 @@ class MonthFragment : BaseFragment() {
         tvUnit.text=getChartTitle()
     }
 
-    private fun refreshData() {
+    fun refreshData() {
         /*仅仅更新了图表的series数组数据,不改动图表的其他内容*/
         io {
             val data =

@@ -91,23 +91,40 @@ class StepSubFragment() : BaseFragment() {
 
 
         btGo.clickDelay {
-            PermissionX.init(activity)
-                .permissions(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-                .onExplainRequestReason { scope, deniedList ->
-                    scope.showRequestReasonDialog(deniedList, "我们需要定位权限，才能记录运动哦",
-                        "确定", "取消")
-                }
-                .request { allGranted, grantedList, deniedList ->
-                    if (allGranted) {
-                        showCountDownDialog()
-                    } else {
-                        "我们需要定位权限，才能记录运动哦".toast()
+            if (activity == null) return@clickDelay
+            if (com.dn.sports.common.CheckPermission.checkMustPermission(activity)) {
+                showCountDownDialog()
+            } else {
+                android.app.AlertDialog.Builder(activity)
+                    .setTitle("位置权限申请说明")
+                    .setMessage("我们需要位置权限来记录您的户外运动轨迹和计算运动距离。\n\n" +
+                            "• 仅在您使用户外运动功能时采集位置\n" +
+                            "• 不会在后台自动采集位置信息\n\n" +
+                            "您可以在系统设置中随时关闭此权限。")
+                    .setPositiveButton("同意") { _, _ ->
+                        PermissionX.init(activity)
+                            .permissions(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            )
+                            .request { allGranted, _, _ ->
+                                if (allGranted) {
+                                    showCountDownDialog()
+                                } else {
+                                    "我们需要定位权限，才能记录运动哦".toast()
+                                }
+                            }
                     }
-                }
+                    .setNegativeButton("拒绝") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+            }
         }
+        
+        // 为 GO 按钮添加呼吸动效 (Micro-interaction: Pulse)
+        val pulseAnim = android.view.animation.AnimationUtils.loadAnimation(context, R.anim.pulse_scale)
+        btGo.startAnimation(pulseAnim)
     }
 
 

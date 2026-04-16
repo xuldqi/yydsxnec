@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import com.dn.sports.R
 import com.dn.sports.StepApplication
 import com.umeng.analytics.MobclickAgent
+import com.dn.sports.utils.Utils
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import org.greenrobot.eventbus.EventBus
@@ -45,9 +46,29 @@ abstract class BaseActivity : FragmentActivity() {
         return false
     }
 
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
+        applyStatusBarPadding()
+    }
+
+    override fun setContentView(view: View) {
+        super.setContentView(view)
+        applyStatusBarPadding()
+    }
+
+    private fun applyStatusBarPadding() {
+        val titleBar = findViewById<View>(R.id.layTitleBar)
+        if (titleBar != null) {
+            val statusBarHeight = Utils.getStatusBarHeight(this)
+            titleBar.setPadding(0, statusBarHeight, 0, 0)
+        }
+    }
+
     fun setTitle(title: String?) {
-        findViewById<View>(R.id.btBack).setOnClickListener { v: View? -> finish() }
-        (findViewById<View>(R.id.tvTitle) as TextView).text = title
+        findViewById<View>(R.id.btBack)?.setOnClickListener { finish() }
+        findViewById<TextView>(R.id.tvTitle)?.let {
+            it.text = title
+        }
     }
 
     override fun onDestroy() {

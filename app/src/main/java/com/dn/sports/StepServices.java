@@ -78,7 +78,7 @@ public class StepServices extends Service {
 
     public void addNotify(){
 
-        boolean open = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("testFeedMessage", true);
+        boolean open = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("testFeedMessage", false);
         if (!open) {
             return;
         }
@@ -103,7 +103,8 @@ public class StepServices extends Service {
         openIt.putExtra(START_FORM_SERVICE,true);
         openIt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         openIt.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent itP = PendingIntent.getActivity(this, BUTTON_OPEN_APP, openIt, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent itP = PendingIntent.getActivity(this, BUTTON_OPEN_APP, openIt, 
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         remoteViews.setOnClickPendingIntent(R.id.notify_root_layout, itP);
 
         remoteViews.setTextViewText(R.id.notify_image_title, Utils.getTopTitleName(this));

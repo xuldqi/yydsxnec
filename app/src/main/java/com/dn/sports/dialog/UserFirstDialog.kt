@@ -53,7 +53,10 @@ class UserFirstDialog:DialogFragment() {
             it.putExtra("type", 2)
             context?.startActivity(it)
         }
-        view.findViewById<View>(R.id.deny).setOnClickListener { System.exit(9) }
+        view.findViewById<View>(R.id.deny).setOnClickListener { 
+            // 隐私合规：用户拒绝隐私政策时正常退出，不能使用System.exit强制杀进程
+            activity?.finishAffinity()
+        }
         view.findViewById<View>(R.id.ok).setOnClickListener {
             initSdk(StepApplication.getInstance())
             getInstance(context!!).put("userAgree", true)

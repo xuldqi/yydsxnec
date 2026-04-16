@@ -174,19 +174,22 @@ public class CountStepsActivity extends BaseActivity {
             public void onClick(View view) {
                 final HintDialog hintDialog = new HintDialog(CountStepsActivity.this,false);
 
-                String msg = "";
+                // 优化退出提示：增强语境感与稳定性 (UX Optimization: Better Context)
+                String msg = "运动"; // 默认兜底 (Default Fallback)
                 if (stepType == StepSubFragment.TYPE_RUN_INDOOR) {
-                    msg = ("室内跑步");
+                    msg = "室内跑步";
                 } else if (stepType == StepSubFragment.TYPE_RUN_OUTDOOR) {
-                    msg = ("室外跑步");
+                    msg = "室外跑步";
                 } else if (stepType == StepSubFragment.TYPE_FAST_WALK) {
-                    msg = ("健走");
+                    msg = "健走";
                 } else if (stepType == StepSubFragment.TYPE_ON_FOOT) {
-                    msg = ("徒步");
+                    msg = "徒步";
                 } else if (stepType == StepSubFragment.TYPE_MOUNTAIN_CLIMBING) {
-                    msg = ("登山");
+                    msg = "登山";
                 }
-                hintDialog.setExitCountTime(msg+"中，是否退出？", new View.OnClickListener() {
+                
+                String prompt = "您的" + msg + "正在进行中，现在退出将不会保存本次记录。确定要退出吗？";
+                hintDialog.setExitCountTime(prompt, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         StepUserManager.getInstance().removeLoginListener(loginListener);
@@ -286,19 +289,19 @@ public class CountStepsActivity extends BaseActivity {
 
     private void checkExit(){
         if(isStart){
-            String msg = "";
+            String msg = "运动";
             if (stepType == StepSubFragment.TYPE_RUN_INDOOR) {
-                msg = ("室内跑步");
+                msg = "室内跑步";
             } else if (stepType == StepSubFragment.TYPE_RUN_OUTDOOR) {
-                msg = ("室外跑步");
+                msg = "室外跑步";
             } else if (stepType == StepSubFragment.TYPE_FAST_WALK) {
-                msg = ("健走");
+                msg = "健走";
             } else if (stepType == StepSubFragment.TYPE_ON_FOOT) {
-                msg = ("徒步");
+                msg = "徒步";
             } else if (stepType == StepSubFragment.TYPE_MOUNTAIN_CLIMBING) {
-                msg = ("登山");
+                msg = "登山";
             }
-            showExitHint(msg + "中，是否退出？");
+            showExitHint("您的" + msg + "正在进行中，确定要退出吗？");
             return;
         }
         finish();

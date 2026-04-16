@@ -9,7 +9,7 @@
         android:gravity="center"
         android:padding="@dimen/padding_10"
         android:text="日期"
-        android:textColor="@color/white"
+        android:textColor="#898E94"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
     <TextView

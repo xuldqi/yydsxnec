@@ -120,4 +120,36 @@ object DbHelper {
         }
         EventBus.getDefault().post(RefreshTodayCount(count))
     }
+
+    /**
+     * 获取过去7天的总步数 (Last 7 Days Steps)
+     */
+    fun getWeeklyStepsSum(): Int {
+        var total = 0
+        for (i in 0..6) {
+            val qb = getDaoSession().stepCountRecordDao.queryBuilder()
+            qb.where(StepCountRecordDao.Properties.Date.eq(DateUtils.getYMD(i)), StepCountRecordDao.Properties.Type.eq(6)).build()
+            val list = qb.list()
+            if (!list.isNullOrEmpty()) {
+                total += (list[0] as StepCountRecord).steps
+            }
+        }
+        return total
+    }
+
+    /**
+     * 获取过去7天的累计跳绳总数 (Last 7 Days Jump-Rope)
+     */
+    fun getWeeklyJumpSum(): Int {
+        var total = 0
+        for (i in 0..6) {
+            val qb = getDaoSession().stepCountRecordDao.queryBuilder()
+            qb.where(StepCountRecordDao.Properties.Date.eq(DateUtils.getYMD(i)), StepCountRecordDao.Properties.Type.eq(7)).build()
+            val list = qb.list()
+            if (!list.isNullOrEmpty()) {
+                list.forEach { total += (it as StepCountRecord).steps }
+            }
+        }
+        return total
+    }
 }

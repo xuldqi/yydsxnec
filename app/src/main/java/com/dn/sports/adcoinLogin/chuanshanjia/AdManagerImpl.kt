@@ -50,18 +50,18 @@ object AdManagerImpl : AdManager {
             ) //允许直接下载的网络状态集合
             .supportMultiProcess(false) //是否支持多进程
             // 隐私合规：添加自定义隐私控制器
-            // 注意：完全禁止所有信息采集会导致广告无法展示
+            // 全面禁止SDK自行采集敏感信息
             .customController(object : TTCustomController() {
-                // 禁止SDK获取手机状态信息(IMEI等) - 这是最敏感的信息
+                // 禁止SDK获取手机状态信息(IMEI等)
                 override fun isCanUsePhoneState(): Boolean = false
-                // 禁止SDK获取位置信息 - 广告不需要位置
+                // 禁止SDK获取位置信息
                 override fun isCanUseLocation(): Boolean = false
-                // 允许SDK获取WiFi状态信息 - 广告需要网络信息
-                override fun isCanUseWifiState(): Boolean = true
+                // 禁止SDK获取WiFi状态信息(SSID/BSSID等)
+                override fun isCanUseWifiState(): Boolean = false
                 // 允许SDK写入外部存储 - 缓存广告素材
                 override fun isCanUseWriteExternal(): Boolean = true
-                // 允许SDK获取AndroidId - 广告需要设备标识
-                override fun isCanUseAndroidId(): Boolean = true
+                // 禁止SDK获取AndroidId
+                override fun isCanUseAndroidId(): Boolean = false
             })
             .build()
     }
@@ -78,9 +78,8 @@ object AdManagerImpl : AdManager {
             ttAdManager = TTAdSdk.getAdManager()
         }
         ttAdManager?.apply {
-            if(askPermiss){
-                requestPermissionIfNecessary(activity)
-            }
+            // 隐私合规：禁止SDK自行请求权限，所有权限由App统一管理
+            // 已移除 requestPermissionIfNecessary(activity) 调用
             if (mTTAdNative == null) {
                 mTTAdNative = ttAdManager!!.createAdNative(activity.applicationContext)
             }

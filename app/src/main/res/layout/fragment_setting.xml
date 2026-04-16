@@ -6,36 +6,32 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bg_health_fg">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="62dp"
-        android:textSize="20sp"
-        android:text="我的"
-        android:textStyle="bold"
-        android:textColor="@color/color_3E3C3B"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <LinearLayout
-        android:id="@+id/root"
+        android:id="@+id/setting_root_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="top"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:text="我的"
+            android:textStyle="bold"
+            android:textColor="@color/color_3E3C3B" />
 
         <RelativeLayout
             android:id="@+id/wx_login"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginLeft="@dimen/padding_10"
             android:layout_marginTop="26dp"
             android:layout_marginRight="@dimen/padding_10"
-            android:layout_marginBottom="37dp"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_10"
-            tools:ignore="Suspicious0dp">
+            android:layout_marginBottom="37dp">
 
             <ImageView
                 android:id="@+id/user_image"
@@ -87,60 +83,9 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="115dp"
-            android:layout_marginLeft="@dimen/padding_10"
-            android:layout_marginRight="@dimen/padding_10"
-            android:layout_marginBottom="20dp"
-            android:background="@mipmap/bg_report_card">
-
-            <ImageView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@mipmap/bg_circle"
-                android:padding="25dp"
-                android:src="@mipmap/icon_cal" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="周报总结"
-                    android:textColor="#44464D"
-                    android:textSize="13dp" />
-
-                <TextView
-                    android:id="@+id/tvSteps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="19dp"
-                    android:text="总步数: 1564 步"
-                    android:textColor="#838383"
-                    android:textSize="13dp" />
-
-                <TextView
-                    android:id="@+id/tvTimes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    android:text="总运动时长: 20分钟"
-                    android:textColor="#838383"
-                    android:textSize="10dp" />
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
+        <include
+            android:id="@+id/layWeeklySummary"
+            layout="@layout/card_weekly_summary" />
 
         <LinearLayout
             android:id="@+id/my_money_layout"
@@ -233,7 +178,8 @@
 
         <com.dn.sports.view.OverScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginLeft="@dimen/padding_10"
             android:layout_marginTop="@dimen/padding_5"
             android:layout_marginRight="@dimen/padding_10"
@@ -242,8 +188,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout

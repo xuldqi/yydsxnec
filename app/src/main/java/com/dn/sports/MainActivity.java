@@ -57,6 +57,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // 开启全沉浸式体验 (Edge-to-Edge Immersive UI)
+        androidx.core.view.WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+        getWindow().setNavigationBarColor(android.graphics.Color.TRANSPARENT);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            getWindow().setNavigationBarContrastEnforced(false);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -405,9 +413,7 @@ public class MainActivity extends BaseActivity {
         });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
+            public void onPageScrolled(int i, float v, int i1) {}
 
             @Override
             public void onPageSelected(int i) {
@@ -422,10 +428,29 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int i) {
+            public void onPageScrollStateChanged(int i) {}
+        });
 
+        // 核心视觉升级：平滑翻页动效 (Fade & Scale Transition)
+        viewPager.setPageTransformer(true, new ViewPager.PageTransformer() {
+            private static final float MIN_SCALE = 0.9f;
+            private static final float MIN_ALPHA = 0.5f;
+
+            @Override
+            public void transformPage(@NonNull View view, float position) {
+                if (position < -1) {
+                    view.setAlpha(0f);
+                } else if (position <= 1) {
+                    float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                    view.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+                } else {
+                    view.setAlpha(0f);
+                }
             }
         });
+
         mBtnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -452,8 +477,21 @@ public class MainActivity extends BaseActivity {
         });
         viewPager.setCurrentItem(0);
         setFocusItem(0);
+        
+        // 关键体验补充：为底部导航栏增加虚拟按键/手势条的避让 (Inset Adaptation)
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.root), (v, insets) -> {
+            androidx.core.graphics.Insets systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars());
+            v.setPadding(0, 0, 0, systemBars.bottom);
+            return insets;
+        });
+
+        // 核心功能激活：检查并申请身体活动(步数)权限，确保数据真实性 (Data Authenticity)
+        if (!CheckPermission.checkStepPermission(this)) {
+            CheckPermission.requestStepPermission(this, 101);
+        }
+
         Boolean firstOpen = (Boolean) SharedPreferenceUtil.Companion.getInstance(this).get("firstOpen", true);
-        boolean open = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("testFeedMessage", true);
+        boolean open = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("testFeedMessage", false);
         if (open && Boolean.FALSE.equals(firstOpen)) {
             Intent it = new Intent(this,StepServices.class);
             if (Build.VERSION.SDK_INT >= 26) {

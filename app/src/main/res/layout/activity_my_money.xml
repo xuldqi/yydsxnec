@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/common_title_layout"/>
     <LinearLayout
+        android:id="@+id/balance_card"
         android:orientation="horizontal"
         android:gravity="center"
-        android:paddingTop="@dimen/padding_10"
-        android:paddingBottom="@dimen/padding_10"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="24dp"
+        android:background="@drawable/bg_wallet_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -21,14 +26,17 @@
             <TextView
                 android:id="@+id/current_coin"
                 android:gravity="center"
-                android:padding="@dimen/padding_5"
-                android:textSize="18sp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:text="10000金币"/>
             <TextView
                 android:gravity="center"
-                android:padding="@dimen/padding_5"
+                android:alpha="0.8"
                 android:text="@string/current_coin"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -41,19 +49,20 @@
             <TextView
                 android:id="@+id/current_money"
                 android:gravity="center"
-                android:padding="@dimen/padding_5"
-                android:textSize="18sp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:text="1.0元"/>
             <TextView
                 android:gravity="center"
-                android:padding="@dimen/padding_5"
+                android:alpha="0.8"
                 android:text="@string/current_money"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-
-
     </LinearLayout>
     <View
         android:background="@color/gray"
@@ -89,6 +98,7 @@
             android:background="@color/transparent"
             android:padding="@dimen/padding_10"
             android:inputType="number"
+            android:hint="请输入提现金额"
             android:textColorHint="@color/gray"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -144,7 +154,8 @@
         android:padding="@dimen/padding_10"
         android:layout_gravity="center_horizontal"
         android:text="提现记录"
-        android:textColor="@color/white"
+        android:textColor="#3E3C3B"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.dn.sports.view.OverScrollView
@@ -158,6 +169,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:background="#F8F8F8"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/date"
@@ -165,7 +177,8 @@
                 android:gravity="center"
                 android:padding="@dimen/padding_10"
                 android:text="日期"
-                android:textColor="@color/white"
+                android:textColor="#898E94"
+                android:textSize="13sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -174,7 +187,8 @@
                 android:gravity="center"
                 android:padding="@dimen/padding_10"
                 android:text="奖励"
-                android:textColor="@color/white"
+                android:textColor="#898E94"
+                android:textSize="13sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

@@ -41,7 +41,11 @@ public class UserPrivateDialog extends BasePopup {
         view.findViewById(R.id.deny).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.exit(9);
+                // 隐私合规：用户拒绝隐私政策时正常退出，不能使用System.exit强制杀进程
+                dismissDialog();
+                if (context instanceof Activity) {
+                    ((Activity) context).finishAffinity();
+                }
             }
         });
         view.findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {

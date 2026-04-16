@@ -10,9 +10,9 @@ import android.content.pm.PackageManager;
 /**
  * 权限检查和请求工具类
  * 隐私合规：所有权限请求前都会弹窗说明用途，用户同意后才调用系统权限请求
+ * 注意：各权限应按需单独请求，不应捆绑申请
  */
 public class CheckPermission {
-    private static final String PERMISSION_READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE;
     private static final String PERMISSION_WRITE_EXTERNAL = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private static final String ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -32,31 +32,29 @@ public class CheckPermission {
     }
 
     /**
-     * 请求必要权限（位置+存储）
+     * 请求位置权限（仅位置，不捆绑存储权限）
      * 隐私合规：先弹窗说明权限用途，用户点击同意后才请求权限
      */
     @TargetApi(23)
     public static void requestMustPermission(Activity act, int mRequestCode){
-        // 隐私合规：先弹窗说明为什么需要这些权限
-        showPermissionExplainDialog(act, mRequestCode);
+        // 隐私合规：仅请求位置权限，存储权限单独按需请求
+        showLocationPermissionDialog(act, mRequestCode);
     }
 
     /**
-     * 显示权限说明弹窗
+     * 显示位置权限说明弹窗
      */
     private static void showPermissionExplainDialog(final Activity act, final int requestCode) {
         new AlertDialog.Builder(act)
                 .setTitle("权限申请说明")
                 .setMessage("为了给您提供更好的服务，我们需要以下权限：\n\n" +
                         "• 位置权限：用于记录您的户外运动轨迹和计算运动距离\n\n" +
-                        "• 存储权限：用于保存运动数据和缓存应用资源\n\n" +
                         "您可以在系统设置中随时关闭这些权限。")
                 .setPositiveButton("同意", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 用户同意后，调用系统权限请求
+                        // 隐私合规：仅请求位置权限
                         String[] permissions = new String[]{
-                                PERMISSION_WRITE_EXTERNAL,
                                 ACCESS_FINE_LOCATION,
                                 ACCESS_COARSE_LOCATION};
                         act.requestPermissions(permissions, requestCode);
@@ -142,6 +140,85 @@ public class CheckPermission {
                                 ACCESS_FINE_LOCATION,
                                 ACCESS_COARSE_LOCATION};
                         act.requestPermissions(permissions, requestCode);
+                    }
+                })
+                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+    /**
+     * 请求通知权限 (Android 13+)
+     */
+    @TargetApi(33)
+    public static void requestNotificationPermission(Activity act, int mRequestCode) {
+        if (android.os.Build.VERSION.SDK_INT >= 33) {
+            showNotificationPermissionDialog(act, mRequestCode);
+        }
+    }
+
+    /**
+     * 显示通知权限说明弹窗
+     */
+    private static void showNotificationPermissionDialog(final Activity act, final int requestCode) {
+        new AlertDialog.Builder(act)
+                .setTitle("通知权限申请")
+                .setMessage("我们需要通知权限来在状态栏实时显示您的步数统计，让您无需打开应用即可查看运动进度。\n\n您可以在系统设置中随时关闭此权限。")
+                .setPositiveButton("同意", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (android.os.Build.VERSION.SDK_INT >= 33) {
+                            act.requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, requestCode);
+                        }
+                    }
+                })
+                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+    /**
+     * 请求健身运动(步数)权限 (Android 10+)
+     */
+    @TargetApi(29)
+    public static void requestStepPermission(Activity act, int mRequestCode) {
+        if (android.os.Build.VERSION.SDK_INT >= 29) {
+            showStepPermissionDialog(act, mRequestCode);
+        }
+    }
+
+    /**
+     * 检查是否有步数权限
+     */
+    @TargetApi(23)
+    public static boolean checkStepPermission(Activity act) {
+        if (android.os.Build.VERSION.SDK_INT >= 29) {
+            return act.checkSelfPermission("android.permission.ACTIVITY_RECOGNITION") == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
+    }
+
+    /**
+     * 显示健身运动权限说明弹窗
+     */
+    private static void showStepPermissionDialog(final Activity act, final int requestCode) {
+        new AlertDialog.Builder(act)
+                .setTitle("健身运动权限申请")
+                .setMessage("我们需要获取您的健身运动权限来同步手机系统的真实步数结果。如果不开启此权限，应用将无法记录您的真实运动量。\n\n您可以在系统设置中随时关闭此权限。")
+                .setPositiveButton("去授权", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (android.os.Build.VERSION.SDK_INT >= 29) {
+                            act.requestPermissions(new String[]{"android.permission.ACTIVITY_RECOGNITION"}, requestCode);
+                        }
                     }
                 })
                 .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {

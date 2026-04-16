@@ -37,16 +37,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="13dp"
             android:layout_marginTop="36dp"
-            android:text="1.为了能让产品功能正常运行，我们可能会使
-用存储权限，用于存储您使用中生成的数据，
-如设置、日志等；\n
-2.友盟、头条将需要收集您的设备Mac地
-址、唯一设备识别码（IMEl/android ID/IDFA/
-OPENUDID/GUID、 SIM卡IMSI信息)以提供
-统计分析服务，并通过地理位置校准报衣数据
-准确性，提供基础反作弊能力；\n
+            android:text="1.为了能让产品功能正常运行，我们可能会申请
+存储权限，用于存储您使用中生成的数据，
+如设置、运动记录等；\n
+2.为提供统计分析服务和广告功能，我们集成
+的第三方SDK（友盟、穿山甲）可能会收集
+必要的设备标识信息，详见《隐私政策》；\n
 3.未经您的同意，我们不会从第三方获取或
-对外提供你的信息;"
+对外提供您的信息；\n
+4.您可以在系统设置中随时关闭相关权限。"
             android:textColor="#7D7D7D"
             android:textSize="16dp" />
 

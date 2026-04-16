@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:background="#fbfbfb"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,6 +9,17 @@
         android:background="@color/app_common_color"
         android:layout_width="match_parent"
         android:layout_height="250dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:text="任务"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <com.dn.sports.view.OverScrollView
         android:paddingTop="@dimen/padding_15"
         android:paddingLeft="@dimen/padding_15"

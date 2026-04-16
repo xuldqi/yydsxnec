@@ -107,26 +107,17 @@ public class StartLogoActivity extends FragmentActivity {
         params.height = (h * 8) / 9;
         adLayout.setLayoutParams(params);
 
-        if (Utils.isFirstOpenAppForUserHint(this)) {
+        boolean isAgree = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("userAgree", false);
+        if (Utils.isFirstOpenAppForUserHint(this) || !isAgree) {
+            // 隐私合规：如果是首次打开或者尚未同意，延迟一秒显示隐私协议弹窗，期间不请求任何配置
             adHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-//                    userFirstHintDialog = new UserFirstHintDialog(StartLogoActivity.this);
-//                    userFirstHintDialog.showDialogAtCenter();
-//                    userFirstHintDialog.setShowCallback(new BasePopup.ShowCallback() {
-//                        @Override
-//                        public void onShow() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onDismiss() {
-//                            initAdPermission();
-//                        }
-//                    });
+                    hide();
                 }
             }, 1000);
         } else {
+            // 隐私合规：只有在用户同意隐私协议后，才允许获取广告配置和网络预加载
             if (Utils.isNetworkAvailable(this) && StepApplication.getInstance().isShowAd()) {
                 AdConfigure.getAdConfigure(this, adHandler);
             } else {
@@ -201,8 +192,7 @@ public class StartLogoActivity extends FragmentActivity {
         if (open) {
             Intent it = new Intent(StartLogoActivity.this, MainActivity.class);
             startActivity(it);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//            finish();
+            finish();
         } else {
             UserFirstDialog dialog = new UserFirstDialog();
 

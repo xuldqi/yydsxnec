@@ -270,7 +270,9 @@ public class TaskAdManager {
     }
 
     private void listenerInstall(final StyleAdEntity mStyleAdEntity) {
+        // 合规整改：移除了超范围收集个人信息的 PACKAGE_ADDED / PACKAGE_REPLACED 广播注册
         // 注册广播监听系统的下载完成事件。
+        /*
         IntentFilter installFilter = new IntentFilter();
         installFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
         installFilter.addAction(Intent.ACTION_PACKAGE_REPLACED);
@@ -285,6 +287,7 @@ public class TaskAdManager {
             }
         };
         mContext.registerReceiver(installBroadcastReceiver, installFilter);
+        */
     }
 
     private void startAdApp(final StyleAdEntity mStyleAdEntity,Context context) {

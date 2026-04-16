@@ -16,7 +16,13 @@ import com.dn.sports.fragment.chart.WeekFragment
 import com.dn.sports.utils.DisplayUtils.dp2px
 import com.dn.sports.utils.MagicIndicatorHelper.bind
 import com.dn.sports.utils.dp
+import com.dn.sports.dialog.RulerViewPickDialog
+import com.dn.sports.ormbean.BodyRecord
+import com.dn.sports.fragment.RecordSubFragment
+import com.dn.sports.greendao.DbHelper
+import android.widget.Toast
 import kotlinx.android.synthetic.main.cart_act.*
+import kotlinx.android.synthetic.main.common_title_layout.*
 import kotlinx.android.synthetic.main.step_count_record_item.*
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
@@ -82,7 +88,37 @@ class ChartActivity : BaseActivity() {
         when (chartType) {
             TYPE_HEAT -> setTitle("热量消耗")
             TYPE_DISTENCE -> setTitle("运动距离")
-            TYPE_WEIGHT -> setTitle("体重记录")
+            TYPE_WEIGHT -> {
+                setTitle("体重记录")
+                // --- 恢复/新增体重记录快捷按钮 (UI Restoration: Quick Add Button) ---
+                right_btn_text.visibility = View.VISIBLE
+                right_btn_text.text = "记录"
+                right_btn_text.setTextColor(Color.parseColor("#F37866"))
+                right_btn_text.setOnClickListener {
+                    val dialog = RulerViewPickDialog(this)
+                    dialog.initWithType("体重记录", RecordSubFragment.TYPE_WEIGHT, {
+                        val model = BodyRecord() // Corrected: Use BodyRecord
+                        model.time = System.currentTimeMillis()
+                        model.data = dialog.rulerData.toString()
+                        model.type = RecordSubFragment.TYPE_WEIGHT
+                        model.unit = "千克"
+                        DbHelper.getDaoSession().bodyRecordDao.insert(model)
+                        
+                        android.widget.Toast.makeText(this, "保存成功", android.widget.Toast.LENGTH_SHORT).show()
+                        dialog.dismissDialog()
+                        
+                        // 实时刷新图表 (Instant Chart Update)
+                        fragments.forEach { fragment ->
+                            when (fragment) {
+                                is DayFragment -> fragment.refreshData()
+                                is WeekFragment -> fragment.refreshData()
+                                is MonthFragment -> fragment.refreshData()
+                            }
+                        }
+                    }, 0f)
+                    dialog.showDialogAtBottom()
+                }
+            }
         }
     }
 

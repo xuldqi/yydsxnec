@@ -18,12 +18,29 @@ class SettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.setting_activity)
-        val open = SharedPreferenceUtil.getInstance(this).get("testFeedMessage", true) as Boolean
+        val open = SharedPreferenceUtil.getInstance(this).get("testFeedMessage", false) as Boolean
         testFeedMessageCheckBox.isChecked = open
         testFeedMessageCheckBox.clickDelay {
-            testFeedMessageCheckBox.isChecked = !testFeedMessageCheckBox.isChecked
-            SharedPreferenceUtil.getInstance(this)
-                .put("testFeedMessage", testFeedMessageCheckBox.isChecked)
+            val isChecked = !testFeedMessageCheckBox.isChecked
+            testFeedMessageCheckBox.isChecked = isChecked
+            SharedPreferenceUtil.getInstance(this).put("testFeedMessage", isChecked)
+            
+            val intent = Intent(this, com.dn.sports.StepServices::class.java)
+            if (isChecked) {
+                // 如果开启，在 Android 13+ 需要申请通知权限
+                if (android.os.Build.VERSION.SDK_INT >= 33) {
+                    com.dn.sports.common.CheckPermission.requestNotificationPermission(this, 10002)
+                }
+                // 启动服务
+                if (android.os.Build.VERSION.SDK_INT >= 26) {
+                    startForegroundService(intent)
+                } else {
+                    startService(intent)
+                }
+            } else {
+                // 如果关闭，停止服务
+                stopService(intent)
+            }
         }
         tvContact.clickDelay {
             "1993323469@qq.com".copy()

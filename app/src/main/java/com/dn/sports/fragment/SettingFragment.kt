@@ -62,7 +62,7 @@ override fun getViewByLayout(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val stateBarH = Utils.getStatusBarHeight(activity)
-        root.setPadding(0, stateBarH, 0, 0)
+        setting_root_container.setPadding(0, stateBarH, 0, 0)
 //        initWXLogin()
 //        view.findViewById<View>(R.id.wx_login).setOnClickListener(
 //            View.OnClickListener {
@@ -76,12 +76,12 @@ override fun getViewByLayout(
 //                req.state = "wechat_sdk_demo_test"
 //                api!!.sendReq(req)
 //            })
-//        val tvStep = view.findViewById<TextView>(R.id.tvSteps)
-//        val tvTimes = view.findViewById<TextView>(R.id.tvTimes)
-
-        val minute = getDurationTime(getWalkTime())
-        tvSteps.text = "总步数: ${getWalkData().toString()}步"
-        tvTimes.text = "总运动时长: ${minute}"
+        // 核心更新：加载本周真实运动数据 (Data Sync: Weekly Analytics)
+        val weeklySteps = com.dn.sports.greendao.DbHelper.getWeeklyStepsSum()
+        val weeklyJumps = com.dn.sports.greendao.DbHelper.getWeeklyJumpSum()
+        
+        view.findViewById<TextView>(R.id.tvWeeklySteps)?.text = weeklySteps.toString()
+        view.findViewById<TextView>(R.id.tvWeeklyJumps)?.text = weeklyJumps.toString()
 
         invite_friend.setOnClickListener(
             View.OnClickListener {

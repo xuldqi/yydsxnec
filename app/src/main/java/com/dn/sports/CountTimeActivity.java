@@ -134,12 +134,12 @@ public class CountTimeActivity extends BaseActivity {
 
     private void checkExit(){
         if(subMiaoBiaoFragment.isStart()){
-            showExitHint("运动计时中，是否退出？");
+            showExitHint("您的运动计时正在进行中，现在退出将不会保存记录。确定要退出吗？");
             return;
         }
 
         if(subCountTimeFragment.isStart()){
-            showExitHint("运动计时中，是否退出？");
+            showExitHint("您的运动计时正在进行中，现在退出将不会保存记录。确定要退出吗？");
             return;
         }
         finish();

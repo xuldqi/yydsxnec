@@ -21,7 +21,7 @@ public class CommonProblemActivity extends BaseActivity {
                 finish();
             }
         });
-        ((TextView) findViewById(R.id.title)).setText(getResources().getString(R.string.common_problem));
+        ((TextView) findViewById(R.id.title)).setText("帮助与反馈");
         findViewById(R.id.root_layout).setPadding(0, Utils.getStatusBarHeight(this), 0, 0);
         String problem = "";
         String[] problemList = getResources().getStringArray(R.array.common_problem);
