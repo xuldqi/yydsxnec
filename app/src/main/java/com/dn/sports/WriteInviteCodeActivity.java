@@ -33,38 +33,8 @@ public class WriteInviteCodeActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_write_invite_code);
-//        writeInviteCode = findViewById(R.id.write_invite_code);
-//        adArea = findViewById(R.id.ad_area);
-//        loadRandomCoinAd("945008003");
-//        if(StepUserManager.getInstance().getUserInfo() == null){
-//            finish();
-//            return;
-//        }
-//
-//        findViewById(R.id.start_invite_code).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                long current = System.currentTimeMillis();
-//                if(current - lastClickTime < 2000){
-//                    return;
-//                }
-//                lastClickTime = current;
-//                UmengLog.logEvent(getApplicationContext(),UmengLog.ID.WRITE_INVITE_CODE);
-//                StepUserManager.getInstance().inviteFriend(WriteInviteCodeActivity.this,writeInviteCode.getText().toString());
-//                finish();
-//            }
-//        });
-//
-//        findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-        writeInviteCode.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.showSoftInput(writeInviteCode, InputMethodManager.SHOW_IMPLICIT);
+        finish();
+        return;
     }
 
     private void loadRandomCoinAd(String adId){

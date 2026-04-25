@@ -21,7 +21,6 @@
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
-            <!-- 穿山甲广告SDK -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（Android ID、OAID、IMEI、IMSI、各类DeviceID、Mac地址）\n• 设备信息（设备型号、品牌、系统版本、屏幕分辨率）\n• 网络信息（BSSID、SSID、IP地址、网络类型、运营商信息）\n• 传感器信息（加速度、重力、陀螺仪）\n• 应用安装列表信息\n• 位置信息"
+                    android:text="• 设备基础信息（设备型号、系统版本、屏幕尺寸）\n• 网络信息（IP地址、网络类型）\n• 广告交互信息（展示、点击、关闭等事件）"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
@@ -67,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="使用目的：广告投放、广告效果统计、反作弊"
+                    android:text="使用目的：广告展示、效果统计、反作弊"
                     android:textColor="#999999"
                     android:textSize="12sp" />
 
@@ -80,7 +79,6 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- 友盟统计SDK -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（Android ID、OAID、IMEI、IMSI、ICCID、MEID、Mac地址）\n• 设备信息（设备型号、品牌、系统版本、屏幕分辨率）\n• 网络信息（网络类型、运营商信息、IP地址）\n• 传感器信息（加速度、重力、陀螺仪）\n• 应用信息（应用版本、渠道信息）\n• 位置信息\n• 崩溃日志信息"
+                    android:text="• 应用信息（应用版本、渠道信息）\n• 设备基础信息（设备型号、系统版本、屏幕尺寸）\n• 统计分析信息（页面访问、启动次数、异常信息）"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
@@ -127,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="使用目的：统计分析应用使用情况、错误分析、运营优化"
+                    android:text="使用目的：统计分析应用使用情况、稳定性分析、产品优化"
                     android:textColor="#999999"
                     android:textSize="12sp" />
 
@@ -140,7 +138,6 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- 微信登录SDK -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（Android ID、IMEI、IMSI、Mac地址）\n• 设备信息（设备型号、系统版本）\n• 网络信息（网络类型、IP地址）\n• 微信用户OpenID/UnionID\n• 授权的用户基本信息（昵称、头像）\n• 应用包名信息"
+                    android:text="• 微信授权返回的用户标识信息（如 OpenID）\n• 用户主动授权的公开资料（如昵称、头像）\n• 应用包名、应用签名等接入校验信息"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
@@ -187,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="使用目的：微信授权登录、内容分享到微信"
+                    android:text="使用目的：微信授权登录、微信分享"
                     android:textColor="#999999"
                     android:textSize="12sp" />
 
@@ -200,7 +197,6 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <!-- 百度地图/定位SDK -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,7 +209,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="百度地图/定位SDK"
+                    android:text="说明"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -221,294 +217,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="提供方：百度在线网络技术（北京）有限公司"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="共享信息类型："
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• 位置信息（GPS坐标、基站信息、WiFi信息）\n• 设备标识信息（Android ID、OAID）\n• 设备信息（设备型号、品牌、系统版本）\n• 网络信息（BSSID、SSID、IP地址、网络类型）\n• 传感器信息（加速度计、陀螺仪）"
+                    android:text="当前版本已关闭任务广告/积分任务模块，也已关闭位置轨迹功能，不再向系统申请存储权限。若后续重新上线相关功能，本页会同步更新对应的共享信息类型与用途说明。"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="使用目的：户外运动轨迹记录、运动距离计算、地图展示"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="隐私政策：https://map.baidu.com/zt/client/privacy/"
-                    android:textColor="#1E90FF"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- 百度鹰眼轨迹SDK -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:bl_corners_radius="12dp"
-                app:bl_solid_color="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="百度鹰眼轨迹SDK"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="提供方：百度在线网络技术（北京）有限公司"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="共享信息类型："
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• 位置信息（GPS坐标、运动轨迹点）\n• 设备标识信息（Android ID）\n• 设备信息（设备型号、系统版本）\n• 运动轨迹数据（坐标、时间戳、速度）"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="使用目的：户外运动时实时记录运动轨迹、生成运动路线图"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="使用场景：仅在用户主动开始户外运动（跑步、健走、徒步等）时启用"
-                    android:textColor="#FF6B00"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="隐私政策：https://lbsyun.baidu.com/index.php?title=open/privacy"
-                    android:textColor="#1E90FF"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- 优量汇广告SDK -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:bl_corners_radius="12dp"
-                app:bl_solid_color="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="优量汇广告SDK"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="提供方：腾讯科技有限公司"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="共享信息类型："
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（IMEI、IDFA、Android ID、MAC、OAID）\n• 设备信息（设备型号、系统版本）\n• 网络信息（IP地址、WiFi信息、基站信息）\n• 传感器信息（加速度、重力、陀螺仪）\n• 应用信息（应用崩溃信息、软件列表）"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="使用目的：广告投放、效果统计、反作弊"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="隐私政策：https://www.tencent.com/zh-cn/privacy-policy.html"
-                    android:textColor="#1E90FF"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- 腾讯开放平台SDK (QQ) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:bl_corners_radius="12dp"
-                app:bl_solid_color="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="腾讯开放平台SDK"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="提供方：深圳市腾讯计算机系统有限公司"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="共享信息类型："
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（IMEI、IMSI、Android ID、Mac地址）\n• 设备信息\n• 网络信息（IP地址）\n• 位置信息\n• 存储权限"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="使用目的：QQ账号授权登录、分享内容到QQ"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="隐私政策：https://cloud.tencent.com/document/product/301/11470"
-                    android:textColor="#1E90FF"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- 阿里(App支付) SDK -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:bl_corners_radius="12dp"
-                app:bl_solid_color="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="阿里(App支付) SDK"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="提供方：支付宝（中国）网络技术有限公司"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="共享信息类型："
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="• 设备标识信息（IMEI、IMSI、Android ID、OAID、Mac地址）\n• 网络信息（IP地址）\n• 位置信息\n• 存储权限"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="使用目的：支付功能实现、安全风控"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="隐私政策：https://opendocs.alipay.com/open/54/01g6qm"
-                    android:textColor="#1E90FF"
-                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

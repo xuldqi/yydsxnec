@@ -92,93 +92,9 @@ public class SignActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_sign);
-        initWXLogin();
-        findViewById(R.id.root).setPadding(0, Utils.getStatusBarHeight(this),0,0);
-        ((TextView) findViewById(R.id.title)).setText(getResources().getString(R.string.today_sgin));
-        ((TextView) findViewById(R.id.title)).setTextColor(Color.WHITE);
-        ((ImageView)findViewById(R.id.back_btn)).setImageResource(R.mipmap.back_btn_white);
-        findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        StepUserManager.getInstance().setLoginListener(loginListener);
-        StepUserManager.getInstance().signRequestList(this);
-
-        //updateData();
-
-        signItems.add(findViewById(R.id.sign_item_1));
-        signItems.add(findViewById(R.id.sign_item_2));
-        signItems.add(findViewById(R.id.sign_item_3));
-        signItems.add(findViewById(R.id.sign_item_4));
-        signItems.add(findViewById(R.id.sign_item_5));
-        signItems.add(findViewById(R.id.sign_item_6));
-        signItems.add(findViewById(R.id.sign_item_7));
-
-
-        String todayDate = DateFormat.format("MM-dd",Calendar.getInstance().getTime()).toString();
-        EyeLog.logi("todayDate:"+todayDate);
-        List<DateTest.WeekDay> weekDays = DateTest.getWeekDay();
-        int i = 0;
-        boolean isToToday = false;
-        for(DateTest.WeekDay item:weekDays){
-            signItems.get(i).setWeekDay(item,isToToday);
-            if(item.day.equals(todayDate)){
-                isToToday = true;
-            }
-            i = i+1;
-        }
-
-        for(SignItem item:signItems){
-            if(item.isSameDate(todayDate)) {
-                item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //不展示广告直接签到
-                        if(!StepApplication.getInstance().isShowAd()){
-                            Intent it = new Intent(SignActivity.this, AdActivity.class);
-//                            it.putExtra(AdActivity.AD_TYPE,AdActivity.SIGN_REQUEST);
-//                            it.putExtra(AdActivity.COIN_NUM,120);
-                            startActivity(it);
-                            return;
-                        }
-
-                        if(videoAd.isAdLoaded()){
-                            UmengLog.logEvent(getApplicationContext(),UmengLog.ID.SIGN_REQUEST);
-                            videoAd.showAd(SignActivity.this,0);
-                        }else{
-                            Toast.makeText(SignActivity.this,getResources().getString(R.string.no_video_ad),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }
-
-        mainHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog = ProgressDialog.createDialog(SignActivity.this);
-                dialog.show();
-                initShowVideoAd();
-            }
-        },100);
-
-        mainHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(dialog != null&&dialog.isShowing())
-                    dialog.dismiss();
-                Toast.makeText(SignActivity.this,getResources().getString(R.string.no_video_ad),Toast.LENGTH_SHORT).show();
-            }
-        },8000);
-
-
-        Date date = new Date();
-        EyeLog.logi(DateFormat.format("MM-dd", date).toString());
-
+        Toast.makeText(this, "当前版本已关闭签到广告页", Toast.LENGTH_SHORT).show();
+        finish();
+        return;
     }
 
     private IWXAPI api;

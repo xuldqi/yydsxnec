@@ -17,7 +17,6 @@ import com.dn.sports.MyMoneyActivity;
 import com.dn.sports.R;
 import com.dn.sports.ShareFirendActivity;
 import com.dn.sports.SignActivity;
-import com.dn.sports.TaskAdActivity;
 import com.dn.sports.WriteInviteCodeActivity;
 import com.dn.sports.adcoinLogin.Ad;
 import com.dn.sports.adcoinLogin.StepUserManager;
@@ -77,14 +76,14 @@ public class MasonItemView extends LinearLayout {
     public void setTaskModel(TaskModel taskModel) {
         this.taskModel = taskModel;
         if(taskModel.getTaskId() == Integer.MIN_VALUE){
-            setTitle("做任务领金币");
-            setHint("更多的任务领取积分");
+            setTitle(getResources().getString(R.string.task_feature_closed_title));
+            setHint(getResources().getString(R.string.task_feature_closed_desc));
+            setCoinNumber(0);
             icon.setImageResource(R.mipmap.task_more);
-            setGoSetting(getResources().getString(R.string.go_to_achieve),R.drawable.press_background,new View.OnClickListener(){
+            setGoSetting(getResources().getString(R.string.task_feature_closed_action),R.drawable.press_background_already_get,new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Intent it = new Intent(context, TaskAdActivity.class);
-                    context.startActivity(it);
+                    Toast.makeText(getContext(), getResources().getString(R.string.task_feature_closed_desc), Toast.LENGTH_SHORT).show();
                 }
             });
             return;

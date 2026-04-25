@@ -1,69 +1,77 @@
 package com.dn.sports.chart
 
 import com.github.aachartmodel.aainfographics.aachartcreator.*
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AATitle
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAXAxis
-import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAYAxis
-import com.dn.sports.utils.ceil
-import com.dn.sports.utils.floor
-
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.*
+/**
+ * Modernized ChartHelper with Premium Visualization styles.
+ */
 object ChartHelper {
 
-
-    /**
-     * 获取X轴 AAXAxis 配置
-     */
     fun initChart(
         data: Array<Int>,
         xName: Array<String>,
-        title: String,
+        titleString: String,
         xInterval: Int = 0
     ): AAOptions {
-        val max = data.maxOrNull() ?: 0.ceil()
-        val min = data.minOrNull() ?: 0.floor()
+        // Premium Gradient: From Semi-transparent Main Color to Transparent
+        val gradientColor = mapOf(
+            "linearGradient" to mapOf("x1" to 0, "y1" to 0, "x2" to 0, "y2" to 1),
+            "stops" to arrayOf(
+                arrayOf(0, "#F37866"),
+                arrayOf(1, "rgba(243, 120, 102, 0)")
+            )
+        )
+
         val aaChartModel = AAChartModel()
             .chartType(AAChartType.Areaspline)
-            .backgroundColor("#f5f5f5")
-            .markerRadius(0)
-            .yAxisReversed(true)
-            .colorsTheme(arrayOf("#F28E83", "#7fF6DCD9"))
-            .xAxisGridLineWidth(1)
+            .backgroundColor("#00000000") // Transparent
+            .markerRadius(4)
+            .markerSymbol(AAChartSymbolType.Circle)
+            .markerSymbolStyle(AAChartSymbolStyleType.BorderBlank)
+            .yAxisReversed(false) // Standard orientation
+            .colorsTheme(arrayOf("#F37866"))
             .series(
                 arrayOf(
                     AASeriesElement()
-                        .name("")
+                        .name(titleString)
                         .showInLegend(false)
-                        .data(data as Array<Any>)
+                        .fillColor(gradientColor) // Gradient Fill
+                        .lineWidth(3f)
+                        .data(data.map { it }.toTypedArray())
                 )
             )
             .xAxisVisible(true)
+            .yAxisVisible(true)
+
         val aaOptions = aaChartModel.aa_toAAOptions()
-        val aaXAxis = AAXAxis()
-            .reversed(aaChartModel.xAxisReversed)
-            .gridLineWidth(aaChartModel.xAxisGridLineWidth) //x轴网格线宽度
-            .title(AATitle())
-            //设置x轴坐标点名称
-            .categories(xName)
-            .visible(aaChartModel.xAxisVisible) //x轴是否可见
-            .tickInterval(xInterval) //x轴坐标点间隔数
-        val title = AATitle()
-            .style(
-                AAStyle()
-                    .color("#00000000")
-            )
-            .text(title)
-        val aayAxis = AAYAxis()
-            .gridLineWidth(aaChartModel.yAxisGridLineWidth) //x轴网格线宽度
-            .title(title)
-            .min(min)
-            .max(max)
-            .minTickInterval((max - min) / 3)
-            .opposite(true)
-            .visible(aaChartModel.yAxisVisible) //x轴是否可见
-            .tickInterval(0) //x轴坐标点间隔数
-        aaOptions.xAxisArray = arrayOf(aaXAxis)
-        aaOptions.yAxisArray = arrayOf(aayAxis)
+
+        // Refine X-Axis
+        aaOptions.xAxis?.apply {
+            categories(xName)
+            gridLineWidth(0f)
+            labels(AALabels().style(AAStyle().color("#999999").fontSize(11)))
+            tickInterval(xInterval)
+        }
+
+        // Refine Y-Axis
+        aaOptions.yAxis?.apply {
+            gridLineDashStyle("Dash")
+            gridLineWidth(0.5f)
+            gridLineColor("#E0E0E0")
+            labels(AALabels().style(AAStyle().color("#999999").fontSize(11)))
+            title(AATitle().text(""))
+            opposite(false)
+            min(0f)
+        }
+
+        // Tooltip Styling
+        aaOptions.tooltip?.apply {
+            enabled(true)
+            backgroundColor("#FFFFFF")
+            borderRadius(8f)
+            style(AAStyle().color("#333333"))
+        }
+
         return aaOptions
     }
 }

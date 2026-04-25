@@ -2,7 +2,6 @@ package com.dn.sports.adcoinLogin;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.util.Log;
 
@@ -45,22 +44,6 @@ public class CommonUtil {
         return md5code.toString();
     }
 
-
-    /**
-     * 应用是否已安装
-     *
-     * @param pkg 包名
-     * @return
-     */
-    public static boolean isPkgInstalled(Context mContext, String pkg) {
-        PackageInfo info = null;
-        try {
-            info = mContext.getPackageManager().getPackageInfo(pkg, 0);//flag 0 不会返回多余的数据
-        } catch (Throwable e) {
-            Log.e(TAG, "IsPkgInstalled (Throwable)", e);
-        }
-        return (info != null);
-    }
 
     /**
      * 外部应用安装器安装apk（原生接口）

@@ -46,85 +46,107 @@ public class VideoAd implements CommonAdInterface {
                 .setMediaExtra(extra) //附加参数，可选
                 .setOrientation(TTAdConstant.VERTICAL) //必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
-//        mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
-//            @Override
-//            public void onError(int code, String message) {
-//                isLoaded = false;
-//                if (adListener != null)
-//                    adListener.adError("onError:"+message+",code:"+code);
-//                EyeLog.loge("VideoAd+onError:"+message+",code:"+code);
-//            }
-//            //视频广告加载后的视频文件资源缓存到本地的回调
-//            @Override
-//            public void onRewardVideoCached() {
-//                EyeLog.logi("VideoAd+onRewardVideoCached");
-//                isLoaded = true;
-//                if (adListener != null)
-//                    adListener.adLoad();
-//            }
-//
-//            @Override
-//            public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
-//                EyeLog.logi("VideoAd+onRewardVideoAdLoad");
-//                isLoaded = true;
-//                ttRewardVideoAd = ad;
-//                ttRewardVideoAd.setRewardAdInteractionListener(new TTRewardVideoAd.RewardAdInteractionListener() {
-//
-//                    @Override
-//                    public void onSkippedVideo() {
-//                        EyeLog.logi("VideoAd+onSkippedVideo");
-//                    }
-//
-//                    @Override
-//                    public void onVideoError() {
-//                        EyeLog.logi("VideoAd+onVideoError");
-//                        if (adListener != null)
-//                            adListener.adError("onVideoError");
-//                    }
-//
-//                    @Override
-//                    public void onAdShow() {
-//                        EyeLog.logi("VideoAd+onAdShow");
-//                        if (adListener != null)
-//                            adListener.adShow();
-//                    }
-//
-//                    @Override
-//                    public void onAdVideoBarClick() {
-//                        EyeLog.logi("VideoAd+onAdVideoBarClick");
-//                    }
-//
-//                    @Override
-//                    public void onAdClose() {
-//                        EyeLog.logi("VideoAd+onAdClose");
-//                        if (adListener != null)
-//                            adListener.adClose();
-//                    }
-//
-//                    @Override
-//                    public void onVideoComplete() {
-//                        EyeLog.logi("VideoAd+onVideoComplete");
-//                    }
-//
-//                    @Override
-//                    public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName) {
-//                        EyeLog.logi("VideoAd+onRewardVerify:"+rewardVerify+",rewardAmount:"+rewardAmount+",rewardName:"+rewardName);
-//                        if (adListener != null) {
-//                            adListener.onRewarded();
-//                        }
-//
-//                        if (adListener != null) {
-//                            adListener.onRewardedSuccess(rewardVerify);
-//                        }
-//                    }
-//                });
-//            }
-//        });
+        mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
+            @Override
+            public void onError(int code, String message) {
+                isLoaded = false;
+                ttRewardVideoAd = null;
+                if (adListener != null) {
+                    adListener.adError("onError:" + message + ",code:" + code);
+                }
+                EyeLog.loge("VideoAd+onError:" + message + ",code:" + code);
+            }
+
+            @Override
+            public void onRewardVideoCached() {
+                EyeLog.logi("VideoAd+onRewardVideoCached");
+                isLoaded = true;
+                if (adListener != null) {
+                    adListener.adLoad();
+                }
+            }
+
+            @Override
+            public void onRewardVideoCached(TTRewardVideoAd ad) {
+                EyeLog.logi("VideoAd+onRewardVideoCached with ad");
+                isLoaded = true;
+                ttRewardVideoAd = ad;
+                if (adListener != null) {
+                    adListener.adLoad();
+                }
+            }
+
+            @Override
+            public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
+                EyeLog.logi("VideoAd+onRewardVideoAdLoad");
+                isLoaded = true;
+                ttRewardVideoAd = ad;
+                ttRewardVideoAd.setRewardAdInteractionListener(new TTRewardVideoAd.RewardAdInteractionListener() {
+
+                    @Override
+                    public void onSkippedVideo() {
+                        EyeLog.logi("VideoAd+onSkippedVideo");
+                    }
+
+                    @Override
+                    public void onVideoError() {
+                        EyeLog.logi("VideoAd+onVideoError");
+                        if (adListener != null) {
+                            adListener.adError("onVideoError");
+                        }
+                    }
+
+                    @Override
+                    public void onAdShow() {
+                        EyeLog.logi("VideoAd+onAdShow");
+                        if (adListener != null) {
+                            adListener.adShow();
+                        }
+                    }
+
+                    @Override
+                    public void onAdVideoBarClick() {
+                        EyeLog.logi("VideoAd+onAdVideoBarClick");
+                    }
+
+                    @Override
+                    public void onAdClose() {
+                        EyeLog.logi("VideoAd+onAdClose");
+                        if (adListener != null) {
+                            adListener.adClose();
+                        }
+                    }
+
+                    @Override
+                    public void onVideoComplete() {
+                        EyeLog.logi("VideoAd+onVideoComplete");
+                    }
+
+                    @Override
+                    public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName, int errorCode, String errorMsg) {
+                        EyeLog.logi("VideoAd+onRewardVerify:" + rewardVerify + ",rewardAmount:" + rewardAmount + ",rewardName:" + rewardName + ",errorCode:" + errorCode + ",errorMsg:" + errorMsg);
+                        if (adListener != null) {
+                            adListener.onRewarded();
+                            adListener.onRewardedSuccess(rewardVerify);
+                        }
+                    }
+
+                    @Override
+                    public void onRewardArrived(boolean isRewardValid, int rewardType, android.os.Bundle extraInfo) {
+                        EyeLog.logi("VideoAd+onRewardArrived:isRewardValid=" + isRewardValid + ",rewardType=" + rewardType);
+                    }
+                });
+            }
+        });
     }
 
     @Override
     public void showAd(Context context, int type) {
-        ttRewardVideoAd.showRewardVideoAd((Activity) context);
+        if (ttRewardVideoAd != null && context instanceof Activity) {
+            ttRewardVideoAd.showRewardVideoAd((Activity) context);
+        } else {
+            EyeLog.loge("VideoAd+showAd failed: reward ad is null or context invalid");
+        }
     }
 
     @Override

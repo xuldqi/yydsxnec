@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="• 步数、运动时长\n• 运动轨迹（仅在使用户外运动功能时）\n• 卡路里消耗"
+                    android:text="• 步数\n• 运动时长\n• 卡路里消耗"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingExtra="4dp" />
@@ -89,50 +89,6 @@
                     android:layout_marginTop="8dp"
                     android:text="用途：记录您的运动数据、生成运动报告"
                     android:textColor="#999999"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- 位置信息 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:bl_corners_radius="12dp"
-                app:bl_solid_color="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="位置信息"
-                    android:textColor="#333333"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="• GPS精确定位信息\n• 网络定位信息（基站、WiFi）"
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="用途：记录户外运动轨迹、计算运动距离"
-                    android:textColor="#999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="采集时机：仅在您主动使用户外运动功能（跑步、健走、徒步、登山）时采集，不会在后台自动采集位置"
-                    android:textColor="#FF6B00"
                     android:textSize="12sp" />
             </LinearLayout>
 

@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
 
 
 
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -66,6 +67,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             multiDexEnabled true
+            signingConfig signingConfigs.release
         }
 
         release {
@@ -115,7 +117,6 @@ dependencies {
     implementation files('libs/retrofit-2.1.0.jar')
     implementation files('libs/okhttp-3.4.1.jar')
     implementation files('libs/okio-1.9.0.jar')
-    implementation files('libs/tmsdk.jar')
     implementation files('libs/android-query-full.0.26.7.jar')
     // 穿山甲广告SDK - 使用本地aar (新版本6.x API变化大，需要全面重构才能升级)
     implementation files('libs/open_ad_sdk.aar')
@@ -150,6 +151,23 @@ dependencies {
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
     implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
 
+    // Modern Android Development (MAD) Components
+    def lifecycle_version = "2.4.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+
+    // Room persistence
+    def room_version = "2.4.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
 }
 
 configurations {
@@ -158,5 +176,7 @@ configurations {
     all*.exclude group: 'com.squareup.okio'
     all*.exclude group: 'retrofit2'
     all*.exclude group: 'okio'
+    all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+    all*.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
     all*.exclude group: 'com.android.support',module:'support-v13'
 }

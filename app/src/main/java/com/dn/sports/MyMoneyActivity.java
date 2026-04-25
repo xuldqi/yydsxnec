@@ -34,10 +34,7 @@ public class MyMoneyActivity extends BaseActivity {
                 progressDialog.dismiss();
             }
             UmengLog.logEvent(MyMoneyActivity.this,UmengLog.ID.GET_MONEY);
-
-            Intent it = new Intent(MyMoneyActivity.this,AdActivity.class);
-            it.putExtra(AdActivity.AD_TYPE,AdActivity.GET_MONEY);
-            startActivity(it);
+            Toast.makeText(MyMoneyActivity.this, "提现申请已提交", Toast.LENGTH_SHORT).show();
         }
 
         @Override

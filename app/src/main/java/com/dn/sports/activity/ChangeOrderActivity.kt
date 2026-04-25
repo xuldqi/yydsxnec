@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.reflect.TypeToken
 import com.dn.sports.R
-import com.dn.sports.RefreshTodayCount
 import com.dn.sports.adapter.CardOrderAdapter
-import com.dn.sports.adcoinLogin.StepUserManager
 import com.dn.sports.bean.CardData
 import com.dn.sports.common.BaseActivity
 import com.dn.sports.utils.JSONUtils
 import com.dn.sports.utils.SharedPreferenceUtil
 import com.dn.sports.view.SportViewCard
 import kotlinx.android.synthetic.main.activity_change_order.*
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -76,13 +72,18 @@ class ChangeOrderActivity: BaseActivity() {
             ): Boolean {
                 // swap positions in adapter
 
-                val currentData = adapter.data[viewHolder.adapterPosition]
+                val fromPosition = viewHolder.bindingAdapterPosition
+                val toPosition = target.bindingAdapterPosition
+                if (fromPosition == RecyclerView.NO_POSITION || toPosition == RecyclerView.NO_POSITION) {
+                    return false
+                }
+                val currentData = adapter.data[fromPosition]
                 val targetData = adapter.data[target.absoluteAdapterPosition]
                 if (currentData.isAdd != targetData.isAdd) {
                     currentData.isAdd = !currentData.isAdd
                 }
 
-                Collections.swap(adapter.data, viewHolder.adapterPosition, target.adapterPosition)
+                Collections.swap(adapter.data, fromPosition, toPosition)
                 adapter.notifyDataSetChanged()
                 saveOrder()
                 return true

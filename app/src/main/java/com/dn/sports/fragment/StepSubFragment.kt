@@ -1,6 +1,5 @@
 package com.dn.sports.fragment
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import com.dn.sports.R
 import com.dn.sports.activity.SetSportTargetActivity
 import com.dn.sports.activity.SportRecordActivity
@@ -17,7 +17,6 @@ import com.dn.sports.utils.clickDelay
 import com.dn.sports.utils.jumpActivity
 import com.dn.sports.utils.toDistance
 import com.dn.sports.utils.toast
-import com.permissionx.guolindev.PermissionX
 import kotlinx.android.synthetic.main.fragment_sub_step.*
 
 class StepSubFragment() : BaseFragment() {
@@ -35,11 +34,16 @@ class StepSubFragment() : BaseFragment() {
     }
 
     var type: Int = 0
+    private val targetPickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val data = result.data ?: return@registerForActivityResult
+            setSportTargetType = data.getIntExtra("set_sport_target_type", 0)
+        }
 
     override fun initViewAction(view: View?) {
-
-        title = view!!.findViewById(R.id.title)
-        data = view!!.findViewById(R.id.data)
+        view ?: return
+        title = view.findViewById(R.id.title)
+        data = view.findViewById(R.id.data)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +85,7 @@ class StepSubFragment() : BaseFragment() {
             val intent = Intent()
             intent.putExtra("set_sport_target_type", setSportTargetType)
             activity?.let { intent.setClass(it, SetSportTargetActivity::class.java) }
-            startActivityForResult(intent, 10001)
+            targetPickerLauncher.launch(intent)
         }
         btRight.clickDelay {
             activity?.jumpActivity(SportRecordActivity::class.java) {
@@ -92,54 +96,16 @@ class StepSubFragment() : BaseFragment() {
 
         btGo.clickDelay {
             if (activity == null) return@clickDelay
-            if (com.dn.sports.common.CheckPermission.checkMustPermission(activity)) {
+            if (type == TYPE_RUN_INDOOR) {
                 showCountDownDialog()
             } else {
-                android.app.AlertDialog.Builder(activity)
-                    .setTitle("位置权限申请说明")
-                    .setMessage("我们需要位置权限来记录您的户外运动轨迹和计算运动距离。\n\n" +
-                            "• 仅在您使用户外运动功能时采集位置\n" +
-                            "• 不会在后台自动采集位置信息\n\n" +
-                            "您可以在系统设置中随时关闭此权限。")
-                    .setPositiveButton("同意") { _, _ ->
-                        PermissionX.init(activity)
-                            .permissions(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            )
-                            .request { allGranted, _, _ ->
-                                if (allGranted) {
-                                    showCountDownDialog()
-                                } else {
-                                    "我们需要定位权限，才能记录运动哦".toast()
-                                }
-                            }
-                    }
-                    .setNegativeButton("拒绝") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .setCancelable(false)
+                "户外轨迹功能暂时下线".toast()
             }
         }
         
         // 为 GO 按钮添加呼吸动效 (Micro-interaction: Pulse)
         val pulseAnim = android.view.animation.AnimationUtils.loadAnimation(context, R.anim.pulse_scale)
         btGo.startAnimation(pulseAnim)
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (data == null) return
-        if (requestCode == 10001) {
-            setSportTargetType = data.getIntExtra("set_sport_target_type", 0)
-            if (setSportTargetType == 0) {
-//                setTargetType!!.text = "自由"
-            } else {
-                val mm = setSportTargetType / 1000f
-//                setTargetType!!.text = "$mm 公里"
-            }
-        }
     }
 
     private fun showCountDownDialog() {

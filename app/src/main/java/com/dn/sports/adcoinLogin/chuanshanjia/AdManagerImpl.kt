@@ -3,7 +3,6 @@ package com.dn.sports.adcoinLogin.chuanshanjia
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import androidx.multidex.BuildConfig
 import com.bytedance.sdk.openadsdk.AdSlot
 import com.bytedance.sdk.openadsdk.TTAdConfig
 import com.bytedance.sdk.openadsdk.TTAdConstant
@@ -12,6 +11,7 @@ import com.bytedance.sdk.openadsdk.TTAdManager
 import com.bytedance.sdk.openadsdk.TTAdNative
 import com.bytedance.sdk.openadsdk.TTAdSdk
 import com.bytedance.sdk.openadsdk.TTCustomController
+import com.dn.sports.BuildConfig
 import com.dn.sports.adcoinLogin.AdManager
 import com.dn.sports.utils.ActivityHolder
 

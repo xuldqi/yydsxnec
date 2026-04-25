@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Premium Brand Palette (Consistency in Dark Mode) -->
+    <color name="brand_primary">#FF8A65</color>
+    <color name="brand_primary_variant">#FF7049</color>
+    <color name="brand_secondary">#7986CB</color>
+
+    <!-- Functional Semantic Colors for Dark Mode -->
+    <color name="text_main">#E0E0E0</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="bg_main">#121212</color>
+    <color name="bg_surface">#1E1E1E</color>
+    <color name="success">#81C784</color>
+    <color name="error">#E57373</color>
+
+    <color name="colorPrimary">#FF8A65</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF7049</color>
+
+    <color name="black">#FFFFFF</color>
+    <color name="white">#1E1E1E</color>
+    <color name="main_back">#121212</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#B0B0B0</color>
+    <color name="data_gray">#424242</color>
+    <color name="green">#81C784</color>
+    <color name="blue">#7986CB</color>
+    <color name="app_common_color">#FF8A65</color>
+    <color name="yellow">#FFF176</color>
+    <color name="red">#E57373</color>
+    <color name="orange">#FFB74D</color>
+
+    <color name="common_background_color">#121212</color>
+    <color name="common_text_gray">#B0B0B0</color>
+</resources>

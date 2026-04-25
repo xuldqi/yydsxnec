@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.dn.sports.R
 import com.dn.sports.StepApplication
+import com.dn.sports.utils.SharedPreferenceUtil
 import com.umeng.analytics.MobclickAgent
 import com.dn.sports.utils.Utils
 import kotlinx.coroutines.MainScope
@@ -82,11 +83,19 @@ abstract class BaseActivity : FragmentActivity() {
 
     override fun onResume() {
         super.onResume()
-        MobclickAgent.onResume(this)
+        if (hasAcceptedPrivacy()) {
+            MobclickAgent.onResume(this)
+        }
     }
 
     override fun onPause() {
+        if (hasAcceptedPrivacy()) {
+            MobclickAgent.onPause(this)
+        }
         super.onPause()
-        MobclickAgent.onPause(this)
+    }
+
+    private fun hasAcceptedPrivacy(): Boolean {
+        return (SharedPreferenceUtil.getInstance(this).get("userAgree", false) as? Boolean) == true
     }
 }

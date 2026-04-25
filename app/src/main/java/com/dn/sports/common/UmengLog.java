@@ -3,6 +3,7 @@ package com.dn.sports.common;
 import android.content.Context;
 
 import com.umeng.analytics.MobclickAgent;
+import com.dn.sports.utils.SharedPreferenceUtil;
 
 /**
  * Created by S on 2018/12/7.
@@ -42,6 +43,13 @@ public class UmengLog {
     }
 
     public static void logEvent(Context context, String event){
+        if (context == null) {
+            return;
+        }
+        Object agree = SharedPreferenceUtil.Companion.getInstance(context).get("userAgree", false);
+        if (!(agree instanceof Boolean) || !((Boolean) agree)) {
+            return;
+        }
         MobclickAgent.onEvent(context, event);
     }
 }

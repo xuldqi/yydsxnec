@@ -4,19 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.dn.sports.R
 import com.dn.sports.activity.ChartActivity
 import com.dn.sports.chart.ChartHelper
-import com.dn.sports.common.LogUtils
 import com.dn.sports.fragment.BaseFragment
-import com.dn.sports.utils.*
-import com.dn.sports.view.TimeRangeView
+import com.dn.sports.utils.ChartDateHelper
+import com.dn.sports.utils.DateUtils
+import com.dn.sports.utils.DateUtils.getPreviousDayTimestamp
+import com.dn.sports.utils.io
+import com.dn.sports.utils.main
+import com.dn.sports.utils.toKal
 import kotlinx.android.synthetic.main.fragment_month.*
 
 class MonthFragment : BaseFragment() {
 
     var chartType = 0
+    private var monthTimes: List<Long>? = null
+    private val monthDataMap = linkedMapOf<Int, Array<Int>>()
 
     override fun getViewByLayout(
         inflater: LayoutInflater?,
@@ -26,15 +30,26 @@ class MonthFragment : BaseFragment() {
         return inflater!!.inflate(R.layout.fragment_month, container, false)
     }
 
-    override fun initViewAction(view: View?) {
-    }
+    override fun initViewAction(view: View?) {}
+
+    override fun updateUserInfo() {}
+
+    override fun clearUserInfo() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        timeRangeView.setMode(TimeRangeView.TIME_MODE_MOTH)
+        timeRangeView.setMode(com.dn.sports.view.TimeRangeView.TIME_MODE_MOTH)
+        refreshData()
+        tvUnit.text = getChartTitle()
+        timeRangeView.dateChange = {
+            refreshData()
+        }
+    }
+
+    fun refreshData() {
         io {
             val data =
-                when(chartType){
+                when (chartType) {
                     ChartActivity.TYPE_DISTENCE -> getWalkData()
                     ChartActivity.TYPE_WEIGHT -> getWeightData()
                     else -> getHeatData()
@@ -48,143 +63,69 @@ class MonthFragment : BaseFragment() {
                 cardView.setTitle(data)
             }
         }
-        timeRangeView.dateChange = {
-            refreshData()
-        }
-        tvUnit.text=getChartTitle()
     }
-
-    fun refreshData() {
-        /*仅仅更新了图表的series数组数据,不改动图表的其他内容*/
-        io {
-            val data =
-                when(chartType){
-                    ChartActivity.TYPE_DISTENCE -> getWalkData()
-                    ChartActivity.TYPE_WEIGHT -> getWeightData()
-                    else -> getHeatData()
-                }
-            main {
-                aaChartView.aa_onlyRefreshTheChartDataWithChartOptionsSeriesArray(
-                    arrayOf(
-                        AASeriesElement()
-                            .name("")
-                            .showInLegend(false)
-                            .data(data as Array<Any>)
-                    )
-                )
-                cardView.chartType = chartType
-                cardView.dateType = timeRangeView.currentTimeMode
-                cardView.setTitle(data)
-            }
-        }
-    }
-
-    var monthTimes: List<Long>? = null
 
     private fun getWalkData(): Array<Int> {
         val startTime = timeRangeView.getStartAndEndTime()[0].time
         val endTime = timeRangeView.getStartAndEndTime()[1].time
-        monthTimes =
-            DateUtils.getEveryMonthTimestamps(
-                startTime,
-                DateUtils.getPreviousDayTimestamp(endTime, false).time
-            )
+        monthTimes = DateUtils.getEveryMonthTimestamps(startTime, getPreviousDayTimestamp(endTime, false).time)
+        monthDataMap.clear()
         for (i in 1..12) {
             getEveryMonthData(i)
         }
-        val result = mutableListOf<Int>()
-        mothDataMap.forEach {
-            result.add(getAverage(it.value))
-        }
-        return result.toTypedArray()
+        return monthDataMap.values.map { getAverage(it) }.toTypedArray()
     }
 
-    private fun getHeatData() : Array<Int>{
+    private fun getHeatData(): Array<Int> {
         val startTime = timeRangeView.getStartAndEndTime()[0].time
         val endTime = timeRangeView.getStartAndEndTime()[1].time
-        monthTimes = DateUtils.getEveryMonthTimestamps(startTime, DateUtils.getPreviousDayTimestamp(endTime, false).time)
+        monthTimes = DateUtils.getEveryMonthTimestamps(startTime, getPreviousDayTimestamp(endTime, false).time)
+        monthDataMap.clear()
         for (i in 1..12) {
-            getEveryMonthData(i,true)
+            getEveryMonthData(i, true)
         }
-        val result = mutableListOf<Int>()
-        mothDataMap.forEach {
-            result.add(getAverage(it.value).toKal())
-        }
-        return result.toTypedArray()
+        return monthDataMap.values.map { getAverage(it).toKal() }.toTypedArray()
     }
 
-
-    private fun getWeightData() : Array<Int>{
+    private fun getWeightData(): Array<Int> {
         val startTime = timeRangeView.getStartAndEndTime()[0].time
         val endTime = timeRangeView.getStartAndEndTime()[1].time
-        monthTimes = DateUtils.getEveryMonthTimestamps(startTime, DateUtils.getPreviousDayTimestamp(endTime, false).time)
+        monthTimes = DateUtils.getEveryMonthTimestamps(startTime, getPreviousDayTimestamp(endTime, false).time)
+        monthDataMap.clear()
         for (i in 1..12) {
             getEveryMonthWeightData(i)
         }
-        val result = mutableListOf<Int>()
-        mothDataMap.forEach {
-            result.add(getAverage(it.value))
-        }
-        return result.toTypedArray()
+        return monthDataMap.values.map { getAverage(it) }.toTypedArray()
     }
 
-
-    //求一个数组的平均数
     private fun getAverage(array: Array<Int>): Int {
-        if (array.isNullOrEmpty()) return 0
-        var sum = 0
-        array.forEach {
-            sum += it
-        }
-        return sum / array.size
+        if (array.isEmpty()) return 0
+        return array.sum() / array.size
     }
 
-    var mothDataMap = hashMapOf<Int, Array<Int>>()
-
-    /**
-     * index 1-12
-     */
-    private fun getEveryMonthData(index: Int,isAll:Boolean=false) {
+    private fun getEveryMonthData(index: Int, isAll: Boolean = false) {
         val startTime = monthTimes!![index - 1]
         val endTime = monthTimes!![index]
-        val datas = if (!isAll) ChartDateHelper.getWalkStepData(startTime, endTime) else
+        val datas = if (!isAll) {
+            ChartDateHelper.getWalkStepData(startTime, endTime)
+        } else {
             ChartDateHelper.getAllStepsData(startTime, endTime)
-        val result = mutableListOf<Int>()
-        datas.forEach {
-            result.add(it.steps)
         }
-        mothDataMap[index] = result.toTypedArray()
+        monthDataMap[index] = datas.map { it.steps }.toTypedArray()
     }
 
     private fun getEveryMonthWeightData(index: Int) {
         val startTime = monthTimes!![index - 1]
         val endTime = monthTimes!![index]
         val datas = ChartDateHelper.getAllWeightData(startTime, endTime)
-        val result = mutableListOf<Int>()
-        datas?.forEach {
-            result.add(it.data.toFloat().toInt())
-        }
-        mothDataMap[index] = result.toTypedArray()
+        monthDataMap[index] = datas?.map { it.data.toFloat().toInt() }?.toTypedArray() ?: emptyArray()
     }
 
     private fun getChartTitle(): String {
         return when (chartType) {
-            ChartActivity.TYPE_DISTENCE -> {
-                "步"
-            }
-            ChartActivity.TYPE_WEIGHT -> {
-                "千克"
-            }
-            else -> {
-                "千卡"
-            }
+            ChartActivity.TYPE_DISTENCE -> "步"
+            ChartActivity.TYPE_WEIGHT -> "千克"
+            else -> "千卡"
         }
-    }
-
-
-    override fun updateUserInfo() {
-    }
-
-    override fun clearUserInfo() {
     }
 }

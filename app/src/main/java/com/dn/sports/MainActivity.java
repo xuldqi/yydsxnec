@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bytedance.sdk.openadsdk.TTAdManager;
+import com.dn.sports.adcoinLogin.AdConfigure;
 import com.dn.sports.adcoinLogin.Ad;
 import com.dn.sports.adcoinLogin.LoginListener;
 import com.dn.sports.adcoinLogin.StepUserManager;
@@ -26,11 +29,12 @@ import com.dn.sports.adcoinLogin.model.TaskModel;
 import com.dn.sports.adcoinLogin.model.User;
 import com.dn.sports.common.BaseActivity;
 import com.dn.sports.common.CheckPermission;
+import com.dn.sports.common.EyeLog;
 import com.dn.sports.common.UIHandler;
 import com.dn.sports.dialog.HintDialog;
+import com.dn.sports.dialog.UserFirstDialog;
 import com.dn.sports.fragment.BaseFragment;
 import com.dn.sports.fragment.HealthFragment;
-import com.dn.sports.fragment.NewHomeFragment;
 import com.dn.sports.fragment.NewTaskFragment;
 import com.dn.sports.fragment.SettingFragment;
 import com.dn.sports.fragment.StepFragment;
@@ -54,6 +58,22 @@ public class MainActivity extends BaseActivity {
     private Button mBtnData;
     private Button mBtnSettings;
     private boolean isNeedGetInfoAfterLogin = false;
+    private boolean hasRequestedHomeAd = false;
+    private boolean hasRequestedStepPermission = false;
+    private final Handler homeAdHandler = new Handler(msg -> {
+        if (isFinishing()) {
+            return true;
+        }
+        if (msg.what == AdConfigure.SHOW_AD) {
+            EyeLog.logi("HomeInterstitialAd-->show");
+            AdManagerImpl.INSTANCE.showAd(this, "953473682", false);
+        } else if (msg.what == AdConfigure.HIDE_AD) {
+            EyeLog.logi("HomeInterstitialAd-->config disabled");
+        } else if (msg.what == AdConfigure.ERROR_AD) {
+            EyeLog.loge("HomeInterstitialAd-->config request failed");
+        }
+        return true;
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +86,11 @@ public class MainActivity extends BaseActivity {
         }
 
         super.onCreate(savedInstanceState);
+        boolean userAgree = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("userAgree", false);
+        if (Utils.isFirstOpenAppForUserHint(this) || !userAgree) {
+            new UserFirstDialog().show(getSupportFragmentManager(), "privacy");
+            return;
+        }
         setContentView(R.layout.activity_main);
 
         initView();
@@ -336,7 +361,10 @@ public class MainActivity extends BaseActivity {
         if(settingFragment != null){
             settingFragment.updateUserInfo();
         }
-        StepUserManager.getInstance().checkIsFirstOpenToday(this);
+        boolean userAgree = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("userAgree", false);
+        if (userAgree) {
+            StepUserManager.getInstance().checkIsFirstOpenToday(this);
+        }
         if(StepUserManager.getInstance().isMustNeedLogin()){
             Intent it = new Intent(MainActivity.this,MustLoginActivity.class);
             startActivity(it);
@@ -424,7 +452,14 @@ public class MainActivity extends BaseActivity {
                 }
                 if(i == 1){
                     dailyFragment.updateUserInfo();
+                    if (!hasRequestedStepPermission && !CheckPermission.checkStepPermission(MainActivity.this)) {
+                        hasRequestedStepPermission = true;
+                        CheckPermission.requestStepPermission(MainActivity.this, 101);
+                    }
                 }
+
+                // Lightweight haptic feedback without extra permissions
+                getWindow().getDecorView().performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
             }
 
             @Override
@@ -477,18 +512,13 @@ public class MainActivity extends BaseActivity {
         });
         viewPager.setCurrentItem(0);
         setFocusItem(0);
-        
+
         // 关键体验补充：为底部导航栏增加虚拟按键/手势条的避让 (Inset Adaptation)
         androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.root), (v, insets) -> {
             androidx.core.graphics.Insets systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars());
             v.setPadding(0, 0, 0, systemBars.bottom);
             return insets;
         });
-
-        // 核心功能激活：检查并申请身体活动(步数)权限，确保数据真实性 (Data Authenticity)
-        if (!CheckPermission.checkStepPermission(this)) {
-            CheckPermission.requestStepPermission(this, 101);
-        }
 
         Boolean firstOpen = (Boolean) SharedPreferenceUtil.Companion.getInstance(this).get("firstOpen", true);
         boolean open = (boolean) SharedPreferenceUtil.Companion.getInstance(this).get("testFeedMessage", false);
@@ -500,17 +530,11 @@ public class MainActivity extends BaseActivity {
                 startService(it);
             }
         }
-//        showAds();
         SharedPreferenceUtil.Companion.getInstance(this).put("firstOpen", false);
     }
 
-
-    private  void  showAds(){
-//        Boolean firstOpen = (Boolean) SharedPreferenceUtil.Companion.getInstance(this).get("firstOpen", true);
-//        if(Boolean.FALSE.equals(firstOpen) || BuildConfig.DEBUG){
-            AdManagerImpl adManager= AdManagerImpl.INSTANCE;
-            adManager.showAd(this,"953473682",false);
-//        }
+    private void requestHomeInterstitialAd() {
+        // Ads disabled in this build.
     }
 
     private void setFocusItem(int item){
@@ -537,9 +561,10 @@ public class MainActivity extends BaseActivity {
 //        btn.setBackgroundResource(resId);
 
         if (isFocus) {
-            btn.setTextColor(Color.parseColor("#FF846C"));
+            btn.setTextColor(getResources().getColor(R.color.brand_primary));
         }else{
             btn.setTextColor(Color.GRAY);
         }
     }
+
 }

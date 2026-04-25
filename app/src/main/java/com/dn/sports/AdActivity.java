@@ -45,7 +45,7 @@ import com.dn.sports.adcoinLogin.model.User;
 import com.dn.sports.common.BaseActivity;
 import com.dn.sports.common.EyeLog;
 import com.dn.sports.dialog.DislikeDialog;
-import com.dn.sports.fragment.HomeFragment;
+import com.dn.sports.fragment.HealthFragment;
 import com.dn.sports.utils.Utils;
 
 import java.util.List;

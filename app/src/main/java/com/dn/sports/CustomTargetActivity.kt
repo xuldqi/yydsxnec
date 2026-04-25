@@ -43,9 +43,6 @@ class CustomTargetActivity : BaseActivity() {
         findViewById<View>(R.id.back_btn).setOnClickListener { finish() }
         (findViewById<View>(R.id.title) as TextView).text = "目标管理"
         findViewById<View>(R.id.root).setPadding(0, Utils.getStatusBarHeight(this), 0, 0)
-        val targetStepNum = StepUserManager.getInstance().getTargetStepNum(this)
-        val targetWeightNum = StepUserManager.getInstance().getTargetWeightNum(this)
-        val targetDistanceNum = StepUserManager.getInstance().getTargetDistanceNum(this)
         initTag(viewPager)
         initViewPager(viewPager)
     }
@@ -69,7 +66,7 @@ class CustomTargetActivity : BaseActivity() {
                 simplePagerTitleView.textSize = 16f
                 simplePagerTitleView.selectedColor = Color.parseColor("#F37866")
                 simplePagerTitleView.normalColor = Color.parseColor("#44464D")
-                simplePagerTitleView.setOnClickListener { v: View? ->
+                simplePagerTitleView.setOnClickListener {
                     mContentVp.currentItem = index
                 }
                 return simplePagerTitleView

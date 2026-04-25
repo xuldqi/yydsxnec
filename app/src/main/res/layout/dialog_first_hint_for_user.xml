@@ -37,9 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="13dp"
             android:layout_marginTop="36dp"
-            android:text="1.为了能让产品功能正常运行，我们可能会申请
-存储权限，用于存储您使用中生成的数据，
-如设置、运动记录等；\n
+            android:text="1.为了能让产品功能正常运行，我们会处理您主动产生的步数、运动记录等基础运动数据；\n
 2.为提供统计分析服务和广告功能，我们集成
 的第三方SDK（友盟、穿山甲）可能会收集
 必要的设备标识信息，详见《隐私政策》；\n

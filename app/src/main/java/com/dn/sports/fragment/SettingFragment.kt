@@ -1,6 +1,5 @@
 package com.dn.sports.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,19 +13,13 @@ import com.dn.sports.*
 import com.dn.sports.activity.SettingActivity
 import com.dn.sports.activity.ShareAppActivity
 import com.dn.sports.activity.SportRecordActivity
-import com.dn.sports.adcoinLogin.GetImageSync
-import com.dn.sports.adcoinLogin.StepUserManager
 import com.dn.sports.common.Constant
 import com.dn.sports.utils.ChartDateHelper
 import com.dn.sports.utils.DateUtils
-import com.dn.sports.utils.DateUtils.getDurationTime
 import com.dn.sports.utils.Utils
-import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
-import kotlinx.android.synthetic.main.day_fragment.*
 import kotlinx.android.synthetic.main.fragment_setting.*
-import java.util.*
 
 class SettingFragment : BaseFragment() {
     private var api: IWXAPI? = null
@@ -79,15 +72,16 @@ override fun getViewByLayout(
         // 核心更新：加载本周真实运动数据 (Data Sync: Weekly Analytics)
         val weeklySteps = com.dn.sports.greendao.DbHelper.getWeeklyStepsSum()
         val weeklyJumps = com.dn.sports.greendao.DbHelper.getWeeklyJumpSum()
-        
+
         view.findViewById<TextView>(R.id.tvWeeklySteps)?.text = weeklySteps.toString()
         view.findViewById<TextView>(R.id.tvWeeklyJumps)?.text = weeklyJumps.toString()
 
         invite_friend.setOnClickListener(
             View.OnClickListener {
-                val it = Intent(activity, SportRecordActivity::class.java)
-                startActivity(it)
+                val intent = Intent(activity, SportRecordActivity::class.java)
+                startActivity(intent)
             })
+
 //        view.findViewById<View>(R.id.my_money_layout)
 //            .setOnClickListener(object : View.OnClickListener {
 //                override fun onClick(view: View) {
@@ -145,15 +139,15 @@ override fun getViewByLayout(
                 startActivity(it)
             }
         })
-        share_to_friends.setOnClickListener { view12: View? ->
-            val it: Intent = Intent(getActivity(), ShareAppActivity::class.java)
-            it.putExtra("share_app", true)
-            startActivity(it)
+        share_to_friends.setOnClickListener {
+            val intent = Intent(activity, ShareAppActivity::class.java)
+            intent.putExtra("share_app", true)
+            startActivity(intent)
         }
-        tvShare.setOnClickListener { view1: View? ->
-            val it: Intent = Intent(getActivity(), ShareAppActivity::class.java)
-            it.putExtra("share_app", true)
-            startActivity(it)
+        tvShare.setOnClickListener {
+            val intent = Intent(activity, ShareAppActivity::class.java)
+            intent.putExtra("share_app", true)
+            startActivity(intent)
         }
         updateUserInfo()
     }

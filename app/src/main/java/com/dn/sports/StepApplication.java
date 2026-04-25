@@ -20,7 +20,6 @@ import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.dn.sports.adcoinLogin.AdManager;
 import com.dn.sports.adcoinLogin.StepUserManager;
-import com.dn.sports.adcoinLogin.TaskAdManager;
 import com.dn.sports.adcoinLogin.chuanshanjia.AdManagerImpl;
 import com.dn.sports.adcoinLogin.chuanshanjia.TTLiveTokenHelper;
 import com.dn.sports.common.BaseActivity;
@@ -33,6 +32,8 @@ import com.dn.sports.utils.Utils;
 import com.meituan.android.walle.WalleChannelReader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
+import com.dn.sports.data.local.AppDatabase;
+import com.dn.sports.data.repository.SportRepository;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -55,7 +56,7 @@ public class StepApplication extends MultiDexApplication {
         this.showProduct = showProduct;
     }
 
-    private boolean isShowAd = true;
+    private boolean isShowAd = false;
 
     public void setShowAd(boolean showAd) {
         isShowAd = showAd;
@@ -82,6 +83,26 @@ public class StepApplication extends MultiDexApplication {
 
     public static int screenHeight = 0;
 
+    private AppDatabase database;
+    private SportRepository repository;
+
+    public SportRepository getRepository() {
+        if (repository == null) {
+            repository = new SportRepository(
+                getDatabase().sportRecordDao(),
+                getDatabase().achievementDao()
+            );
+        }
+        return repository;
+    }
+
+    public AppDatabase getDatabase() {
+        if (database == null) {
+            database = AppDatabase.Companion.getDatabase(this);
+        }
+        return database;
+    }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -92,7 +113,6 @@ public class StepApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-//        TaskAdManager.initApplication(this);
 //        StepUserManager.getInstance().initWXLoginID(Constant.WX_LOGIN.getWxAppId(this),Constant.WX_LOGIN.getWxSecret(this));
         DisplayUtils.INSTANCE.init(this);
         String channel = Utils.getMarket(this);
@@ -101,9 +121,6 @@ public class StepApplication extends MultiDexApplication {
         Boolean isAgree = (Boolean) SharedPreferenceUtil.Companion.getInstance(this).get("userAgree", false);
         if (isAgree) {
             UMConfigure.init(this, "649d44e7bd4b621232c3b6df",myChannel, UMConfigure.DEVICE_TYPE_PHONE, null);
-            AdManagerImpl.INSTANCE.initSdk(this);
-        }else {
-            UMConfigure.preInit(this, "649d44e7bd4b621232c3b6df", myChannel);
         }
         service = new DbService(this);
 //        SDKInitializer.initialize(this);

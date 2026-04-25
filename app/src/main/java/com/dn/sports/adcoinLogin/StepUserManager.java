@@ -35,6 +35,7 @@ import com.dn.sports.common.EyeLog;
 import com.dn.sports.common.LogUtils;
 import com.dn.sports.greendao.DbHelper;
 import com.dn.sports.utils.DateUtils;
+import com.dn.sports.utils.SharedPreferenceUtil;
 import com.dn.sports.utils.Utils;
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -191,6 +192,10 @@ public class StepUserManager {
 
     //判断是不是今天第一次打开，同步检查步数
     public void checkIsFirstOpenToday(Context context){
+        boolean userAgree = (boolean) SharedPreferenceUtil.Companion.getInstance(context).get("userAgree", false);
+        if (!userAgree) {
+            return;
+        }
         String currentDate = DateUtils.getYMD(0);
         String m = (String)Utils.get(context,IS_TODAY_FIRST_TIME,"");
         reCheckSteps = true;

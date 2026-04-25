@@ -16,6 +16,10 @@
     <string name="settings_hint">一些通常的信息</string>
     <string name="permission">权限设置</string>
     <string name="task_ad">做任务领金币</string>
+    <string name="task_feature_closed_title">任务功能已关闭</string>
+    <string name="task_feature_closed_desc">当前版本已关闭第三方任务广告和积分任务模块，不再接入 TMSDK。</string>
+    <string name="task_feature_closed_tip">如需继续使用，请联系运营或查看最新版本说明。</string>
+    <string name="task_feature_closed_action">已关闭</string>
     <string name="demo_reward_feedback">反馈</string>
 
     <string name="copy">复制</string>

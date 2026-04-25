@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.dn.sports.MainActivity
 import com.dn.sports.R
@@ -38,30 +39,33 @@ class UserFirstDialog:DialogFragment() {
         val window = dialog?.window
         window?.setGravity(Gravity.CENTER)
         window?.setDimAmount(0f)
-        window?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.transparent)))
+        window?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.transparent)))
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
         tvUser.bigClick(10.dp)
         tvPrivate.bigClick(10.dp)
         tvUser.clickDelay {
-            val it = Intent(context, YSXYActivity::class.java)
-            it.putExtra("type", 1)
-            context?.startActivity(it)
+            val intent = Intent(context, YSXYActivity::class.java)
+            intent.putExtra("type", 1)
+            context?.startActivity(intent)
         }
         tvPrivate.clickDelay {
-            val it = Intent(context, YSXYActivity::class.java)
-            it.putExtra("type", 2)
-            context?.startActivity(it)
+            val intent = Intent(context, YSXYActivity::class.java)
+            intent.putExtra("type", 2)
+            context?.startActivity(intent)
         }
         view.findViewById<View>(R.id.deny).setOnClickListener { 
             // 隐私合规：用户拒绝隐私政策时正常退出，不能使用System.exit强制杀进程
             activity?.finishAffinity()
         }
         view.findViewById<View>(R.id.ok).setOnClickListener {
+            val safeContext = requireContext()
+            getInstance(safeContext).put("userAgree", true)
             initSdk(StepApplication.getInstance())
-            getInstance(context!!).put("userAgree", true)
-            val it = Intent(context, MainActivity::class.java)
-            context!!.startActivity(it)
+            val intent = Intent(safeContext, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            safeContext.startActivity(intent)
+            activity?.finish()
             dismiss()
         }
     }

@@ -1,12 +1,10 @@
 package com.dn.sports.activity
 
-import android.Manifest
+import android.content.Intent
 import android.graphics.Bitmap
-import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import com.angcyo.widget.span.span
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -18,7 +16,6 @@ import com.dn.sports.R
 import com.dn.sports.common.BaseActivity
 import com.dn.sports.greendao.DbHelper
 import com.dn.sports.utils.*
-import com.permissionx.guolindev.PermissionX
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType
 import kotlinx.android.synthetic.main.share_app_act.*
@@ -26,9 +23,7 @@ import java.io.File
 
 class ShareAppActivity : BaseActivity() {
 
-    var photoFilePath =
-        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).path
-    val picpath = "${photoFilePath}${this.hashCode()}.jpg"
+    private val picpath by lazy { File(cacheDir, "share_${hashCode()}.jpg").absolutePath }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,61 +79,41 @@ class ShareAppActivity : BaseActivity() {
         var bitmap: Bitmap? = laySharePic.getDrawingCache(true)
         if (bitmap != null) {
             bitmap = Bitmap.createBitmap(bitmap)
-            checkStorgePermission({
-                io {
-                    BitmapUtils.saveBitmap(
-                        bitmap,
-                        picpath,
-                        object : BitmapUtils.SharePictureCallBack {
-                            override fun onsuccess() {
-                                MediaScannerConnection.scanFile(
-                                    this@ShareAppActivity,
-                                    arrayOf("${picpath}"),
-                                    null,
-                                    null
-                                )
-                                main {
-                                    "保存成功".toast()
-                                }
+            io {
+                BitmapUtils.saveBitmap(
+                    bitmap,
+                    picpath,
+                    object : BitmapUtils.SharePictureCallBack {
+                        override fun onsuccess() {
+                            main {
+                                shareToSystem()
                             }
+                        }
 
-                            override fun onFailed(e: Exception?) {}
-                        })
-                }
-            }) {
-                "我们需要本地存储权限来保存到相册".toast()
+                        override fun onFailed(e: Exception?) {
+                            main {
+                                "分享图片生成失败".toast()
+                            }
+                        }
+                    })
             }
         }
         laySharePic.setDrawingCacheEnabled(false)
     }
 
-    private fun checkStorgePermission(onAgree: () -> Unit, onDenid: () -> Unit) {
-        if (com.dn.sports.common.CheckPermission.checkWritePermission(this)) {
-            onAgree.invoke()
-        } else {
-            android.app.AlertDialog.Builder(this)
-                .setTitle("存储权限申请说明")
-                .setMessage("我们需要存储权限来保存您的运动数据图片到系统相册。\n\n您可以在系统设置中随时关闭此权限。")
-                .setPositiveButton("同意") { _, _ ->
-                    PermissionX.init(this)
-                        .permissions(
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE
-                        )
-                        .request { allGranted, _, _ ->
-                            if (allGranted) {
-                                onAgree.invoke()
-                            } else {
-                                onDenid.invoke()
-                            }
-                        }
-                }
-                .setNegativeButton("拒绝") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setCancelable(false)
-                .show()
+    private fun shareToSystem() {
+        val shareFile = File(picpath)
+        if (!shareFile.exists()) {
+            "分享图片不存在".toast()
+            return
         }
+        val uri = FileProvider.getUriForFile(this, "com.dn.sports.fileprovider", shareFile)
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "image/jpeg"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivity(Intent.createChooser(intent, getString(R.string.share_to_app_title)))
     }
 
 

@@ -27,18 +27,12 @@ class SettingActivity : BaseActivity() {
             
             val intent = Intent(this, com.dn.sports.StepServices::class.java)
             if (isChecked) {
-                // 如果开启，在 Android 13+ 需要申请通知权限
-                if (android.os.Build.VERSION.SDK_INT >= 33) {
-                    com.dn.sports.common.CheckPermission.requestNotificationPermission(this, 10002)
-                }
-                // 启动服务
                 if (android.os.Build.VERSION.SDK_INT >= 26) {
                     startForegroundService(intent)
                 } else {
                     startService(intent)
                 }
             } else {
-                // 如果关闭，停止服务
                 stopService(intent)
             }
         }
