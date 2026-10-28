@@ -73,8 +73,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   _buildStepsHeroCard(context, steps, record),
                   const SizedBox(height: 18),
                   _buildHabitCardsStream(context, record),
-                  const SizedBox(height: 24),
-                  _buildHealthToolboxSection(context),
                 ],
               ),
             ),
@@ -141,10 +139,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 ),
                 child: Row(
                   children: const [
-                    Text('🔥', style: TextStyle(fontSize: 14)),
+                    Icon(Icons.local_fire_department_rounded, size: 15, color: Color(0xFFEA580C)),
                     SizedBox(width: 4),
                     Text(
-                      '连击 7天',
+                      '连续 7 天',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
@@ -305,10 +303,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      '今日活动步数',
+                      '步数',
                       style: TextStyle(
                         color: Color(0xFF1E1B4B),
-                        fontSize: 15,
+                        fontSize: 16,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -316,13 +314,13 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 ),
                 Row(
                   children: const [
-                    Text('运动分析', style: TextStyle(fontSize: 12, color: Color(0xFF6366F1), fontWeight: FontWeight.w600)),
+                    Text('详情', style: TextStyle(fontSize: 12, color: Color(0xFF6366F1), fontWeight: FontWeight.w600)),
                     Icon(Icons.chevron_right_rounded, size: 16, color: Color(0xFF6366F1)),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 14),
             Row(
               children: [
                 Expanded(
@@ -346,11 +344,11 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                           const Text('步', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 13, fontWeight: FontWeight.bold)),
                         ],
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        '目标 10,000 步 · 还差 ${NumberFormat('#,###').format((10000 - steps).clamp(0, 10000))} 步',
-                        style: const TextStyle(
-                          color: Color(0xFF64748B),
+                      const SizedBox(height: 4),
+                      const Text(
+                        '目标 10,000 步',
+                        style: TextStyle(
+                          color: Color(0xFF94A3B8),
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -359,14 +357,14 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: 66,
-                  height: 66,
+                  width: 60,
+                  height: 60,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                       CircularProgressIndicator(
                         value: progress,
-                        strokeWidth: 7,
+                        strokeWidth: 6,
                         backgroundColor: const Color(0xFFF1F5F9),
                         valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF6366F1)),
                       ),
@@ -374,7 +372,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                         '${(progress * 100).toInt()}%',
                         style: const TextStyle(
                           color: Color(0xFF1E1B4B),
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
@@ -383,21 +381,21 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 14),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: const Color(0xFFF8FAFC),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildSubStat(Icons.route_rounded, '$distanceKm km', '运动里程', const Color(0xFF10B981)),
-                  Container(width: 1, height: 24, color: const Color(0xFFE2E8F0)),
-                  _buildSubStat(Icons.local_fire_department_rounded, '$calories kcal', '消耗热量', const Color(0xFFF97316)),
-                  Container(width: 1, height: 24, color: const Color(0xFFE2E8F0)),
-                  _buildSubStat(Icons.timer_outlined, '${steps ~/ 100} 分钟', '活跃时长', const Color(0xFF0EA5E9)),
+                  _buildSubStat(Icons.route_rounded, '$distanceKm km', '公里', const Color(0xFF10B981)),
+                  Container(width: 1, height: 20, color: const Color(0xFFE2E8F0)),
+                  _buildSubStat(Icons.local_fire_department_rounded, '$calories kcal', '千卡', const Color(0xFFF97316)),
+                  Container(width: 1, height: 20, color: const Color(0xFFE2E8F0)),
+                  _buildSubStat(Icons.timer_outlined, '${steps ~/ 100} 分', '时长', const Color(0xFF0EA5E9)),
                 ],
               ),
             ),
@@ -410,8 +408,8 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
   Widget _buildSubStat(IconData icon, String value, String label, Color color) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: color),
-        const SizedBox(width: 6),
+        Icon(icon, size: 15, color: color),
+        const SizedBox(width: 5),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -429,12 +427,12 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 12),
+          padding: EdgeInsets.only(left: 4, bottom: 10),
           child: Text(
-            '今日健康打卡',
+            '今日打卡',
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
+              fontSize: 17,
+              fontWeight: FontWeight.w800,
               color: Color(0xFF1E1B4B),
             ),
           ),
@@ -483,7 +481,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     final waterProgress = (record.waterMl / 2000).clamp(0.0, 1.0);
 
     return _buildActionCard(
-      title: '喝水打卡',
+      title: '喝水',
       icon: Icons.water_drop_rounded,
       color: const Color(0xFF0EA5E9),
       onTap: () => context.push('/water'),
@@ -519,8 +517,8 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               } catch (_) {}
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('已记录饮水 +250ml 💧 记得按时喝水哦！'),
-                  duration: Duration(milliseconds: 1500),
+                  content: Text('已记录饮水 +250ml'),
+                  duration: Duration(milliseconds: 1200),
                   behavior: SnackBarBehavior.floating,
                 ),
               );
@@ -534,7 +532,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: const Center(
                 child: Text(
-                  '+250ml 💧',
+                  '+250ml',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
@@ -561,7 +559,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     final remainM = timer.remainingTime.inMinutes % 60;
 
     return _buildActionCard(
-      title: isActive ? '${activeSession.fastingHours}:${activeSession.eatingHours} 轻断食' : '轻断食计划',
+      title: '轻断食',
       icon: Icons.timer_outlined,
       color: const Color(0xFFF97316),
       onTap: () => context.push('/fasting'),
@@ -569,9 +567,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            isActive ? '断食中 · ${elapsedH}h ${elapsedM}m' : '准备就绪 · 待开启',
+            isActive ? '${elapsedH}h ${elapsedM}m' : '未开启',
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.w900,
               color: Color(0xFF1E1B4B),
             ),
@@ -579,9 +577,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           Text(
             isActive
-                ? (timer.isOvertime ? '已超额达成目标！🔥' : '离进食窗口剩 ${remainH}h ${remainM}m')
-                : '推荐 16:8 燃脂方案，助代谢提速',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+                ? (timer.isOvertime ? '已达成目标' : '剩 ${remainH}h ${remainM}m')
+                : '16:8 方案',
+            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 10),
           GestureDetector(
@@ -595,7 +593,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: Center(
                 child: Text(
-                  isActive ? '查看计时器 ⏳' : '一键开启断食 🚀',
+                  isActive ? '计时器' : '开启断食',
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
@@ -617,7 +615,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     final goalCalories = (dietAsync.valueOrNull?.goal ?? 2000).round();
 
     return _buildActionCard(
-      title: '饮食摄入',
+      title: '饮食',
       icon: Icons.restaurant_rounded,
       color: const Color(0xFF10B981),
       onTap: () => context.push('/diet'),
@@ -647,7 +645,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Center(
-                      child: Text('📷 AI 识图',
+                      child: Text('识图',
                           style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF059669))),
                     ),
                   ),
@@ -683,7 +681,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     final mins = record.sleepMins % 60 > 0 ? record.sleepMins % 60 : 45;
 
     return _buildActionCard(
-      title: '昨晚睡眠',
+      title: '睡眠',
       icon: Icons.nightlight_round,
       color: const Color(0xFF6366F1),
       onTap: () => context.push('/sleep'),
@@ -714,7 +712,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: const Center(
                 child: Text(
-                  '🎧 助眠白噪音',
+                  '助眠音',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
@@ -732,7 +730,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
   // ── Card: Vital Signs ───────────────────────────────────────────────────────
   Widget _buildVitalSignsCard(BuildContext context, DailyHealthRecord record) {
     return _buildActionCard(
-      title: '心率 & 压力',
+      title: '心率',
       icon: Icons.favorite_rounded,
       color: const Color(0xFFF43F5E),
       onTap: () => context.push('/vital-signs'),
@@ -762,7 +760,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: const Center(
                 child: Text(
-                  '📷 测心率',
+                  '测量',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
@@ -779,47 +777,39 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
 
   // ── Card: Mood Diary ────────────────────────────────────────────────────────
   Widget _buildMoodCard(BuildContext context, DailyHealthRecord record) {
-    final emojis = [
-      {'e': '😆', 'l': '开心'},
-      {'e': '😊', 'l': '平静'},
-      {'e': '😐', 'l': '一般'},
-      {'e': '😫', 'l': '焦虑'},
-      {'e': '😢', 'l': '低落'},
-    ];
-
     return _buildActionCard(
-      title: '今日心情 · ${record.mood}',
+      title: '情绪',
       icon: Icons.mood_rounded,
       color: const Color(0xFFF59E0B),
       onTap: () => context.push('/mood'),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: emojis.map((item) {
-              final isCurrent = record.mood == item['l'];
-              return GestureDetector(
-                onTap: () {
-                  ref.read(dailyHealthProvider.notifier).setMood(item['l']!);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('心情已记录：${item['e']} ${item['l']}'),
-                      duration: const Duration(seconds: 1),
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: isCurrent ? const Color(0xFFF59E0B).withValues(alpha: 0.2) : Colors.transparent,
-                    shape: BoxShape.circle,
+          Text(
+            record.mood.isNotEmpty ? record.mood : '平静',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B)),
+          ),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () => context.push('/mood'),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF59E0B).withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Center(
+                child: Text(
+                  '记录',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFFD97706),
                   ),
-                  child: Text(item['e']!, style: const TextStyle(fontSize: 18)),
                 ),
-              );
-            }).toList(),
+              ),
+            ),
           ),
         ],
       ),
@@ -883,141 +873,4 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       ),
     );
   }
-
-  // ── 6. Health Toolbox (Organized Sections instead of 18 dumped icons) ──────
-  Widget _buildHealthToolboxSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
-            '健康管理工具箱',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
-            ),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(22),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A000000),
-                blurRadius: 14,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              _buildToolCategory(
-                title: '🌸 女性与生理健康',
-                tools: [
-                  _ToolItem('经期预测', Icons.favorite_border, const Color(0xFFEC4899), '/period'),
-                  _ToolItem('便便健康', Icons.emoji_nature_rounded, const Color(0xFF854D0E), '/poop'),
-                ],
-                context: context,
-              ),
-              const Divider(height: 24, color: Color(0xFFF1F5F9)),
-              _buildToolCategory(
-                title: '⚖️ 体型与体成分管理',
-                tools: [
-                  _ToolItem('体重管理', Icons.monitor_weight_outlined, const Color(0xFF3B82F6), '/weight'),
-                  _ToolItem('体测三围', Icons.straighten_rounded, const Color(0xFFA855F7), '/body-record'),
-                ],
-                context: context,
-              ),
-              const Divider(height: 24, color: Color(0xFFF1F5F9)),
-              _buildToolCategory(
-                title: '🧘 身心舒缓与冥想',
-                tools: [
-                  _ToolItem('正念冥想', Icons.self_improvement_rounded, const Color(0xFF8B5CF6), '/meditation'),
-                  _ToolItem('助眠白噪音', Icons.music_note_rounded, const Color(0xFF0EA5E9), '/white-noise'),
-                ],
-                context: context,
-              ),
-              const Divider(height: 24, color: Color(0xFFF1F5F9)),
-              _buildToolCategory(
-                title: '🏆 运动进阶与数据安全',
-                tools: [
-                  _ToolItem('训练计划', Icons.fitness_center_rounded, const Color(0xFF6366F1), '/training-plan'),
-                  _ToolItem('动作库', Icons.directions_run_rounded, const Color(0xFF10B981), '/movement-library'),
-                  _ToolItem('勋章馆', Icons.emoji_events_rounded, const Color(0xFFD97706), '/achievements'),
-                  _ToolItem('数据备份', Icons.cloud_download_outlined, const Color(0xFF64748B), '/data-export'),
-                ],
-                context: context,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildToolCategory({
-    required String title,
-    required List<_ToolItem> tools,
-    required BuildContext context,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF64748B),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: tools.map((t) {
-            return Expanded(
-              child: GestureDetector(
-                onTap: () => context.push(t.route),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF8FAFC),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFE2E8F0)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(t.icon, color: t.color, size: 16),
-                      const SizedBox(width: 6),
-                      Text(
-                        t.label,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF334155),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-      ],
-    );
-  }
-}
-
-class _ToolItem {
-  final String label;
-  final IconData icon;
-  final Color color;
-  final String route;
-  _ToolItem(this.label, this.icon, this.color, this.route);
 }
