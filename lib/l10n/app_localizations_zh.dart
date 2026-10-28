@@ -1,0 +1,8579 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Chinese (`zh`).
+class AppL10nZh extends AppL10n {
+  AppL10nZh([String locale = 'zh']) : super(locale);
+
+  @override
+  String get accept_invite => '接受邀请';
+
+  @override
+  String get account => '账户';
+
+  @override
+  String get achieve_all_types_desc => '尝试过5种不同的运动类型';
+
+  @override
+  String get achieve_all_types_name => '全能运动员';
+
+  @override
+  String get achieve_cal_10000_desc => '累计消耗10,000千卡热量';
+
+  @override
+  String get achieve_cal_10000_name => '热量粉碎机';
+
+  @override
+  String get achieve_cal_1000_desc => '累计消耗1,000千卡热量';
+
+  @override
+  String get achieve_cal_1000_name => '热量消耗者';
+
+  @override
+  String get achieve_cat_diet => '饮食成就';
+
+  @override
+  String get achieve_cat_mood => '心情成就';
+
+  @override
+  String get achieve_cat_sleep => '睡眠成就';
+
+  @override
+  String get achieve_cat_sport => '运动成就';
+
+  @override
+  String get achieve_cat_water => '饮水成就';
+
+  @override
+  String get achieve_diet_balanced_desc => '一天内记录完早中晚三餐';
+
+  @override
+  String get achieve_diet_balanced_name => '营养均衡';
+
+  @override
+  String get achieve_diet_first_desc => '记录第一次饮食';
+
+  @override
+  String get achieve_diet_first_name => '健康开端';
+
+  @override
+  String get achieve_diet_goal_desc => '连续7天摄入热量在目标范围内';
+
+  @override
+  String get achieve_diet_goal_name => '精准掌控';
+
+  @override
+  String get achieve_diet_low_cal_desc => '连续7天摄入热量低于目标';
+
+  @override
+  String get achieve_diet_low_cal_name => '轻食主义';
+
+  @override
+  String get achieve_diet_streak_30_desc => '连续30天记录饮食';
+
+  @override
+  String get achieve_diet_streak_30_name => '饮食专家';
+
+  @override
+  String get achieve_diet_streak_7_desc => '连续7天记录饮食';
+
+  @override
+  String get achieve_diet_streak_7_name => '饮食记录员';
+
+  @override
+  String get achieve_distance_100km_desc => '累计运动距离达到100公里';
+
+  @override
+  String get achieve_distance_100km_name => '100 公里';
+
+  @override
+  String get achieve_distance_10km_desc => '累计运动距离达到10公里';
+
+  @override
+  String get achieve_distance_10km_name => '10 公里';
+
+  @override
+  String get achieve_distance_marathon_desc => '累计运动距离达到42.195公里';
+
+  @override
+  String get achieve_distance_marathon_name => '马拉松';
+
+  @override
+  String get achieve_early_bird_desc => '在凌晨6点前完成运动';
+
+  @override
+  String get achieve_early_bird_name => '晨间之鸟';
+
+  @override
+  String get achieve_first_workout_desc => '完成第一次运动';
+
+  @override
+  String get achieve_first_workout_name => '初试身手';
+
+  @override
+  String get achieve_mood_first_desc => '记录第一次心情';
+
+  @override
+  String get achieve_mood_first_name => '记录心情';
+
+  @override
+  String get achieve_mood_happy_desc => '连续7天保持好心情';
+
+  @override
+  String get achieve_mood_happy_name => '快乐连击';
+
+  @override
+  String get achieve_mood_improve_desc => '心情从低落转为快乐';
+
+  @override
+  String get achieve_mood_improve_name => '心态转变';
+
+  @override
+  String get achieve_mood_stable_desc => '连续30天没有负面情绪';
+
+  @override
+  String get achieve_mood_stable_name => '情绪稳定';
+
+  @override
+  String get achieve_mood_streak_30_desc => '连续30天记录心情';
+
+  @override
+  String get achieve_mood_streak_30_name => '心灵导师';
+
+  @override
+  String get achieve_mood_streak_7_desc => '连续7天记录心情';
+
+  @override
+  String get achieve_mood_streak_7_name => '情绪觉察';
+
+  @override
+  String get achieve_night_owl_desc => '在晚上10点后完成运动';
+
+  @override
+  String get achieve_night_owl_name => '深夜之猫';
+
+  @override
+  String get achieve_sleep_8hrs_desc => '单次睡眠达到8小时';
+
+  @override
+  String get achieve_sleep_8hrs_name => '饱足睡眠';
+
+  @override
+  String get achieve_sleep_early_desc => '在晚上10点前入睡';
+
+  @override
+  String get achieve_sleep_early_name => '早睡早起';
+
+  @override
+  String get achieve_sleep_first_desc => '记录第一次睡眠';
+
+  @override
+  String get achieve_sleep_first_name => '第一觉';
+
+  @override
+  String get achieve_sleep_quality_desc => '睡眠质量分数达到90分';
+
+  @override
+  String get achieve_sleep_quality_name => '深度睡眠';
+
+  @override
+  String get achieve_sleep_streak_30_desc => '连续30天记录睡眠';
+
+  @override
+  String get achieve_sleep_streak_30_name => '睡眠大师';
+
+  @override
+  String get achieve_sleep_streak_7_desc => '连续7天记录睡眠';
+
+  @override
+  String get achieve_sleep_streak_7_name => '规律作息';
+
+  @override
+  String get achieve_streak_30_desc => '连续30天完成运动';
+
+  @override
+  String get achieve_streak_30_name => '月度冠军';
+
+  @override
+  String get achieve_streak_3_desc => '连续3天完成运动';
+
+  @override
+  String get achieve_streak_3_name => '三日连胜';
+
+  @override
+  String get achieve_streak_7_desc => '连续7天完成运动';
+
+  @override
+  String get achieve_streak_7_name => '七日连胜';
+
+  @override
+  String get achieve_water_8cups_desc => '一天内达成8杯饮水目标';
+
+  @override
+  String get achieve_water_8cups_name => '八杯水大师';
+
+  @override
+  String get achieve_water_first_desc => '记录第一次饮水';
+
+  @override
+  String get achieve_water_first_name => '第一口水';
+
+  @override
+  String get achieve_water_streak_30_desc => '连续30天达成饮水目标';
+
+  @override
+  String get achieve_water_streak_30_name => '水润一月';
+
+  @override
+  String get achieve_water_streak_7_desc => '连续7天达成饮水目标';
+
+  @override
+  String get achieve_water_streak_7_name => '水润一周';
+
+  @override
+  String get achieve_water_total_100L_desc => '累计饮水达到100升';
+
+  @override
+  String get achieve_water_total_100L_name => '100升俱乐部';
+
+  @override
+  String get achieve_water_variety_desc => '尝试过10种不同的饮品';
+
+  @override
+  String get achieve_water_variety_name => '饮品探索家';
+
+  @override
+  String get achieve_workout_100_desc => '累计完成100次运动';
+
+  @override
+  String get achieve_workout_100_name => '运动之星';
+
+  @override
+  String get achieve_workout_10_desc => '累计完成10次运动';
+
+  @override
+  String get achieve_workout_10_name => '坚持不懈';
+
+  @override
+  String get achieve_workout_50_desc => '累计完成50次运动';
+
+  @override
+  String get achieve_workout_50_name => '运动达人';
+
+  @override
+  String get achievements_page_subtitle => '记录每一次坚持，沉淀你的运动成就';
+
+  @override
+  String get achievements_page_title => '成就';
+
+  @override
+  String get activity_permission_msg => '此应用需要健康活动权限以准确追踪步数。点击确认以授予权限。';
+
+  @override
+  String get ad_desc =>
+      '1.每日奖励数量和金额有限，先到先得。\\n2.获得奖励需看完视频。\\n3.每个用户每天仅可参加1次。\\n4.获得奖励后后将直接进入钱包。';
+
+  @override
+  String get add_health_record => '添加健康记录';
+
+  @override
+  String get already_copy => '已复制到剪切板';
+
+  @override
+  String get already_get_coin => '已领取';
+
+  @override
+  String get already_get_coin_hint => '您已领取过奖励啦';
+
+  @override
+  String get already_luck_reward => '今日已抽奖，请明日再来。';
+
+  @override
+  String get already_sign => '已领取';
+
+  @override
+  String get analytics => '数据分析';
+
+  @override
+  String get app_name => '微步运动';
+
+  @override
+  String get apr => '4月';
+
+  @override
+  String get aug => '8月';
+
+  @override
+  String get auth => '允许';
+
+  @override
+  String get beverage_beer => '啤酒';
+
+  @override
+  String get beverage_coconut_water => '椰子水';
+
+  @override
+  String get beverage_coffee => '咖啡';
+
+  @override
+  String get beverage_cola => '可乐';
+
+  @override
+  String get beverage_honey_water => '蜂蜜水';
+
+  @override
+  String get beverage_juice => '果汁';
+
+  @override
+  String get beverage_lemon_water => '柠檬水';
+
+  @override
+  String get beverage_milk => '牛奶';
+
+  @override
+  String get beverage_milk_tea => '奶茶';
+
+  @override
+  String get beverage_mineral_water => '矿泉水';
+
+  @override
+  String get beverage_soda => '苏打水';
+
+  @override
+  String get beverage_soup => '汤';
+
+  @override
+  String get beverage_soy_milk => '豆浆';
+
+  @override
+  String get beverage_sports_drink => '运动饮料';
+
+  @override
+  String get beverage_tea => '茶';
+
+  @override
+  String get beverage_water => '白开水';
+
+  @override
+  String get beverage_yogurt => '酸奶';
+
+  @override
+  String get blood_glucose => '血糖';
+
+  @override
+  String get blood_pressure => '血压';
+
+  @override
+  String get bp_monitoring => '生理指标记录';
+
+  @override
+  String get challenge_1_desc => '连续7天每天达到10,000步';
+
+  @override
+  String get challenge_1_title => '7天万步挑战';
+
+  @override
+  String get challenge_2_desc => '在周六和周日每天消耗至少500千卡';
+
+  @override
+  String get challenge_2_title => '周末燃脂500';
+
+  @override
+  String get challenge_3_desc => '连续21天每天步行超过5,000步';
+
+  @override
+  String get challenge_3_title => '21天习惯养成';
+
+  @override
+  String get coin => '金币';
+
+  @override
+  String get coin_record_list => '金币获取记录';
+
+  @override
+  String get common_problem => '常见问题';
+
+  @override
+  String get contact_us => '联系我们';
+
+  @override
+  String get copy => '复制';
+
+  @override
+  String get create_post_action_post => '发布';
+
+  @override
+  String get create_post_add_data_title => '添加运动数据';
+
+  @override
+  String get create_post_attach_calories => '今日消耗';
+
+  @override
+  String get create_post_attach_steps => '今日步数';
+
+  @override
+  String get create_post_empty_content => '请输入分享内容';
+
+  @override
+  String get create_post_failed => '发布失败，请重试';
+
+  @override
+  String get create_post_hint_content => '说点什么吧，分享你的运动心得...';
+
+  @override
+  String get create_post_preview_format => '今日数据预览：%1\$d 步 | %2\$d 千卡';
+
+  @override
+  String get create_post_preview_placeholder => '今日数据预览：8520 步 | 420 千卡';
+
+  @override
+  String get create_post_success => '发布成功！';
+
+  @override
+  String get create_post_title => '发布动态';
+
+  @override
+  String get current_coin => '当前金币';
+
+  @override
+  String get current_money => '可提现金额(元)';
+
+  @override
+  String get data_export_chooser_share_achievement => '分享运动成就';
+
+  @override
+  String get data_export_chooser_share_data => '分享运动数据';
+
+  @override
+  String get data_export_csv_header => '日期,运动类型,时长(分钟),步数,热量(千卡),距离(公里)\\n';
+
+  @override
+  String get data_export_failed_format => '导出失败：%1\$s';
+
+  @override
+  String get data_export_share_calories_format => '消耗 %1\$d 千卡\\n\\n';
+
+  @override
+  String get data_export_share_hashtags => '#运动打卡 #健康生活';
+
+  @override
+  String get data_export_share_title => '🏃 我的运动成就 🏃\\n\\n';
+
+  @override
+  String get data_export_share_total_duration_format => '总时长 %1\$d 分钟\\n';
+
+  @override
+  String get data_export_share_weekly_count_format => '本周运动 %1\$d 次\\n';
+
+  @override
+  String get data_export_success_format => '导出成功：%1\$s';
+
+  @override
+  String get data_export_weekly_success => '周报导出成功';
+
+  @override
+  String get data_fragment_default_target_steps => '6000';
+
+  @override
+  String get data_fragment_set_target_first => '请先设置目标步数';
+
+  @override
+  String get data_fragment_target_not_reached => '尚未达成目标，继续加油！';
+
+  @override
+  String get data_fragment_target_reached => '恭喜你，目标步数达成！';
+
+  @override
+  String get data_fragment_target_too_high => '目标步数不能大于10000步';
+
+  @override
+  String get data_fragment_target_too_low => '目标步数不能小于3000步';
+
+  @override
+  String get data_fragment_today_steps_format => '今日步数：%1\$d步';
+
+  @override
+  String get data_load_failed => '数据加载失败';
+
+  @override
+  String get data_title_1 => '里程';
+
+  @override
+  String get data_title_2 => '时长';
+
+  @override
+  String get data_title_3 => '卡路里';
+
+  @override
+  String get dec => '12月';
+
+  @override
+  String get default_user => '用户';
+
+  @override
+  String get deny => '拒绝';
+
+  @override
+  String get deny_permission => '拒绝权限将导致某些功能无法正常使用,请打开设置到应用详情页打开权限';
+
+  @override
+  String get dialog_ok => '确定';
+
+  @override
+  String get diastolic => '舒张压';
+
+  @override
+  String get diet_record_added_calories_format => '已记录 %1\$d千卡';
+
+  @override
+  String get diet_target_set_format => '目标已设置为 %1\$d千卡';
+
+  @override
+  String get doing_sport_unlock_achievement_format => '🏆 解锁新成就: %1\$s';
+
+  @override
+  String get double_coin_fail_hint => '奖励已提交，到账后余额自动更新';
+
+  @override
+  String get double_coin_hint => '奖励已提交，预计到账 +%1\$s 金币，余额会自动更新';
+
+  @override
+  String get everyday_target_steps => '每日目标步数';
+
+  @override
+  String get exercise => '运动';
+
+  @override
+  String get exercise_performance => '运动表现';
+
+  @override
+  String get exit_app => '再点击一次退出程序';
+
+  @override
+  String get export_body_success => '身体记录已导出';
+
+  @override
+  String get export_workout_success => '运动记录已导出';
+
+  @override
+  String get feb => '2月';
+
+  @override
+  String get first_for_user_hint =>
+      '1.为了能让产品功能正常运行，我们可能会使用存储权限，用于存储您使用中生成的数据，如设置、日志等;\\n\n    2.友盟、头条将需要收集您的设备Mac地址、唯一设备识别码（IMEI/android ID/IDFA/OPENUDID/GUID、SIM卡IMSI信息）以提供统计分析服务，并通过地理位置校准报表数据准确性，提供基础反作弊能力；\\n\n    3.未经您的同意，我们不会从第三方获取或对外提供你的信息；\\n';
+
+  @override
+  String get first_for_user_hint5 => '查看《用户协议》和';
+
+  @override
+  String get first_for_user_hint6 => '《隐私协议》';
+
+  @override
+  String get first_for_user_hint_title => '用户隐私政策须知';
+
+  @override
+  String get fri => '周五';
+
+  @override
+  String get get_all_money_num => '全部提现';
+
+  @override
+  String get get_coin => '领取金币';
+
+  @override
+  String get get_coin_hint => '每1500步可以换取80金币';
+
+  @override
+  String get get_coin_in_ad => '恭喜您获得%1\$s';
+
+  @override
+  String get get_coin_s => '领取金币';
+
+  @override
+  String get get_money => '提现';
+
+  @override
+  String get get_money_hint => '提现成功，请前往支付宝账单查看奖励。';
+
+  @override
+  String get get_money_num => '提现到支付宝';
+
+  @override
+  String get get_money_num_hint =>
+      '1. 使用支付宝提现，一般两小时到帐，请自行查询账单\\n2. 提现金额包含1元、5元、10元、20元、50元额度，无手续费\\n3. 每日提现次数无限制，可多次提现';
+
+  @override
+  String get get_money_num_title => '提现说明';
+
+  @override
+  String get get_money_record => '提现记录';
+
+  @override
+  String get get_random_coin_reward => '获取随机金币';
+
+  @override
+  String get get_reward_failed => '获取失败，请稍后再试';
+
+  @override
+  String get get_step_target_reward => '领取步数达标奖励';
+
+  @override
+  String get get_sync_step_reward => '同步步数成功，前往任务领取奖励';
+
+  @override
+  String get get_target_reward => '领取达成奖励';
+
+  @override
+  String get go_sign => '去签到';
+
+  @override
+  String get go_to_achieve => '去完成';
+
+  @override
+  String get goal_detail_footer_hint => '继续保持，稳步达成今日目标';
+
+  @override
+  String get google_fit_client_id =>
+      '530383953471-7psjpq1s7tv1kj3ckd8orq10rjp8v3ha.apps.googleusercontent.com';
+
+  @override
+  String get health_center => '健康概览';
+
+  @override
+  String get health_center_desc => '全面的健康记录与智能分析';
+
+  @override
+  String get health_chart_axis_exercise_duration => '运动时长';
+
+  @override
+  String get health_chart_axis_exercise_intensity => '运动强度';
+
+  @override
+  String get health_chart_desc_glucose_trend => '血糖趋势';
+
+  @override
+  String get health_chart_desc_hr_analysis => '心率分析';
+
+  @override
+  String get health_chart_label_weight_kg => '体重 (kg)';
+
+  @override
+  String get health_chart_limit_diabetes_diagnosis => '糖尿病诊断';
+
+  @override
+  String get health_chart_limit_fasting_normal_upper => '空腹正常上限';
+
+  @override
+  String get health_chart_limit_normal_upper => '正常上限';
+
+  @override
+  String get health_chart_score_center_text => '%1\$d\\n分';
+
+  @override
+  String get health_dashboard_action_bp_monitor => '血压监测';
+
+  @override
+  String get health_dashboard_action_data_analysis => '数据分析';
+
+  @override
+  String get health_dashboard_action_guided_workout => '引导训练';
+
+  @override
+  String get health_dashboard_action_measure_weight => '测量体重';
+
+  @override
+  String get health_dashboard_action_today_exercise => '今日运动';
+
+  @override
+  String get health_dashboard_category_body_comp => '身体成分';
+
+  @override
+  String get health_dashboard_category_bp => '血压监测';
+
+  @override
+  String get health_dashboard_category_exercise => '运动表现';
+
+  @override
+  String get health_dashboard_category_recovery => '恢复状态';
+
+  @override
+  String get health_dashboard_category_training_plan => '训练计划';
+
+  @override
+  String get health_dashboard_current_plan => '当前计划';
+
+  @override
+  String get health_dashboard_date_pattern => 'yyyy年MM月dd日 EEEE';
+
+  @override
+  String get health_dashboard_glucose_unit_mmol => '毫摩尔/升';
+
+  @override
+  String get health_dashboard_insight_bp_high => '血压偏高，建议咨询医生并调整生活方式';
+
+  @override
+  String get health_dashboard_insight_bp_normal => '血压水平正常，继续保持健康生活方式';
+
+  @override
+  String get health_dashboard_insight_hrv_attention => '心率变异性偏低，建议注意休息和恢复';
+
+  @override
+  String get health_dashboard_insight_hrv_excellent => '心率变异性优秀，身体恢复能力强';
+
+  @override
+  String get health_dashboard_insight_no_exercise => '本周尚未运动，建议制定运动计划';
+
+  @override
+  String get health_dashboard_insight_no_plan => '尚未设置训练计划，建议先创建每周计划';
+
+  @override
+  String get health_dashboard_insight_weight_down_format =>
+      '本周体重下降%.1f公斤，保持良好状态';
+
+  @override
+  String get health_dashboard_insight_weight_stable => '近期变化平稳，继续保持当前节奏';
+
+  @override
+  String get health_dashboard_insight_weight_up_format =>
+      '本周体重上升%.1f公斤，建议关注饮食控制';
+
+  @override
+  String get health_dashboard_record_option_bp => '血压记录';
+
+  @override
+  String get health_dashboard_record_option_exercise => '运动记录';
+
+  @override
+  String get health_dashboard_record_option_glucose => '血糖记录';
+
+  @override
+  String get health_dashboard_record_option_hr => '心率记录';
+
+  @override
+  String get health_dashboard_schedule_duration_format => '%1\$s · %2\$d分钟';
+
+  @override
+  String get health_dashboard_schedule_pending => '待完成';
+
+  @override
+  String get health_dashboard_schedule_training_task => '训练任务';
+
+  @override
+  String get health_dashboard_score_head_good => '综合评分（满分100）';
+
+  @override
+  String get health_dashboard_score_head_need_improve => '需要改善（满分100）';
+
+  @override
+  String get health_dashboard_score_item_body => '身体成分/BMI';
+
+  @override
+  String get health_dashboard_score_item_bp => '血压';
+
+  @override
+  String get health_dashboard_score_item_exercise => '运动';
+
+  @override
+  String get health_dashboard_score_item_hrv => 'HRV';
+
+  @override
+  String get health_dashboard_score_line_missing => '• %1\$s：未参与评分（缺少数据）';
+
+  @override
+  String get health_dashboard_score_line_value => '• %1\$s：%2\$d/25（%3\$s）';
+
+  @override
+  String get health_dashboard_score_rule_bmi => 'BMI区间评分';
+
+  @override
+  String get health_dashboard_score_rule_bp => '收缩压/舒张压评分';
+
+  @override
+  String get health_dashboard_score_rule_exercise => '按本周运动次数评分';
+
+  @override
+  String get health_dashboard_score_rule_hrv => '按RMSSD恢复能力评分';
+
+  @override
+  String get health_dashboard_score_suggestion_format => '%1\$s\\n建议：%2\$s';
+
+  @override
+  String get health_dashboard_weight_status_bmi_format => 'BMI %1\$.1f · %2\$s';
+
+  @override
+  String get health_dashboard_weight_status_stable => '状态稳定';
+
+  @override
+  String get health_insights => '健康洞察';
+
+  @override
+  String get health_records_title => '健康记录';
+
+  @override
+  String get health_score => '健康评分';
+
+  @override
+  String get health_str => '健康';
+
+  @override
+  String get health_viz_category_bp_monitoring => '血压监测';
+
+  @override
+  String get health_viz_category_exercise_performance => '运动表现';
+
+  @override
+  String get health_viz_category_weight_management => '体重管理';
+
+  @override
+  String get health_viz_chart_desc_bp_trend => '血压趋势';
+
+  @override
+  String get health_viz_chart_desc_exercise_type_distribution => '运动类型分布';
+
+  @override
+  String get health_viz_chart_desc_exercise_volume => '运动量统计';
+
+  @override
+  String get health_viz_chart_desc_glucose_change => '血糖变化';
+
+  @override
+  String get health_viz_chart_desc_hr_change => '心率变化';
+
+  @override
+  String get health_viz_chart_desc_weight_trend => '体重趋势';
+
+  @override
+  String get health_viz_insight_bp_normal => '血压正常';
+
+  @override
+  String get health_viz_insight_exercise_frequency_good => '运动频率良好';
+
+  @override
+  String get health_viz_insight_weight_stable => '体重控制稳定';
+
+  @override
+  String get health_viz_label_aerobic_exercise => '有氧运动';
+
+  @override
+  String get health_viz_label_avg_heart_rate => '平均心率';
+
+  @override
+  String get health_viz_label_ball_sports => '球类运动';
+
+  @override
+  String get health_viz_label_diastolic => '舒张压';
+
+  @override
+  String get health_viz_label_exercise_duration_min => '运动时长 (分钟)';
+
+  @override
+  String get health_viz_label_flexibility_training => '柔韧性训练';
+
+  @override
+  String get health_viz_label_glucose_value => '血糖值';
+
+  @override
+  String get health_viz_label_hrv => '心率变异性';
+
+  @override
+  String get health_viz_label_no_data => '暂无数据';
+
+  @override
+  String get health_viz_label_strength_training => '力量训练';
+
+  @override
+  String get health_viz_label_systolic => '收缩压';
+
+  @override
+  String get health_viz_label_weight_kg => '体重（公斤）';
+
+  @override
+  String get health_viz_range_month => '近一月';
+
+  @override
+  String get health_viz_range_quarter => '近三月';
+
+  @override
+  String get health_viz_range_week => '近一周';
+
+  @override
+  String get health_viz_range_year => '近一年';
+
+  @override
+  String get health_viz_report_exercise_title => '运动表现分析';
+
+  @override
+  String get health_viz_report_vitals_desc => '血压、心率等生命体征数据分析';
+
+  @override
+  String get health_viz_report_vitals_title => '生命体征报告';
+
+  @override
+  String get health_viz_report_weekly_desc => '综合分析本周的健康数据表现';
+
+  @override
+  String get health_viz_report_weekly_title => '周度健康报告';
+
+  @override
+  String get health_viz_title_bp => '血压监控分析';
+
+  @override
+  String get health_viz_title_exercise => '运动数据分析';
+
+  @override
+  String get health_viz_title_glucose => '血糖控制分析';
+
+  @override
+  String get health_viz_title_hr => '心率变异分析';
+
+  @override
+  String get health_viz_title_overview => '健康数据总览';
+
+  @override
+  String get health_viz_title_weight => '体重趋势分析';
+
+  @override
+  String get health_viz_toast_view_report_format => '查看报告: %1\$s';
+
+  @override
+  String get health_viz_trend_downward => '(下降趋势)\\n';
+
+  @override
+  String get health_viz_trend_significant_down => '(显著下降)\\n';
+
+  @override
+  String get health_viz_trend_significant_up => '(显著上升)\\n';
+
+  @override
+  String get health_viz_trend_upward => '(上升趋势)\\n';
+
+  @override
+  String get heart_rate => '心率';
+
+  @override
+  String get hydration_factor_format => '补水系数 %1\$d%%';
+
+  @override
+  String get icon => '头像';
+
+  @override
+  String get invite_friend => '邀请好友';
+
+  @override
+  String get jan => '1月';
+
+  @override
+  String get jul => '7月';
+
+  @override
+  String get jun => '6月';
+
+  @override
+  String get kcal_format => '%1\$d 千卡';
+
+  @override
+  String get kcal_format_k => '%1\$s 千卡';
+
+  @override
+  String get label_settext_9de0d246a9 => '米';
+
+  @override
+  String get leaderboard_mock_1 => '奔跑的蜗牛';
+
+  @override
+  String get leaderboard_mock_2 => '燃脂达人';
+
+  @override
+  String get leaderboard_mock_3 => '健身英雄';
+
+  @override
+  String get leaderboard_mock_4 => '李艾力';
+
+  @override
+  String get leaderboard_mock_5 => '健康伙伴';
+
+  @override
+  String get leaderboard_mock_6 => '闲庭信步';
+
+  @override
+  String get leaderboard_mock_7 => '休息大师';
+
+  @override
+  String get level_advanced => '高级';
+
+  @override
+  String get level_beginner => '入门';
+
+  @override
+  String get level_intermediate => '中级';
+
+  @override
+  String get location => '所在地';
+
+  @override
+  String get luck_reward => '幸运大抽奖';
+
+  @override
+  String get luck_reward_times => '你还有%1\$s次抽奖机会';
+
+  @override
+  String get luck_reward_times_hint =>
+      '1.用户参与抽奖活动表示同意接受此规则。\\n2.用户每日拥有一次抽奖机会。\\n3.获取奖励后可以通过看视频翻倍。\\n4.奖励可在钱包内奖励记录查看。';
+
+  @override
+  String get luck_reward_times_title => '抽奖规则';
+
+  @override
+  String get main_card_data_title_all_sport => '全部运动';
+
+  @override
+  String get main_card_data_title_sport_burn => '运动消耗';
+
+  @override
+  String get main_card_data_title_step_stats => '步数统计';
+
+  @override
+  String get main_card_data_title_walk_distance => '走路距离';
+
+  @override
+  String get main_card_data_title_weight_record => '体重记录';
+
+  @override
+  String get main_stats_month_suffix_format => '%1\$d月';
+
+  @override
+  String get main_stats_title_achieved_period_count => '达标期数';
+
+  @override
+  String get main_stats_title_active_period_count => '活跃期数';
+
+  @override
+  String get main_stats_title_avg_period_burn => '平均每期消耗';
+
+  @override
+  String get main_stats_title_avg_period_count => '平均每期次数';
+
+  @override
+  String get main_stats_title_avg_period_data => '平均每期数据';
+
+  @override
+  String get main_stats_title_avg_period_duration => '平均每期时长';
+
+  @override
+  String get main_stats_title_history_max => '历史最高';
+
+  @override
+  String get main_stats_title_history_min => '历史最低';
+
+  @override
+  String get main_stats_title_longest_month => '最长月份';
+
+  @override
+  String get main_stats_title_longest_sport_day => '最长运动日';
+
+  @override
+  String get main_stats_title_peak_burn_day => '最高消耗日';
+
+  @override
+  String get main_stats_title_peak_month => '最高月份';
+
+  @override
+  String get main_stats_title_peak_record => '最高纪录';
+
+  @override
+  String get main_stats_title_peak_single_day_count => '最高单日次数';
+
+  @override
+  String get main_stats_title_total_activity_count => '总活动次数';
+
+  @override
+  String get main_stats_title_total_burn => '总消耗';
+
+  @override
+  String get main_stats_title_total_distance => '总距离';
+
+  @override
+  String get main_stats_title_total_sport_burn => '总运动消耗';
+
+  @override
+  String get main_stats_title_total_sport_duration => '总运动时长';
+
+  @override
+  String get main_stats_title_total_steps => '总步数';
+
+  @override
+  String get main_stats_unit_count => '次';
+
+  @override
+  String get main_stats_unit_day => '天';
+
+  @override
+  String get main_stats_unit_hour => '小时';
+
+  @override
+  String get main_stats_unit_kcal => '千卡';
+
+  @override
+  String get main_stats_unit_km => '公里';
+
+  @override
+  String get main_stats_unit_minute => '分钟';
+
+  @override
+  String get main_stats_unit_month => '月';
+
+  @override
+  String get main_stats_unit_second => '秒';
+
+  @override
+  String get main_stats_unit_step => '步';
+
+  @override
+  String get manager_target_str => '目标管理';
+
+  @override
+  String get mar => '3月';
+
+  @override
+  String get mason_achievement => '成就殿堂';
+
+  @override
+  String get mason_achievement_hint => '成就越高，赚的越多';
+
+  @override
+  String get mason_get_coin => '立刻领取';
+
+  @override
+  String get mason_get_first_money => '完成第一笔体现奖励';
+
+  @override
+  String get mason_get_first_money_hint => '提现红包到微信，零钱花不完';
+
+  @override
+  String get mason_invite_friend => '邀请好友赚金币';
+
+  @override
+  String get mason_invite_friend_hint => '邀请升级奖励无上限';
+
+  @override
+  String get mason_target_step => '目标步数';
+
+  @override
+  String get mason_target_step_hint => '设置步数越多赚的越多';
+
+  @override
+  String get mason_task_ad => '做海量任务领取金币';
+
+  @override
+  String get mason_task_ad_hint => '完成任务越多赚的越多';
+
+  @override
+  String get mason_video => '看创意视频赚金币';
+
+  @override
+  String get mason_video_hint => '海量视频，上不封顶';
+
+  @override
+  String get mason_write_code => '填写邀请码';
+
+  @override
+  String get mason_write_code_hint => '填写你邀请人的邀请码';
+
+  @override
+  String get may => '5月';
+
+  @override
+  String get me => '我';
+
+  @override
+  String get medal_wall_title => '荣誉勋章';
+
+  @override
+  String get meditation_pattern_box => '箱式呼吸';
+
+  @override
+  String get meditation_pattern_relaxed => '放松呼吸';
+
+  @override
+  String get meditation_pattern_resonance => '谐振呼吸';
+
+  @override
+  String get meditation_sound_fire => '篝火';
+
+  @override
+  String get meditation_sound_off => '声音关闭';
+
+  @override
+  String get meditation_sound_rain => '雨声';
+
+  @override
+  String get meditation_sound_waves => '海浪';
+
+  @override
+  String get meditation_summary_format => '%1\$s | %2\$d 分钟 | %3\$s';
+
+  @override
+  String get mobile => '手机';
+
+  @override
+  String get mock_delete_account_message =>
+      '确定要注销此账号吗？注销后您的所有本地运动记录、步数和金币等数据都将被永久清空且不可恢复。';
+
+  @override
+  String get modify_error => '修改失败';
+
+  @override
+  String get modify_success => '修改成功';
+
+  @override
+  String get mon => '周一';
+
+  @override
+  String get mood_bad => '差';
+
+  @override
+  String get mood_good => '好';
+
+  @override
+  String get mood_great => '极好';
+
+  @override
+  String get mood_neutral => '一般';
+
+  @override
+  String get mood_very_bad => '极差';
+
+  @override
+  String get must_login_error_login_format => '登录失败: %1\$s';
+
+  @override
+  String get must_login_error_register_format => '注册失败: %1\$s';
+
+  @override
+  String get my_coin => '我的金币';
+
+  @override
+  String get my_info => '我的信息';
+
+  @override
+  String get my_invite_code => '我的邀请码';
+
+  @override
+  String get my_invite_code_hint =>
+      '注：1. 请勿用违规手段邀请好友，否则平台有权清除奖励。2. 受邀好友需要在下载应用的24小时内在设置中填入邀请码，否则邀请失效。';
+
+  @override
+  String get my_money => '我的钱包';
+
+  @override
+  String get nick_name => '昵称';
+
+  @override
+  String get no_sign => '未签到';
+
+  @override
+  String get no_sign_date => '未到时间';
+
+  @override
+  String get no_video_ad => '当前网络不畅，稍后再来';
+
+  @override
+  String get notification_sync_service_label => '智能同步后台';
+
+  @override
+  String get nov => '11月';
+
+  @override
+  String get oct => '10月';
+
+  @override
+  String get onboarding_desc_1 => '自动记录步数和运动路线，让每一步都有意义。';
+
+  @override
+  String get onboarding_desc_2 => '一站式追踪饮水、体重和训练计划。';
+
+  @override
+  String get onboarding_desc_3 => '达成每日活动目标赚取金币，邀请好友获得更多奖励。';
+
+  @override
+  String get onboarding_title_1 => '每日精准计步';
+
+  @override
+  String get onboarding_title_2 => '全方位健康管理';
+
+  @override
+  String get onboarding_title_3 => '达成目标赢奖励';
+
+  @override
+  String get outdoor_tracking => '户外轨迹';
+
+  @override
+  String get permission => '权限设置';
+
+  @override
+  String get plan_meta_format => '%1\$d 训练日 | %2\$d 休息日';
+
+  @override
+  String get plan_not_created => '暂无计划';
+
+  @override
+  String get plan_reason_prefix => '从\\\"%1\$s\\\"开始: %2\$s';
+
+  @override
+  String get plan_recommendation_title => '%1\$s | %2\$s 推荐';
+
+  @override
+  String get plan_tap_to_create => '点击制定你的训练计划';
+
+  @override
+  String get plan_task_format => '%1\$s | %2\$d 分钟';
+
+  @override
+  String get plan_today_completed => '今日训练已完成 ✅';
+
+  @override
+  String get plan_today_pending => '今日训练待开始 ⏳';
+
+  @override
+  String get prof_weight_save_failed => '保存失败';
+
+  @override
+  String get prof_weight_save_success => '保存成功';
+
+  @override
+  String get prof_weight_update_failed => '更新失败';
+
+  @override
+  String get prof_weight_update_success => '更新成功';
+
+  @override
+  String get pulse => '脉搏';
+
+  @override
+  String get quick_actions => '快捷操作';
+
+  @override
+  String get quick_login => '立即登录';
+
+  @override
+  String get rate_us => '评价我们';
+
+  @override
+  String get recovery_status => '恢复状态';
+
+  @override
+  String get sat => '周六';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String get sep => '9月';
+
+  @override
+  String get set_sport_added_set_format => '已添加第%1\$d组';
+
+  @override
+  String get set_target => '设置目标';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get settings_hint => '一些通常的信息';
+
+  @override
+  String get sex => '性别';
+
+  @override
+  String get sgin_date => '签到记录';
+
+  @override
+  String get sgin_failed => '签到失败';
+
+  @override
+  String get sgin_success => '签到成功';
+
+  @override
+  String get sgin_total_money => '当前金额:';
+
+  @override
+  String get share1 => '1.发送邀请\\n【分享给好友】';
+
+  @override
+  String get share2 => '2.下载应用\\n【填写邀请码】';
+
+  @override
+  String get share3 => '3.获取奖励\\n【查奖励记录】';
+
+  @override
+  String get share_friends => '分享给朋友';
+
+  @override
+  String get share_page_flow_title => '邀请流程';
+
+  @override
+  String get share_page_invite_subtitle => '分享邀请码，双方都能获得奖励';
+
+  @override
+  String get share_page_invite_title => '邀请好友一起运动';
+
+  @override
+  String get share_to_app_title => '快速分享给好友';
+
+  @override
+  String get sign => '签到';
+
+  @override
+  String get sign_already => '今日已签到';
+
+  @override
+  String get sign_hint_text => '今天还没有签到，要去签到吗？';
+
+  @override
+  String get sign_ok => '签到成功，奖励到账后余额自动更新';
+
+  @override
+  String get sleep_quality_average => '一般 😐';
+
+  @override
+  String get sleep_quality_excellent => '极佳 😴';
+
+  @override
+  String get sleep_quality_good => '良好 😊';
+
+  @override
+  String get sleep_quality_poor => '较差 😔';
+
+  @override
+  String get sleep_quality_very_poor => '极差 😫';
+
+  @override
+  String get sleep_record_msg => '睡眠时长 %1\$s，质量 %2\$s';
+
+  @override
+  String get sleep_record_saved => '已保存';
+
+  @override
+  String get sleep_stat_h_m_format => '%1\$dh %2\$dm';
+
+  @override
+  String get social_mock_content_1 => '早起晨跑的感觉太棒了！新鲜空气和汗水是开启一天最好的方式。☀️';
+
+  @override
+  String get social_mock_content_2 => '完成了45分钟深度冥想，身心都焕然一新。';
+
+  @override
+  String get social_mock_content_3 => '连续100天达成万步目标，坚持就是胜利。🔥';
+
+  @override
+  String get social_mock_content_4 => '新装备果然动力十足，今天多跑了3公里！';
+
+  @override
+  String get social_mock_user_1 => '极客跑者';
+
+  @override
+  String get social_mock_user_2 => '瑜伽之星';
+
+  @override
+  String get social_mock_user_3 => '自律达人';
+
+  @override
+  String get social_mock_user_4 => '步数冠军';
+
+  @override
+  String get social_workout_action_meetup => '约练';
+
+  @override
+  String get social_workout_create_team => '创建打卡小队';
+
+  @override
+  String get social_workout_friend_avatar_lin => '林';
+
+  @override
+  String get social_workout_friend_avatar_ya => '雅';
+
+  @override
+  String get social_workout_friend_lin_name => '小林  ·  连续12天';
+
+  @override
+  String get social_workout_friend_lin_weekly => '本周运动 146 分钟';
+
+  @override
+  String get social_workout_friend_status => '好友状态';
+
+  @override
+  String get social_workout_friend_status_hint => '看看大家最近的运动打卡情况';
+
+  @override
+  String get social_workout_friend_ya_name => '阿雅  ·  连续7天';
+
+  @override
+  String get social_workout_friend_ya_weekly => '本周运动 92 分钟';
+
+  @override
+  String get social_workout_invite_now => '立即邀请';
+
+  @override
+  String get social_workout_login_required => '请先登录...';
+
+  @override
+  String get social_workout_subtitle => '组队打卡更容易坚持，每周一起冲刺运动目标';
+
+  @override
+  String get social_workout_team_coming_soon => '打卡小队功能即将上线';
+
+  @override
+  String get social_workout_title => '和好友一起运动';
+
+  @override
+  String get spend_cal_str => '热量消耗';
+
+  @override
+  String get sport_cat_ball => '球类运动';
+
+  @override
+  String get sport_cat_dance => '舞蹈类';
+
+  @override
+  String get sport_cat_fight => '格斗武术';
+
+  @override
+  String get sport_cat_gym => '健身房';
+
+  @override
+  String get sport_cat_leisure => '休闲运动';
+
+  @override
+  String get sport_cat_other => '其他';
+
+  @override
+  String get sport_cat_outdoor => '户外运动';
+
+  @override
+  String get sport_cat_ride => '骑行类';
+
+  @override
+  String get sport_cat_run => '跑步类';
+
+  @override
+  String get sport_cat_walk => '步行类';
+
+  @override
+  String get sport_cat_water => '水上运动';
+
+  @override
+  String get sport_cat_winter => '冬季运动';
+
+  @override
+  String get sport_completed_msg => '时长%1\$s，消耗%2\$d千卡';
+
+  @override
+  String get sport_completed_title => '%1\$s已完成！';
+
+  @override
+  String get sport_detail_header_eyebrow => '训练入口';
+
+  @override
+  String get sport_detail_history_button => '历史';
+
+  @override
+  String get sport_detail_mode_title => '记录方式';
+
+  @override
+  String get sport_detail_recent_empty => '还没有这项运动记录，点击下方开始按钮开启第一条。';
+
+  @override
+  String get sport_detail_recent_title => '最近记录';
+
+  @override
+  String get sport_detail_start_button => '开始运动';
+
+  @override
+  String get sport_detail_stat_last_seven_days => '近7天次数';
+
+  @override
+  String get sport_detail_stat_total_actions => '累计动作';
+
+  @override
+  String get sport_detail_stat_total_calories => '累计消耗';
+
+  @override
+  String get sport_detail_stat_total_distance => '累计距离';
+
+  @override
+  String get sport_detail_stat_total_duration => '累计时长';
+
+  @override
+  String get sport_detail_stat_total_rounds => '累计局数';
+
+  @override
+  String get sport_detail_stat_total_sessions => '累计次数';
+
+  @override
+  String get sport_detail_summary_empty => '还没有这项运动记录，先从一次轻量训练开始。';
+
+  @override
+  String get sport_detail_summary_format => '累计 %1\$d 次 · 最近一次 %2\$s';
+
+  @override
+  String get sport_detail_title => '运动概览';
+
+  @override
+  String get sport_ended_save => '%1\$s已结束。保存记录吗？';
+
+  @override
+  String get sport_exit_confirmation => '%1\$s正在进行中。确认现在退出吗？';
+
+  @override
+  String get sport_history_title_all => '运动历史';
+
+  @override
+  String get sport_history_title_format => '%1\$s历史';
+
+  @override
+  String get sport_mode_badge_distance => '距离模式';
+
+  @override
+  String get sport_mode_badge_score => '计分模式';
+
+  @override
+  String get sport_mode_badge_set => '组数模式';
+
+  @override
+  String get sport_mode_badge_step => '步数模式';
+
+  @override
+  String get sport_mode_badge_time => '计时模式';
+
+  @override
+  String get sport_mode_badge_track => 'GPS轨迹';
+
+  @override
+  String get sport_mode_distance => '距离训练';
+
+  @override
+  String get sport_mode_hint_distance => '重点看距离、圈数和配速，适合游泳、器械骑行等距离型训练。';
+
+  @override
+  String get sport_mode_hint_score => '重点看局数、得分和结果，适合保龄球、台球等计分记录。';
+
+  @override
+  String get sport_mode_hint_set => '重点看计划组数、完成组数和次数，适合力量训练和器械训练。';
+
+  @override
+  String get sport_mode_hint_step => '重点看步数、距离和时长，适合不依赖地图的步行与室内跑。';
+
+  @override
+  String get sport_mode_hint_time => '重点看时长和热量，适合球类、瑜伽、舞蹈这类计时训练。';
+
+  @override
+  String get sport_mode_hint_track => '重点看路线、距离和配速，适合需要真实轨迹的户外运动。';
+
+  @override
+  String get sport_mode_score => '结果记录';
+
+  @override
+  String get sport_mode_set => '组数训练';
+
+  @override
+  String get sport_mode_step => '步数记录';
+
+  @override
+  String get sport_mode_time => '计时训练';
+
+  @override
+  String get sport_mode_track => '轨迹记录';
+
+  @override
+  String get sport_name_0 => '其他运动';
+
+  @override
+  String get sport_name_1 => '户外跑步';
+
+  @override
+  String get sport_name_10 => '竞走';
+
+  @override
+  String get sport_name_11 => '散步';
+
+  @override
+  String get sport_name_12 => '爬楼梯';
+
+  @override
+  String get sport_name_13 => '室内骑行';
+
+  @override
+  String get sport_name_14 => '山地骑行';
+
+  @override
+  String get sport_name_15 => '公路骑行';
+
+  @override
+  String get sport_name_16 => '动感单车';
+
+  @override
+  String get sport_name_17 => '足球';
+
+  @override
+  String get sport_name_18 => '篮球';
+
+  @override
+  String get sport_name_19 => '羽毛球';
+
+  @override
+  String get sport_name_2 => '室内跑步';
+
+  @override
+  String get sport_name_20 => '乒乓球';
+
+  @override
+  String get sport_name_21 => '网球';
+
+  @override
+  String get sport_name_22 => '排球';
+
+  @override
+  String get sport_name_23 => '高尔夫';
+
+  @override
+  String get sport_name_24 => '保龄球';
+
+  @override
+  String get sport_name_25 => '台球';
+
+  @override
+  String get sport_name_26 => '斯诺克';
+
+  @override
+  String get sport_name_27 => '美式足球';
+
+  @override
+  String get sport_name_28 => '曲棍球';
+
+  @override
+  String get sport_name_29 => '橄榄球';
+
+  @override
+  String get sport_name_3 => '户外步行';
+
+  @override
+  String get sport_name_30 => '棒球';
+
+  @override
+  String get sport_name_31 => '板球';
+
+  @override
+  String get sport_name_32 => '冲浪';
+
+  @override
+  String get sport_name_33 => '帆船';
+
+  @override
+  String get sport_name_34 => '帆板';
+
+  @override
+  String get sport_name_35 => '皮划艇';
+
+  @override
+  String get sport_name_36 => '赛艇';
+
+  @override
+  String get sport_name_37 => '水球';
+
+  @override
+  String get sport_name_38 => '跳水';
+
+  @override
+  String get sport_name_39 => '花样游泳';
+
+  @override
+  String get sport_name_4 => '室内步行';
+
+  @override
+  String get sport_name_40 => '浮潜';
+
+  @override
+  String get sport_name_41 => '滑雪';
+
+  @override
+  String get sport_name_42 => '滑冰';
+
+  @override
+  String get sport_name_43 => '冰球';
+
+  @override
+  String get sport_name_44 => '冰壶';
+
+  @override
+  String get sport_name_45 => '雪橇';
+
+  @override
+  String get sport_name_46 => '单板滑雪';
+
+  @override
+  String get sport_name_47 => '越野滑雪';
+
+  @override
+  String get sport_name_48 => '花样滑冰';
+
+  @override
+  String get sport_name_49 => '力量训练';
+
+  @override
+  String get sport_name_5 => '健走';
+
+  @override
+  String get sport_name_50 => 'HIIT';
+
+  @override
+  String get sport_name_51 => '瑜伽';
+
+  @override
+  String get sport_name_52 => '普拉提';
+
+  @override
+  String get sport_name_53 => '有氧操';
+
+  @override
+  String get sport_name_54 => '杠铃训练';
+
+  @override
+  String get sport_name_55 => '哑铃训练';
+
+  @override
+  String get sport_name_56 => '壶铃训练';
+
+  @override
+  String get sport_name_57 => '弹力带训练';
+
+  @override
+  String get sport_name_58 => '划船机';
+
+  @override
+  String get sport_name_59 => '椭圆机';
+
+  @override
+  String get sport_name_6 => '游泳';
+
+  @override
+  String get sport_name_60 => '踏步机';
+
+  @override
+  String get sport_name_61 => '拳击';
+
+  @override
+  String get sport_name_62 => '跆拳道';
+
+  @override
+  String get sport_name_63 => '柔道';
+
+  @override
+  String get sport_name_64 => '空手道';
+
+  @override
+  String get sport_name_65 => '武术';
+
+  @override
+  String get sport_name_66 => '散打';
+
+  @override
+  String get sport_name_67 => '摔跤';
+
+  @override
+  String get sport_name_68 => '击剑';
+
+  @override
+  String get sport_name_69 => '综合格斗';
+
+  @override
+  String get sport_name_7 => '户外骑行';
+
+  @override
+  String get sport_name_70 => '泰拳';
+
+  @override
+  String get sport_name_71 => '街舞';
+
+  @override
+  String get sport_name_72 => '芭蕾';
+
+  @override
+  String get sport_name_73 => '拉丁舞';
+
+  @override
+  String get sport_name_74 => '民间舞';
+
+  @override
+  String get sport_name_75 => '现代舞';
+
+  @override
+  String get sport_name_76 => '广场舞';
+
+  @override
+  String get sport_name_77 => '肚皮舞';
+
+  @override
+  String get sport_name_78 => '攀岩';
+
+  @override
+  String get sport_name_79 => '滑翔伞';
+
+  @override
+  String get sport_name_8 => '马拉松';
+
+  @override
+  String get sport_name_80 => '蹦极';
+
+  @override
+  String get sport_name_81 => '跳伞';
+
+  @override
+  String get sport_name_82 => '定向越野';
+
+  @override
+  String get sport_name_83 => '钓鱼';
+
+  @override
+  String get sport_name_84 => '射箭';
+
+  @override
+  String get sport_name_85 => '飞镖';
+
+  @override
+  String get sport_name_86 => '冥想';
+
+  @override
+  String get sport_name_9 => '越野跑';
+
+  @override
+  String get sport_record_action_distance => '保存距离记录';
+
+  @override
+  String get sport_record_action_format => '动作：%1\$d 次';
+
+  @override
+  String get sport_record_action_score => '保存比赛结果';
+
+  @override
+  String get sport_record_action_set => '保存组数记录';
+
+  @override
+  String get sport_record_action_step => '保存步数记录';
+
+  @override
+  String get sport_record_action_time => '保存计时记录';
+
+  @override
+  String get sport_record_action_track => '保存轨迹记录';
+
+  @override
+  String get sport_record_calorie_format => '消耗：%1\$s 千卡';
+
+  @override
+  String get sport_record_count_format => '次数：%1\$d 次';
+
+  @override
+  String get sport_record_distance_text_format => '距离：%1\$s';
+
+  @override
+  String get sport_record_duration_format => '时长：%1\$d 分钟';
+
+  @override
+  String get sport_record_mode_text_format => '模式：%1\$s';
+
+  @override
+  String get sport_record_round_format => '%1\$d 局';
+
+  @override
+  String get sport_record_score_format => '%1\$d 分';
+
+  @override
+  String get sport_record_score_text_format => '得分：%1\$d 分';
+
+  @override
+  String get sport_record_set_format => '%1\$d 组';
+
+  @override
+  String get sport_record_speed_format => '配速：%1\$s';
+
+  @override
+  String get sport_record_step_format => '步数：%1\$d 步';
+
+  @override
+  String get sport_save_confirmation => '%1\$s已完成。保存此记录吗？';
+
+  @override
+  String get sport_set_save_confirmation => '训练结束，共完成%1\$d组。保存此记录吗？';
+
+  @override
+  String get sport_target_reached => '您的运动目标已达成';
+
+  @override
+  String get sport_training_distance_input_hint_generic => '录入距离后自动换算配速与消耗。';
+
+  @override
+  String get sport_training_distance_input_hint_ride => '录入里程后自动换算时速与消耗。';
+
+  @override
+  String get sport_training_distance_label_generic => '已录入距离';
+
+  @override
+  String get sport_training_distance_label_ride => '当前里程';
+
+  @override
+  String get sport_training_plan_hint_format => '每组 %1\$d 次 · %2\$s';
+
+  @override
+  String get sport_training_plan_hint_idle => '设定计划后开始记录组数进度。';
+
+  @override
+  String get sport_training_plan_placeholder => '未设定';
+
+  @override
+  String get sport_training_weight_none => '无负重';
+
+  @override
+  String get sport_training_weight_text_format => '%1\$s kg';
+
+  @override
+  String get status_high => '偏高';
+
+  @override
+  String get status_low => '偏低';
+
+  @override
+  String get status_normal => '正常';
+
+  @override
+  String get step => '步';
+
+  @override
+  String get step_number_record => '步行记录';
+
+  @override
+  String get step_sub_doing_sport_hint => '已有正在进行的运动，立刻进入？';
+
+  @override
+  String get step_sub_target_free => '自由';
+
+  @override
+  String get step_sub_target_km_format => '%1\$s 公里';
+
+  @override
+  String get step_widget_label => '微步运动 Widget';
+
+  @override
+  String get suggest_step_num => '建议每日步行范围3000到10000步';
+
+  @override
+  String get sun => '周日';
+
+  @override
+  String get sure_get_coin => '确定领取';
+
+  @override
+  String get sync_connected_msg => '已连接 %1\$s，今日步数：%2\$d';
+
+  @override
+  String get sync_failed_msg => '步数同步失败：%1\$s';
+
+  @override
+  String get sync_google_fit_msg =>
+      '为了准确追踪您的步数，需要连接 Google Fit 获取步数数据。点击确认以开启 Google 账户授权。';
+
+  @override
+  String get sync_health_title => '同步健康数据';
+
+  @override
+  String get sync_task_ad_title => '任务成功，获取金币:';
+
+  @override
+  String get systolic => '收缩压';
+
+  @override
+  String get tab_achievements => '成就';
+
+  @override
+  String get tab_check_in => '签到';
+
+  @override
+  String get tab_daily => '日常';
+
+  @override
+  String get tab_sport => '运动';
+
+  @override
+  String get tab_step => '健康';
+
+  @override
+  String get tab_target => '目标';
+
+  @override
+  String get tab_user => '我的';
+
+  @override
+  String get target_steps_hint => '1.设置每天的目标步数\\n2.达成每日步数领取奖励\\n3.设置越多奖励越多\\n';
+
+  @override
+  String get task_ad => '做任务领金币';
+
+  @override
+  String get task_error => '获取任务出错';
+
+  @override
+  String get task_page_title => '任务';
+
+  @override
+  String get thu => '周四';
+
+  @override
+  String get today_data => '今日数据';
+
+  @override
+  String get today_mason => '今日任务';
+
+  @override
+  String get today_schedule => '今日计划';
+
+  @override
+  String get today_sgin => '签到领取奖励';
+
+  @override
+  String get today_sgin_hint => '每日签到';
+
+  @override
+  String get today_steps_str => '今日步数';
+
+  @override
+  String get today_target_steps => '今日目标步数';
+
+  @override
+  String get todo => 'TODO';
+
+  @override
+  String get total_coin => '累计金币';
+
+  @override
+  String get total_money => '累计奖励';
+
+  @override
+  String get train_intensity_high => '高强度';
+
+  @override
+  String get train_intensity_high_interval => '高强度间歇';
+
+  @override
+  String get train_intensity_low => '低强度';
+
+  @override
+  String get train_intensity_low_jog => '低强度慢跑';
+
+  @override
+  String get train_intensity_medium_high => '中高强度';
+
+  @override
+  String get train_intensity_moderate => '中等强度';
+
+  @override
+  String get train_intensity_moderate_pace => '中等配速';
+
+  @override
+  String get train_plan_desc_build_muscle => '以力量训练为主，科学分配肌群训练，促进肌肉生长';
+
+  @override
+  String get train_plan_desc_health => '均衡的运动安排，保持身体健康状态';
+
+  @override
+  String get train_plan_desc_lose_weight => '以有氧运动为主，配合力量训练，高效燃烧脂肪';
+
+  @override
+  String get train_plan_desc_stamina => '循序渐进提升心肺功能和运动耐力';
+
+  @override
+  String get train_plan_name_build_muscle => '增肌塑形计划';
+
+  @override
+  String get train_plan_name_health => '健康维护计划';
+
+  @override
+  String get train_plan_name_lose_weight => '减脂燃卡计划';
+
+  @override
+  String get train_plan_name_stamina => '耐力提升计划';
+
+  @override
+  String get train_plan_tip_build_muscle =>
+      '增肌关键：足够蛋白质(每kg体重1.6-2g)，渐进超负荷，充足休息。';
+
+  @override
+  String get train_plan_tip_health => '贵在坚持！运动不必追求高强度，每天动一动就是最好的。';
+
+  @override
+  String get train_plan_tip_lose_weight => '减脂关键：保持热量缺口，有氧+力量结合效果最佳。';
+
+  @override
+  String get train_plan_tip_stamina => '耐力提升关键：循序渐进增加运动量，每周增幅不超过10%。';
+
+  @override
+  String get train_sport_back => '背部训练';
+
+  @override
+  String get train_sport_chest => '胸部训练';
+
+  @override
+  String get train_sport_cycling => '骑行';
+
+  @override
+  String get train_sport_hiit_interval => 'HIIT高强度间歇';
+
+  @override
+  String get train_sport_interval_run => '间歇跑';
+
+  @override
+  String get train_sport_jogging => '慢跑';
+
+  @override
+  String get train_sport_legs => '腿部训练';
+
+  @override
+  String get train_sport_light_cardio => '轻度有氧';
+
+  @override
+  String get train_sport_long_slow_run => '长距离慢跑';
+
+  @override
+  String get train_sport_rest => '休息';
+
+  @override
+  String get train_sport_shoulders => '肩部训练';
+
+  @override
+  String get train_tip_aerobic_cardio_health => '有氧运动，心肺健康';
+
+  @override
+  String get train_tip_back_combo => '引体向上、划船、下拉';
+
+  @override
+  String get train_tip_chest_combo => '卧推、上斜推举、夹胸';
+
+  @override
+  String get train_tip_easy_walk => '轻松愉快的步行';
+
+  @override
+  String get train_tip_focus_large_muscle => '注重大肌群训练，如深蹲、硬拉';
+
+  @override
+  String get train_tip_full_body_relax => '全身运动，放松身心';
+
+  @override
+  String get train_tip_full_rest => '完全休息，让身体恢复';
+
+  @override
+  String get train_tip_full_rest_nutrition => '完全休息，补充营养';
+
+  @override
+  String get train_tip_fun_social_fitness => '趣味运动，社交健身';
+
+  @override
+  String get train_tip_growth_rest_sleep => '肌肉生长发生在休息时，保证充足睡眠';
+
+  @override
+  String get train_tip_hiit_afterburn => '短时高效，运动后持续燃脂';
+
+  @override
+  String get train_tip_joint_friendly_full_body => '全身运动，关节友好';
+
+  @override
+  String get train_tip_keep_hr_60_70 => '保持心率在最大心率的60-70%';
+
+  @override
+  String get train_tip_keep_pace_stable => '保持稳定配速';
+
+  @override
+  String get train_tip_leg_combo => '深蹲、腿举、腿弯举、小腿';
+
+  @override
+  String get train_tip_low_impact_joint => '低冲击有氧，保护关节';
+
+  @override
+  String get train_tip_promote_recovery => '促进恢复，不过度消耗';
+
+  @override
+  String get train_tip_recovery_day => '恢复日';
+
+  @override
+  String get train_tip_recovery_relax_muscle => '恢复性训练，帮助肌肉放松';
+
+  @override
+  String get train_tip_rest_recover_short => '休息恢复';
+
+  @override
+  String get train_tip_rest_stretch => '休息恢复，可以进行拉伸';
+
+  @override
+  String get train_tip_shoulder_combo => '推举、侧平举、面拉';
+
+  @override
+  String get train_tip_stretch_relax => '舒展身体，放松心情';
+
+  @override
+  String get trend_down => '下降';
+
+  @override
+  String get trend_stable => '稳定';
+
+  @override
+  String get trend_up => '上升';
+
+  @override
+  String get tue => '周二';
+
+  @override
+  String get ui_auto_aslist_03656661a3 => '咨询心血管专科医生进行全面评估';
+
+  @override
+  String get ui_auto_aslist_046c6233e0 => '最近';
+
+  @override
+  String get ui_auto_aslist_06f7d2ec4b => '膝盖方向和脚尖一致，站起时收紧臀部';
+
+  @override
+  String get ui_auto_aslist_08e5a9932a => '月经期间适当调整运动强度';
+
+  @override
+  String get ui_auto_aslist_09f1a8ca6a => '双腿均匀拉伸，避免一侧代偿';
+
+  @override
+  String get ui_auto_aslist_0b0e9b986a => '选择游泳、早晚散步等适合的运动';
+
+  @override
+  String get ui_auto_aslist_0b29e22e92 => '每年进行全面体检，包括心血管和代谢筛查';
+
+  @override
+  String get ui_auto_aslist_0d83078816 => '数据';
+
+  @override
+  String get ui_auto_aslist_0debf521ea => '计划';
+
+  @override
+  String get ui_auto_aslist_12a96d8f50 => '什么是';
+
+  @override
+  String get ui_auto_aslist_15043bfccf => '设定健康改善目标';
+
+  @override
+  String get ui_auto_aslist_1750f4fb54 => '调节情绪，预防秋季抑郁';
+
+  @override
+  String get ui_auto_aslist_17f1b7ab61 => '增加水分摄入，预防脱水';
+
+  @override
+  String get ui_auto_aslist_183547459a => '制定固定的运动时间表';
+
+  @override
+  String get ui_auto_aslist_1bc70beae7 => '尝试冥想或正念练习，每天10-15分钟';
+
+  @override
+  String get ui_auto_aslist_1bd6489db4 => '徒手深蹲';
+
+  @override
+  String get ui_auto_aslist_1bf28d15cc => '解释异常的健康指标';
+
+  @override
+  String get ui_auto_aslist_1d5778948a => '增加日常活动量，如步行、爬楼梯';
+
+  @override
+  String get ui_auto_aslist_1e3ff18ab7 => '保持规律的有氧运动';
+
+  @override
+  String get ui_auto_aslist_204d65fe6b => '制定合理的热量缺口（每日减少300-500卡路里）';
+
+  @override
+  String get ui_auto_aslist_207bb3aab5 => '考虑心电图、心脏超声等检查';
+
+  @override
+  String get ui_auto_aslist_23a732eecc => '有问题';
+
+  @override
+  String get ui_auto_aslist_242e467a6b => '确保充足的恢复时间';
+
+  @override
+  String get ui_auto_aslist_26b9c15a52 => '评估';
+
+  @override
+  String get ui_auto_aslist_294b9f5ec2 => '学习并练习深呼吸技巧';
+
+  @override
+  String get ui_auto_aslist_29c0a66c1a => '担心';
+
+  @override
+  String get ui_auto_aslist_2a58569390 => '规律进行中等强度有氧运动';
+
+  @override
+  String get ui_auto_aslist_2bfb991872 => '了解如何改善健康评分';
+
+  @override
+  String get ui_auto_aslist_2d10c1bfaf => '结合有氧运动和力量训练';
+
+  @override
+  String get ui_auto_aslist_2d47912ebf => '查看今天的健康数据';
+
+  @override
+  String get ui_auto_aslist_2e606b4e83 => '获取个性化健康建议';
+
+  @override
+  String get ui_auto_aslist_2f225cf3c9 => '多食用温热食物，补充能量';
+
+  @override
+  String get ui_auto_aslist_2f3dc20e06 => '关注视力和听力健康';
+
+  @override
+  String get ui_auto_aslist_2fadf1de77 => '调整作息，适应日照时间变化';
+
+  @override
+  String get ui_auto_aslist_30661a7cb1 => '交替进行有氧和无氧运动';
+
+  @override
+  String get ui_auto_aslist_30f38042ee => '注意防晒，保护皮肤健康';
+
+  @override
+  String get ui_auto_aslist_323bf89a32 => '意思';
+
+  @override
+  String get ui_auto_aslist_32459b6693 => '咨询医生或健康管理师制定个人化计划';
+
+  @override
+  String get ui_auto_aslist_340cac29e6 => '增加血压监测频率，每日测量并记录';
+
+  @override
+  String get ui_auto_aslist_342de573c8 => '背部放松到有牵拉感即可';
+
+  @override
+  String get ui_auto_aslist_34e47d7e3e => '控制';
+
+  @override
+  String get ui_auto_aslist_36e7244ea0 => '注意花粉过敏，选择合适的运动时间和地点';
+
+  @override
+  String get ui_auto_aslist_38f05712d7 => '进行适合年龄的阻力训练，保持肌肉量';
+
+  @override
+  String get ui_auto_aslist_3da8a7b54e => '将运动安排在一天中精力最充沛的时间';
+
+  @override
+  String get ui_auto_aslist_3ddbb4a510 => '选择室内运动或温暖时段的户外活动';
+
+  @override
+  String get ui_auto_aslist_3f9810121c => '推荐';
+
+  @override
+  String get ui_auto_aslist_42465de230 => '分析血压变化与生活方式的关联';
+
+  @override
+  String get ui_auto_aslist_4639f5e9e4 => '运动与心率变异正相关';
+
+  @override
+  String get ui_auto_aslist_469507dc98 => '婴儿式';
+
+  @override
+  String get ui_auto_aslist_4775f47e75 => '俯身杠铃划船';
+
+  @override
+  String get ui_auto_aslist_482d63de47 => '增加体力活动，每周至少150分钟中等强度运动';
+
+  @override
+  String get ui_auto_aslist_48f75a24bc => '早上好';
+
+  @override
+  String get ui_auto_aslist_49a723099c => '关注营养补给，特别是运动前后';
+
+  @override
+  String get ui_auto_aslist_4a4871febf => '加入柔韧性和平衡性训练';
+
+  @override
+  String get ui_auto_aslist_4b4c50af60 => '定期记录体重、血压等关键指标';
+
+  @override
+  String get ui_auto_aslist_4bde0c73d5 => '如血压持续升高，及时就医调整药物';
+
+  @override
+  String get ui_auto_aslist_4ce5ce0c12 => '查看最近的健康数据';
+
+  @override
+  String get ui_auto_aslist_4eeba18b67 => '分析我的整体健康状况';
+
+  @override
+  String get ui_auto_aslist_54007112dc => '保持健康的社交关系';
+
+  @override
+  String get ui_auto_aslist_54511c42ba => '躯干保持一条直线，胸部主动发力';
+
+  @override
+  String get ui_auto_aslist_54850410f1 => '血压偏高';
+
+  @override
+  String get ui_auto_aslist_54c01d94d5 => '定期进行认知功能评估';
+
+  @override
+  String get ui_auto_aslist_55964636fb => '定期进行妇科检查和乳腺检查';
+
+  @override
+  String get ui_auto_aslist_563e8b64c8 => '练习深呼吸或冥想放松技巧';
+
+  @override
+  String get ui_auto_aslist_5766c02d4c => '选择喜欢的运动类型提高坚持性';
+
+  @override
+  String get ui_auto_aslist_593fbc7f62 => '使用智能设备辅助数据收集';
+
+  @override
+  String get ui_auto_aslist_59c4e26fd7 => '补充叶酸，特别是育龄期女性';
+
+  @override
+  String get ui_auto_aslist_59e12aef7f => '核心稳定，速度匀速，不要塌腰';
+
+  @override
+  String get ui_auto_aslist_5bfaa980d3 => '培养兴趣爱好，增加生活乐趣';
+
+  @override
+  String get ui_auto_aslist_5c49090ecc => '控制晚餐份量，避免睡前进食';
+
+  @override
+  String get ui_auto_aslist_5db61226f3 => '保持充足的维生素D摄入';
+
+  @override
+  String get ui_auto_aslist_6061203a46 => '评价';
+
+  @override
+  String get ui_auto_aslist_60e67efb4a => 'BMI指数代表什么？';
+
+  @override
+  String get ui_auto_aslist_623d56f64d => '睡前1小时避免使用电子设备';
+
+  @override
+  String get ui_auto_aslist_629427cdb3 => '记录运动日志，追踪进展';
+
+  @override
+  String get ui_auto_aslist_63e9449ad9 => '适当减少高强度训练频率';
+
+  @override
+  String get ui_auto_aslist_6564093322 => '收操';
+
+  @override
+  String get ui_auto_aslist_65d9ea821f => '定期进行糖化血红蛋白检测';
+
+  @override
+  String get ui_auto_aslist_65ee856938 => '记录饮食和运动日志';
+
+  @override
+  String get ui_auto_aslist_6663b6ffa0 => '主练';
+
+  @override
+  String get ui_auto_aslist_67bb7ba813 => '合理安排工作和休息时间';
+
+  @override
+  String get ui_auto_aslist_67db1c36f7 => '上背部拉伸';
+
+  @override
+  String get ui_auto_aslist_69920badd1 => '建立放松的睡前仪式（阅读、冥想、轻柔音乐）';
+
+  @override
+  String get ui_auto_aslist_6ab1f1775c => '晚上好';
+
+  @override
+  String get ui_auto_aslist_6c335b604e => '情况';
+
+  @override
+  String get ui_auto_aslist_7081f3711b => '控制碳水化合物摄入，选择低GI食物';
+
+  @override
+  String get ui_auto_aslist_711025b087 => '必要时寻求专业心理咨询师帮助';
+
+  @override
+  String get ui_auto_aslist_7139a98819 => '保持规律运动';
+
+  @override
+  String get ui_auto_aslist_72c677e16f => '改善睡眠质量，保证7-8小时睡眠';
+
+  @override
+  String get ui_auto_aslist_73f3350bb7 => '定期进行健康检查，早发现早治疗';
+
+  @override
+  String get ui_auto_aslist_74203850b7 => '怎么办';
+
+  @override
+  String get ui_auto_aslist_747b542aca => '增加膳食纤维摄入，提高饱腹感';
+
+  @override
+  String get ui_auto_aslist_7491578e66 => '从小的生活习惯改变开始';
+
+  @override
+  String get ui_auto_aslist_74a81a117c => '注意保暖，避免感冒';
+
+  @override
+  String get ui_auto_aslist_76d2d72001 => '保持心情愉快，对抗季节性抑郁';
+
+  @override
+  String get ui_auto_aslist_7997ee9fa4 => '加强力量训练，保护肌肉量';
+
+  @override
+  String get ui_auto_aslist_7b1e0657c7 => '设定短期可达成的健康目标';
+
+  @override
+  String get ui_auto_aslist_7b5df123ee => '脊柱一节节活动，不要抢节奏';
+
+  @override
+  String get ui_auto_aslist_7e175663eb => '适量进补，为冬季储备能量';
+
+  @override
+  String get ui_auto_aslist_7eca689f0d => '你好';
+
+  @override
+  String get ui_auto_aslist_8069c673ed => '增加钙和维生素D的摄入，预防骨质疏松';
+
+  @override
+  String get ui_auto_aslist_80904b8d1c => '运动对健康有什么好处？';
+
+  @override
+  String get ui_auto_aslist_80ff8146a9 => '中握距卧推';
+
+  @override
+  String get ui_auto_aslist_8172e43bd7 => '每次拉伸 20 秒以上，呼吸要平稳';
+
+  @override
+  String get ui_auto_aslist_82b45de06c => '给我一些健康建议';
+
+  @override
+  String get ui_auto_aslist_83a991d77c => '激活';
+
+  @override
+  String get ui_auto_aslist_84165bea77 => '解释我的异常数据';
+
+  @override
+  String get ui_auto_aslist_85f8c03413 => '建立规律的睡眠时间，每天同一时间上床睡觉';
+
+  @override
+  String get ui_auto_aslist_88a432cd57 => '关注心理健康，平衡工作和生活';
+
+  @override
+  String get ui_auto_aslist_8b9b30343c => '猫式拉伸';
+
+  @override
+  String get ui_auto_aslist_8bd806398b => '根据季节变化调整运动项目';
+
+  @override
+  String get ui_auto_aslist_8bd9d0432c => '定期监测空腹血糖和餐后血糖';
+
+  @override
+  String get ui_auto_aslist_8c9bdf7d38 => '下午好';
+
+  @override
+  String get ui_auto_aslist_8e7f7c4339 => '每周尝试一种新的运动方式';
+
+  @override
+  String get ui_auto_aslist_8ee806b903 => '准备运动装备，减少运动障碍';
+
+  @override
+  String get ui_auto_aslist_91b97bb24e => '加强肺部保健，预防呼吸道疾病';
+
+  @override
+  String get ui_auto_aslist_94ed6e558b => '增加户外运动时间，享受温和阳光';
+
+  @override
+  String get ui_auto_aslist_9aaf967bde => '第2步';
+
+  @override
+  String get ui_auto_aslist_9b2401c732 => '减重';
+
+  @override
+  String get ui_auto_aslist_9e5e027ada => '管理压力，学习放松技巧';
+
+  @override
+  String get ui_auto_aslist_a067a9057c => '建立日常健康数据记录习惯';
+
+  @override
+  String get ui_auto_aslist_a0cd3f42f3 => '考虑瑜伽、太极等恢复性运动';
+
+  @override
+  String get ui_auto_aslist_a1f2c14edf => '低强度进入状态，先把呼吸找回来';
+
+  @override
+  String get ui_auto_aslist_a38e35968f => '从每周增加1次运动开始';
+
+  @override
+  String get ui_auto_aslist_a527282e96 => '建立规律的运动习惯，预防代谢疾病';
+
+  @override
+  String get ui_auto_aslist_aa07c3f6b6 => '增加训练多样性，避免运动适应';
+
+  @override
+  String get ui_auto_aslist_aaba43333f => '控制体重，BMI维持在18.5-23.9';
+
+  @override
+  String get ui_auto_aslist_aafc522132 => '如何建立运动习惯';
+
+  @override
+  String get ui_auto_aslist_ace1a5af77 => '如何理解心率变异性？';
+
+  @override
+  String get ui_auto_aslist_aef5ccf3ff => '什么是正常的血压范围？';
+
+  @override
+  String get ui_auto_aslist_b034f9da2f => '如何';
+
+  @override
+  String get ui_auto_aslist_b0e7abd4a4 => '查看详细的风险分析';
+
+  @override
+  String get ui_auto_aslist_b169949bb6 => '每次运动30-45分钟';
+
+  @override
+  String get ui_auto_aslist_b5316613f7 => '腘绳肌拉伸';
+
+  @override
+  String get ui_auto_aslist_b56f534cd7 => '多食用新鲜蔬菜，补充维生素';
+
+  @override
+  String get ui_auto_aslist_b6b9ceb50b => '解释';
+
+  @override
+  String get ui_auto_aslist_b6dc4a01fb => '如何理解';
+
+  @override
+  String get ui_auto_aslist_b893442b37 => '综合评估血压、血糖、血脂、腰围指标';
+
+  @override
+  String get ui_auto_aslist_b9e9328c02 => '我想减重5公斤';
+
+  @override
+  String get ui_auto_aslist_bb17ff328b => '第3步';
+
+  @override
+  String get ui_auto_aslist_bb725f7b61 => '放松';
+
+  @override
+  String get ui_auto_aslist_bc210a18f9 => '制定血压控制计划';
+
+  @override
+  String get ui_auto_aslist_bc2a6098f1 => '增加蛋白质摄入比例至总热量的25-30%';
+
+  @override
+  String get ui_auto_aslist_bc378fd942 => '监测身体成分变化，不仅关注体重';
+
+  @override
+  String get ui_auto_aslist_be2c31ecb6 => '单臂哑铃划船';
+
+  @override
+  String get ui_auto_aslist_bef7bf664c => '登山者';
+
+  @override
+  String get ui_auto_aslist_bf3971dc42 => '收尾';
+
+  @override
+  String get ui_auto_aslist_bf420e1efb => '学习应对中年期生理和心理变化';
+
+  @override
+  String get ui_auto_aslist_bfde964498 => '希望';
+
+  @override
+  String get ui_auto_aslist_c39d23e383 => '管理工作和生活压力';
+
+  @override
+  String get ui_auto_aslist_c679f933f6 => '确保蛋白质摄入充足（每公斤体重1.2-1.6g）';
+
+  @override
+  String get ui_auto_aslist_c6be50b134 => '想要';
+
+  @override
+  String get ui_auto_aslist_c6d0958e31 => '快速跳绳';
+
+  @override
+  String get ui_auto_aslist_c7dcc54596 => '定期监测血压、血脂、血糖';
+
+  @override
+  String get ui_auto_aslist_c8e923d5bf => '关注钙质补充，预防骨质疏松';
+
+  @override
+  String get ui_auto_aslist_cbc6d7e093 => '椭圆机';
+
+  @override
+  String get ui_auto_aslist_cc49c9b42f => '保持室内通风，预防中暑';
+
+  @override
+  String get ui_auto_aslist_cddabcbdb5 => '限制钠盐摄入（每日&lt;6g）';
+
+  @override
+  String get ui_auto_aslist_ce9f742216 => '参加团体运动或课程';
+
+  @override
+  String get ui_auto_aslist_cf2e53fbee => '划船机';
+
+  @override
+  String get ui_auto_aslist_cf73f8670e => '评估当前训练强度是否合适';
+
+  @override
+  String get ui_auto_aslist_cf9e991128 => '为什么';
+
+  @override
+  String get ui_auto_aslist_d0172de84c => '心血管疾病';
+
+  @override
+  String get ui_auto_aslist_d03e75558c => '先收肩胛再拉肘，不要耸肩借力';
+
+  @override
+  String get ui_auto_aslist_d0571ca3cd => '寻求家人朋友的支持';
+
+  @override
+  String get ui_auto_aslist_d0e2a0089d => '确保充足的铁元素摄入，预防缺铁性贫血';
+
+  @override
+  String get ui_auto_aslist_d18a5bfd68 => '创造良好的睡眠环境（温度18-22°C，安静黑暗）';
+
+  @override
+  String get ui_auto_aslist_d1d62def9d => '设定阶段性减重目标（每月1-2公斤）';
+
+  @override
+  String get ui_auto_aslist_d2324fb1ea => '分析我的健康状况';
+
+  @override
+  String get ui_auto_aslist_d52e9fdabc => '制定个性化的饮食和运动计划';
+
+  @override
+  String get ui_auto_aslist_d61a721dd0 => '先热身再上强度，降低受伤风险';
+
+  @override
+  String get ui_auto_aslist_dab1949d2e => '杯式深蹲';
+
+  @override
+  String get ui_auto_aslist_dcc8446e1c => '怎么样';
+
+  @override
+  String get ui_auto_aslist_e14116bcda => '站姿腿后侧与小腿拉伸';
+
+  @override
+  String get ui_auto_aslist_e194c6489a => '优化睡眠质量，保持规律作息';
+
+  @override
+  String get ui_auto_aslist_e2b69c8ab5 => '状况';
+
+  @override
+  String get ui_auto_aslist_e2e27a8725 => '严重';
+
+  @override
+  String get ui_auto_aslist_e2e9b71b21 => '制定地中海饮食或DASH饮食计划';
+
+  @override
+  String get ui_auto_aslist_e32e86c1dc => '考虑调整训练频率和强度';
+
+  @override
+  String get ui_auto_aslist_e40417dcf2 => '想要改善心血管健康';
+
+  @override
+  String get ui_auto_aslist_e451f1a0f5 => '分析近期饮食变化，识别高热量食物摄入增加';
+
+  @override
+  String get ui_auto_aslist_e46e84a168 => '避免在高温时段进行剧烈运动';
+
+  @override
+  String get ui_auto_aslist_e4841cb267 => '胸肩前侧拉伸';
+
+  @override
+  String get ui_auto_aslist_e596d49545 => '每周称重2-3次，监测体重变化';
+
+  @override
+  String get ui_auto_aslist_e5da151d15 => '详细记录运动和饮食信息';
+
+  @override
+  String get ui_auto_aslist_e5eefb3831 => '如持续快速下降，咨询营养师或医生';
+
+  @override
+  String get ui_auto_aslist_e98280544f => '进行全面体检，为一年的健康打基础';
+
+  @override
+  String get ui_auto_aslist_ea340b9dda => '方法';
+
+  @override
+  String get ui_auto_aslist_ea3d214c49 => '不正常';
+
+  @override
+  String get ui_auto_aslist_eb246cfe18 => '保持适量运动，提高免疫力';
+
+  @override
+  String get ui_auto_aslist_eba45ed327 => '注意保暖，特别是手脚和关节部位';
+
+  @override
+  String get ui_auto_aslist_ee92d89371 => '戒烟限酒，改善生活方式';
+
+  @override
+  String get ui_auto_aslist_f05d9d14e0 => '保持数据记录的连续性和准确性';
+
+  @override
+  String get ui_auto_aslist_f2cad2a54f => '设定运动提醒和奖励机制';
+
+  @override
+  String get ui_auto_aslist_f34231986b => '避免睡前3小时大量进食和饮用咖啡因';
+
+  @override
+  String get ui_auto_aslist_f6e1a72a89 => '慢呼吸，每次拉伸保持 20-30 秒';
+
+  @override
+  String get ui_auto_aslist_f8340dd056 => '避免过度节食，保持营养均衡';
+
+  @override
+  String get ui_auto_aslist_f8c53ab5a0 => '俯卧撑';
+
+  @override
+  String get ui_auto_aslist_fcf3bc749c => '应该';
+
+  @override
+  String get ui_auto_aslist_fe6516d46f => '寻找运动伙伴或加入运动群体';
+
+  @override
+  String get ui_auto_aslist_feb455325e => '定期评估和调整健康计划';
+
+  @override
+  String get ui_auto_aslist_ff3a040e90 => '第4步';
+
+  @override
+  String get ui_auto_bulk_00a629eaaf => '60s';
+
+  @override
+  String get ui_auto_bulk_00cecba9ca => '还差 9000 步达到目标';
+
+  @override
+  String get ui_auto_bulk_013139ddad => '删除计划';
+
+  @override
+  String get ui_auto_bulk_013167e450 => '上臂围';
+
+  @override
+  String get ui_auto_bulk_0152872feb => '先给预览，再让用户保存';
+
+  @override
+  String get ui_auto_bulk_025f8a6123 => 'SDNN';
+
+  @override
+  String get ui_auto_bulk_02a6889026 => '累计获得 0 金币';
+
+  @override
+  String get ui_auto_bulk_03f38597a6 => '速度';
+
+  @override
+  String get ui_auto_bulk_04902e4d1e => '超重';
+
+  @override
+  String get ui_auto_bulk_04b71807c4 => '输入分钟数';
+
+  @override
+  String get ui_auto_bulk_04ec5a9d9e => '20 分钟';
+
+  @override
+  String get ui_auto_bulk_050dd5a4ae => '在可恢复范围内把训练密度拉高，重点做体能和代谢双提升。';
+
+  @override
+  String get ui_auto_bulk_0520faf837 => '0/0分钟';
+
+  @override
+  String get ui_auto_bulk_05b997a163 => '提高消耗，控节奏 · 约25分钟';
+
+  @override
+  String get ui_auto_bulk_065a9a5efe => '如果今天状态差';
+
+  @override
+  String get ui_auto_bulk_07adc59b17 => '燃脂';
+
+  @override
+  String get ui_auto_bulk_08132e0293 => '0分钟';
+
+  @override
+  String get ui_auto_bulk_085bd117d6 => '说些什么...';
+
+  @override
+  String get ui_auto_bulk_0951aa57a4 => '先选高价值参数';
+
+  @override
+  String get ui_auto_bulk_09b095d8fc => '音量';
+
+  @override
+  String get ui_auto_bulk_09d44261d7 => '数据导出';
+
+  @override
+  String get ui_auto_bulk_0cab9262b0 => '本周先练\\n不先练满';
+
+  @override
+  String get ui_auto_bulk_0d0ad79ebc => '时间计时';
+
+  @override
+  String get ui_auto_bulk_0d3895b4dc => '运动类型';
+
+  @override
+  String get ui_auto_bulk_0d3ee579c8 => '耐力';
+
+  @override
+  String get ui_auto_bulk_0d4dd9d9ca => '随时能改';
+
+  @override
+  String get ui_auto_bulk_0df6d81ce0 => '🙁';
+
+  @override
+  String get ui_auto_bulk_0e19f86e8d => '10 分钟';
+
+  @override
+  String get ui_auto_bulk_0f69017824 => '因为什么';
+
+  @override
+  String get ui_auto_bulk_0f7efab97b => '不是空白配置页';
+
+  @override
+  String get ui_auto_bulk_105ad7aab5 => '50 公斤';
+
+  @override
+  String get ui_auto_bulk_108a50c1e0 => '热量（千卡）';
+
+  @override
+  String get ui_auto_bulk_10eac094ea => '记录一次体重、体脂与水分状态后，这里会显示变化趋势。';
+
+  @override
+  String get ui_auto_bulk_115f30e39b => '运动时长（分钟）';
+
+  @override
+  String get ui_auto_bulk_1277801423 => '当时心情';
+
+  @override
+  String get ui_auto_bulk_130b7dbaf3 => '通知解析';
+
+  @override
+  String get ui_auto_bulk_13d063fe23 => 'STEP 1';
+
+  @override
+  String get ui_auto_bulk_13f4afff1c => '备注和标签';
+
+  @override
+  String get ui_auto_bulk_150162504e => '局数';
+
+  @override
+  String get ui_auto_bulk_15a9ab25f8 => '连接传感器后更准确';
+
+  @override
+  String get ui_auto_bulk_15d0dc626c => '0/0千卡';
+
+  @override
+  String get ui_auto_bulk_15d3c80a93 => '内脏脂肪等级';
+
+  @override
+  String get ui_auto_bulk_15df591b90 => '下一项';
+
+  @override
+  String get ui_auto_bulk_16d956fbf0 => '正在结合您近期的数据生成个性化的运动趋势分析结果。';
+
+  @override
+  String get ui_auto_bulk_171b7f715d => '💡 推荐每日热量目标';
+
+  @override
+  String get ui_auto_bulk_17219b6a05 => '今日任务';
+
+  @override
+  String get ui_auto_bulk_1784329107 => '0/0次';
+
+  @override
+  String get ui_auto_bulk_1818da1415 => '目标变化后重新推荐';
+
+  @override
+  String get ui_auto_bulk_19a854115f => '身高';
+
+  @override
+  String get ui_auto_bulk_1a45bab3ca => '💧 白水';
+
+  @override
+  String get ui_auto_bulk_1c07cc7a83 => '身体围度 (cm)';
+
+  @override
+  String get ui_auto_bulk_1cf63ae219 => '500ml';
+
+  @override
+  String get ui_auto_bulk_1dd5946425 => '先试试引导训练（燃脂 / 增肌 / 恢复）';
+
+  @override
+  String get ui_auto_bulk_1fdfcebe4a => '空腹时长（小时）';
+
+  @override
+  String get ui_auto_bulk_20252d00aa => '最高纪录';
+
+  @override
+  String get ui_auto_bulk_2108ca1239 => '你的训练进度';
+
+  @override
+  String get ui_auto_bulk_2195e8b3bb => '注射后间隔（分钟）';
+
+  @override
+  String get ui_auto_bulk_21efd88b67 => '暂无数据';
+
+  @override
+  String get ui_auto_bulk_23767abb02 => '练习时长';
+
+  @override
+  String get ui_auto_bulk_2432b57515 => '备注';
+
+  @override
+  String get ui_auto_bulk_2496af30b6 => '50%';
+
+  @override
+  String get ui_auto_bulk_265060d874 => '😴 休息';
+
+  @override
+  String get ui_auto_bulk_275877b563 => '添加喝水记录';
+
+  @override
+  String get ui_auto_bulk_2919fb84ab => '表现评分';
+
+  @override
+  String get ui_auto_bulk_294176e470 => '记录昨晚睡眠';
+
+  @override
+  String get ui_auto_bulk_2a7bd45586 => '开始生成我的周计划';
+
+  @override
+  String get ui_auto_bulk_2a91c5cf6b => '-- bpm';
+
+  @override
+  String get ui_auto_bulk_2ab01e418d => '一般';
+
+  @override
+  String get ui_auto_bulk_2b3ec5c712 => '📚 学习';
+
+  @override
+  String get ui_auto_bulk_2c0cfe2d63 => '体重趋势';
+
+  @override
+  String get ui_auto_bulk_2c373332c4 => '运动记录';
+
+  @override
+  String get ui_auto_bulk_2c825a9900 => '选择时间';
+
+  @override
+  String get ui_auto_bulk_2d1aa98550 => '显示通知栏';
+
+  @override
+  String get ui_auto_bulk_2e20a7a9c8 => '中体力劳动（常常运动、每周3-5天）';
+
+  @override
+  String get ui_auto_bulk_2ed278fedd => '测量条件';
+
+  @override
+  String get ui_auto_bulk_2f192c03bb => '血糖管理';
+
+  @override
+  String get ui_auto_bulk_2f56053ac9 => '今日训练';
+
+  @override
+  String get ui_auto_bulk_301391fc4b => '计划描述';
+
+  @override
+  String get ui_auto_bulk_307914b4a8 => '测量时间';
+
+  @override
+  String get ui_auto_bulk_3193ca44d6 => '根据时长估算';
+
+  @override
+  String get ui_auto_bulk_31ca04728a =>
+      '把下肢循环换成 20 分钟低强度有氧，计划仍然记为完成，但会自动下调本周后两天负荷。';
+
+  @override
+  String get ui_auto_bulk_31dcf6e093 => '最近还没有身体成分记录';
+
+  @override
+  String get ui_auto_bulk_3250972b7e => '20000步';
+
+  @override
+  String get ui_auto_bulk_3343e5f931 => '热身';
+
+  @override
+  String get ui_auto_bulk_334aaec45f => '你好，用户';
+
+  @override
+  String get ui_auto_bulk_34a9e4e945 => '近期饮酒';
+
+  @override
+  String get ui_auto_bulk_36a4908a55 => '男';
+
+  @override
+  String get ui_auto_bulk_37b9d8de53 => '请输入每日目标热量（千卡）';
+
+  @override
+  String get ui_auto_bulk_37fb6a4fae => '预计 145 分钟 / 周 · 包含 2 天恢复安排';
+
+  @override
+  String get ui_auto_bulk_3a17b7352e => '分钟';
+
+  @override
+  String get ui_auto_bulk_3a8869f54a => '无体力劳动（几乎不运动）';
+
+  @override
+  String get ui_auto_bulk_3aa3508cf8 => '记状态';
+
+  @override
+  String get ui_auto_bulk_3ad28fd7df => '💎 矿泉水';
+
+  @override
+  String get ui_auto_bulk_3babafa028 => '年龄（岁）';
+
+  @override
+  String get ui_auto_bulk_3bca6fb348 => '当前压力水平';
+
+  @override
+  String get ui_auto_bulk_3cd5944a33 => '骨量 (kg)';
+
+  @override
+  String get ui_auto_bulk_3da59100ac => '运动时长';
+
+  @override
+  String get ui_auto_bulk_3e1e146d01 => '身体数据';
+
+  @override
+  String get ui_auto_bulk_3e20450940 => '总步数';
+
+  @override
+  String get ui_auto_bulk_3ec2bba02a => '距离';
+
+  @override
+  String get ui_auto_bulk_3f3663e911 => '帮助与反馈';
+
+  @override
+  String get ui_auto_bulk_400cde287f => '每组次数';
+
+  @override
+  String get ui_auto_bulk_401579141e => '这里是动作的详细说明...';
+
+  @override
+  String get ui_auto_bulk_409dacafd0 => '柠檬水';
+
+  @override
+  String get ui_auto_bulk_418853708e => '0.00 km';
+
+  @override
+  String get ui_auto_bulk_421ae42e13 => '椰子水';
+
+  @override
+  String get ui_auto_bulk_42a6c3ef84 => '开启声音';
+
+  @override
+  String get ui_auto_bulk_42ac5dc592 => '0 分钟';
+
+  @override
+  String get ui_auto_bulk_42f6a2ccfa => '记录一次更完整的身体状态';
+
+  @override
+  String get ui_auto_bulk_42fc5dcc25 => '可按设备实际提供的数据补充录入，不需要每项都填写。';
+
+  @override
+  String get ui_auto_bulk_4332c0684a => '偏瘦';
+
+  @override
+  String get ui_auto_bulk_44604fd93b => '例如 晨跑、核心训练';
+
+  @override
+  String get ui_auto_bulk_44ea12be04 => '去评分';
+
+  @override
+  String get ui_auto_bulk_44efd179aa => '退出登录';
+
+  @override
+  String get ui_auto_bulk_4540466142 => '计划进度\\n4 / 7';
+
+  @override
+  String get ui_auto_bulk_47afab0496 => '入睡时间';
+
+  @override
+  String get ui_auto_bulk_47e25812af => 'PNN50';
+
+  @override
+  String get ui_auto_bulk_48188a252d => '记录时间';
+
+  @override
+  String get ui_auto_bulk_48da582a83 => '重体力劳动（强度运动、长时间运动或体力劳动）';
+
+  @override
+  String get ui_auto_bulk_490ce35435 => '徒手下肢循环 · 28 分钟';
+
+  @override
+  String get ui_auto_bulk_4917957375 => '开始后会持续更新里程、速度、热量和心率。';
+
+  @override
+  String get ui_auto_bulk_492b4198db => '睡眠质量';
+
+  @override
+  String get ui_auto_bulk_49f7b8052f => '减脂 · 初级轻启动';
+
+  @override
+  String get ui_auto_bulk_49fcbce491 => '按组记录次数和重量，适合力量训练类运动。';
+
+  @override
+  String get ui_auto_bulk_4a340f2531 => '经常运动的人睡眠质量比一般人好 50%';
+
+  @override
+  String get ui_auto_bulk_4b1c7e4098 => '📝 其它';
+
+  @override
+  String get ui_auto_bulk_4c3699a66a => '0 次';
+
+  @override
+  String get ui_auto_bulk_4c8625fc44 => '建议组数';
+
+  @override
+  String get ui_auto_bulk_4c95a97281 => '实时追踪';
+
+  @override
+  String get ui_auto_bulk_4d09e737b4 => '语音教练';
+
+  @override
+  String get ui_auto_bulk_4d75379186 => '睡眠时长';
+
+  @override
+  String get ui_auto_bulk_4da3fa4e59 => 'STEP 2';
+
+  @override
+  String get ui_auto_bulk_4ef62706d6 => '18300步';
+
+  @override
+  String get ui_auto_bulk_4f2f8e3551 => '3 组 × 40 秒，组间休息 25 秒。';
+
+  @override
+  String get ui_auto_bulk_510578f618 => '公众号：微小目标';
+
+  @override
+  String get ui_auto_bulk_51737906c9 => '引导训练';
+
+  @override
+  String get ui_auto_bulk_5191e5dafa => '计划调整';
+
+  @override
+  String get ui_auto_bulk_51ec39c345 => '久坐提醒';
+
+  @override
+  String get ui_auto_bulk_5353b85698 => '分享好友';
+
+  @override
+  String get ui_auto_bulk_53740305d1 => '25秒';
+
+  @override
+  String get ui_auto_bulk_5375b0e4d0 => '🍵 茶';
+
+  @override
+  String get ui_auto_bulk_54484868bb => '湿度 (%)';
+
+  @override
+  String get ui_auto_bulk_54654583c8 => '酸奶';
+
+  @override
+  String get ui_auto_bulk_546d45c241 => '体水分 (%)';
+
+  @override
+  String get ui_auto_bulk_547290ffb7 => '测试前运动描述';
+
+  @override
+  String get ui_auto_bulk_55271f08f0 => '查看我的训练计划';
+
+  @override
+  String get ui_auto_bulk_56071ada2a => '胸围';
+
+  @override
+  String get ui_auto_bulk_57aa91412a => '最小心率';
+
+  @override
+  String get ui_auto_bulk_5822c21bda => '本周安排应该很直观';
+
+  @override
+  String get ui_auto_bulk_5858832b73 => '设备型号';
+
+  @override
+  String get ui_auto_bulk_58f93d8b3f => '例如 138';
+
+  @override
+  String get ui_auto_bulk_592c595891 => '开始时间';
+
+  @override
+  String get ui_auto_bulk_59a40b0d0e => '平均配速';
+
+  @override
+  String get ui_auto_bulk_5ad7f5a8b2 => '结果';
+
+  @override
+  String get ui_auto_bulk_5bdeb41dd8 => '🥥 椰子水';
+
+  @override
+  String get ui_auto_bulk_5c55cae5a8 => '这份计划会优先帮你建立稳定训练节奏，不会一开始堆太多量。';
+
+  @override
+  String get ui_auto_bulk_5c59ce4489 => '3组';
+
+  @override
+  String get ui_auto_bulk_5c8d6d3023 => '🙂';
+
+  @override
+  String get ui_auto_bulk_5d6aba637b => '体脂率 (%)';
+
+  @override
+  String get ui_auto_bulk_5dbebe543d => '盒式呼吸 · 4 吸 / 4 停 / 4 呼 / 4 停';
+
+  @override
+  String get ui_auto_bulk_5e213ddbb7 => '去开启';
+
+  @override
+  String get ui_auto_bulk_5ec1ca1461 => '备选：';
+
+  @override
+  String get ui_auto_bulk_5f411223ca => '返回';
+
+  @override
+  String get ui_auto_bulk_5f67003388 => '室温 (℃)';
+
+  @override
+  String get ui_auto_bulk_5f6805ff44 => '训练日';
+
+  @override
+  String get ui_auto_bulk_5fbc58e219 => '本周运动';
+
+  @override
+  String get ui_auto_bulk_5fbf343679 => '啤酒';
+
+  @override
+  String get ui_auto_bulk_5fc6a99264 => '😭';
+
+  @override
+  String get ui_auto_bulk_60884051c2 => '更新推荐计划';
+
+  @override
+  String get ui_auto_bulk_6090f2507f => '✈️ 旅行';
+
+  @override
+  String get ui_auto_bulk_614351674f => 'BMI 指数';
+
+  @override
+  String get ui_auto_bulk_621e55b2b5 => '完成这项动作后，这里会显示你的训练节奏。';
+
+  @override
+  String get ui_auto_bulk_63339e31a2 => '今日首条';
+
+  @override
+  String get ui_auto_bulk_6396cd72d6 => '200ml';
+
+  @override
+  String get ui_auto_bulk_6449eb722b => '点击添加心率';
+
+  @override
+  String get ui_auto_bulk_64a4c9a485 => '选择日期和时间';
+
+  @override
+  String get ui_auto_bulk_65e5d4e4a1 => '手动录入';
+
+  @override
+  String get ui_auto_bulk_661a960aa5 => '可乐';
+
+  @override
+  String get ui_auto_bulk_663eb46459 => '肌肉量 (kg)';
+
+  @override
+  String get ui_auto_bulk_66846af9f7 => '初级';
+
+  @override
+  String get ui_auto_bulk_67755bdf54 => '点击修改 ›';
+
+  @override
+  String get ui_auto_bulk_67d8aec47b => '大腿围';
+
+  @override
+  String get ui_auto_bulk_689c823769 => '体力劳动等级';
+
+  @override
+  String get ui_auto_bulk_68bf118227 => '强体力劳动（每天运动、每周6-7天）';
+
+  @override
+  String get ui_auto_bulk_68d5a30144 => '最大心率';
+
+  @override
+  String get ui_auto_bulk_697330e457 => '生理周期第几天 (女性)';
+
+  @override
+  String get ui_auto_bulk_6a806bafe6 => '训练负荷';
+
+  @override
+  String get ui_auto_bulk_6b566b91d9 => '本周';
+
+  @override
+  String get ui_auto_bulk_6b60e22def => '前夜睡眠质量';
+
+  @override
+  String get ui_auto_bulk_6c47d4c8b2 => '很差';
+
+  @override
+  String get ui_auto_bulk_6d97aa3b98 => '隐私申明';
+
+  @override
+  String get ui_auto_bulk_6ddeda0dfa => '🏥 健康';
+
+  @override
+  String get ui_auto_bulk_6e1f569d48 => '2000 千卡';
+
+  @override
+  String get ui_auto_bulk_6e9ad1b163 => '查看动作库（补充今天训练内容）';
+
+  @override
+  String get ui_auto_bulk_6ea1fe6baa => '基础信息';
+
+  @override
+  String get ui_auto_bulk_7019a5fb92 =>
+      '周一已经完成有氧唤醒，今天接下肢训练最顺。强度不高，但会明显提升你这周的训练存在感。';
+
+  @override
+  String get ui_auto_bulk_709694416b => '环境音';
+
+  @override
+  String get ui_auto_bulk_70a1bf3a03 => '总运动时长 0 分钟';
+
+  @override
+  String get ui_auto_bulk_70ca1b342a => '0步';
+
+  @override
+  String get ui_auto_bulk_71016fe0fe => '胰岛素剂量';
+
+  @override
+  String get ui_auto_bulk_7144946d35 => '点击添加血糖';
+
+  @override
+  String get ui_auto_bulk_71908a8a0a => '豆浆';
+
+  @override
+  String get ui_auto_bulk_720bd06d03 => '☕ 咖啡';
+
+  @override
+  String get ui_auto_bulk_729b26b8e8 => '😄';
+
+  @override
+  String get ui_auto_bulk_72a66e4b51 => '每周训练 5 天，先把节奏养起来，再逐步提高训练量。';
+
+  @override
+  String get ui_auto_bulk_731284d1c7 => '测量时机';
+
+  @override
+  String get ui_auto_bulk_732f6f5589 => '手动输入';
+
+  @override
+  String get ui_auto_bulk_736eaaaec5 => '添加标签';
+
+  @override
+  String get ui_auto_bulk_73b1fe47d7 => '根据目标体重';
+
+  @override
+  String get ui_auto_bulk_745e25a85e => '很好';
+
+  @override
+  String get ui_auto_bulk_7494e5afee => '🎵 播放助眠白噪音';
+
+  @override
+  String get ui_auto_bulk_74aaba2d12 => '谐振式呼吸 · 4 吸 / 4 呼';
+
+  @override
+  String get ui_auto_bulk_74e58b1eec => '通常只要 10 秒左右就能选好。';
+
+  @override
+  String get ui_auto_bulk_760bb87ccb => '活动次数';
+
+  @override
+  String get ui_auto_bulk_77af587985 => '5天';
+
+  @override
+  String get ui_auto_bulk_77d0bda4a1 => '核心稳定';
+
+  @override
+  String get ui_auto_bulk_785a9c111c => '皮下脂肪 (%)';
+
+  @override
+  String get ui_auto_bulk_786549d926 => '补充记录测量背景，比如设备变化、饮食、训练或其他特殊状态。';
+
+  @override
+  String get ui_auto_bulk_78b1739a98 => '🏃 能量饮';
+
+  @override
+  String get ui_auto_bulk_7a5794ace9 => '牛奶';
+
+  @override
+  String get ui_auto_bulk_7a8f0c40c9 => '建议固定在同一时段测量，得到更稳定的结果。';
+
+  @override
+  String get ui_auto_bulk_7ae7cd1386 => '💡 睡眠小贴士';
+
+  @override
+  String get ui_auto_bulk_7b4433b054 => 'AI 健康建议主动推送';
+
+  @override
+  String get ui_auto_bulk_7bca8c6314 => '输入关键指标后，这里会自动给出更容易理解的解释。';
+
+  @override
+  String get ui_auto_bulk_7c8f72d7f1 => '100ml';
+
+  @override
+  String get ui_auto_bulk_7ccda04375 => '控制动作质量，稳步加量 · 约26分钟';
+
+  @override
+  String get ui_auto_bulk_7cf2228054 => '预计消耗';
+
+  @override
+  String get ui_auto_bulk_7df81c9f0a => '蜂蜜水';
+
+  @override
+  String get ui_auto_bulk_7e48034805 => '同步微信步数';
+
+  @override
+  String get ui_auto_bulk_7e83123cd7 => '饮品类型';
+
+  @override
+  String get ui_auto_bulk_7e98196b8c => '第1步';
+
+  @override
+  String get ui_auto_bulk_7f8e147d4b => '参与运动排行榜';
+
+  @override
+  String get ui_auto_bulk_8074ee5a29 => '锻炼时长';
+
+  @override
+  String get ui_auto_bulk_80824ff352 => '当前计划';
+
+  @override
+  String get ui_auto_bulk_820945492f => '目标体重';
+
+  @override
+  String get ui_auto_bulk_820eb5b696 => 'cm';
+
+  @override
+  String get ui_auto_bulk_8240d6b43c => '如果今天想练更狠一点';
+
+  @override
+  String get ui_auto_bulk_82421ec511 => '压力指数';
+
+  @override
+  String get ui_auto_bulk_834c726346 => '计划不是一次性配置';
+
+  @override
+  String get ui_auto_bulk_83aca873dd => '🍺 啤酒';
+
+  @override
+  String get ui_auto_bulk_84c54db3f8 => '账户与帮助';
+
+  @override
+  String get ui_auto_bulk_8522caadac => '目标详细';
+
+  @override
+  String get ui_auto_bulk_8636accf14 => '👪 家庭';
+
+  @override
+  String get ui_auto_bulk_86e5ec937a => '自重训练';
+
+  @override
+  String get ui_auto_bulk_8735fb4c2b => '建议时长';
+
+  @override
+  String get ui_auto_bulk_87c835a6b1 => '女';
+
+  @override
+  String get ui_auto_bulk_87d3471b53 => '🎮 娱乐';
+
+  @override
+  String get ui_auto_bulk_87fa25a9f3 => '0金币';
+
+  @override
+  String get ui_auto_bulk_88bcba5cfb => '推荐训练节奏';
+
+  @override
+  String get ui_auto_bulk_89bcf65d93 => '力量训练组';
+
+  @override
+  String get ui_auto_bulk_89cb65e69e => '负重(kg)';
+
+  @override
+  String get ui_auto_bulk_8af66106c5 => '起床时间';
+
+  @override
+  String get ui_auto_bulk_8bc1deebe9 => '直接看到每天练什么';
+
+  @override
+  String get ui_auto_bulk_8d8b439b74 => '记录感受、路线或补充说明';
+
+  @override
+  String get ui_auto_bulk_8e6000c8da => '10 千卡';
+
+  @override
+  String get ui_auto_bulk_8f31634b5a => '静息时长（分钟）';
+
+  @override
+  String get ui_auto_bulk_9024d26d8e => '先记录本次测量的核心信息，后面的身体成分会更有参考价值。';
+
+  @override
+  String get ui_auto_bulk_90293ea702 => '奶茶';
+
+  @override
+  String get ui_auto_bulk_9056f92ff6 => '健身动作';
+
+  @override
+  String get ui_auto_bulk_94099a4f0f => '睡眠质量（1-10）';
+
+  @override
+  String get ui_auto_bulk_94191ceb1b => '能量饮';
+
+  @override
+  String get ui_auto_bulk_946983a6c2 => '🥛 酸奶';
+
+  @override
+  String get ui_auto_bulk_94a755afe7 => '果汁';
+
+  @override
+  String get ui_auto_bulk_94dd4a05e8 => '呼吸放松设置';
+
+  @override
+  String get ui_auto_bulk_94f206f4e3 => '新增一组';
+
+  @override
+  String get ui_auto_bulk_952681acdb => '上一餐碳水（克）';
+
+  @override
+  String get ui_auto_bulk_9588d525e2 => '测量设备型号';
+
+  @override
+  String get ui_auto_bulk_9749aec07f => '昨晚睡眠时长（小时）';
+
+  @override
+  String get ui_auto_bulk_97729c4455 => '已连续执行 8 天。今天不需要重新“配置计划”，你只需要知道现在该练什么。';
+
+  @override
+  String get ui_auto_bulk_97ac3f44ce => '编辑卡片';
+
+  @override
+  String get ui_auto_bulk_98c0933171 => '减脂轻启动计划';
+
+  @override
+  String get ui_auto_bulk_991344b5b2 => '预计 千卡';
+
+  @override
+  String get ui_auto_bulk_9916c3b981 => '👥 社交';
+
+  @override
+  String get ui_auto_bulk_9a31a04187 => '感觉怎样';
+
+  @override
+  String get ui_auto_bulk_9aa3e4b1f8 => '轻微出汗即可，唤醒心肺与下肢';
+
+  @override
+  String get ui_auto_bulk_9b4f279b4a => '根据时长、强度和组数给出负荷与建议。';
+
+  @override
+  String get ui_auto_bulk_9b80994acb => '静息心率';
+
+  @override
+  String get ui_auto_bulk_9c6d2f2f45 => '汤';
+
+  @override
+  String get ui_auto_bulk_9dc35a0038 => '运动名称';
+
+  @override
+  String get ui_auto_bulk_9e75621ec5 => '核心指标';
+
+  @override
+  String get ui_auto_bulk_9ebe3cb0eb => '选择训练模板';
+
+  @override
+  String get ui_auto_bulk_a001ed1cf1 => '茶';
+
+  @override
+  String get ui_auto_bulk_a0d0fe6d88 => '本周可执行';
+
+  @override
+  String get ui_auto_bulk_a1394739bb => '2021年02月01-2021年02月07';
+
+  @override
+  String get ui_auto_bulk_a169f0f866 => '同一时段、同一设备、相近环境下测量，趋势会更稳定。';
+
+  @override
+  String get ui_auto_bulk_a2ba88d339 => '不用再重新创建';
+
+  @override
+  String get ui_auto_bulk_a2d95b6ebe => '组数';
+
+  @override
+  String get ui_auto_bulk_a357634b02 => 'RMSSD';
+
+  @override
+  String get ui_auto_bulk_a3a4e454eb => '距离（公里）';
+
+  @override
+  String get ui_auto_bulk_a3d534d9fe => '较差';
+
+  @override
+  String get ui_auto_bulk_a3e3b88377 => '开始';
+
+  @override
+  String get ui_auto_bulk_a4a695a764 => '💡 AI 健康趋势预测';
+
+  @override
+  String get ui_auto_bulk_a4b8077724 => '300ml';
+
+  @override
+  String get ui_auto_bulk_a761914f97 => '咖啡';
+
+  @override
+  String get ui_auto_bulk_a8acbdbbe7 => '🥛 牛奶';
+
+  @override
+  String get ui_auto_bulk_a8b52f17ee => '分钟 / 周';
+
+  @override
+  String get ui_auto_bulk_a8ff0bc0cd => '呼吸放松';
+
+  @override
+  String get ui_auto_bulk_aa99bb028c => '放松紧张肌群，重建状态 · 约20分钟';
+
+  @override
+  String get ui_auto_bulk_aac3529980 => '喝水提醒';
+
+  @override
+  String get ui_auto_bulk_ab24ea3f34 => '近期摄入咖啡因';
+
+  @override
+  String get ui_auto_bulk_aca43234bd => '实时更新';
+
+  @override
+  String get ui_auto_bulk_aceb86c6bc => '矿泉水';
+
+  @override
+  String get ui_auto_bulk_ad74980084 => '当前级别';
+
+  @override
+  String get ui_auto_bulk_ad96194e6d => '得分';
+
+  @override
+  String get ui_auto_bulk_af964b55d8 => '0 千卡';
+
+  @override
+  String get ui_auto_bulk_b04fcbe476 => '确定添加';
+
+  @override
+  String get ui_auto_bulk_b09df93b93 => '保存这份计划';
+
+  @override
+  String get ui_auto_bulk_b0c0e6b638 => '平均心率';
+
+  @override
+  String get ui_auto_bulk_b0ce7c1c03 => '默认推荐';
+
+  @override
+  String get ui_auto_bulk_b11890ee20 => '补齐运动名称、时长和强度，保存前可以补充备注。';
+
+  @override
+  String get ui_auto_bulk_b171d3f82b => '腰围';
+
+  @override
+  String get ui_auto_bulk_b193e19cfd => '体重 (kg)';
+
+  @override
+  String get ui_auto_bulk_b2b266574f => '呼吸方式';
+
+  @override
+  String get ui_auto_bulk_b361c38d81 => '动感单车';
+
+  @override
+  String get ui_auto_bulk_b509484f28 => '恢复日';
+
+  @override
+  String get ui_auto_bulk_b5d56ffd02 => '先看推荐，再决定是否保存为你的训练计划。';
+
+  @override
+  String get ui_auto_bulk_b63e327b72 => '减脂轻启动 · 第 2 周';
+
+  @override
+  String get ui_auto_bulk_b6878726fe => '步数权限未开启，无法记录您的运动数据';
+
+  @override
+  String get ui_auto_bulk_bb440e5849 => '消耗热量';
+
+  @override
+  String get ui_auto_bulk_bb893f4b75 => '还没有你的专属计划';
+
+  @override
+  String get ui_auto_bulk_bb8ad970aa => '饮水量 (ml)';
+
+  @override
+  String get ui_auto_bulk_bbc7564540 => '🍽️ 饮食';
+
+  @override
+  String get ui_auto_bulk_bcaad88e13 => '快走 + 核心激活 · 25 分钟';
+
+  @override
+  String get ui_auto_bulk_bd63d702c6 => '测算中...';
+
+  @override
+  String get ui_auto_bulk_bdd8f81560 => '我的成就';
+
+  @override
+  String get ui_auto_bulk_bf9c2940f7 => '按当前里程估算';
+
+  @override
+  String get ui_auto_bulk_c27d66f237 => '生理状态';
+
+  @override
+  String get ui_auto_bulk_c2ea797d8b => '测量日期';
+
+  @override
+  String get ui_auto_bulk_c3a0f45e6a => '我的训练计划';
+
+  @override
+  String get ui_auto_bulk_c474eab369 => '管理活动';
+
+  @override
+  String get ui_auto_bulk_c4d058c899 => '🍯 蜂蜜水';
+
+  @override
+  String get ui_auto_bulk_c53dbd00ec => '组间休息';
+
+  @override
+  String get ui_auto_bulk_c5c01c8e21 => '良好';
+
+  @override
+  String get ui_auto_bulk_c62caaa297 => '开始这项练习';
+
+  @override
+  String get ui_auto_bulk_c69e181adf => '增肌';
+
+  @override
+  String get ui_auto_bulk_c6bcf06d45 => '今日概览';
+
+  @override
+  String get ui_auto_bulk_c7390e077a => '个性化计划';
+
+  @override
+  String get ui_auto_bulk_c743a1f2b3 => '按当前选择更新推荐计划';
+
+  @override
+  String get ui_auto_bulk_c76ca04b2c => '保存记录';
+
+  @override
+  String get ui_auto_bulk_c7d668022a => '记录当下状态，方便理解短期波动是否来自睡眠、压力或生理周期。';
+
+  @override
+  String get ui_auto_bulk_c7db6d4f1a => '恢复';
+
+  @override
+  String get ui_auto_bulk_c9cdd69719 => '填写补充说明（可选）';
+
+  @override
+  String get ui_auto_bulk_c9f7f18159 => '🥤 可乐';
+
+  @override
+  String get ui_auto_bulk_cb1de6e56e => '海浪';
+
+  @override
+  String get ui_auto_bulk_cb68a5d25c => '动作指南';
+
+  @override
+  String get ui_auto_bulk_cc6a89386d => '3 组';
+
+  @override
+  String get ui_auto_bulk_cd2fa34408 => '重新排计划';
+
+  @override
+  String get ui_auto_bulk_ce4458d33a => '🍊 果汁';
+
+  @override
+  String get ui_auto_bulk_cf19377b19 => '开始今天训练';
+
+  @override
+  String get ui_auto_bulk_cf53436b01 => '超过60分钟未运动时提醒';
+
+  @override
+  String get ui_auto_bulk_cf6e9d30e2 => '步数同步';
+
+  @override
+  String get ui_auto_bulk_cf72380ced => '雨声';
+
+  @override
+  String get ui_auto_bulk_d05ae7c042 => '身体成分分析';
+
+  @override
+  String get ui_auto_bulk_d0addf2ace =>
+      '先给自己一份能直接开始的周安排。选好目标和级别后，我们会先推荐一版，再决定要不要保存。';
+
+  @override
+  String get ui_auto_bulk_d2a48b9713 => '❤️ 恋爱';
+
+  @override
+  String get ui_auto_bulk_d2a8caf29f => '1. 第一步\\n2. 第二步';
+
+  @override
+  String get ui_auto_bulk_d31efa2696 => '身高（厘米）';
+
+  @override
+  String get ui_auto_bulk_d323ef3e7e => '设置每日热量目标';
+
+  @override
+  String get ui_auto_bulk_d4e2682d2a => '平均每日步数';
+
+  @override
+  String get ui_auto_bulk_d5145905be => '酮体水平';
+
+  @override
+  String get ui_auto_bulk_d5b3395d5b => '约 126';
+
+  @override
+  String get ui_auto_bulk_d5f4f6cf31 => '例如 5.2';
+
+  @override
+  String get ui_auto_bulk_d5fe43d170 => '运动提醒';
+
+  @override
+  String get ui_auto_bulk_d62156b185 => '添加运动记录';
+
+  @override
+  String get ui_auto_bulk_d69fc66f84 => '最近 7 天还没有练习这项动作。';
+
+  @override
+  String get ui_auto_bulk_d773306636 => '训练要点';
+
+  @override
+  String get ui_auto_bulk_d79d498b40 => '小腿围';
+
+  @override
+  String get ui_auto_bulk_d9c9ff7475 => '臀围';
+
+  @override
+  String get ui_auto_bulk_dac7ac64df => '版本信息';
+
+  @override
+  String get ui_auto_bulk_dafaa9f2c9 => '健康与训练';
+
+  @override
+  String get ui_auto_bulk_dbee8df721 => '先看推荐';
+
+  @override
+  String get ui_auto_bulk_dc3caaa8d6 => '0.0 km/h';
+
+  @override
+  String get ui_auto_bulk_dd24b8a75c => '邀请好友一起为健康加油';
+
+  @override
+  String get ui_auto_bulk_dfa3c0cd8c => '增加 1 组循环即可，不建议直接把整周都改重。';
+
+  @override
+  String get ui_auto_bulk_dfa9881f55 => '轻体力劳动（工作学习、偶尔运动）';
+
+  @override
+  String get ui_auto_bulk_dfac151de7 => '高级';
+
+  @override
+  String get ui_auto_bulk_e0f2044be3 => '可选，留空则自动估算';
+
+  @override
+  String get ui_auto_bulk_e12bfc76a3 => '基础代谢 (千卡)';
+
+  @override
+  String get ui_auto_bulk_e1b4dc9631 => '训练分析';
+
+  @override
+  String get ui_auto_bulk_e20caada6c => '血糖值';
+
+  @override
+  String get ui_auto_bulk_e2d4f79155 => '💼 工作';
+
+  @override
+  String get ui_auto_bulk_e2e0b2ec85 => '身体状态摘要';
+
+  @override
+  String get ui_auto_bulk_e39a1f352d => '🫘 豆浆';
+
+  @override
+  String get ui_auto_bulk_e464236ab6 => '动作名称';
+
+  @override
+  String get ui_auto_bulk_e4e36cd58f => '🍋 柠檬水';
+
+  @override
+  String get ui_auto_bulk_e517b2fc6d => '点击添加血压';
+
+  @override
+  String get ui_auto_bulk_e534f59ad9 => '高低强度交替，避免连续两天极限输出。';
+
+  @override
+  String get ui_auto_bulk_e62bd90f05 => '白水';
+
+  @override
+  String get ui_auto_bulk_e639f2b95d => '记录时长（分钟）';
+
+  @override
+  String get ui_auto_bulk_e663f2678c => '训练贴士';
+
+  @override
+  String get ui_auto_bulk_e6805ed590 => '训练分类';
+
+  @override
+  String get ui_auto_bulk_e75ca0a5fa => '放松呼吸 · 4 吸 / 6 呼';
+
+  @override
+  String get ui_auto_bulk_e77453535a => '蛋白质率 (%)';
+
+  @override
+  String get ui_auto_bulk_e828380dfa => '🏃 运动';
+
+  @override
+  String get ui_auto_bulk_e84b443b26 => '评分说明';
+
+  @override
+  String get ui_auto_bulk_e9087cc4da => '8小时30分钟';
+
+  @override
+  String get ui_auto_bulk_e9fa43d514 => '说些什么';
+
+  @override
+  String get ui_auto_bulk_ec13baff37 => '5 分钟';
+
+  @override
+  String get ui_auto_bulk_ec2ce2d557 => '调整今天';
+
+  @override
+  String get ui_auto_bulk_ec41af834e => '注销账号';
+
+  @override
+  String get ui_auto_bulk_ee3946d9c6 => '减脂 · 高级';
+
+  @override
+  String get ui_auto_bulk_ef90538429 => '🍲 汤';
+
+  @override
+  String get ui_auto_bulk_efbfcadffc => '餐食构成';
+
+  @override
+  String get ui_auto_bulk_f10fec311a => '第一天先用低门槛任务把训练开起来，给身体一个“本周要动”的信号。';
+
+  @override
+  String get ui_auto_bulk_f1313ecdba => '减脂';
+
+  @override
+  String get ui_auto_bulk_f1908f236d => '💙';
+
+  @override
+  String get ui_auto_bulk_f3b7f56165 => '0 千卡';
+
+  @override
+  String get ui_auto_bulk_f3ff4b8a2e => '9000步';
+
+  @override
+  String get ui_auto_bulk_f4fc55c50d => '篝火';
+
+  @override
+  String get ui_auto_bulk_f5a2d11402 => '水合状态';
+
+  @override
+  String get ui_auto_bulk_f63ae244d3 => '压力水平（1-10）';
+
+  @override
+  String get ui_auto_bulk_f6a9805632 => '主要循环';
+
+  @override
+  String get ui_auto_bulk_f778cca47f => '🧋 奶茶';
+
+  @override
+  String get ui_auto_bulk_f77c938302 => '更多...';
+
+  @override
+  String get ui_auto_bulk_fb6a4653ac => '每2小时提醒补充水分';
+
+  @override
+  String get ui_auto_bulk_fdddc5f58f => '跑步机快走';
+
+  @override
+  String get ui_auto_bulk_fe24f052d1 => '请完善身高体重信息以计算 BMI';
+
+  @override
+  String get ui_auto_bulk_fe2d26a257 => '未设置';
+
+  @override
+  String get ui_auto_bulk_ff0847911e => '智能分析';
+
+  @override
+  String get ui_auto_bulk_ffd5f33df8 => '强度';
+
+  @override
+  String get ui_auto_dialog_118558717a => '开启步数同步';
+
+  @override
+  String get ui_auto_dialog_194d3e4b51 => '确定要删除这条运动记录吗？';
+
+  @override
+  String get ui_auto_dialog_208460a7e6 => '退出训练';
+
+  @override
+  String get ui_auto_dialog_2af0da9c6f => '选择提醒时间';
+
+  @override
+  String get ui_auto_dialog_2b6bc0f293 => '操作';
+
+  @override
+  String get ui_auto_dialog_519601ec51 => '参与排行榜需要开启步数同步与其余好友分享您的运动进度。是否立即开启？';
+
+  @override
+  String get ui_auto_dialog_5586135905 => '数据导出与分享';
+
+  @override
+  String get ui_auto_dialog_631cd22018 => '确认删除';
+
+  @override
+  String get ui_auto_dialog_81b5faddb0 => '确定要删除这条饮食记录吗？';
+
+  @override
+  String get ui_auto_dialog_8f8d34049e => '设置手机号';
+
+  @override
+  String get ui_auto_dialog_93247c8b36 => '设置每日目标';
+
+  @override
+  String get ui_auto_dialog_a790208caf => '删除记录';
+
+  @override
+  String get ui_auto_dialog_b71d903f00 => '还没有完成任何一组，确认现在退出吗？';
+
+  @override
+  String get ui_auto_dialog_b7bd22a900 => '选择月份';
+
+  @override
+  String get ui_auto_dialog_bab8f14c91 => '确定要删除这条体重记录吗？';
+
+  @override
+  String get ui_auto_dialog_bdeb5d9bce => '确定要删除这条喝水记录吗？';
+
+  @override
+  String get ui_auto_dialog_ec04cf29e9 => '设置昵称';
+
+  @override
+  String get ui_auto_dialog_f161d2d1f0 => '确定要删除这条心情记录吗？';
+
+  @override
+  String get ui_auto_dialog_f31908db0b => '正在登录中...';
+
+  @override
+  String get ui_auto_dialog_f637460777 => '提前结束训练';
+
+  @override
+  String get ui_auto_dialog_ff59d24ef1 => '健康评分说明';
+
+  @override
+  String get ui_auto_domain_0158398225 => '🏃 运动健身目标:\\n';
+
+  @override
+  String get ui_auto_domain_0191d5284b => '周四: 休息或拉伸';
+
+  @override
+  String get ui_auto_domain_01a7bbce61 => '• 需要关注的风险因子:';
+
+  @override
+  String get ui_auto_domain_01b8eb9c0f => '✅ 好消息！目前您的健康数据没有检测到明显的异常。\\n\\n';
+
+  @override
+  String get ui_auto_domain_022cb27aeb => '❤️ 心率数据摘要:\\n';
+
+  @override
+  String get ui_auto_domain_068c9a13fc => '🩺 血压数据摘要:\\n';
+
+  @override
+  String get ui_auto_domain_09565b5ad4 => '严格控制碳水化合物摄入';
+
+  @override
+  String get ui_auto_domain_0a2293ade5 => '• 每日记录体重和血压\\n';
+
+  @override
+  String get ui_auto_domain_0b3814ec49 => '瑜伽或普拉提';
+
+  @override
+  String get ui_auto_domain_0bfd71c39e => '运动次数:';
+
+  @override
+  String get ui_auto_domain_0cbdd1b300 => '周三: 康复性力量训练 30分钟';
+
+  @override
+  String get ui_auto_domain_0f184c4639 => '肌肉围度测量';
+
+  @override
+  String get ui_auto_domain_0f3d519777 => '睡眠不足可能影响血压';
+
+  @override
+  String get ui_auto_domain_10c8d23166 => '继续正常训练';
+
+  @override
+  String get ui_auto_domain_10e4d7d8fe => '千卡\\n';
+
+  @override
+  String get ui_auto_domain_1166894c47 => '⚠️ 重要提醒: 检测到';
+
+  @override
+  String get ui_auto_domain_124be8cff5 => '• 逐步提高运动强度和时长\\n\\n';
+
+  @override
+  String get ui_auto_domain_12662424e3 => '已出现低血糖症状，需立即处理';
+
+  @override
+  String get ui_auto_domain_12cf1d319d => '增加水分摄入，监测血糖变化';
+
+  @override
+  String get ui_auto_domain_13aefd5658 => '最活跃:';
+
+  @override
+  String get ui_auto_domain_15470bdee4 => '运动时长提升';
+
+  @override
+  String get ui_auto_domain_172b5b1b1b => '综合体能测试';
+
+  @override
+  String get ui_auto_domain_17d3fda565 => '周六: 平衡和协调训练 25分钟';
+
+  @override
+  String get ui_auto_domain_1880638f0f => '周二: 间歇训练 40分钟';
+
+  @override
+  String get ui_auto_domain_188d73b0fe => '运动距离提升';
+
+  @override
+  String get ui_auto_domain_1b65bc788a => '疼痛评分';
+
+  @override
+  String get ui_auto_domain_1bcbd8841d => '• 每周进行150分钟中等强度有氧运动\\n';
+
+  @override
+  String get ui_auto_domain_1bf50cd555 => '周六: 模拟比赛训练 90分钟';
+
+  @override
+  String get ui_auto_domain_1c740c608a => '耐力训练需要更长时间，建议延长训练时长';
+
+  @override
+  String get ui_auto_domain_20db52860d => '• 整体风险等级:';
+
+  @override
+  String get ui_auto_domain_247faabfae => '剧烈运动前血糖偏低，有低血糖风险';
+
+  @override
+  String get ui_auto_domain_24d0fe79ff => '📊 体重数据摘要:\\n';
+
+  @override
+  String get ui_auto_domain_250f28a47d => '运动前适当补充碳水化合物';
+
+  @override
+  String get ui_auto_domain_2533fb6fbe => '可能存在过度训练，建议适当减少训练量并注重恢复';
+
+  @override
+  String get ui_auto_domain_26ada521ff => '立即补充15-20g快速碳水化合物（如葡萄糖片、果汁）';
+
+  @override
+  String get ui_auto_domain_2876f4d469 => '您的健康状况良好，暂时没有特别的建议。请继续保持良好的生活习惯！';
+
+  @override
+  String get ui_auto_domain_2d05e1b723 => '柔韧性训练后注意拉伸放松';
+
+  @override
+  String get ui_auto_domain_2d15cf3296 => '• 心率变异性:';
+
+  @override
+  String get ui_auto_domain_2d58d6b9a8 => '增加水分摄入，避免脱水';
+
+  @override
+  String get ui_auto_domain_2e4858cc12 => '主观疲劳度较高，明天安排轻松恢复训练';
+
+  @override
+  String get ui_auto_domain_2ef20f76fe => '状态评价:';
+
+  @override
+  String get ui_auto_domain_2fa9f414a9 => '有氧训练比例较高，建议增加力量训练';
+
+  @override
+  String get ui_auto_domain_30378d3190 => '💡 个性化健康建议\\n\\n';
+
+  @override
+  String get ui_auto_domain_3109b36a2d => '有氧运动比例较高，建议增加力量训练以提升肌肉力量';
+
+  @override
+  String get ui_auto_domain_3203b4fdfc => '竞技状态评估';
+
+  @override
+  String get ui_auto_domain_326a4df5da => '建议增加柔韧性和平衡性训练，预防跌倒风险';
+
+  @override
+  String get ui_auto_domain_32d2799db9 => '建议下次训练降低强度或安排恢复性运动';
+
+  @override
+  String get ui_auto_domain_332be26365 => '请继续保持良好的健康习惯，定期记录健康数据以便及时发现变化。';
+
+  @override
+  String get ui_auto_domain_3609de39c4 => '检测到以下异常情况：\\n\\n';
+
+  @override
+  String get ui_auto_domain_362942410c => '控制体重，减少腹部脂肪';
+
+  @override
+  String get ui_auto_domain_3650e599b1 => '个)\\n';
+
+  @override
+  String get ui_auto_domain_36853babb0 => '吸烟会导致血压短期升高';
+
+  @override
+  String get ui_auto_domain_398acfee79 => '低强度有氧运动';
+
+  @override
+  String get ui_auto_domain_3b1aad6756 => '最爱运动:';
+
+  @override
+  String get ui_auto_domain_3c1f3e6386 => '步\\n';
+
+  @override
+  String get ui_auto_domain_3c5b58ce5d => '周三: 力量训练 50分钟';
+
+  @override
+  String get ui_auto_domain_3d0f52ecb3 => '柔韧性训练不足，建议增加拉伸运动';
+
+  @override
+  String get ui_auto_domain_3e0442ebc9 => '请告诉我您最关心的健康方面，我会为您制定具体的目标和计划。';
+
+  @override
+  String get ui_auto_domain_3fe9bfeed6 => '周二: 休息';
+
+  @override
+  String get ui_auto_domain_4068d15cd6 => '周一: 轻度拉伸和活动 30分钟';
+
+  @override
+  String get ui_auto_domain_4276db7384 => '力量训练比例不足，建议每周至少3次力量训练';
+
+  @override
+  String get ui_auto_domain_4315dce876 => '采用低GI饮食，控制餐后血糖';
+
+  @override
+  String get ui_auto_domain_4343913907 => '训练效果很好！继续保持当前的训练节奏';
+
+  @override
+  String get ui_auto_domain_460b1cf933 => '年轻时是建立肌肉力量的最佳时期，建议增加力量训练';
+
+  @override
+  String get ui_auto_domain_47fc4e9be0 => '⚠️ 风险评估:\\n';
+
+  @override
+  String get ui_auto_domain_48779d97d5 => '静坐时间不足，可能影响测量准确性';
+
+  @override
+  String get ui_auto_domain_49f7727737 => '总重量提升';
+
+  @override
+  String get ui_auto_domain_4a1d14a552 => '训练频率很高，注意安排休息日避免过度训练';
+
+  @override
+  String get ui_auto_domain_4a6ee85549 => '力量训练建议每个动作进行3组以上';
+
+  @override
+  String get ui_auto_domain_4bbe9419ae => '考虑减少单餐碳水化合物摄入量';
+
+  @override
+  String get ui_auto_domain_4c7c82564e => '糖尿病前期：需要生活方式干预';
+
+  @override
+  String get ui_auto_domain_4d9d49cc4b => '高强度训练过多，建议增加低中强度训练促进恢复';
+
+  @override
+  String get ui_auto_domain_50ca088d1d => '周四: 瑜伽或拉伸 45分钟';
+
+  @override
+  String get ui_auto_domain_51c9d2bb4d => '• 增强体能和肌肉力量\\n';
+
+  @override
+  String get ui_auto_domain_51d24bf0b4 => '出现高血糖症状时及时就医';
+
+  @override
+  String get ui_auto_domain_520388fa5f => '按摩放松';
+
+  @override
+  String get ui_auto_domain_5451527d57 => '个高风险异常，建议尽快咨询医疗专业人士。';
+
+  @override
+  String get ui_auto_domain_56f7eae8d9 => '建议:';
+
+  @override
+  String get ui_auto_domain_5884083e5d => '📊 健康监测目标:\\n';
+
+  @override
+  String get ui_auto_domain_58fa223577 => '• 每月减重1-2公斤\\n';
+
+  @override
+  String get ui_auto_domain_5ba37b6b8f => '次\\n';
+
+  @override
+  String get ui_auto_domain_5bc0fa5655 => '周五: 水中运动 30分钟';
+
+  @override
+  String get ui_auto_domain_5c8a4c101b => '公里\\n';
+
+  @override
+  String get ui_auto_domain_5da407f21e => '周五: 中等强度有氧运动 50分钟';
+
+  @override
+  String get ui_auto_domain_5e3816e33e => '出现症状时避免驾车或操作机械';
+
+  @override
+  String get ui_auto_domain_60b69598ef => '关节活动度';
+
+  @override
+  String get ui_auto_domain_611563f881 => '学会识别低血糖早期症状';
+
+  @override
+  String get ui_auto_domain_63deebf904 => '周六: 户外活动或运动';
+
+  @override
+  String get ui_auto_domain_65a298f89b => '建议适当增加训练强度或时长';
+
+  @override
+  String get ui_auto_domain_6807af1183 => '运动时长下降';
+
+  @override
+  String get ui_auto_domain_6b0acd5190 => '📈 基础指标分析:\\n';
+
+  @override
+  String get ui_auto_domain_6b1191b871 => '运动能力提升';
+
+  @override
+  String get ui_auto_domain_6b483c9a34 => '最大摄氧量';
+
+  @override
+  String get ui_auto_domain_6dab0d4958 => '强度偏低，可以适当提高运动强度';
+
+  @override
+  String get ui_auto_domain_6df91827a4 => '• 改善睡眠质量\\n\\n';
+
+  @override
+  String get ui_auto_domain_6fffd97155 => '连续运动:';
+
+  @override
+  String get ui_auto_domain_702441c800 => '腰围测量';
+
+  @override
+  String get ui_auto_domain_7223749f39 => '有氧耐力提升';
+
+  @override
+  String get ui_auto_domain_7387787323 => '🍯 血糖数据摘要:\\n';
+
+  @override
+  String get ui_auto_domain_75f8d09fa9 => '建议每周至少进行3次运动，提高训练频率';
+
+  @override
+  String get ui_auto_domain_76587923ac => '训练负荷较高，注意休息和恢复';
+
+  @override
+  String get ui_auto_domain_7719812c3d => '周三: 休息或瑜伽';
+
+  @override
+  String get ui_auto_domain_77871dd476 => '周二: 高强度间歇训练 45分钟';
+
+  @override
+  String get ui_auto_domain_7a652e0b53 => '周日: 休息或恢复性训练';
+
+  @override
+  String get ui_auto_domain_7b7086ab27 => '• 改善心血管健康\\n';
+
+  @override
+  String get ui_auto_domain_7e9519f4ca => '周三: 高强度间歇训练 30分钟';
+
+  @override
+  String get ui_auto_domain_7f091b8169 => '力量训练比例较高，建议增加有氧运动改善心肺功能';
+
+  @override
+  String get ui_auto_domain_812b5ecfed => '增加有氧运动比例以提升耐力水平';
+
+  @override
+  String get ui_auto_domain_829103a35b => '周三: 交叉训练 50分钟';
+
+  @override
+  String get ui_auto_domain_847624ceb1 => '高强度训练，注意充分休息和恢复';
+
+  @override
+  String get ui_auto_domain_864565dfa9 => '酮体水平偏高，避免剧烈运动';
+
+  @override
+  String get ui_auto_domain_876f719079 => '血糖过高时避免剧烈运动';
+
+  @override
+  String get ui_auto_domain_88a5675d41 => '周五: 节奏训练 45分钟';
+
+  @override
+  String get ui_auto_domain_893e81dc4c => '🔍 健康数据异常分析\\n\\n';
+
+  @override
+  String get ui_auto_domain_8c94d17ae2 => '胰岛素注射后血糖偏低，需要密切监测';
+
+  @override
+  String get ui_auto_domain_8d52ec2dbe => '📉 体重管理目标:\\n';
+
+  @override
+  String get ui_auto_domain_8e34758437 => '有氧运动建议持续30分钟以上';
+
+  @override
+  String get ui_auto_domain_8f09d7dc1d => '力量训练比例较高，建议增加有氧训练';
+
+  @override
+  String get ui_auto_domain_8f7e67d711 => '🏃 运动数据摘要:\\n';
+
+  @override
+  String get ui_auto_domain_8ffc2ad1db => '消耗热量:';
+
+  @override
+  String get ui_auto_domain_90638d19d3 => '周五: 全身综合力量训练 60分钟';
+
+  @override
+  String get ui_auto_domain_922601c6c0 => '总步数:';
+
+  @override
+  String get ui_auto_domain_93075adb1d => '天\\n';
+
+  @override
+  String get ui_auto_domain_934234c338 => '选择低GI食物，如全谷物、蔬菜';
+
+  @override
+  String get ui_auto_domain_980bead5fa => '专项成绩提升';
+
+  @override
+  String get ui_auto_domain_98ff58113c => '周四: 专项战术训练 60分钟';
+
+  @override
+  String get ui_auto_domain_99a901b764 => '周二: 全身力量训练 40分钟';
+
+  @override
+  String get ui_auto_domain_9a1b212858 => '周五: 速度和爆发力训练 40分钟';
+
+  @override
+  String get ui_auto_domain_9b18d01bca => '周六: 户外活动或运动 60分钟';
+
+  @override
+  String get ui_auto_domain_9d6bdc4273 => '有氧运动心率偏低，可以适当提高强度';
+
+  @override
+  String get ui_auto_domain_9ddf000e46 => '已出现高血糖症状';
+
+  @override
+  String get ui_auto_domain_9ea648ee3e => '保持良好睡眠';
+
+  @override
+  String get ui_auto_domain_9fad791f80 => '• 目标BMI范围: 18.5-24.9\\n\\n';
+
+  @override
+  String get ui_auto_domain_a23e9b1d98 => '🚨 检测到的异常:\\n';
+
+  @override
+  String get ui_auto_domain_a4c32b8520 => '增加规律的有氧运动';
+
+  @override
+  String get ui_auto_domain_a636071546 => '增加血糖监测频率';
+
+  @override
+  String get ui_auto_domain_a63b04c54b => '存在高血压相关症状';
+
+  @override
+  String get ui_auto_domain_a902e1a349 => '健康数据异常检测报告\\n';
+
+  @override
+  String get ui_auto_domain_aa11ab8d31 => '连续高强度训练较多，建议安排1-2天休息';
+
+  @override
+  String get ui_auto_domain_aa47b8377d => '周一: 轻松有氧运动 45分钟';
+
+  @override
+  String get ui_auto_domain_ab3719b077 => '• 血压状态:';
+
+  @override
+  String get ui_auto_domain_aecb487ca6 => '总时长:';
+
+  @override
+  String get ui_auto_domain_afc7ed92bc => '最近表现有所下降，可能需要调整训练计划或增加休息';
+
+  @override
+  String get ui_auto_domain_b0b9ad684f => '轻度拉伸';
+
+  @override
+  String get ui_auto_domain_b4326bfab5 => '• 建立规律的运动习惯\\n';
+
+  @override
+  String get ui_auto_domain_bbe5c6206b => '周三: 轻度有氧运动 30分钟';
+
+  @override
+  String get ui_auto_domain_bd04fafd5d => '进步速度放缓，考虑增加训练变化性或强度';
+
+  @override
+  String get ui_auto_domain_c03d0fc681 => '📈 体重管理目标:\\n';
+
+  @override
+  String get ui_auto_domain_c0eb9b8a61 => '📊 本周运动报告\\n\\n';
+
+  @override
+  String get ui_auto_domain_c1a162c838 => '周四: 核心和功能性训练 45分钟';
+
+  @override
+  String get ui_auto_domain_c48ee38c13 => '血糖过高时运动可能加重病情';
+
+  @override
+  String get ui_auto_domain_c560fc9ed3 => '开始记录你的第一次运动吧！';
+
+  @override
+  String get ui_auto_domain_c5acf79cb2 => '每周体重变化';
+
+  @override
+  String get ui_auto_domain_c92912a790 => '周五: 有氧运动 45分钟';
+
+  @override
+  String get ui_auto_domain_c933751de9 => '充足睡眠 (8+ 小时)';
+
+  @override
+  String get ui_auto_domain_c9f0f55b6f => '酮体水平很高，需要紧急医疗处理';
+
+  @override
+  String get ui_auto_domain_ca46a276bd => '周四: 功能性训练 40分钟';
+
+  @override
+  String get ui_auto_domain_cd161038d0 => '• 增加肌肉量，改善体成分\\n\\n';
+
+  @override
+  String get ui_auto_domain_ce368c8ba1 => '周日: 积极恢复';
+
+  @override
+  String get ui_auto_domain_cf34b1f168 => '酮体水平偏高，存在酮症酸中毒风险';
+
+  @override
+  String get ui_auto_domain_cfbc69b8a6 => '• 体重管理（减重/增重/维持）\\n';
+
+  @override
+  String get ui_auto_domain_d029846f9c => '血压水平:';
+
+  @override
+  String get ui_auto_domain_d2d63e717f => '随着年龄增长，建议适当降低高强度训练比例';
+
+  @override
+  String get ui_auto_domain_d541478786 => '功能恢复程度';
+
+  @override
+  String get ui_auto_domain_d58a0de5b4 => '💡 建议您选择2-3个最重要的目标开始，逐步建立健康习惯。';
+
+  @override
+  String get ui_auto_domain_d65f283309 => '疾病状态可能影响血糖控制';
+
+  @override
+  String get ui_auto_domain_d6ce516e9b => '周一: 有氧运动 40分钟';
+
+  @override
+  String get ui_auto_domain_d80ee77d47 => '🔍 综合健康分析报告\\n\\n';
+
+  @override
+  String get ui_auto_domain_d84e920e36 => '周一: 上肢力量训练 60分钟';
+
+  @override
+  String get ui_auto_domain_d92007593f => '运动距离:';
+
+  @override
+  String get ui_auto_domain_d9ddffdff5 => '比赛表现';
+
+  @override
+  String get ui_auto_domain_dc93a4ebab => '🎯 健康目标设定指导\\n\\n';
+
+  @override
+  String get ui_auto_domain_dd1800285d => '心率过高，注意控制运动强度';
+
+  @override
+  String get ui_auto_domain_dd4e675c26 => '深度拉伸';
+
+  @override
+  String get ui_auto_domain_de11f956a0 => '周六: 长距离训练 60-90分钟';
+
+  @override
+  String get ui_auto_domain_de1ea7d80b => '训练强度偏低，可以适当增加中高强度训练';
+
+  @override
+  String get ui_auto_domain_de39304943 => '糖尿病风险：需要医疗干预';
+
+  @override
+  String get ui_auto_domain_de7634a03b => '有氧运动对减重最有效，建议增加有氧运动比例';
+
+  @override
+  String get ui_auto_domain_dff5ad02a1 => '• 每周2-3次力量训练\\n';
+
+  @override
+  String get ui_auto_domain_e02ece9ee0 => '周一: 专项技术训练 60分钟';
+
+  @override
+  String get ui_auto_domain_e398bc97bb => '平均速度提升';
+
+  @override
+  String get ui_auto_domain_e69828cdaa => '📋 数据质量评分:';
+
+  @override
+  String get ui_auto_domain_e6a947b831 => '周二: 全身力量训练 45分钟';
+
+  @override
+  String get ui_auto_domain_e8eba85c27 => '为了减重目标，建议增加训练时长或强度';
+
+  @override
+  String get ui_auto_domain_e9193a4bb3 => '动态拉伸';
+
+  @override
+  String get ui_auto_domain_eae508a634 => '柔韧性训练不足，建议每周进行2-3次拉伸或瑜伽';
+
+  @override
+  String get ui_auto_domain_eb8ff3a824 => '周日: 休息或轻度活动';
+
+  @override
+  String get ui_auto_domain_ebccd35712 => '近期摄入咖啡因，可能导致血压升高';
+
+  @override
+  String get ui_auto_domain_ed150f8b8d => '基于您当前的健康状况，我为您推荐以下目标：\\n\\n';
+
+  @override
+  String get ui_auto_domain_efba07a761 => '📊 整体健康评分:';
+
+  @override
+  String get ui_auto_domain_eff8b119d7 => '心率恢复速度';
+
+  @override
+  String get ui_auto_domain_f03331b8c4 => '随身携带快速碳水化合物';
+
+  @override
+  String get ui_auto_domain_f09d4d847f => '周日: 休息';
+
+  @override
+  String get ui_auto_domain_f0e217a5fe => '运动后血压可能受到影响';
+
+  @override
+  String get ui_auto_domain_f1a3e8bb6f => '周一: 中等强度有氧运动 45分钟';
+
+  @override
+  String get ui_auto_domain_f2ae442cbe => '周四: 休息';
+
+  @override
+  String get ui_auto_domain_f33ca242e5 => '继续保持规律运动，有助于血糖控制';
+
+  @override
+  String get ui_auto_domain_f3efc3e009 => '建议立即就医，可能需要药物治疗';
+
+  @override
+  String get ui_auto_domain_f52274565d => '我可以帮您制定个性化的健康目标。常见的健康目标包括：\\n\\n';
+
+  @override
+  String get ui_auto_domain_f54a0f4992 => '• 月度健康状况评估\\n\\n';
+
+  @override
+  String get ui_auto_domain_f54d83df20 => '周六: 休息或拉伸';
+
+  @override
+  String get ui_auto_domain_f5bc7582e6 => '为了增肌目标，需要增加训练负荷和重量';
+
+  @override
+  String get ui_auto_domain_f63cd233d3 => '最大举重重量';
+
+  @override
+  String get ui_auto_domain_f71aaf94fe => '周二: 下肢力量训练 60分钟';
+
+  @override
+  String get ui_auto_domain_f973dc4758 => '充分水分补充';
+
+  @override
+  String get ui_auto_domain_f98f6926f7 => '力量耐力提升';
+
+  @override
+  String get ui_auto_domain_f9984ecde0 => '尝试增加运动时长或增加间歇训练';
+
+  @override
+  String get ui_auto_domain_faa72f12f2 => '轻度有氧运动';
+
+  @override
+  String get ui_auto_domain_facfe17fb9 => '考虑调整训练方式或增加强度来突破平台期';
+
+  @override
+  String get ui_auto_domain_fb5c3547c7 => '• 健康增重，每月0.5-1公斤\\n';
+
+  @override
+  String get ui_auto_domain_fcb5a56d73 => '• 每周记录运动数据\\n';
+
+  @override
+  String get ui_auto_domain_fefb41c5b6 => '15分钟后重新测量血糖';
+
+  @override
+  String get ui_auto_domain_fff2ba1947 => '低血糖风险：可能导致意识模糊、昏迷';
+
+  @override
+  String get ui_auto_format_00911c767b => '• 最新血压: %1\$d/%2\$d mmHg\\n';
+
+  @override
+  String get ui_auto_format_018fb387dd => '近 7 天体脂 %+.1f%%，整体变化较平稳。';
+
+  @override
+  String get ui_auto_format_05c1654154 => '餐后血糖高: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_format_07c00ecc91 => '按当前趋势，预计在%d天后达到目标体重，继续保持！';
+
+  @override
+  String get ui_auto_format_0ca0939c70 => '血压达到危症水平: %1\$d/%2\$d mmHg';
+
+  @override
+  String get ui_auto_format_0ca2b75411 =>
+      '近 7 天体重 %1\$+.1f 公斤，波动区间 %2\$.1f 公斤。';
+
+  @override
+  String get ui_auto_format_110e1fa9a5 =>
+      '体重在短期内剧烈变化%1\$.1fkg (%2\$.1f%%)，需要关注';
+
+  @override
+  String get ui_auto_format_1128d4212d =>
+      '血压变异性过大: 收缩压SD=%1\$.1f, 舒张压SD=%2\$.1f';
+
+  @override
+  String get ui_auto_format_1137ccebb6 => '体重短期变化%1\$.1fkg (%2\$.1f%%)，超出正常范围';
+
+  @override
+  String get ui_auto_format_1137e5af65 => '脉压差过小: %d mmHg';
+
+  @override
+  String get ui_auto_format_11a082b1fb => '• 最新血糖: %1\$.1f %2\$s\\n';
+
+  @override
+  String get ui_auto_format_2243af4253 => '心率过快: %d bpm';
+
+  @override
+  String get ui_auto_format_24e07d01ef =>
+      '您在%1\$s内进行了%2\$d次运动，平均每周%3\$d次，符合健康建议';
+
+  @override
+  String get ui_auto_format_2c6250ff36 => '心率变异性持续下降: 趋势斜率%.2f';
+
+  @override
+  String get ui_auto_format_2e022c1a7b => '体重 %.1f 公斤';
+
+  @override
+  String get ui_auto_format_34e218de2c => '低血糖: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_format_373d2cc602 => '体重%1\$s趋势异常: 每周变化%2\$.1fkg';
+
+  @override
+  String get ui_auto_format_37d6964dc2 => '%1\$s本周完成 %2\$d/%3\$d 天';
+
+  @override
+  String get ui_auto_format_4800e5a37e => '体脂 %1\$.1f%% · BMI %2\$.1f';
+
+  @override
+  String get ui_auto_format_4a74d95d35 => '严重低血糖: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_format_4bff749c67 => '• 最新体重: %.1f kg\\n';
+
+  @override
+  String get ui_auto_format_4df896a891 => '本周运动%d次，建议增加到每周3次';
+
+  @override
+  String get ui_auto_format_514479f9ed => '静息心率过高: %d bpm';
+
+  @override
+  String get ui_auto_format_571f2094e0 => '• 平均血糖: %1\$.1f %2\$s\\n';
+
+  @override
+  String get ui_auto_format_5dd2a239a3 => '心率过慢: %d bpm';
+
+  @override
+  String get ui_auto_format_601463cc36 => '优先级: %1\$s | 证据等级: %2\$s\\n\\n';
+
+  @override
+  String get ui_auto_format_610ed4cc33 => '本周运动%d次，运动频率优秀';
+
+  @override
+  String get ui_auto_format_6abc726fed => '• 运动次数: %d 次\\n';
+
+  @override
+  String get ui_auto_format_70bb46f4df => '血糖变异性过大: CV=%.1f%%';
+
+  @override
+  String get ui_auto_format_71eae9dc6f => '• 变化: %+.1f kg\\n';
+
+  @override
+  String get ui_auto_format_739ff7016d => '脉压差过大: %d mmHg';
+
+  @override
+  String get ui_auto_format_7e85fa1439 => '已设置每天 %1\$02d:%2\$02d 提醒';
+
+  @override
+  String get ui_auto_format_8807c87491 => '计划完成 %1\$d/%2\$d 天';
+
+  @override
+  String get ui_auto_format_8d111d9721 => '连续%d次血糖偏高';
+
+  @override
+  String get ui_auto_format_8d50543253 => '心率变异性极低: %.1f ms';
+
+  @override
+  String get ui_auto_format_8e9d9a7e71 => '• 总运动时长: %d 分钟\\n';
+
+  @override
+  String get ui_auto_format_902f933635 => '%1\$d\\\'%2\$02d\\&quot;/公里';
+
+  @override
+  String get ui_auto_format_9317acd6eb => '血糖极高: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_format_958b9b0967 => '体重变化在%.1f公斤范围内，控制良好';
+
+  @override
+  String get ui_auto_format_a16a2356a7 => '血压严重偏高: %1\$d/%2\$d mmHg';
+
+  @override
+  String get ui_auto_format_a5946fe7ec => '空腹血糖高: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_format_b26869ee5b => '• 最新心率: %d bpm\\n';
+
+  @override
+  String get ui_auto_format_b595803c8d => '当前体水分 %.1f%%，建议结合最近状态一起观察。';
+
+  @override
+  String get ui_auto_format_bcd4386b44 => '静息心率过低: %d bpm';
+
+  @override
+  String get ui_auto_format_bdef819d12 =>
+      '%1\$s异常值: %2\$.2f (Z-Score: %3\$.2f)';
+
+  @override
+  String get ui_auto_format_c8124505fe => '最大心率异常: %d bpm';
+
+  @override
+  String get ui_auto_format_c8de19ca20 => '血压偏低: %1\$d/%2\$d mmHg';
+
+  @override
+  String get ui_auto_format_cdcb9bf7bc => '• 血压趋势：收缩压%+d mmHg';
+
+  @override
+  String get ui_auto_format_d526a01c36 => '发现 %d 个潜在风险因子：\\n\\n';
+
+  @override
+  String get ui_auto_format_d883abb196 => '/ %,d步';
+
+  @override
+  String get ui_auto_format_e123ec6667 => '最新血压%1\$d/%2\$d mmHg，处于理想范围';
+
+  @override
+  String get ui_auto_format_e6279b47a9 => '• 总消耗热量: %d 卡路里\\n';
+
+  @override
+  String get ui_auto_format_eb61419bc7 => '• 体重变化：%+.1f 公斤';
+
+  @override
+  String get ui_auto_format_efd46da980 => '心率变异性异常高: %.1f ms';
+
+  @override
+  String get ui_auto_format_f363dd41bd => '• 平均血压: %1\$.0f/%2\$.0f mmHg\\n';
+
+  @override
+  String get ui_auto_format_f60d444a8d => '训练时长 %1\$d 分钟 · 消耗 %2\$d 千卡';
+
+  @override
+  String get ui_auto_format_fb5041c079 => '分析%d次运动记录的表现趋势';
+
+  @override
+  String get ui_auto_format_fe2b06f467 => '• 运动频率：每周约%d次';
+
+  @override
+  String get ui_auto_full_004bf6c9a4 => '操作';
+
+  @override
+  String get ui_auto_full_009569d920 => '手动输入或在食材库中选择';
+
+  @override
+  String get ui_auto_full_01ceb3edde => '无数据';
+
+  @override
+  String get ui_auto_full_029c5cf68d => 'onboarding image';
+
+  @override
+  String get ui_auto_full_02cc4f8f5a => '请输入';
+
+  @override
+  String get ui_auto_full_046f4e6039 => '0ml';
+
+  @override
+  String get ui_auto_full_0494499037 => '睡眠记录';
+
+  @override
+  String get ui_auto_full_04ab46142c => '华为 / 荣耀 运动健康';
+
+  @override
+  String get ui_auto_full_052798d60b => '+25米';
+
+  @override
+  String get ui_auto_full_0713ccf219 => '经过一夜睡眠，身体处于缺水状态...';
+
+  @override
+  String get ui_auto_full_0724b8c5b1 => '⏯ 继续';
+
+  @override
+  String get ui_auto_full_072b030ba1 => '60';
+
+  @override
+  String get ui_auto_full_088ae13e05 => '走路步数';
+
+  @override
+  String get ui_auto_full_08f90c1a41 => '2000';
+
+  @override
+  String get ui_auto_full_0a3b7f8c7f => '2020年5月12日 4时6分';
+
+  @override
+  String get ui_auto_full_0bd46d3e70 => '当前金币：';
+
+  @override
+  String get ui_auto_full_0c1fec657f => '秒';
+
+  @override
+  String get ui_auto_full_0c4865b55f => '0 Kal';
+
+  @override
+  String get ui_auto_full_0d7bd91ed2 => '开心天数';
+
+  @override
+  String get ui_auto_full_0e40fe69b8 => '收款账户:';
+
+  @override
+  String get ui_auto_full_1021d1e606 => '运动打卡动态圈';
+
+  @override
+  String get ui_auto_full_1063e38cb5 => '移除';
+
+  @override
+  String get ui_auto_full_10ec59e73f => '8小时';
+
+  @override
+  String get ui_auto_full_11f81b5842 => '本周总步数';
+
+  @override
+  String get ui_auto_full_12d7939b3b => '日均热量';
+
+  @override
+  String get ui_auto_full_12f1d7ef38 => '结束';
+
+  @override
+  String get ui_auto_full_1301b323d3 => '450 千卡';
+
+  @override
+  String get ui_auto_full_135895622e => '修改目标';
+
+  @override
+  String get ui_auto_full_13ac0e0299 => '喝水详情';
+
+  @override
+  String get ui_auto_full_149e9677a5 => '170';
+
+  @override
+  String get ui_auto_full_14d18ae2bf => '组数模式';
+
+  @override
+  String get ui_auto_full_14e6d83ff5 => '时间：';
+
+  @override
+  String get ui_auto_full_153fa67a7f => '选择';
+
+  @override
+  String get ui_auto_full_15806c39ad => '连续签到0天';
+
+  @override
+  String get ui_auto_full_1724cf75f2 => '完成率';
+
+  @override
+  String get ui_auto_full_173765b19a => '🧘';
+
+  @override
+  String get ui_auto_full_176848afab => '·';
+
+  @override
+  String get ui_auto_full_1879879cb7 => '热量趋势';
+
+  @override
+  String get ui_auto_full_18940d53c5 => '12:00';
+
+  @override
+  String get ui_auto_full_18c50e88d7 => '目标距离';
+
+  @override
+  String get ui_auto_full_19fcb9eb25 => '时间';
+
+  @override
+  String get ui_auto_full_1a69cc9440 => '立即开始';
+
+  @override
+  String get ui_auto_full_1d5463d26b => '共 86 种运动';
+
+  @override
+  String get ui_auto_full_1dacb10f06 => '5800';
+
+  @override
+  String get ui_auto_full_1deb846a2a => '05-05';
+
+  @override
+  String get ui_auto_full_1e0bbae5c4 => '坚持不懈';
+
+  @override
+  String get ui_auto_full_1e8aef898a => '累计签到0天';
+
+  @override
+  String get ui_auto_full_1f0e3dad99 => '19';
+
+  @override
+  String get ui_auto_full_1fe85c057e => '暂无记录，添加饮食试试';
+
+  @override
+  String get ui_auto_full_1ff1de7740 => '24';
+
+  @override
+  String get ui_auto_full_202f12ffba => '倒计时';
+
+  @override
+  String get ui_auto_full_21fc612404 => '自动根据时长和距离计算';
+
+  @override
+  String get ui_auto_full_220262ce51 => '太棒了，记录已保存';
+
+  @override
+  String get ui_auto_full_2229fe1cf0 => '与运动、喝水、饮食、睡眠、心情记录联动解锁';
+
+  @override
+  String get ui_auto_full_2260674c11 => '勋章进度';
+
+  @override
+  String get ui_auto_full_226b091218 => '类型';
+
+  @override
+  String get ui_auto_full_227e15e61a => '长按拖动卡片调整卡片顺序';
+
+  @override
+  String get ui_auto_full_22b58c6798 => '可暂停后继续';
+
+  @override
+  String get ui_auto_full_22ce3c06d0 => '小米 / Zepp Life';
+
+  @override
+  String get ui_auto_full_2530cb0afb => '20元';
+
+  @override
+  String get ui_auto_full_2593af7293 => '📅 本月心情日历';
+
+  @override
+  String get ui_auto_full_27749157cf => '坚持天数';
+
+  @override
+  String get ui_auto_full_29b5d75155 => '😴 睡眠趋势';
+
+  @override
+  String get ui_auto_full_2a813bc3eb => '立即下载';
+
+  @override
+  String get ui_auto_full_2b24d49505 => '145';
+
+  @override
+  String get ui_auto_full_2b80deb8ec => '历史最高步数';
+
+  @override
+  String get ui_auto_full_2be4237ee2 => '开始您的第一次运动吧';
+
+  @override
+  String get ui_auto_full_2cc3f81d2f => '未开启通知使用权';
+
+  @override
+  String get ui_auto_full_2d60b7d559 => '暂无计划';
+
+  @override
+  String get ui_auto_full_2e22cec81d => '点击制定专属计划 ›';
+
+  @override
+  String get ui_auto_full_2e85dea5d7 => '今天精神怎么样';
+
+  @override
+  String get ui_auto_full_2eff678853 => '累计重复次数';
+
+  @override
+  String get ui_auto_full_2f81130a68 => '为什么早起要喝一杯水？';
+
+  @override
+  String get ui_auto_full_2faa266043 => '目标设置';
+
+  @override
+  String get ui_auto_full_303492ea77 => '这是动态的内容文字...';
+
+  @override
+  String get ui_auto_full_30565a8911 => '0.0';
+
+  @override
+  String get ui_auto_full_31edf50b8d => '秒表用于自由计时，倒计时适合间歇训练。';
+
+  @override
+  String get ui_auto_full_32c65d8d74 => '标题';
+
+  @override
+  String get ui_auto_full_33a34fb146 => '3 组 × 40 秒 · 组间休息 25 秒';
+
+  @override
+  String get ui_auto_full_33e75ff09d => '28';
+
+  @override
+  String get ui_auto_full_3424ee3e2c => '总热量(千卡)';
+
+  @override
+  String get ui_auto_full_344f459e96 => '真实姓名:';
+
+  @override
+  String get ui_auto_full_3600ace4b8 => '450千卡/天';
+
+  @override
+  String get ui_auto_full_36285b8c01 => '描述文字';
+
+  @override
+  String get ui_auto_full_3644a684f9 => '200';
+
+  @override
+  String get ui_auto_full_36b9a14914 => '最近的摄入记录';
+
+  @override
+  String get ui_auto_full_3731393e39 => '为本次运动选择目标，达成后会自动提醒。';
+
+  @override
+  String get ui_auto_full_3737bc69d9 => '冥想计时器';
+
+  @override
+  String get ui_auto_full_375ec8858f => '好的';
+
+  @override
+  String get ui_auto_full_3782d489af => '+ 添加这一组';
+
+  @override
+  String get ui_auto_full_37ad0425e7 => '12/28';
+
+  @override
+  String get ui_auto_full_38ce27d846 => '下一步';
+
+  @override
+  String get ui_auto_full_39305aa280 => '80后的回忆！经典三国完美复刻，安卓用户的福利';
+
+  @override
+  String get ui_auto_full_39d2b80d94 => '徒步';
+
+  @override
+  String get ui_auto_full_3bf2085444 => '记饮食';
+
+  @override
+  String get ui_auto_full_3cc4b779df => '午餐';
+
+  @override
+  String get ui_auto_full_3ced03e62d => '0千卡';
+
+  @override
+  String get ui_auto_full_3cfb34717c => '运动完成！';
+
+  @override
+  String get ui_auto_full_3d322ae60a => '暂停下载';
+
+  @override
+  String get ui_auto_full_3dd997569b => '助眠白噪音';
+
+  @override
+  String get ui_auto_full_3de6621409 => '7天万步挑战';
+
+  @override
+  String get ui_auto_full_3dee6f61c7 => '50元';
+
+  @override
+  String get ui_auto_full_3df6930203 => '室内跑';
+
+  @override
+  String get ui_auto_full_3e81e2c188 => '2000千卡';
+
+  @override
+  String get ui_auto_full_3e9dc5c606 => '知晓过去，才能遇见未来';
+
+  @override
+  String get ui_auto_full_3fea7ca76c => '状态';
+
+  @override
+  String get ui_auto_full_40fb1bf15b => '输入水量';
+
+  @override
+  String get ui_auto_full_41c8ce3c58 => ':567890';
+
+  @override
+  String get ui_auto_full_41eedf4071 => '12:11';
+
+  @override
+  String get ui_auto_full_42008e0811 => '.00';
+
+  @override
+  String get ui_auto_full_4206e76abd => '10元';
+
+  @override
+  String get ui_auto_full_420c331ac5 => '着陆无双';
+
+  @override
+  String get ui_auto_full_422708fe2a => '谐振式呼吸 · 10 分钟 · 声音关';
+
+  @override
+  String get ui_auto_full_42a6b6726a => '可选自由模式或固定公里数。';
+
+  @override
+  String get ui_auto_full_4331f63c61 => '卡路里/千卡';
+
+  @override
+  String get ui_auto_full_434cb42d36 => '查看达人分享，发布你的打卡';
+
+  @override
+  String get ui_auto_full_4351cfebe4 => '查看';
+
+  @override
+  String get ui_auto_full_43814c5454 => '正在进行深度识别分析...';
+
+  @override
+  String get ui_auto_full_44762f8e10 => '174cm';
+
+  @override
+  String get ui_auto_full_44db993893 => '11月13日-11月19日';
+
+  @override
+  String get ui_auto_full_465260fe80 => '年';
+
+  @override
+  String get ui_auto_full_466c416ff2 => '金币记录';
+
+  @override
+  String get ui_auto_full_4701d894b5 => '连续7天达到10,000步';
+
+  @override
+  String get ui_auto_full_4771af6d30 => '（新用户权益，仅一次）';
+
+  @override
+  String get ui_auto_full_47898c0658 => '完善个人信息';
+
+  @override
+  String get ui_auto_full_4880c7d640 => '--/--';
+
+  @override
+  String get ui_auto_full_49f4f9e7be => '坚持住，你可以的！';
+
+  @override
+  String get ui_auto_full_4a310d4298 => '2000 ml';
+
+  @override
+  String get ui_auto_full_4a7d1ed414 => '0000';
+
+  @override
+  String get ui_auto_full_4b1b4dc8cf => '报告';
+
+  @override
+  String get ui_auto_full_4b518775c5 => '总时长';
+
+  @override
+  String get ui_auto_full_4b7c0b7de9 => '微小目标micro-target';
+
+  @override
+  String get ui_auto_full_4b9c3271dc => '重置';
+
+  @override
+  String get ui_auto_full_4b9ed1c6b3 => '22:30';
+
+  @override
+  String get ui_auto_full_4c2a8fe7ea => '消息';
+
+  @override
+  String get ui_auto_full_4c4b4adfa7 => '1 分钟 7.5 次';
+
+  @override
+  String get ui_auto_full_4de076364d => '2024-01';
+
+  @override
+  String get ui_auto_full_4f56d5bbad => '休息秒数';
+
+  @override
+  String get ui_auto_full_4f7b91b1bf => '共05分00秒';
+
+  @override
+  String get ui_auto_full_4fd1ac252b => '快来加入微步运动\\n与朋友一起健康打卡！';
+
+  @override
+  String get ui_auto_full_5039f8d760 => '正在练习';
+
+  @override
+  String get ui_auto_full_50671b9e76 => '室外跑';
+
+  @override
+  String get ui_auto_full_50a17fb398 => '开始呼吸';
+
+  @override
+  String get ui_auto_full_50fb8e0b7a => '02月24日 12:23';
+
+  @override
+  String get ui_auto_full_5141ba3b0e => '116千卡/100g';
+
+  @override
+  String get ui_auto_full_516476e6a4 => '趋势分析';
+
+  @override
+  String get ui_auto_full_516e5ebd93 => '适合组间训练、冲刺和自由计时';
+
+  @override
+  String get ui_auto_full_51753bb96b => '开始后系统会自动按时长估算热量。暂停后可恢复，结束时会保存本次记录。';
+
+  @override
+  String get ui_auto_full_5188aa9e68 => '08:00';
+
+  @override
+  String get ui_auto_full_51adb83f08 => '时间：00:00';
+
+  @override
+  String get ui_auto_full_52b94d7857 => '暂无体重记录';
+
+  @override
+  String get ui_auto_full_536719f5a0 => '设置每日饮水目标';
+
+  @override
+  String get ui_auto_full_53a11da256 => '喝水常识';
+
+  @override
+  String get ui_auto_full_54b116f762 => '普通的view';
+
+  @override
+  String get ui_auto_full_556cbd514e => '趋势统计&gt;';
+
+  @override
+  String get ui_auto_full_55c7e16463 => '进度: 0 / 7 天';
+
+  @override
+  String get ui_auto_full_56164c5abe => '吸气';
+
+  @override
+  String get ui_auto_full_5629f2d9d8 => '次数';
+
+  @override
+  String get ui_auto_full_5672a8eab2 => '公式：体重(kg) × 30~35ml';
+
+  @override
+  String get ui_auto_full_569de58215 => '平均心情';
+
+  @override
+  String get ui_auto_full_56c4d686c5 => '－';
+
+  @override
+  String get ui_auto_full_5830f10812 => '常吃食物';
+
+  @override
+  String get ui_auto_full_58b9535df1 =>
+      '在运动的道路上，每一次迈步都是对自我的超越。累计完成10次运动即可获得此殊荣。';
+
+  @override
+  String get ui_auto_full_592a953516 => '适合 HIIT、组间休息和拉伸定时';
+
+  @override
+  String get ui_auto_full_59662644f5 => '持续运动时长';
+
+  @override
+  String get ui_auto_full_5adf7e2af7 => '+晚餐';
+
+  @override
+  String get ui_auto_full_5b46020008 => '为您计算个性化的每日喝水目标';
+
+  @override
+  String get ui_auto_full_5c106fb487 => '训练总时长';
+
+  @override
+  String get ui_auto_full_5d47dd2734 => '关联分析';
+
+  @override
+  String get ui_auto_full_5db9d7da65 => '运动挑战赛';
+
+  @override
+  String get ui_auto_full_5dfe2ea21b => '150毫升';
+
+  @override
+  String get ui_auto_full_5e56f330c5 => '(每100g 116千卡)';
+
+  @override
+  String get ui_auto_full_5edcdff8de => '1元';
+
+  @override
+  String get ui_auto_full_601c427074 => '加餐';
+
+  @override
+  String get ui_auto_full_60584e35a4 => '运动排行';
+
+  @override
+  String get ui_auto_full_609b5f0a08 => '时';
+
+  @override
+  String get ui_auto_full_611abd5bc1 => '🌅';
+
+  @override
+  String get ui_auto_full_6359681fa9 => '历史获得000000金币';
+
+  @override
+  String get ui_auto_full_6415554be9 => '统计概览';
+
+  @override
+  String get ui_auto_full_64eabf261d => '添加训练组';
+
+  @override
+  String get ui_auto_full_6717251bc4 => '运动名称';
+
+  @override
+  String get ui_auto_full_675d78630c => '0/15';
+
+  @override
+  String get ui_auto_full_67bd93756b => '正在处理...';
+
+  @override
+  String get ui_auto_full_67ff32d40f => '8000';
+
+  @override
+  String get ui_auto_full_685223c793 => '查看更多记录';
+
+  @override
+  String get ui_auto_full_68b53ac7cb => '太棒了！';
+
+  @override
+  String get ui_auto_full_69ae28690a => '距离模式';
+
+  @override
+  String get ui_auto_full_69e4902b42 => '今天没有任何记录';
+
+  @override
+  String get ui_auto_full_6a0e726394 => '请将食物置于框内拍摄';
+
+  @override
+  String get ui_auto_full_6c96adb925 => '写详细记录';
+
+  @override
+  String get ui_auto_full_6cbf8d73ac => '上次记录';
+
+  @override
+  String get ui_auto_full_6cfd303529 => '每完成一组就记录次数和负重，统计会自动更新。';
+
+  @override
+  String get ui_auto_full_6d47e10b72 => '+加餐';
+
+  @override
+  String get ui_auto_full_6db15cc014 => '智能推荐';
+
+  @override
+  String get ui_auto_full_6deabf9b13 => '平均入睡';
+
+  @override
+  String get ui_auto_full_6ed3411932 => '走路距离';
+
+  @override
+  String get ui_auto_full_6f8d4e6ad1 => '1 次呼吸 8 秒，吸气 4 秒，吐气 4 秒';
+
+  @override
+  String get ui_auto_full_6f9173cf0b => '累计运动';
+
+  @override
+  String get ui_auto_full_70ac95c0f5 => '2023.10.01 - 10.07';
+
+  @override
+  String get ui_auto_full_7124f37663 => '2000毫升';
+
+  @override
+  String get ui_auto_full_7141503c9a => '📊 心情分布';
+
+  @override
+  String get ui_auto_full_7229ecc631 => '次';
+
+  @override
+  String get ui_auto_full_751a79afde => '30分钟';
+
+  @override
+  String get ui_auto_full_75907b0a7d => '历史最低';
+
+  @override
+  String get ui_auto_full_75945ff792 => '今日已摄入 (千卡)';
+
+  @override
+  String get ui_auto_full_762871af71 => '05:00';
+
+  @override
+  String get ui_auto_full_76cc0b5f96 => '配速';
+
+  @override
+  String get ui_auto_full_780b32ce6d => '如何获得：累计完成10次运动';
+
+  @override
+  String get ui_auto_full_7867c816a4 => '2026-04-08';
+
+  @override
+  String get ui_auto_full_7a0c7660e8 => '已完成训练组数';
+
+  @override
+  String get ui_auto_full_7a7fd63831 => '劳力士服务中心，清洗保养，更换配件，9秒费用查询';
+
+  @override
+  String get ui_auto_full_7a9f8d95e9 => '暂无运动记录';
+
+  @override
+  String get ui_auto_full_7b544696c4 => '+999';
+
+  @override
+  String get ui_auto_full_7bf7e846e3 => '00:00';
+
+  @override
+  String get ui_auto_full_7cf597282a => '300千卡';
+
+  @override
+  String get ui_auto_full_7d0e9960f9 => '勋章收集进度';
+
+  @override
+  String get ui_auto_full_7db888defd => '1天';
+
+  @override
+  String get ui_auto_full_7e21757fc9 => '我的运动成就';
+
+  @override
+  String get ui_auto_full_7e43977d37 => '分段记录';
+
+  @override
+  String get ui_auto_full_7e5e1b55f7 => '排行榜等活动请在对应页面查看';
+
+  @override
+  String get ui_auto_full_7e70bf9755 => '+100米';
+
+  @override
+  String get ui_auto_full_7ef605fc8d => '150';
+
+  @override
+  String get ui_auto_full_8022b7772c => '连续运动';
+
+  @override
+  String get ui_auto_full_819767ada1 => '用户名';
+
+  @override
+  String get ui_auto_full_81b8db0e94 => '开始 / 暂停';
+
+  @override
+  String get ui_auto_full_8227e17a67 => '米';
+
+  @override
+  String get ui_auto_full_8245f63bdb => '💧 喝水';
+
+  @override
+  String get ui_auto_full_828ff9eeb5 => '里程：0km';
+
+  @override
+  String get ui_auto_full_82918f84bb => '+早餐';
+
+  @override
+  String get ui_auto_full_83494985ed => '2026-03-05';
+
+  @override
+  String get ui_auto_full_83a7472b49 => '心情记录';
+
+  @override
+  String get ui_auto_full_843574dcfb => '登山';
+
+  @override
+  String get ui_auto_full_84448e65ad => '饮食日记';
+
+  @override
+  String get ui_auto_full_8461474614 => '搜索运动类型...';
+
+  @override
+  String get ui_auto_full_853ae90f03 => ':';
+
+  @override
+  String get ui_auto_full_86c7dee2fb => '推荐每日喝水目标';
+
+  @override
+  String get ui_auto_full_872300b2a7 => '餐类分析';
+
+  @override
+  String get ui_auto_full_87e4d9efe3 => '稍后再说';
+
+  @override
+  String get ui_auto_full_896303044a => '步数';
+
+  @override
+  String get ui_auto_full_8a53255def => '📜 历史记录';
+
+  @override
+  String get ui_auto_full_8c489d0946 => '体重';
+
+  @override
+  String get ui_auto_full_8ca8f0eec9 => '日均步数';
+
+  @override
+  String get ui_auto_full_8cb7b3cf89 => '时间训练';
+
+  @override
+  String get ui_auto_full_8d80b1c191 => '🎯';
+
+  @override
+  String get ui_auto_full_8da5a4dc82 => '详细报告';
+
+  @override
+  String get ui_auto_full_8e296a067a => '25';
+
+  @override
+  String get ui_auto_full_8e50bef39e => '5元';
+
+  @override
+  String get ui_auto_full_8fe4d8dcbf => '结束并保存';
+
+  @override
+  String get ui_auto_full_90b5ef82f4 => '45.5/公斤';
+
+  @override
+  String get ui_auto_full_92636e8c8f => '跳过';
+
+  @override
+  String get ui_auto_full_930c87f11a => '我的勋章';
+
+  @override
+  String get ui_auto_full_930f3b0722 => '2000ml';
+
+  @override
+  String get ui_auto_full_94b99c784e => '25分钟/天';
+
+  @override
+  String get ui_auto_full_9564eb1724 => '微步运动 - 个人周报';
+
+  @override
+  String get ui_auto_full_958b9c3aff => '选择运动类型';
+
+  @override
+  String get ui_auto_full_96a6ae1411 => '晚餐';
+
+  @override
+  String get ui_auto_full_975b94b333 => '日历模式';
+
+  @override
+  String get ui_auto_full_975bebf84b => '健走';
+
+  @override
+  String get ui_auto_full_97e56f883f => '用户001';
+
+  @override
+  String get ui_auto_full_9819dcfb2e => '计策略，才真三国！';
+
+  @override
+  String get ui_auto_full_98f1370821 => '20';
+
+  @override
+  String get ui_auto_full_99530cd613 => '记录距离';
+
+  @override
+  String get ui_auto_full_99946dae32 => '399千卡';
+
+  @override
+  String get ui_auto_full_99c5f4bf7d => '现有余额';
+
+  @override
+  String get ui_auto_full_99d0cb8cd7 => '最多摄入';
+
+  @override
+  String get ui_auto_full_9ae362bda2 => '挑战赛';
+
+  @override
+  String get ui_auto_full_9b6ad6b8d1 => '不知道为什么，心情很差';
+
+  @override
+  String get ui_auto_full_9bd10d1e34 => '总次数';
+
+  @override
+  String get ui_auto_full_9bf4d3b0d2 => '确认并设置目标';
+
+  @override
+  String get ui_auto_full_9d4b3439f7 => '已适配的健康 App (请确保已开启其通知权限)';
+
+  @override
+  String get ui_auto_full_9d93c0f0f4 => '0小时';
+
+  @override
+  String get ui_auto_full_9f1ef07877 => '0%';
+
+  @override
+  String get ui_auto_full_a017e24739 => '📦';
+
+  @override
+  String get ui_auto_full_a09c311859 => '👩';
+
+  @override
+  String get ui_auto_full_a0d675a18d => '10 千卡/分钟';
+
+  @override
+  String get ui_auto_full_a111462d34 => '毫升';
+
+  @override
+  String get ui_auto_full_a142cf6091 => '当前未播放';
+
+  @override
+  String get ui_auto_full_a17b2353e6 => '历史最高';
+
+  @override
+  String get ui_auto_full_a1fa277792 => '类型';
+
+  @override
+  String get ui_auto_full_a329425bc3 => '添加饮食记录';
+
+  @override
+  String get ui_auto_full_a330de9254 => '本次运动提示';
+
+  @override
+  String get ui_auto_full_a3b1555fb4 => '🏆';
+
+  @override
+  String get ui_auto_full_a3ed39e1f4 => '0次';
+
+  @override
+  String get ui_auto_full_a5a2defa4c => '平均起床';
+
+  @override
+  String get ui_auto_full_a65ac88694 => '有目标才有前行的动力';
+
+  @override
+  String get ui_auto_full_a680280bbf => '12次/天';
+
+  @override
+  String get ui_auto_full_a719a5355c => '谐振式呼吸';
+
+  @override
+  String get ui_auto_full_a79aa8b2c6 => '+午餐';
+
+  @override
+  String get ui_auto_full_a81ff74cf2 => '秒表计时';
+
+  @override
+  String get ui_auto_full_a957a56cbf => '8,000步';
+
+  @override
+  String get ui_auto_full_aa00c4c0f4 => '0/0';
+
+  @override
+  String get ui_auto_full_aa94c6c829 => '步数模式';
+
+  @override
+  String get ui_auto_full_ab1d3e8c0c => '建议每日行走3000~6000步';
+
+  @override
+  String get ui_auto_full_ab20cc42f3 => '和';
+
+  @override
+  String get ui_auto_full_ab40c65017 => '米饭 300克';
+
+  @override
+  String get ui_auto_full_aba77ea6be => '👨';
+
+  @override
+  String get ui_auto_full_aba7927f37 => '◠◡◠';
+
+  @override
+  String get ui_auto_full_abac49610b => '显示在健康页';
+
+  @override
+  String get ui_auto_full_abe0326e06 => '报名挑战';
+
+  @override
+  String get ui_auto_full_ac29e4af16 => '5:00';
+
+  @override
+  String get ui_auto_full_acaf45716b => '设定目标';
+
+  @override
+  String get ui_auto_full_acd84bcb5a => '修改热量预算';
+
+  @override
+  String get ui_auto_full_ad24a0659b => '🌧️';
+
+  @override
+  String get ui_auto_full_ad6bd0aa90 => '健康成就之旅';
+
+  @override
+  String get ui_auto_full_af6c0066f0 => '当前日期暂无记录';
+
+  @override
+  String get ui_auto_full_b01465d386 => '根据您的体重，推荐每日喝水 1800-2100 ml';
+
+  @override
+  String get ui_auto_full_b14b8efad6 => '距离/公里';
+
+  @override
+  String get ui_auto_full_b1575b8f21 => 'Set 1';
+
+  @override
+  String get ui_auto_full_b15d91274e => '关闭';
+
+  @override
+  String get ui_auto_full_b1d400b800 => '输入活动名称';
+
+  @override
+  String get ui_auto_full_b205e4e707 => '户外跑步';
+
+  @override
+  String get ui_auto_full_b2652ac926 => '今日已摄入';
+
+  @override
+  String get ui_auto_full_b2e34c9407 => '0 步';
+
+  @override
+  String get ui_auto_full_b31b286d1c =>
+      '开启后，应用将能自动同步来自华为健康、小米、微信运动等 App 在通知栏显示的最新步数。';
+
+  @override
+  String get ui_auto_full_b31e80a43d => '160 CM';
+
+  @override
+  String get ui_auto_full_b3bb3c7225 => '+2500';
+
+  @override
+  String get ui_auto_full_b3c19432d2 => '记录喝水';
+
+  @override
+  String get ui_auto_full_b4a7887b5f => '《用户协议》';
+
+  @override
+  String get ui_auto_full_b4c9eb14cf => '喝水趋势';
+
+  @override
+  String get ui_auto_full_b5a7adde1a => '描述';
+
+  @override
+  String get ui_auto_full_b5b4018257 => '每日饮食';
+
+  @override
+  String get ui_auto_full_b637b2e5b1 => '1500ml';
+
+  @override
+  String get ui_auto_full_b68c994969 => '识别包名: com.xiaomi.hm.health';
+
+  @override
+  String get ui_auto_full_b6a80b5685 => '持续运动时间';
+
+  @override
+  String get ui_auto_full_b6bf780f0f => '开启自动同步';
+
+  @override
+  String get ui_auto_full_b6d767d2f8 => '22';
+
+  @override
+  String get ui_auto_full_b6f3af2122 => '任务标题';
+
+  @override
+  String get ui_auto_full_b707a15e19 => '12:23';
+
+  @override
+  String get ui_auto_full_b78a322350 => '标题';
+
+  @override
+  String get ui_auto_full_b7b8f3a8b3 => '立刻录入';
+
+  @override
+  String get ui_auto_full_ba10fcc9a4 => '💧';
+
+  @override
+  String get ui_auto_full_ba9dc6d2d4 => '历史记录';
+
+  @override
+  String get ui_auto_full_baad5e8013 => '消耗热量 (千卡)';
+
+  @override
+  String get ui_auto_full_bae9ba337e => '搜索运动类型';
+
+  @override
+  String get ui_auto_full_baec6461b0 => 'icon';
+
+  @override
+  String get ui_auto_full_bb5cc40cd7 => '立即签到';
+
+  @override
+  String get ui_auto_full_bc86f166cd => '喝水记录';
+
+  @override
+  String get ui_auto_full_bce7575206 => '5000米/天';
+
+  @override
+  String get ui_auto_full_bd547d7793 => '记录体重';
+
+  @override
+  String get ui_auto_full_bd8be5579e => '初试身手';
+
+  @override
+  String get ui_auto_full_be0f745778 => '今天';
+
+  @override
+  String get ui_auto_full_c20ad4d76f => '12';
+
+  @override
+  String get ui_auto_full_c31f48f84e => '分享';
+
+  @override
+  String get ui_auto_full_c380a317b5 => '🏅';
+
+  @override
+  String get ui_auto_full_c3992269b4 => '退出';
+
+  @override
+  String get ui_auto_full_c39a1ae0d7 => '奖励';
+
+  @override
+  String get ui_auto_full_c3ebe27993 => '日均摄入';
+
+  @override
+  String get ui_auto_full_c4442f1f0d => '8500 步';
+
+  @override
+  String get ui_auto_full_c47c9e3026 => '静谧雨夜';
+
+  @override
+  String get ui_auto_full_c4ca4238a0 => '1';
+
+  @override
+  String get ui_auto_full_c6036a69be => '1120';
+
+  @override
+  String get ui_auto_full_c60b1d7393 => '累计完成10次运动训练';
+
+  @override
+  String get ui_auto_full_c623f7cba4 => '第 1 组 / 共 3 组';
+
+  @override
+  String get ui_auto_full_c7a5d893fe => '当前日期暂无心情';
+
+  @override
+  String get ui_auto_full_c7a9759564 => '主食杂粮';
+
+  @override
+  String get ui_auto_full_c81e728d9d => '2';
+
+  @override
+  String get ui_auto_full_c883ad8285 => '今日暂无记录';
+
+  @override
+  String get ui_auto_full_c990336583 => '📈 心情趋势';
+
+  @override
+  String get ui_auto_full_c9e3981784 => '份量：';
+
+  @override
+  String get ui_auto_full_cab7976bc6 => '去领金币';
+
+  @override
+  String get ui_auto_full_cbe1a97e3c => '删除下载';
+
+  @override
+  String get ui_auto_full_cedf8da054 => '&gt;';
+
+  @override
+  String get ui_auto_full_cef3aac8a8 => '5公里';
+
+  @override
+  String get ui_auto_full_cfa5301358 => '1500';
+
+  @override
+  String get ui_auto_full_cfab1ba8c6 => '--';
+
+  @override
+  String get ui_auto_full_cfcd208495 => '0';
+
+  @override
+  String get ui_auto_full_d0a11d0791 => '风险评估';
+
+  @override
+  String get ui_auto_full_d158af3104 => '手动设置';
+
+  @override
+  String get ui_auto_full_d1f56abd6f => '微信登录';
+
+  @override
+  String get ui_auto_full_d2c10763a0 => '成就勋章';
+
+  @override
+  String get ui_auto_full_d3d9446802 => '10';
+
+  @override
+  String get ui_auto_full_d4d5353022 => '工作、休息';
+
+  @override
+  String get ui_auto_full_d5d3db1765 => 'title';
+
+  @override
+  String get ui_auto_full_d7735b3644 => '金币奖励';
+
+  @override
+  String get ui_auto_full_d7cfe6658c => '3月05号';
+
+  @override
+  String get ui_auto_full_d7da265427 => '运动打卡圈';
+
+  @override
+  String get ui_auto_full_d7f1e92e98 => '今日记录';
+
+  @override
+  String get ui_auto_full_daf783c8cd => '分';
+
+  @override
+  String get ui_auto_full_db01fbb538 => '倒计时关闭: --:--';
+
+  @override
+  String get ui_auto_full_dc3ebd082a => '✕ 退出';
+
+  @override
+  String get ui_auto_full_dc5a9a0d09 => '04:57';
+
+  @override
+  String get ui_auto_full_dc69f249a8 => '记圈';
+
+  @override
+  String get ui_auto_full_dd5925ba52 => '00:00:00';
+
+  @override
+  String get ui_auto_full_dec2ce394c => '000金币≈0.0元';
+
+  @override
+  String get ui_auto_full_df58350aa3 => '2023-5';
+
+  @override
+  String get ui_auto_full_dfb8d511c7 => '用户名称';
+
+  @override
+  String get ui_auto_full_dff521d468 => '▶';
+
+  @override
+  String get ui_auto_full_e092736459 => '0/39';
+
+  @override
+  String get ui_auto_full_e0ea1fa1cc => 'CONGRATULATIONS!';
+
+  @override
+  String get ui_auto_full_e1089d4dfa => '--:--';
+
+  @override
+  String get ui_auto_full_e126ecd515 => '公里';
+
+  @override
+  String get ui_auto_full_e2e8da69d0 => '2003年12月22日  22:23';
+
+  @override
+  String get ui_auto_full_e4da3b7fbb => '5';
+
+  @override
+  String get ui_auto_full_e5446f0f1b => '分享荣誉';
+
+  @override
+  String get ui_auto_full_e56c452eae => '(因部分系统机制问题，可能出现需多次同步才能获取到步数的情况。 )';
+
+  @override
+  String get ui_auto_full_e5bf251ab3 => '系统同步权限';
+
+  @override
+  String get ui_auto_full_e61f2cc4c3 => '同意';
+
+  @override
+  String get ui_auto_full_e6f60d6bb2 => '+50米';
+
+  @override
+  String get ui_auto_full_e704927421 => '累计消耗';
+
+  @override
+  String get ui_auto_full_e71b341b0b => '深呼吸，放松心情';
+
+  @override
+  String get ui_auto_full_e83a256e4f => '确认';
+
+  @override
+  String get ui_auto_full_e90ecdaa8d => '10分钟前';
+
+  @override
+  String get ui_auto_full_e91496ea7f => '总热量';
+
+  @override
+  String get ui_auto_full_e93028bdc1 => '3000';
+
+  @override
+  String get ui_auto_full_e957ecc6c1 => '饮食统计';
+
+  @override
+  String get ui_auto_full_ea4aada68b => '📊 质量分布';
+
+  @override
+  String get ui_auto_full_eabc9b5baa => '未解锁';
+
+  @override
+  String get ui_auto_full_eb02697caa => '平均质量';
+
+  @override
+  String get ui_auto_full_eb1a35c316 => '已完成 3 组，累计 6 分钟。';
+
+  @override
+  String get ui_auto_full_eb4d632f51 => '回到今天';
+
+  @override
+  String get ui_auto_full_eccbc87e4b => '3';
+
+  @override
+  String get ui_auto_full_ed83f53ede => '01-04';
+
+  @override
+  String get ui_auto_full_ee057f9e6d => '记录天数';
+
+  @override
+  String get ui_auto_full_ee1b82d5f0 => '平均时长';
+
+  @override
+  String get ui_auto_full_eeaa9837de => '荣誉达成';
+
+  @override
+  String get ui_auto_full_ef5f002f0f => '19.3公里';
+
+  @override
+  String get ui_auto_full_efdce06448 => '使用推荐值';
+
+  @override
+  String get ui_auto_full_f00df1a375 => '总组数';
+
+  @override
+  String get ui_auto_full_f104d150a1 => '2026-03-21 达成';
+
+  @override
+  String get ui_auto_full_f18c57a7f2 => '克';
+
+  @override
+  String get ui_auto_full_f39ae9ff3a => '1800';
+
+  @override
+  String get ui_auto_full_f3b184dc98 => '搜索食物';
+
+  @override
+  String get ui_auto_full_f4f46b7feb => '00:0';
+
+  @override
+  String get ui_auto_full_f511e9e0d4 => '15分钟';
+
+  @override
+  String get ui_auto_full_f70f5c6b53 => '户外跑';
+
+  @override
+  String get ui_auto_full_f7211d3ffc => '⏰ 作息规律';
+
+  @override
+  String get ui_auto_full_f7696a9b36 => '2500';
+
+  @override
+  String get ui_auto_full_f7ddd489ab => '0.00';
+
+  @override
+  String get ui_auto_full_f818259b1d => '2023-01-01';
+
+  @override
+  String get ui_auto_full_f819de8124 => '75%';
+
+  @override
+  String get ui_auto_full_f899139df5 => '100';
+
+  @override
+  String get ui_auto_full_f8c3feb48c => '日历';
+
+  @override
+  String get ui_auto_full_f965fea308 => '次数';
+
+  @override
+  String get ui_auto_full_f9992b2c2e => '5000/天';
+
+  @override
+  String get ui_auto_full_fb2ea5cbb4 => '手动输入或使用快捷按钮累加本次运动距离。';
+
+  @override
+  String get ui_auto_full_fb852fc6cc => '进行中';
+
+  @override
+  String get ui_auto_full_fb9951660e => '所有类型';
+
+  @override
+  String get ui_auto_full_fcd9436296 => '重量';
+
+  @override
+  String get ui_auto_full_fd375dee48 => '07:00';
+
+  @override
+  String get ui_auto_full_fd6e4095e0 =>
+      '识别包名: com.huawei.health / com.hihonor.health';
+
+  @override
+  String get ui_auto_full_fdc9d587b5 => '我的本周跑量';
+
+  @override
+  String get ui_auto_full_feac70e2cf => '今天 12:00';
+
+  @override
+  String get ui_auto_full_ff0ee55e51 => '时间模式';
+
+  @override
+  String get ui_auto_full_ff6ba24d41 => '🚶 步数';
+
+  @override
+  String get ui_auto_full_ff8bed43ac => '1/4';
+
+  @override
+  String get ui_auto_method_010c9f12d9 => '你的运动目标已达成';
+
+  @override
+  String get ui_auto_method_014c2b8adc => '请完善日期和时间信息';
+
+  @override
+  String get ui_auto_method_028cdfbeb0 => '删除提示';
+
+  @override
+  String get ui_auto_method_08b5033ee3 => '请输入有效的运动时长';
+
+  @override
+  String get ui_auto_method_09c89dc8b9 => '继续训练';
+
+  @override
+  String get ui_auto_method_0a20fd57a1 => '运动分布';
+
+  @override
+  String get ui_auto_method_11d7819fac => '每天定时提醒您开始训练计划';
+
+  @override
+  String get ui_auto_method_1303e638b5 => '修改时间';
+
+  @override
+  String get ui_auto_method_182cece58d => '💡 微步 AI 健康建议';
+
+  @override
+  String get ui_auto_method_1a4ccdb444 => '取消退出';
+
+  @override
+  String get ui_auto_method_1d37e75bf3 => '请输入舒张压';
+
+  @override
+  String get ui_auto_method_20910c5de0 => '0公里/小时';
+
+  @override
+  String get ui_auto_method_241f2e6b75 => '你还没有记录过腰围';
+
+  @override
+  String get ui_auto_method_246aa46373 => '你还没有记录过小腿围';
+
+  @override
+  String get ui_auto_method_319a541426 => '请输入血糖值';
+
+  @override
+  String get ui_auto_method_322e528433 => '注销账号';
+
+  @override
+  String get ui_auto_method_334306b663 => '请输入运动时长';
+
+  @override
+  String get ui_auto_method_3daa166c8d => '心率范围应在30-250之间';
+
+  @override
+  String get ui_auto_method_4565fd5463 => '今天还没有运动哦，现在开始吧！';
+
+  @override
+  String get ui_auto_method_56c9087a99 => '已删除记录';
+
+  @override
+  String get ui_auto_method_5c94123fcf => '请输入有效的血糖值';
+
+  @override
+  String get ui_auto_method_6954f9a3a2 => '申请记步权限';
+
+  @override
+  String get ui_auto_method_6d1c35286a => '每日运动提醒通知';
+
+  @override
+  String get ui_auto_method_760fb8dcbe => '修改体重记录';
+
+  @override
+  String get ui_auto_method_7a3af6b4f1 => '使用轨迹记录提示';
+
+  @override
+  String get ui_auto_method_8347a927c0 => '修改';
+
+  @override
+  String get ui_auto_method_85db755989 => '当您久坐不动时提醒您起来活动';
+
+  @override
+  String get ui_auto_method_86fbb83305 => '请输入平均心率';
+
+  @override
+  String get ui_auto_method_914c87d06e => '动作库训练 ·';
+
+  @override
+  String get ui_auto_method_91e0484906 => '🏃 运动时间到！';
+
+  @override
+  String get ui_auto_method_9c1f8b7c2f => '你还没有记录过身高';
+
+  @override
+  String get ui_auto_method_a190b617aa => '收缩压应大于舒张压';
+
+  @override
+  String get ui_auto_method_a717bbf10f => '定时提醒您补充水分';
+
+  @override
+  String get ui_auto_method_aa2fb1b6cf => '请选择日期';
+
+  @override
+  String get ui_auto_method_ab69dba354 => '你还没有记录过臀围';
+
+  @override
+  String get ui_auto_method_ae6b76a9e5 => '你还没有记录过体重';
+
+  @override
+  String get ui_auto_method_c21a0dc9ca => '你还没有记录过上臂围';
+
+  @override
+  String get ui_auto_method_c34d201966 => '你还没有记录过胸围';
+
+  @override
+  String get ui_auto_method_c48ae72c9a => '训练结束，共完成';
+
+  @override
+  String get ui_auto_method_c6cdba261a => '运动时长应在1-600分钟之间';
+
+  @override
+  String get ui_auto_method_c93ca01a8c => '你还没有记录过大腿围';
+
+  @override
+  String get ui_auto_method_cb8c7f5d68 => '公斤';
+
+  @override
+  String get ui_auto_method_cb91f5ebd6 => '收缩压范围应在60-300之间';
+
+  @override
+  String get ui_auto_method_d2bf878baf => '有未保存的训练记录，是否退出？';
+
+  @override
+  String get ui_auto_method_d9f14636aa => '舒张压范围应在40-200之间';
+
+  @override
+  String get ui_auto_method_de0ff792fc => '运动目标达成';
+
+  @override
+  String get ui_auto_method_e50478fc58 => '请输入收缩压';
+
+  @override
+  String get ui_auto_method_e74553d2a4 => '请输入有效的心率值';
+
+  @override
+  String get ui_auto_method_eb45a8e060 => '开启并进入';
+
+  @override
+  String get ui_auto_method_efa54b12a2 => '血糖值超出正常范围';
+
+  @override
+  String get ui_auto_method_f2a63912dc => '请输入有效的体重值';
+
+  @override
+  String get ui_auto_method_fb015878f6 => '引导式训练：';
+
+  @override
+  String get ui_auto_method_fbd05a89ca => '请选择时间';
+
+  @override
+  String get ui_auto_method_fecefe9ee6 => '取消提醒';
+
+  @override
+  String get ui_auto_return_007032bfb3 => '综合力量';
+
+  @override
+  String get ui_auto_return_0218cbc880 => '开心';
+
+  @override
+  String get ui_auto_return_02c7b1a320 => '拉力器';
+
+  @override
+  String get ui_auto_return_047b1b29b7 => '进阶安排';
+
+  @override
+  String get ui_auto_return_04a99be8ff => '让一周里有稳定活动量，同时留出恢复空间，适合长期维持。';
+
+  @override
+  String get ui_auto_return_07198d2f5b => '未检测到明显的健康数据异常。';
+
+  @override
+  String get ui_auto_return_0775b64987 => '血压波动中等';
+
+  @override
+  String get ui_auto_return_09e647347b => '睡前';
+
+  @override
+  String get ui_auto_return_0ba0974488 => '上肢推力';
+
+  @override
+  String get ui_auto_return_0c457a3656 => '其他类';
+
+  @override
+  String get ui_auto_return_0d98c74797 => '其他';
+
+  @override
+  String get ui_auto_return_0ee2ef1657 => '背部拉力';
+
+  @override
+  String get ui_auto_return_12df6bb699 => '轻体力劳动';
+
+  @override
+  String get ui_auto_return_17d32c917e => '近三个月';
+
+  @override
+  String get ui_auto_return_199710422d => '健康状况良好';
+
+  @override
+  String get ui_auto_return_19ac677ac0 => '低';
+
+  @override
+  String get ui_auto_return_1fa42afe88 => '入门';
+
+  @override
+  String get ui_auto_return_1ff7d056fc => '这份计划会优先帮你建立稳定训练节奏，再通过有氧和力量配合提高效率。';
+
+  @override
+  String get ui_auto_return_2166bdec84 => '更新单个任务';
+
+  @override
+  String get ui_auto_return_259309fccf => '获取用户信息';
+
+  @override
+  String get ui_auto_return_27fd53ef6a => '心率上升';
+
+  @override
+  String get ui_auto_return_28022da8a2 => '未测量';
+
+  @override
+  String get ui_auto_return_290ba906ee => '分数模式';
+
+  @override
+  String get ui_auto_return_2aa7946e8c => '过高';
+
+  @override
+  String get ui_auto_return_32127a5552 => '分享列表';
+
+  @override
+  String get ui_auto_return_33823e9215 => '数据不足';
+
+  @override
+  String get ui_auto_return_33a4541c27 => '高度异常';
+
+  @override
+  String get ui_auto_return_344ac0470d => '减脂燃卡';
+
+  @override
+  String get ui_auto_return_352238403e => '重体力劳动';
+
+  @override
+  String get ui_auto_return_363b17ecdd => '签到列表';
+
+  @override
+  String get ui_auto_return_38adeae14a => '良好的开始！继续加油！';
+
+  @override
+  String get ui_auto_return_3bde446e92 => '随机';
+
+  @override
+  String get ui_auto_return_3ff7d41b80 => '增肌塑形';
+
+  @override
+  String get ui_auto_return_4051392566 => '杠铃';
+
+  @override
+  String get ui_auto_return_4073db4b41 => '血糖稳定';
+
+  @override
+  String get ui_auto_return_40ac13bfa5 => '最近一段时间数据变化不大，整体状态比较稳定。';
+
+  @override
+  String get ui_auto_return_4296d7d293 => '高';
+
+  @override
+  String get ui_auto_return_4433e710a6 => '高风险';
+
+  @override
+  String get ui_auto_return_44d865f037 => '加油！你离目标只有一步之遥！';
+
+  @override
+  String get ui_auto_return_45a7cc1444 => '器械';
+
+  @override
+  String get ui_auto_return_46b568edc8 => '健康状况优秀';
+
+  @override
+  String get ui_auto_return_4984cd115b => '轻度异常';
+
+  @override
+  String get ui_auto_return_4a1ef083cd => '健康状况一般';
+
+  @override
+  String get ui_auto_return_4ce7899995 => '中度异常';
+
+  @override
+  String get ui_auto_return_4e49f70ac9 => '下降趋势';
+
+  @override
+  String get ui_auto_return_5177ba3f70 => '先从第一天开练，优先建立本周训练节奏。';
+
+  @override
+  String get ui_auto_return_523cc0df7c => '工作学习、偶尔运动';
+
+  @override
+  String get ui_auto_return_52c9b5254f => '空腹';
+
+  @override
+  String get ui_auto_return_544fac400d => '标准';
+
+  @override
+  String get ui_auto_return_54d5511acc => '近一个月';
+
+  @override
+  String get ui_auto_return_57406d700f => '哑铃';
+
+  @override
+  String get ui_auto_return_5a1c279867 => '肥胖';
+
+  @override
+  String get ui_auto_return_5a3ca79b00 => '心率下降';
+
+  @override
+  String get ui_auto_return_5d17462485 => '建议固定在晨起或同一时段测量，这样趋势会更有参考价值。';
+
+  @override
+  String get ui_auto_return_5f2dc77d2a => '保持健康';
+
+  @override
+  String get ui_auto_return_5f31d5ff13 => '推荐升级';
+
+  @override
+  String get ui_auto_return_5f5d2a2ac5 => '需要改善';
+
+  @override
+  String get ui_auto_return_6019c34509 => '高血压危症';
+
+  @override
+  String get ui_auto_return_60c36f2a55 => '全身燃脂';
+
+  @override
+  String get ui_auto_return_62103751df => '还没有训练记录';
+
+  @override
+  String get ui_auto_return_629504fbfb => '中体力劳动';
+
+  @override
+  String get ui_auto_return_62e9a33db6 => '设备传感器';
+
+  @override
+  String get ui_auto_return_6574c5bb8e => '中等风险';
+
+  @override
+  String get ui_auto_return_65b945e53a => '未知等级';
+
+  @override
+  String get ui_auto_return_6684c12045 => '步数列表';
+
+  @override
+  String get ui_auto_return_66e769b1a5 => '高血压1期';
+
+  @override
+  String get ui_auto_return_67c8e36b05 => '血压相对稳定';
+
+  @override
+  String get ui_auto_return_687e3242dd => '壶铃';
+
+  @override
+  String get ui_auto_return_69bb0e0ef0 => '偏低';
+
+  @override
+  String get ui_auto_return_6b828e4da7 => '以有氧和基础力量穿插推进，先把每周训练频率稳定下来，再逐步提高量。';
+
+  @override
+  String get ui_auto_return_6e52fb57ac => '棒极了';
+
+  @override
+  String get ui_auto_return_6f47172756 => '每天运动、每周6-7天';
+
+  @override
+  String get ui_auto_return_6fa87eee37 => '太棒了！你已经完成了今天的目标！';
+
+  @override
+  String get ui_auto_return_74a97af209 => '✅ 目标已达成！';
+
+  @override
+  String get ui_auto_return_77002ac334 => '常常运动、每周3-5天';
+
+  @override
+  String get ui_auto_return_7d4be39879 => '这份计划会优先把肌群训练顺序排清楚，避免今天练太多、明天又接不上。';
+
+  @override
+  String get ui_auto_return_7e7a98ea11 => '同步任务结果';
+
+  @override
+  String get ui_auto_return_8034682695 => '开始运动吧，让我们一起达成目标！';
+
+  @override
+  String get ui_auto_return_82190805cf => '未评价';
+
+  @override
+  String get ui_auto_return_840e932a8f => '极高';
+
+  @override
+  String get ui_auto_return_882e940129 => '心率稳定';
+
+  @override
+  String get ui_auto_return_897b3c231f => '任务奖励';
+
+  @override
+  String get ui_auto_return_8b3f0fc495 => '无体力劳动';
+
+  @override
+  String get ui_auto_return_8fa28f95c0 => '伤心';
+
+  @override
+  String get ui_auto_return_8fd16a40aa => '近一年';
+
+  @override
+  String get ui_auto_return_90150b8f84 => '继续保持！你已经完成了一半！';
+
+  @override
+  String get ui_auto_return_90624d92ff => '强体力劳动';
+
+  @override
+  String get ui_auto_return_945efd24eb => '几乎不运动';
+
+  @override
+  String get ui_auto_return_9636aa6c88 => '训练推进';
+
+  @override
+  String get ui_auto_return_9709fc1814 => '血糖下降';
+
+  @override
+  String get ui_auto_return_9c50f7da20 => '高度关注';
+
+  @override
+  String get ui_auto_return_9cca4adc21 => '继续恢复，下一组马上开始';
+
+  @override
+  String get ui_auto_return_9d675a3344 => '糟糕';
+
+  @override
+  String get ui_auto_return_9e2fcbe01e => '这份计划更看重连续性和恢复，不会一开始就把配速和时长拉得太满。';
+
+  @override
+  String get ui_auto_return_9f39c66407 => '餐前';
+
+  @override
+  String get ui_auto_return_a27dc5ee7f => '长椅辅助';
+
+  @override
+  String get ui_auto_return_a3f9afcc4a => '弹力带';
+
+  @override
+  String get ui_auto_return_a5dd7463a7 => '上臀围';
+
+  @override
+  String get ui_auto_return_a786e00c2e => '先按推、拉、腿的节奏把力量训练排开，既能感受到训练感，也更容易坚持。';
+
+  @override
+  String get ui_auto_return_abd4f121c8 => '提升耐力';
+
+  @override
+  String get ui_auto_return_adc2f3b438 => '稳步提升';
+
+  @override
+  String get ui_auto_return_b0876f1470 => '以心肺和连续运动时长为主，不急着拉太高强度，先把续航做出来。';
+
+  @override
+  String get ui_auto_return_b16c321e24 => '需改善';
+
+  @override
+  String get ui_auto_return_b3bd3d4322 => '轻微';
+
+  @override
+  String get ui_auto_return_b56976385d => '低风险';
+
+  @override
+  String get ui_auto_return_b6080f70ae => '上升趋势';
+
+  @override
+  String get ui_auto_return_b7eb5030e4 => '今天练过';
+
+  @override
+  String get ui_auto_return_bc413e4d48 => '餐后';
+
+  @override
+  String get ui_auto_return_c08ed90d8c => '优秀';
+
+  @override
+  String get ui_auto_return_c195df6308 => '异常';
+
+  @override
+  String get ui_auto_return_c2d670ba1d => '中度关注';
+
+  @override
+  String get ui_auto_return_c385f61608 => '已暂停 · 准备阶段';
+
+  @override
+  String get ui_auto_return_c691c57a22 => '分享上传';
+
+  @override
+  String get ui_auto_return_ca27b7bc75 => '任务列表';
+
+  @override
+  String get ui_auto_return_cb0ed5ef5f => '紧急';
+
+  @override
+  String get ui_auto_return_cb28af4f7d => '所选时间段';
+
+  @override
+  String get ui_auto_return_ce9820e8fc => '重新进入准备状态';
+
+  @override
+  String get ui_auto_return_d108d00445 => '血压升高';
+
+  @override
+  String get ui_auto_return_d622b6431c => '修改用户信息';
+
+  @override
+  String get ui_auto_return_d910698a4c => '邀请好友列表';
+
+  @override
+  String get ui_auto_return_de8ba4bf6e => '臀腿下肢';
+
+  @override
+  String get ui_auto_return_def2f47326 => '随机金币列表';
+
+  @override
+  String get ui_auto_return_e1c2b56da0 => '这份计划重点是长期可持续，让运动成为日常的一部分，而不是临时冲刺。';
+
+  @override
+  String get ui_auto_return_e51dd8297b => '相对稳定';
+
+  @override
+  String get ui_auto_return_e82a8ff5d3 => '同步步数';
+
+  @override
+  String get ui_auto_return_e903d4db06 => '已暂停 · 组间休息中';
+
+  @override
+  String get ui_auto_return_e969467d2a => '糖尿病范围';
+
+  @override
+  String get ui_auto_return_eadd05ba6a => '中等';
+
+  @override
+  String get ui_auto_return_eb3dc8827d => '厘米';
+
+  @override
+  String get ui_auto_return_ee5c3b1c3b => '紧急异常';
+
+  @override
+  String get ui_auto_return_f0c7ca8e1e => '近一周';
+
+  @override
+  String get ui_auto_return_f14e998bfa => '需要重点关注';
+
+  @override
+  String get ui_auto_return_f1d4ff50f3 => '自定义';
+
+  @override
+  String get ui_auto_return_f5550b13ef => '轻度提醒';
+
+  @override
+  String get ui_auto_return_f5551e8b0a => '昨天练过';
+
+  @override
+  String get ui_auto_return_f7b4e955b1 => '高血压2期';
+
+  @override
+  String get ui_auto_return_fa0203f425 => '综合评分（满分100）\\n当前状态良好，继续保持';
+
+  @override
+  String get ui_auto_return_fa11f8c07c => '进阶';
+
+  @override
+  String get ui_auto_return_fad5015c5c => '需要关注';
+
+  @override
+  String get ui_auto_return_fae056648d => '血糖上升';
+
+  @override
+  String get ui_auto_return_fb0f345856 => '身体概况';
+
+  @override
+  String get ui_auto_return_fb139d778f => '强度运动、长时间运动或体力劳动';
+
+  @override
+  String get ui_auto_return_fe0e8bf768 => '注册';
+
+  @override
+  String get ui_auto_return_fe14e21a5d => '灵活恢复';
+
+  @override
+  String get ui_auto_return_ffb0da9e7c => '血压波动较大';
+
+  @override
+  String get ui_auto_settext_0050bd5b5f => '趋势统计 &gt;';
+
+  @override
+  String get ui_auto_settext_01e13bc33f => '屏息';
+
+  @override
+  String get ui_auto_settext_026c7d7f64 => '步数目标';
+
+  @override
+  String get ui_auto_settext_042fd7f260 => '开启权限';
+
+  @override
+  String get ui_auto_settext_083a6661e0 => '更多运动';
+
+  @override
+  String get ui_auto_settext_08806ea315 => '总览';
+
+  @override
+  String get ui_auto_settext_095e938e2a => '停止';
+
+  @override
+  String get ui_auto_settext_0a9ccf7dc0 => '今日已完成';
+
+  @override
+  String get ui_auto_settext_0bffc62bb3 => '网络错误';
+
+  @override
+  String get ui_auto_settext_121f4b0dae => '身体数据概览';
+
+  @override
+  String get ui_auto_settext_1622dc9b6b => '未知';
+
+  @override
+  String get ui_auto_settext_175e141184 => '选择食物';
+
+  @override
+  String get ui_auto_settext_1761529cd9 => '心情统计';
+
+  @override
+  String get ui_auto_settext_1951a4400c => '📉 下降趋势';
+
+  @override
+  String get ui_auto_settext_1b6b943d3e => 'HRV一般';
+
+  @override
+  String get ui_auto_settext_1c56d8c5aa => '注册失败';
+
+  @override
+  String get ui_auto_settext_1ce65a4d22 => '账号覆盖提示';
+
+  @override
+  String get ui_auto_settext_1ede6f42ae => '编辑运动记录';
+
+  @override
+  String get ui_auto_settext_1fd1d7f524 => '健身动作库';
+
+  @override
+  String get ui_auto_settext_23c9bc4d87 => '昨日';
+
+  @override
+  String get ui_auto_settext_27ca568be2 => '继续';
+
+  @override
+  String get ui_auto_settext_296304f1e5 => '今日';
+
+  @override
+  String get ui_auto_settext_2d82e6718d => '已完成本轮练习';
+
+  @override
+  String get ui_auto_settext_2de6425f4d => '尚未运动';
+
+  @override
+  String get ui_auto_settext_307dd9d6df => '尚未达成';
+
+  @override
+  String get ui_auto_settext_3098a5ce4f => '本次热量';
+
+  @override
+  String get ui_auto_settext_32e720d9ab => '未设置训练计划';
+
+  @override
+  String get ui_auto_settext_3382654a2d => '室外跑步';
+
+  @override
+  String get ui_auto_settext_34a72046cc => '喝水日记';
+
+  @override
+  String get ui_auto_settext_351e35c899 => '总消耗';
+
+  @override
+  String get ui_auto_settext_381300584f => '运动排行榜';
+
+  @override
+  String get ui_auto_settext_3b23be1873 => '1局';
+
+  @override
+  String get ui_auto_settext_3eaac754ec => '时速(km/h)';
+
+  @override
+  String get ui_auto_settext_3ff901bb94 => '最近一周没有一天步数达标哦！';
+
+  @override
+  String get ui_auto_settext_40d2b84573 => '混音盘为空，请点击上方图标添加声音';
+
+  @override
+  String get ui_auto_settext_45600acbf1 => '个人记录!';
+
+  @override
+  String get ui_auto_settext_48ac479789 => '当前';
+
+  @override
+  String get ui_auto_settext_4b1931d4e4 => '1 组';
+
+  @override
+  String get ui_auto_settext_4eb19ee1b0 => '立即体验';
+
+  @override
+  String get ui_auto_settext_5130cd5086 => '最近一周没有一天步数达标，继续加油哦！';
+
+  @override
+  String get ui_auto_settext_51af880f25 => '你有正在下载安装的任务没有完成，是否继续？';
+
+  @override
+  String get ui_auto_settext_5467a21410 => '服务运行正常：正在后台监听步数中';
+
+  @override
+  String get ui_auto_settext_5a6f8404a6 => '本次得分';
+
+  @override
+  String get ui_auto_settext_5f8dc0ce07 => '稍后重新尝试';
+
+  @override
+  String get ui_auto_settext_611f266873 => '步/天';
+
+  @override
+  String get ui_auto_settext_61ad98ddbe => '分钟/天';
+
+  @override
+  String get ui_auto_settext_637e171533 => '体重日历';
+
+  @override
+  String get ui_auto_settext_65a8d79f83 => '本次时长';
+
+  @override
+  String get ui_auto_settext_6bae563936 => '编辑饮食记录';
+
+  @override
+  String get ui_auto_settext_72fa7c88b7 => '分析';
+
+  @override
+  String get ui_auto_settext_750f2dc7b2 => '今天建议做低强度放松，给后续训练腾出恢复空间。';
+
+  @override
+  String get ui_auto_settext_7605539297 => '体重记录';
+
+  @override
+  String get ui_auto_settext_7f7c7dcf89 => '再来一次';
+
+  @override
+  String get ui_auto_settext_80e55391ce => '约 60';
+
+  @override
+  String get ui_auto_settext_83427e16b5 => '返回动作库';
+
+  @override
+  String get ui_auto_settext_8a070ffdb2 => '暂无饮食记录';
+
+  @override
+  String get ui_auto_settext_8a8df3bb6f => '血糖变化趋势';
+
+  @override
+  String get ui_auto_settext_8dc3844129 => '千卡/天';
+
+  @override
+  String get ui_auto_settext_92da267ec4 => '当天步数目标已达成，请继续加油哦！';
+
+  @override
+  String get ui_auto_settext_93162c388a => '平均每日消耗';
+
+  @override
+  String get ui_auto_settext_9377bdb218 => '已解锁';
+
+  @override
+  String get ui_auto_settext_96c9c629a1 => '睡眠统计';
+
+  @override
+  String get ui_auto_settext_9b1259da82 => '公里';
+
+  @override
+  String get ui_auto_settext_9cb4f069f5 => '添加一条身体成分数据';
+
+  @override
+  String get ui_auto_settext_9cc2ec222a => '暂无趋势图，添加心率后自动生成';
+
+  @override
+  String get ui_auto_settext_9d007233b0 => '情绪状态';
+
+  @override
+  String get ui_auto_settext_9d44a3879f => '本次训练量';
+
+  @override
+  String get ui_auto_settext_9de0d246a9 => '米';
+
+  @override
+  String get ui_auto_settext_9e5ffa068e => '基本信息';
+
+  @override
+  String get ui_auto_settext_a103c5d353 => '120金币';
+
+  @override
+  String get ui_auto_settext_a4955af0c9 => '体重稳定';
+
+  @override
+  String get ui_auto_settext_a6c7d9b36f => '趋势模式';
+
+  @override
+  String get ui_auto_settext_a7c26800a8 => '管理系统权限';
+
+  @override
+  String get ui_auto_settext_a8b0c20416 => '全部';
+
+  @override
+  String get ui_auto_settext_aa9e192981 => '运动目标设置';
+
+  @override
+  String get ui_auto_settext_ac50dadaeb => '微信已绑定其他账号，登录将清空并覆盖本地数据，是否继续？';
+
+  @override
+  String get ui_auto_settext_adc32002ac => '力量训练';
+
+  @override
+  String get ui_auto_settext_b2217d8bcd => '米/天';
+
+  @override
+  String get ui_auto_settext_b3d6debc0e => '暂无趋势图，添加血压后自动生成';
+
+  @override
+  String get ui_auto_settext_b450d1dbea => '运动能力分析';
+
+  @override
+  String get ui_auto_settext_b7ef28cc5e => '体重变化趋势';
+
+  @override
+  String get ui_auto_settext_b9db8476ee => '暂无记录';
+
+  @override
+  String get ui_auto_settext_ba4b5ed1ab => '今';
+
+  @override
+  String get ui_auto_settext_bdf040d84d => '室内跑步';
+
+  @override
+  String get ui_auto_settext_c0397ade9e => '选择归属地';
+
+  @override
+  String get ui_auto_settext_c72b05b689 => '暂无趋势图，添加血糖后自动生成';
+
+  @override
+  String get ui_auto_settext_c78b865070 => '退出提示';
+
+  @override
+  String get ui_auto_settext_c827d8dbb7 => '历史';
+
+  @override
+  String get ui_auto_settext_c877db470b => '网络不畅，请检查当前网络是否正常连接，重新连接。';
+
+  @override
+  String get ui_auto_settext_c931fd73fa => '历史轨迹';
+
+  @override
+  String get ui_auto_settext_c99d9de34c => '动作详情';
+
+  @override
+  String get ui_auto_settext_cab5c3401c => '无HRV数据';
+
+  @override
+  String get ui_auto_settext_cb58e8f54c => '停留';
+
+  @override
+  String get ui_auto_settext_cb940a4be6 => '0天';
+
+  @override
+  String get ui_auto_settext_cc5b9ae9e9 => '配速(/100m)';
+
+  @override
+  String get ui_auto_settext_cc79f33387 => '体重目标';
+
+  @override
+  String get ui_auto_settext_ce26955a3c => '知道了';
+
+  @override
+  String get ui_auto_settext_d09504750e => '图表';
+
+  @override
+  String get ui_auto_settext_d272fce633 => 'HRV偏低';
+
+  @override
+  String get ui_auto_settext_d54dbb4070 => '血压监测趋势';
+
+  @override
+  String get ui_auto_settext_d6425bd4e9 => '饮食记录';
+
+  @override
+  String get ui_auto_settext_d7656a6524 => '统计';
+
+  @override
+  String get ui_auto_settext_dbad0af540 => '昨晚';
+
+  @override
+  String get ui_auto_settext_ded8fd2493 => '📈 上升趋势';
+
+  @override
+  String get ui_auto_settext_e0dc0736fb => '围度';
+
+  @override
+  String get ui_auto_settext_e25a8523aa => 'HRV良好';
+
+  @override
+  String get ui_auto_settext_e487278310 => '心率变异性分析';
+
+  @override
+  String get ui_auto_settext_e68c51c236 => '次/天';
+
+  @override
+  String get ui_auto_settext_e8834b2790 => '恢复日 · 主动放松';
+
+  @override
+  String get ui_auto_settext_e8a01dca93 => '上次';
+
+  @override
+  String get ui_auto_settext_ea3f7e1252 => '训练计时';
+
+  @override
+  String get ui_auto_settext_ebd585c58e => '⚖️ 平稳趋势';
+
+  @override
+  String get ui_auto_settext_ee6d45cd80 => '喝水小知识';
+
+  @override
+  String get ui_auto_settext_expr_026de1d259 => '放松修复';
+
+  @override
+  String get ui_auto_settext_expr_03d4b1e4de => '共';
+
+  @override
+  String get ui_auto_settext_expr_075c6cbbc4 => '千卡)';
+
+  @override
+  String get ui_auto_settext_expr_098872f0ca => '千卡/100g';
+
+  @override
+  String get ui_auto_settext_expr_0d29a4f3cb => '预计';
+
+  @override
+  String get ui_auto_settext_expr_0d34237ed5 => '最近 7 天练了';
+
+  @override
+  String get ui_auto_settext_expr_10a9cdab77 => '开始，先把动作标准度练出来。';
+
+  @override
+  String get ui_auto_settext_expr_12c3c7deec => '训练贴士：';
+
+  @override
+  String get ui_auto_settext_expr_1445f8419c => '连续签到';
+
+  @override
+  String get ui_auto_settext_expr_190f2fba12 => '种运动';
+
+  @override
+  String get ui_auto_settext_expr_2280628083 => '分钟';
+
+  @override
+  String get ui_auto_settext_expr_23e8bba360 => '千卡';
+
+  @override
+  String get ui_auto_settext_expr_270c0afaed => 'MM月dd日 HH时mm分';
+
+  @override
+  String get ui_auto_settext_expr_2a33020e5b => '保存中...';
+
+  @override
+  String get ui_auto_settext_expr_2c09632037 => '比赛局数';
+
+  @override
+  String get ui_auto_settext_expr_2de0d491d0 => '小时';
+
+  @override
+  String get ui_auto_settext_expr_2fbe048dc9 => '今日步数：';
+
+  @override
+  String get ui_auto_settext_expr_32bd5b7791 => '平均: %.0f 次/分';
+
+  @override
+  String get ui_auto_settext_expr_34b8e01d10 => '达成';
+
+  @override
+  String get ui_auto_settext_expr_375768d0e2 => '正在混响:';
+
+  @override
+  String get ui_auto_settext_expr_375a9bb93d => 'dd日HH时';
+
+  @override
+  String get ui_auto_settext_expr_3a4bf2ca04 => '%d分';
+
+  @override
+  String get ui_auto_settext_expr_3c5d185406 => '个声音)';
+
+  @override
+  String get ui_auto_settext_expr_3e97f641af => '已保存当前进度，下次可以继续补齐';
+
+  @override
+  String get ui_auto_settext_expr_3ee4f8346a => '里程：';
+
+  @override
+  String get ui_auto_settext_expr_3fc066bda0 => '组准备开始';
+
+  @override
+  String get ui_auto_settext_expr_40966af2b9 => '今日步数:';
+
+  @override
+  String get ui_auto_settext_expr_41c51524f2 => '次 /';
+
+  @override
+  String get ui_auto_settext_expr_4221ac0354 => '组，休息后进入下一组';
+
+  @override
+  String get ui_auto_settext_expr_4273806e68 => '前天';
+
+  @override
+  String get ui_auto_settext_expr_442c6ae209 => '组';
+
+  @override
+  String get ui_auto_settext_expr_4449109b18 => '分钟 / 周 ·';
+
+  @override
+  String get ui_auto_settext_expr_468586c644 => '平均: %1\$.0f/%2\$.0f';
+
+  @override
+  String get ui_auto_settext_expr_4c72faeb40 => '平均: %1\$.1f %2\$s';
+
+  @override
+  String get ui_auto_settext_expr_4d1c5c8107 => '第';
+
+  @override
+  String get ui_auto_settext_expr_4e690898eb => '轨迹';
+
+  @override
+  String get ui_auto_settext_expr_4eb3ef7e26 => '%d 千卡';
+
+  @override
+  String get ui_auto_settext_expr_4f8a02fa50 => '已解锁';
+
+  @override
+  String get ui_auto_settext_expr_51823a5487 => '秒';
+
+  @override
+  String get ui_auto_settext_expr_52ddefadd9 => '步达到目标';
+
+  @override
+  String get ui_auto_settext_expr_5ad932355e => '昨天';
+
+  @override
+  String get ui_auto_settext_expr_5ed3652e0c => '%d 分钟';
+
+  @override
+  String get ui_auto_settext_expr_620bf82011 => '记录';
+
+  @override
+  String get ui_auto_settext_expr_6525af5994 => 'yyyy年MM月dd日 HH时mm分';
+
+  @override
+  String get ui_auto_settext_expr_66fc0f5d20 => '训练组数';
+
+  @override
+  String get ui_auto_settext_expr_6af7053c51 => '已完成';
+
+  @override
+  String get ui_auto_settext_expr_6da7f307c1 => '总运动时长';
+
+  @override
+  String get ui_auto_settext_expr_6db932e3e0 => '计划进度\\n';
+
+  @override
+  String get ui_auto_settext_expr_6dc392c8b6 => '步';
+
+  @override
+  String get ui_auto_settext_expr_6e1bba8ef0 => '%d 次/分';
+
+  @override
+  String get ui_auto_settext_expr_70a5a6da4d => '· 第';
+
+  @override
+  String get ui_auto_settext_expr_731edaa0a3 => '内脏脂肪评估:';
+
+  @override
+  String get ui_auto_settext_expr_732cb78055 => '本周步数达标天数';
+
+  @override
+  String get ui_auto_settext_expr_734c8e4512 => '体重下降';
+
+  @override
+  String get ui_auto_settext_expr_73fbb26b83 => '混音已暂停 (';
+
+  @override
+  String get ui_auto_settext_expr_74fc6f0fdd => '倒计时关闭: %1\$02d:%2\$02d';
+
+  @override
+  String get ui_auto_settext_expr_768d3586c7 => '约';
+
+  @override
+  String get ui_auto_settext_expr_791bc60789 => '千卡/分钟';
+
+  @override
+  String get ui_auto_settext_expr_7b67add891 => '%+.1f 公斤';
+
+  @override
+  String get ui_auto_settext_expr_7c782c174b => '组';
+
+  @override
+  String get ui_auto_settext_expr_82d497414c => '跟着节奏呼吸，不用着急';
+
+  @override
+  String get ui_auto_settext_expr_84c40939a8 => '%.1f 公里';
+
+  @override
+  String get ui_auto_settext_expr_89751b7149 => '%d 公里';
+
+  @override
+  String get ui_auto_settext_expr_8a579efc2c => '主动恢复';
+
+  @override
+  String get ui_auto_settext_expr_8caed06f5a => '组';
+
+  @override
+  String get ui_auto_settext_expr_8d3fbcb21e => '，继续完成这项动作能更容易形成稳定训练节奏。';
+
+  @override
+  String get ui_auto_settext_expr_91be773496 => '体脂率评估:';
+
+  @override
+  String get ui_auto_settext_expr_91d9c7e284 => '已暂停，准备好后继续';
+
+  @override
+  String get ui_auto_settext_expr_93c18999d1 => '(每100g';
+
+  @override
+  String get ui_auto_settext_expr_944f943623 => '1 次呼吸';
+
+  @override
+  String get ui_auto_settext_expr_9765f20daf => '保持动作标准，完成第';
+
+  @override
+  String get ui_auto_settext_expr_980ebecc3b => '计划会根据你当天状态做小幅调整。';
+
+  @override
+  String get ui_auto_settext_expr_9c9917c9a5 => '体重上升';
+
+  @override
+  String get ui_auto_settext_expr_9cfcd41db8 => '比赛时长';
+
+  @override
+  String get ui_auto_settext_expr_9f23dd00db => '训练完成，但保存记录时出了点问题';
+
+  @override
+  String get ui_auto_settext_expr_9f4a723f24 => '%.1f分';
+
+  @override
+  String get ui_auto_settext_expr_a1b490203a => '还差';
+
+  @override
+  String get ui_auto_settext_expr_a75d9a51b3 => '今天';
+
+  @override
+  String get ui_auto_settext_expr_a80b6b7ff5 => '基础代谢评估:';
+
+  @override
+  String get ui_auto_settext_expr_aaa94b14f0 => '组训练';
+
+  @override
+  String get ui_auto_settext_expr_b06fd0134f => '已结束训练，但保存记录时出了点问题';
+
+  @override
+  String get ui_auto_settext_expr_b3617d12c7 => '开始';
+
+  @override
+  String get ui_auto_settext_expr_b544c6a4da => '个环境音';
+
+  @override
+  String get ui_auto_settext_expr_b98da0392e => '训练完成，已经为你保存到记录中';
+
+  @override
+  String get ui_auto_settext_expr_bb503dfbd7 => '评分说明 ·';
+
+  @override
+  String get ui_auto_settext_expr_bc0bf70bb7 => '累计签到';
+
+  @override
+  String get ui_auto_settext_expr_bd8dff4270 => '历史获得';
+
+  @override
+  String get ui_auto_settext_expr_c4c4af0a75 => '项';
+
+  @override
+  String get ui_auto_settext_expr_d2075bc5a1 => '%.1f 公斤';
+
+  @override
+  String get ui_auto_settext_expr_d39ad9b33e => '分钟 · 放松一下';
+
+  @override
+  String get ui_auto_settext_expr_dc5b716f86 => '累计';
+
+  @override
+  String get ui_auto_settext_expr_ddb046bc7a => '编辑心情记录';
+
+  @override
+  String get ui_auto_settext_expr_df80137c14 => '%d 次';
+
+  @override
+  String get ui_auto_settext_expr_e40cc5cdf5 => '金币≈';
+
+  @override
+  String get ui_auto_settext_expr_e5cddafc72 => '如何获得：';
+
+  @override
+  String get ui_auto_settext_expr_ed2ac55a00 => '天';
+
+  @override
+  String get ui_auto_settext_expr_ee4f4ab9a6 => '组 / 共';
+
+  @override
+  String get ui_auto_settext_expr_f24b607086 => '运动记录 %d 次';
+
+  @override
+  String get ui_auto_settext_expr_f36c95d450 => '周';
+
+  @override
+  String get ui_auto_settext_expr_f87fb0ab9b => '训练时长';
+
+  @override
+  String get ui_auto_settext_expr_f938fee1fe => '已完成第';
+
+  @override
+  String get ui_auto_settext_expr_fb0984d3bd => '进度:';
+
+  @override
+  String get ui_auto_settext_expr_fbd2b1fb73 => '共';
+
+  @override
+  String get ui_auto_settext_expr_fd7da79562 => '建议按';
+
+  @override
+  String get ui_auto_settext_expr_fe7dc19c93 => '次，累计';
+
+  @override
+  String get ui_auto_settext_f0b2194fca => '未开启权限：无法获取第三方手环数据';
+
+  @override
+  String get ui_auto_settext_f1438dba95 => '本次距离';
+
+  @override
+  String get ui_auto_settext_f1f989e8cb => '未完成任务提示';
+
+  @override
+  String get ui_auto_settext_f411d0f1f9 => '说明';
+
+  @override
+  String get ui_auto_settext_f449961589 => '呼气';
+
+  @override
+  String get ui_auto_settext_f74578e8ed => '这一轮已经完成，慢慢回到日常节奏';
+
+  @override
+  String get ui_auto_settext_f79d949400 => '还没有这项动作的训练记录，今天完成一次就会开始累计你的节奏。';
+
+  @override
+  String get ui_auto_settext_f899b800f8 => '轨迹追踪';
+
+  @override
+  String get ui_auto_settext_f920ed4b43 => '编辑喝水记录';
+
+  @override
+  String get ui_auto_settext_f96eeb093c => '距离目标';
+
+  @override
+  String get ui_auto_settext_fad5222ca0 => '已完成';
+
+  @override
+  String get ui_auto_settext_fafd698b3f => '000金币';
+
+  @override
+  String get ui_auto_settext_fb0833fd64 => '热量目标';
+
+  @override
+  String get ui_auto_settext_fbf93809e9 => '今天不安排高强度';
+
+  @override
+  String get ui_auto_settext_fc94ff94f0 => '已保存到我的训练计划';
+
+  @override
+  String get ui_auto_settext_fe95c9b74b => '首次记录';
+
+  @override
+  String get ui_auto_settext_ff21681af5 => '周报总结';
+
+  @override
+  String get ui_auto_text_1fcc29d0 => '五';
+
+  @override
+  String get ui_auto_text_21716cf3 => '四';
+
+  @override
+  String get ui_auto_text_249aba76 => '天';
+
+  @override
+  String get ui_auto_text_2d8be272 => '二';
+
+  @override
+  String get ui_auto_text_3adbdb3a => '分类';
+
+  @override
+  String get ui_auto_text_4ff1e74e => '日期';
+
+  @override
+  String get ui_auto_text_61b45352 => '六';
+
+  @override
+  String get ui_auto_text_7941da94 => '一';
+
+  @override
+  String get ui_auto_text_8d63ef38 => '暂停';
+
+  @override
+  String get ui_auto_text_9830e1f8 => 'ml';
+
+  @override
+  String get ui_auto_text_99c8f454 => '中级';
+
+  @override
+  String get ui_auto_text_9f27d5a6 => '😐';
+
+  @override
+  String get ui_auto_text_e662ff59 => '三';
+
+  @override
+  String get ui_auto_text_eab619fb => '水';
+
+  @override
+  String get ui_auto_text_ebe86682 => 'kg';
+
+  @override
+  String get ui_auto_text_edb33656 => '早餐';
+
+  @override
+  String get ui_auto_text_edfec00f => '米饭';
+
+  @override
+  String get ui_auto_text_f8384fff => '达标天数';
+
+  @override
+  String get ui_auto_toast_0007d170de => '删除成功';
+
+  @override
+  String get ui_auto_toast_0998b48251 => '已取消运动提醒';
+
+  @override
+  String get ui_auto_toast_09a4d0ac21 => '计划已删除';
+
+  @override
+  String get ui_auto_toast_0ae3dd7e89 => '请先打开GPS选项。';
+
+  @override
+  String get ui_auto_toast_0ebf5ee0dd => '请输入次数';
+
+  @override
+  String get ui_auto_toast_0f6d81c7ab => '请输入食物名称';
+
+  @override
+  String get ui_auto_toast_0ff01a967a => '保存失败，请重试';
+
+  @override
+  String get ui_auto_toast_1334bdfb0f => '无法写入文件';
+
+  @override
+  String get ui_auto_toast_17527addf8 => '目标水量必须大于0';
+
+  @override
+  String get ui_auto_toast_1974fe5349 => '绑定成功';
+
+  @override
+  String get ui_auto_toast_1b92092d63 => '已更新';
+
+  @override
+  String get ui_auto_toast_24738562b3 => '已授予权限。';
+
+  @override
+  String get ui_auto_toast_2be1cd9fe1 => '请输入有效数字';
+
+  @override
+  String get ui_auto_toast_2ca23a0f63 => '呼吸练习已完成，已为您记录下这份平静';
+
+  @override
+  String get ui_auto_toast_2de1fc7b0d => '运动记录保存成功';
+
+  @override
+  String get ui_auto_toast_34285b7262 => '微信步数未更新（小于或等于当前步数）';
+
+  @override
+  String get ui_auto_toast_375ef8f9cd => '定时结束，声音已关闭';
+
+  @override
+  String get ui_auto_toast_38cff18bdc => '请先选择要混合的声音';
+
+  @override
+  String get ui_auto_toast_3b108349b9 => '保存成功';
+
+  @override
+  String get ui_auto_toast_3bbd3d903a => '久坐提醒已开启（每60分钟检测）';
+
+  @override
+  String get ui_auto_toast_3eed9eab68 => '喝水提醒已开启（每2小时提醒）';
+
+  @override
+  String get ui_auto_toast_453196e0b4 => '请先同意隐私政策！';
+
+  @override
+  String get ui_auto_toast_4687fdfd5d => '喝水量必须大于0';
+
+  @override
+  String get ui_auto_toast_4d23ef069b => '运动数据保存成功';
+
+  @override
+  String get ui_auto_toast_4e20534e06 => '微信配置错误，无法启动小程序';
+
+  @override
+  String get ui_auto_toast_4ee17ce951 => '报名成功！';
+
+  @override
+  String get ui_auto_toast_4fcb6ba144 => '请先登录后再签到';
+
+  @override
+  String get ui_auto_toast_522393e5aa => '暂停追踪';
+
+  @override
+  String get ui_auto_toast_53d92fed86 => '请至少添加一组训练';
+
+  @override
+  String get ui_auto_toast_55aa6366c0 => '更新成功';
+
+  @override
+  String get ui_auto_toast_5b3d9e0404 => '继续追踪';
+
+  @override
+  String get ui_auto_toast_5cc232620c => '已删除';
+
+  @override
+  String get ui_auto_toast_5d91eb10a2 => '尚未安装微信，请安装后登录!';
+
+  @override
+  String get ui_auto_toast_63fc80c44e => '训练完成！已保存记录';
+
+  @override
+  String get ui_auto_toast_655b6683f5 => '已关闭步数同步，您将从排行榜隐身';
+
+  @override
+  String get ui_auto_toast_66228e25dd => '运动追踪完成，请检查数据';
+
+  @override
+  String get ui_auto_toast_695068095c => '热量必须大于0';
+
+  @override
+  String get ui_auto_toast_6de920b4e4 => '保存失败';
+
+  @override
+  String get ui_auto_toast_6e76b9e5db => '保存运动记录时出错';
+
+  @override
+  String get ui_auto_toast_6ff591fd18 => '未到提现额度';
+
+  @override
+  String get ui_auto_toast_71fa3bd0e5 => '登录成功';
+
+  @override
+  String get ui_auto_toast_7311a0e31c => '账户或姓名错误';
+
+  @override
+  String get ui_auto_toast_747dcb5a82 => '同步成功，步数已更新';
+
+  @override
+  String get ui_auto_toast_7772c07df8 => '微信步数未更新（可能是获取失败）';
+
+  @override
+  String get ui_auto_toast_778f16b62d => '已关闭 AI 健康建议主动推送';
+
+  @override
+  String get ui_auto_toast_7adb3a5ebb => '该成就尚未解锁，暂不可分享';
+
+  @override
+  String get ui_auto_toast_7f274dd9f8 => '记录失败';
+
+  @override
+  String get ui_auto_toast_815d30bfe7 => '目标步数不能大于100000步';
+
+  @override
+  String get ui_auto_toast_82f746cfbb => '目标热量必须大于0';
+
+  @override
+  String get ui_auto_toast_87929ada35 => '请先登录，再邀请好友';
+
+  @override
+  String get ui_auto_toast_8a3e40040e => '已开启 AI 健康建议主动推送';
+
+  @override
+  String get ui_auto_toast_8ba8075267 => '请先确认推荐计划';
+
+  @override
+  String get ui_auto_toast_8d3711b0a2 => '时间不可以小于两秒';
+
+  @override
+  String get ui_auto_toast_8ec90cf246 => '数据库不可用，无法导出';
+
+  @override
+  String get ui_auto_toast_934aa75b00 => '开始追踪运动';
+
+  @override
+  String get ui_auto_toast_99903297d0 => '请填写完整的身高、年龄信息';
+
+  @override
+  String get ui_auto_toast_9a32f3bcdc => '训练计划已保存';
+
+  @override
+  String get ui_auto_toast_9bca3eea66 => '停止追踪运动';
+
+  @override
+  String get ui_auto_toast_9e4a21b207 =>
+      '未获取到步数数据，请在小程序中点击\\&quot;获取\\&quot;按钮';
+
+  @override
+  String get ui_auto_toast_a158b1d76d => '已按当前目标更新推荐计划';
+
+  @override
+  String get ui_auto_toast_a1a16bd5c2 => '请输入体重';
+
+  @override
+  String get ui_auto_toast_a344697b7e => '下载安装中';
+
+  @override
+  String get ui_auto_toast_a5e1c3af2e => '记录不存在';
+
+  @override
+  String get ui_auto_toast_acf0664a54 => '删除失败';
+
+  @override
+  String get ui_auto_toast_baeb696683 => '请选择运动类型';
+
+  @override
+  String get ui_auto_toast_bfede875b8 => '同步步数成功';
+
+  @override
+  String get ui_auto_toast_c071e6ba94 => '任务同步错误，获取积分失败';
+
+  @override
+  String get ui_auto_toast_c17cd2589c => '已开启步数同步，将在排行榜展示您的成绩';
+
+  @override
+  String get ui_auto_toast_c2b4cb90a1 => '计算失败，请检查输入';
+
+  @override
+  String get ui_auto_toast_c415b99ff6 => '生成周报失败';
+
+  @override
+  String get ui_auto_toast_c57e280893 => '请先开始播放';
+
+  @override
+  String get ui_auto_toast_c777696c97 => '目标热量不能超过10000千卡';
+
+  @override
+  String get ui_auto_toast_cb6b1ae4bf => '久坐提醒已关闭';
+
+  @override
+  String get ui_auto_toast_d70bd48b0e => '请先加载广告';
+
+  @override
+  String get ui_auto_toast_d87a089379 => '请先安装微信客户端';
+
+  @override
+  String get ui_auto_toast_da9d9fcbd5 => '缺少读写权限，无法计步，请前往设置设置权限！';
+
+  @override
+  String get ui_auto_toast_db8309e5b0 => '请先登录，再填写邀请码';
+
+  @override
+  String get ui_auto_toast_dc220d76e2 => '启动微信小程序失败，请稍后重试';
+
+  @override
+  String get ui_auto_toast_dd10c24f36 => '喝水提醒已关闭';
+
+  @override
+  String get ui_auto_toast_dde8f0daab => '需要相机权限才能识别食物';
+
+  @override
+  String get ui_auto_toast_de5049a584 => '没有获取到任务，请稍后再试！';
+
+  @override
+  String get ui_auto_toast_df2bdb20b7 => '登录或注册异常！';
+
+  @override
+  String get ui_auto_toast_e024d09f21 => '已记录';
+
+  @override
+  String get ui_auto_toast_e5d289bb5f => '保存分享图片失败';
+
+  @override
+  String get ui_auto_toast_f09e8a93ad => '请输入有效的血压值';
+
+  @override
+  String get ui_auto_toast_f285c5c4d7 => '提现失败';
+
+  @override
+  String get ui_auto_toast_f81afc66d2 => '请输入目标水量';
+
+  @override
+  String get ui_auto_toast_f8229cd83f => '三方分享功能暂未开启';
+
+  @override
+  String get ui_auto_toast_f8dfedcd8a => '已保存';
+
+  @override
+  String get ui_auto_toast_f978b57fc6 => '手机没有安装浏览器';
+
+  @override
+  String get ui_auto_toast_fa3e596cc9 => '生成分享图片失败';
+
+  @override
+  String get ui_auto_toast_fbd78423e5 => '微信步数获取失败，请重试';
+
+  @override
+  String get ui_auto_toast_fc4d1c55d0 => '保存数据解析失败';
+
+  @override
+  String get ui_auto_toast_fde53cbf7c => '请输入有效的数字';
+
+  @override
+  String get ui_auto_toast_fec0f829f0 => '目标水量不能超过10000ml';
+
+  @override
+  String get ui_auto_toast_fecd719238 => '请输入目标热量';
+
+  @override
+  String get ui_auto_uiadd_0160674ec4 => '营养建议：\\n';
+
+  @override
+  String get ui_auto_uiadd_019536ee70 => '心率变异性一般，建议适量运动\\n';
+
+  @override
+  String get ui_auto_uiadd_052b389815 => '次徒手训练';
+
+  @override
+  String get ui_auto_uiadd_069280a207 => '• 控制热量摄入，增加蔬菜水果比例\\n';
+
+  @override
+  String get ui_auto_uiadd_10d14ffdfd => '心率变异性偏低，注意休息和恢复\\n';
+
+  @override
+  String get ui_auto_uiadd_14dfc9fed0 => '优先保持节奏连续，必要时可降低速度但不要突然停下。';
+
+  @override
+  String get ui_auto_uiadd_1633a674e8 => '控制盐分并规律测压';
+
+  @override
+  String get ui_auto_uiadd_1a6855d748 => '\\n今天已完成';
+
+  @override
+  String get ui_auto_uiadd_1fee02c204 => '运动建议：\\n';
+
+  @override
+  String get ui_auto_uiadd_2022007ce8 => '\\n\\n每项满分25分。缺少数据的项不参与分母计算。';
+
+  @override
+  String get ui_auto_uiadd_284bb48815 => '· 体脂';
+
+  @override
+  String get ui_auto_uiadd_28e72b8294 => '总分采用满分100分：\\n';
+
+  @override
+  String get ui_auto_uiadd_2adfd2a4b7 => '体重偏轻，建议增加营养摄入';
+
+  @override
+  String get ui_auto_uiadd_34c469767b => '当前数据完整度：';
+
+  @override
+  String get ui_auto_uiadd_35c1440c01 => '• 运动与血压：规律运动有助于血压稳定\\n';
+
+  @override
+  String get ui_auto_uiadd_389a2bb87e => '血糖水平偏高，建议定期监测';
+
+  @override
+  String get ui_auto_uiadd_3a00251d1c =>
+      '总分 = (各项得分之和) ÷ (已采集项数 × 25) × 100\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_4613933c9c => '• 运动前后关注心率变化\\n';
+
+  @override
+  String get ui_auto_uiadd_48e6d4b908 => '体重超标，建议控制饮食和增加运动';
+
+  @override
+  String get ui_auto_uiadd_4e1df344a4 => '健康趋势分析：\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_4f6991b407 => '• 减少高热量零食和饮料\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_543161e315 => '血压偏高，建议医疗咨询';
+
+  @override
+  String get ui_auto_uiadd_56db689db7 => '建议继续保持良好的生活习惯';
+
+  @override
+  String get ui_auto_uiadd_58498b4434 => '(建议增加)\\n';
+
+  @override
+  String get ui_auto_uiadd_5d51a9b5cc => '(相对稳定)\\n';
+
+  @override
+  String get ui_auto_uiadd_654c77e339 => '监测建议：\\n';
+
+  @override
+  String get ui_auto_uiadd_655cebd5e1 => '\\n预计消耗：';
+
+  @override
+  String get ui_auto_uiadd_66a96f9beb => '训练量：';
+
+  @override
+  String get ui_auto_uiadd_67680b020f => '在舒适范围内拉伸，感受到牵拉即可，不要强压。';
+
+  @override
+  String get ui_auto_uiadd_6879545ad9 => '核心收紧，注意动作轨迹，不要为了速度牺牲姿势。';
+
+  @override
+  String get ui_auto_uiadd_6edf9cc763 => '心率变异性良好，身体恢复能力强\\n';
+
+  @override
+  String get ui_auto_uiadd_8124c54765 => '/4 项\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_8481345a33 => '(稳定)\\n';
+
+  @override
+  String get ui_auto_uiadd_902c692662 => '个性化健康建议：\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_9262bbf90c => '• 坚持定期记录体重和体成分\\n';
+
+  @override
+  String get ui_auto_uiadd_992f0766c2 => '• 心率变异性：';
+
+  @override
+  String get ui_auto_uiadd_9da79d5d36 => '秒，吸气';
+
+  @override
+  String get ui_auto_uiadd_a254b51d7b => '\\n解锁：这是你这项动作的个人最佳完成时长';
+
+  @override
+  String get ui_auto_uiadd_a9e3037b01 => '运动增加有助于体重控制\\n';
+
+  @override
+  String get ui_auto_uiadd_afef8e5738 => '组，约';
+
+  @override
+  String get ui_auto_uiadd_b03a71a556 => '• 血压偏高时增加监测频率\\n';
+
+  @override
+  String get ui_auto_uiadd_b32a847036 => '先用 20 秒熟悉动作节奏，保持呼吸稳定。';
+
+  @override
+  String get ui_auto_uiadd_c2ae26e1ba => '，停留';
+
+  @override
+  String get ui_auto_uiadd_c7f6d655bb => '优先保证睡眠和恢复';
+
+  @override
+  String get ui_auto_uiadd_c88b6f2891 => '每组结束后短暂放松，再开始下一组';
+
+  @override
+  String get ui_auto_uiadd_d0a41d0152 => '✓ 当前健康状况良好，无明显风险因子\\n';
+
+  @override
+  String get ui_auto_uiadd_d540e7989f => '，吐气';
+
+  @override
+  String get ui_auto_uiadd_da810b9534 => '减少高糖饮食并复测';
+
+  @override
+  String get ui_auto_uiadd_dcd21040a9 => '(符合健康建议)\\n';
+
+  @override
+  String get ui_auto_uiadd_dd3b3cede4 => '健康风险评估：\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_e052f572be => '• 运动频率与体重变化：';
+
+  @override
+  String get ui_auto_uiadd_e2e59afa07 => '需要更长时间的数据来分析趋势\\n';
+
+  @override
+  String get ui_auto_uiadd_e330351f60 => '每周至少运动3次';
+
+  @override
+  String get ui_auto_uiadd_edca5c94c2 => '运动不足，增加慢性病风险';
+
+  @override
+  String get ui_auto_uiadd_f20744e5e3 => '健康数据相关性分析：\\n\\n';
+
+  @override
+  String get ui_auto_uiadd_fe92bb19d7 => '\\n最近 7 天练习';
+
+  @override
+  String get ui_calorie => '热量';
+
+  @override
+  String get ui_calorie_burn => '热量消耗';
+
+  @override
+  String get ui_common_add => '添加';
+
+  @override
+  String get ui_common_cancel => '取消';
+
+  @override
+  String get ui_common_completed => '完成';
+
+  @override
+  String get ui_common_confirm => '确定';
+
+  @override
+  String get ui_common_day => '日';
+
+  @override
+  String get ui_common_delete => '删除';
+
+  @override
+  String get ui_common_month => '月';
+
+  @override
+  String get ui_common_none => '暂无';
+
+  @override
+  String get ui_common_save => '保存';
+
+  @override
+  String get ui_common_suggestion => '建议';
+
+  @override
+  String get ui_common_today => '今天';
+
+  @override
+  String get ui_common_unrecorded => '未记录';
+
+  @override
+  String get ui_common_week => '周';
+
+  @override
+  String get ui_common_yesterday => '昨天';
+
+  @override
+  String get ui_duration => '时长';
+
+  @override
+  String get ui_sport_timer => '运动计时';
+
+  @override
+  String get ui_training_plan => '训练计划';
+
+  @override
+  String get ui_unit_kcal => '千卡';
+
+  @override
+  String get ui_weekday_fri => '周五';
+
+  @override
+  String get ui_weekday_mon => '周一';
+
+  @override
+  String get ui_weekday_sat => '周六';
+
+  @override
+  String get ui_weekday_sun => '周日';
+
+  @override
+  String get ui_weekday_thu => '周四';
+
+  @override
+  String get ui_weekday_tue => '周二';
+
+  @override
+  String get ui_weekday_wed => '周三';
+
+  @override
+  String get unit_money => '元';
+
+  @override
+  String get unknown_sport => '未知运动';
+
+  @override
+  String get unregister_user => '未登录用户';
+
+  @override
+  String get user_page_contact_wechat => '公众号: 微小目标';
+
+  @override
+  String get user_page_step_sync_subtitle => '从健康应用通知同步步数';
+
+  @override
+  String get user_xy => '用户协议';
+
+  @override
+  String get user_ys => '隐私政策';
+
+  @override
+  String get userinfo_gx => '个人信息共享清单';
+
+  @override
+  String get userinfo_sj => '个人信息收集清单';
+
+  @override
+  String get ver_name => '版本号';
+
+  @override
+  String get video_double_coin => '看完视频奖励翻倍';
+
+  @override
+  String get view_all_data => '全部记录';
+
+  @override
+  String get voice_coach_distance_10km => '十公里！你是跑步达人！';
+
+  @override
+  String get voice_coach_distance_5km => '五公里达成！';
+
+  @override
+  String get voice_coach_distance_update_format => '已完成%1\$d公里';
+
+  @override
+  String get voice_coach_encourage_10 => '不错的开始，继续保持！';
+
+  @override
+  String get voice_coach_encourage_30 => '半小时了，你真棒！';
+
+  @override
+  String get voice_coach_encourage_60 => '一小时运动，太厉害了！';
+
+  @override
+  String get voice_coach_encouragement_1 => '加油，你是最棒的！';
+
+  @override
+  String get voice_coach_encouragement_2 => '保持这个节奏！';
+
+  @override
+  String get voice_coach_encouragement_3 => '坚持就是胜利！';
+
+  @override
+  String get voice_coach_encouragement_4 => '你做得很好！';
+
+  @override
+  String get voice_coach_encouragement_5 => '再坚持一下！';
+
+  @override
+  String get voice_coach_encouragement_6 => '突破自我，超越极限！';
+
+  @override
+  String get voice_coach_encouragement_7 => '每一步都是进步！';
+
+  @override
+  String get voice_coach_encouragement_8 => '汗水不会辜负你！';
+
+  @override
+  String get voice_coach_finish_calories_format => '消耗%1\$d千卡。';
+
+  @override
+  String get voice_coach_finish_duration_format => '本次运动%1\$d分钟，';
+
+  @override
+  String get voice_coach_finish_intro => '运动结束！';
+
+  @override
+  String get voice_coach_finish_outro => '太棒了！';
+
+  @override
+  String get voice_coach_hr_zone_1 => '热身区，可以加快速度';
+
+  @override
+  String get voice_coach_hr_zone_2 => '燃脂区，保持这个强度';
+
+  @override
+  String get voice_coach_hr_zone_3 => '有氧区，很好的训练强度';
+
+  @override
+  String get voice_coach_hr_zone_4 => '无氧区，注意不要过度';
+
+  @override
+  String get voice_coach_hr_zone_5 => '极限区，请适当放慢';
+
+  @override
+  String get voice_coach_milestone_format => '恭喜！%1\$s';
+
+  @override
+  String get voice_coach_pace_format => '当前配速%1\$d分%2\$d秒每公里';
+
+  @override
+  String get voice_coach_pause => '运动暂停';
+
+  @override
+  String get voice_coach_resume => '继续运动，保持节奏';
+
+  @override
+  String get voice_coach_start_format => '%1\$s开始，加油！';
+
+  @override
+  String get voice_coach_time_update_format => '已运动%1\$d分钟';
+
+  @override
+  String get watch_all_ad_get_coin => '看完视频领取金币';
+
+  @override
+  String get water_record_added_format => '%1\$s 已记录 %2\$dml';
+
+  @override
+  String get water_record_added_net_format => '%1\$s 已记录 %2\$dml（净补水 %3\$dml）';
+
+  @override
+  String get water_target_set_by_profile_format => '已根据您的信息设置目标为 %1\$dml';
+
+  @override
+  String get water_target_set_format => '目标已设置为 %1\$dml';
+
+  @override
+  String get wed => '周三';
+
+  @override
+  String get weight => '体重';
+
+  @override
+  String get weight_management => '体重管理';
+
+  @override
+  String get welcome_hello => '你好，';
+
+  @override
+  String get white_noise_name_1 => '窗外细雨';
+
+  @override
+  String get white_noise_name_10 => '壁炉柴火';
+
+  @override
+  String get white_noise_name_11 => '山顶狂风';
+
+  @override
+  String get white_noise_name_12 => '竹林微风';
+
+  @override
+  String get white_noise_name_13 => '宇宙白噪';
+
+  @override
+  String get white_noise_name_14 => '粉红记忆';
+
+  @override
+  String get white_noise_name_15 => '褐色沉思';
+
+  @override
+  String get white_noise_name_2 => '雷雨交加';
+
+  @override
+  String get white_noise_name_3 => '屋檐雨声';
+
+  @override
+  String get white_noise_name_4 => '森林小雨';
+
+  @override
+  String get white_noise_name_5 => '夏日海浪';
+
+  @override
+  String get white_noise_name_6 => '深海呼吸';
+
+  @override
+  String get white_noise_name_7 => '山间溪流';
+
+  @override
+  String get white_noise_name_8 => '静谧湖泊';
+
+  @override
+  String get white_noise_name_9 => '深夜篝火';
+
+  @override
+  String get white_noise_timer_set_format => '已设置 %1\$d 分钟后自动关闭';
+
+  @override
+  String get widget_description => '微步运动 — 步数/喝水/热量 桌面小组件';
+
+  @override
+  String get workout_meta_finish_format =>
+      '已完成 %1\$d/%2\$d 组 | 共计 %3\$d 分钟 | 预计消耗 %4\$d 千卡';
+
+  @override
+  String get workout_paused_round_format => '暂停中 | 第%1\$d组进行中';
+
+  @override
+  String get workout_resume_round_format => '继续第%1\$d组训练';
+
+  @override
+  String get workout_stop_save_msg_format => '已完成%1\$d/%2\$d组。保存当前进度吗？';
+
+  @override
+  String get workout_summary_completed => '计划圆满完成';
+
+  @override
+  String get workout_summary_saved => '当前进度已保存';
+
+  @override
+  String get workout_toast_completed => '训练已完成';
+
+  @override
+  String get workout_toast_ended => '训练已结束';
+
+  @override
+  String get workout_toast_saved => '进度已保存';
+
+  @override
+  String get workout_unit_km => '公里';
+
+  @override
+  String get write_invite_code => '填写邀请码';
+
+  @override
+  String get write_invite_code_hint => '下载应用后的24小时内输入有效';
+
+  @override
+  String get wx_entry_error_code_format => '错误码%1\$d';
+
+  @override
+  String get wx_entry_launch_failed_format => '跳转失败：%1\$s';
+
+  @override
+  String get wx_entry_step_format_error => '步数数据格式错误：%1\$s';
+
+  @override
+  String get wx_entry_step_process_error => '处理步数数据时出错：%1\$s';
+
+  @override
+  String get wx_hint_content => '允许App读取微信运动步数';
+
+  @override
+  String get wx_hint_title => '读取微信运动步数';
+
+  @override
+  String get wx_steps => '同步微信步数成功：';
+
+  @override
+  String get wx_steps_hint => '请用小程序同步微信步数，获取实时步数';
+}

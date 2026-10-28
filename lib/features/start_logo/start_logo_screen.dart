@@ -1,0 +1,285 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/gestures.dart';
+
+class StartLogoScreen extends StatefulWidget {
+  const StartLogoScreen({super.key});
+
+  @override
+  State<StartLogoScreen> createState() => _StartLogoScreenState();
+}
+
+class _StartLogoScreenState extends State<StartLogoScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl;
+  late final Animation<double> _scale;
+  late final Animation<double> _fade;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    _ctrl = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1500));
+    _scale = Tween<double>(begin: 0.7, end: 1.0).animate(
+      CurvedAnimation(parent: _ctrl, curve: Curves.easeOutBack),
+    );
+    _fade = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _ctrl, curve: Curves.easeIn),
+    );
+    _ctrl.forward();
+    _navigate();
+  }
+
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(milliseconds: 1800));
+    if (!mounted) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final privacyAgreed = prefs.getBool('privacy_agreed') ?? false;
+
+    if (!privacyAgreed) {
+      await _showPrivacyDialog();
+    } else {
+      _proceedToNext();
+    }
+  }
+
+  void _proceedToNext() async {
+    final prefs = await SharedPreferences.getInstance();
+    final onboarded = prefs.getBool('onboarded') ?? false;
+    if (!mounted) return;
+    if (!onboarded) {
+      context.go('/onboarding');
+    } else {
+      context.go('/home');
+    }
+  }
+
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _showPrivacyDialog() async {
+    final size = MediaQuery.of(context).size;
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return PopScope(
+          canPop: false,
+          child: Dialog(
+            backgroundColor: const Color(0xFF1E1B4B),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+            child: Container(
+              width: size.width * 0.88,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E1B4B),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.shield_rounded,
+                            color: Color(0xFF38BDF8), size: 24),
+                      ),
+                      const SizedBox(width: 12),
+                      const Text(
+                        '服务协议与隐私政策',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 260),
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.white70, height: 1.6),
+                          children: [
+                            const TextSpan(
+                                text:
+                                    '欢迎使用微刻运动！\n\n为了能协助您管理身体指标，我们需要获取物理活动识别（计步传感器）和后台运行权限。\n\n请放心，所有的步数、体重、睡眠和健康数据仅属于您个人，均保存在本地存储，我们承诺绝不上传或透露您的隐私信息。\n\n在使用前，请仔细阅读'),
+                            TextSpan(
+                              text: '《服务协议》',
+                              style: const TextStyle(
+                                  color: Color(0xFF38BDF8),
+                                  fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => _launchURL(
+                                    'https://policies.google.com/terms'),
+                            ),
+                            const TextSpan(text: '与'),
+                            TextSpan(
+                              text: '《隐私政策》',
+                              style: const TextStyle(
+                                  color: Color(0xFF38BDF8),
+                                  fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => _launchURL(
+                                    'https://policies.google.com/privacy'),
+                            ),
+                            const TextSpan(
+                                text: '。点击“同意并继续”即表示您已阅读并同意上述全部条款。'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                          ),
+                          onPressed: () {
+                            SystemNavigator.pop();
+                          },
+                          child: const Text(
+                            '拒绝并退出',
+                            style: TextStyle(
+                                color: Colors.white38,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF38BDF8),
+                            foregroundColor: Colors.white,
+                            elevation: 4,
+                            shadowColor: const Color(0xFF38BDF8).withValues(alpha: 0.4),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14)),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                          onPressed: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.setBool('privacy_agreed', true);
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                              _proceedToNext();
+                            }
+                          },
+                          child: const Text('同意并继续',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF0F0C29), Color(0xFF1A1040), Color(0xFF24243E)],
+          ),
+        ),
+        child: Center(
+          child: FadeTransition(
+            opacity: _fade,
+            child: ScaleTransition(
+              scale: _scale,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF6366F1), Color(0xFF38BDF8)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(28),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF38BDF8).withValues(alpha: 0.4),
+                          blurRadius: 24,
+                          offset: const Offset(0, 10),
+                        )
+                      ],
+                    ),
+                    child: const Icon(Icons.directions_walk_rounded,
+                        size: 56, color: Colors.white),
+                  ),
+                  const SizedBox(height: 24),
+                  const Text(
+                    '微刻运动',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '守护您的健康每一天',
+                    style: TextStyle(
+                      color: Colors.white54,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

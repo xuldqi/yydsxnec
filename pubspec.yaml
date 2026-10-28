@@ -1,0 +1,144 @@
+name: steps_webu_flutter
+description: "微刻运动 - 跨平台健康运动应用 (Android / iOS / HarmonyOS)"
+publish_to: 'none'
+
+version: 1.3.0+1219
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  google_mlkit_text_recognition: ^0.15.0
+  flutter_html: ^3.0.0
+  camera: ^0.11.4
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # --- UI & Icons ---
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+
+  # --- 状态管理 ---
+  flutter_riverpod: ^2.6.1
+
+  # --- 路由 ---
+  go_router: ^14.6.2
+
+  # --- 本地数据库 ---
+  drift: ^2.22.1
+  drift_flutter: ^0.2.4
+  sqlite3_flutter_libs: ^0.5.28
+
+  # --- 数据存储 ---
+  shared_preferences: ^2.3.3
+  flutter_secure_storage: ^10.3.1
+
+  # --- 图表 ---
+  fl_chart: ^0.70.2
+
+  # --- 计步 / 传感器 ---
+  pedometer: ^4.0.2
+  sensors_plus: ^7.1.0
+
+  # --- 权限 ---
+  permission_handler: ^12.0.3
+
+  # --- 通知 ---
+  flutter_local_notifications: ^22.0.1
+  timezone: ^0.11.1
+
+  # --- 工具类 ---
+  intl: ^0.20.2
+  collection: ^1.19.1
+  path_provider: ^2.1.6
+  share_plus: ^10.1.4
+  uuid: ^4.5.1
+
+  # --- 动画 ---
+  lottie: ^3.3.1
+
+  # --- 音频 (白噪音) ---
+  audioplayers: ^6.1.0
+
+  # --- 日历 ---
+  table_calendar: ^3.2.0
+  geolocator: ^14.0.2
+  just_audio: ^0.10.6
+  provider: ^6.1.5+1
+  record: ^6.2.1
+  flutter_timezone: ^5.1.0
+  audio_session: ^0.2.4
+  flutter_foreground_task: ^9.2.2
+  percent_indicator: ^4.2.5
+  url_launcher: ^6.3.2
+  sqflite: ^2.4.2+1
+  sqflite_common_ffi_web: ^1.0.2
+  path: ^1.9.1
+  http: ^1.6.0
+  image_picker: ^1.2.3
+  image_picker_android: ^0.8.13+17
+  image_picker_ios: ^0.8.13+6
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  dio: ^5.10.0
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.12.0
+  home_widget: ^0.9.3
+  image_background_remover: ^2.0.0
+  image_cropper: ^12.2.1
+  archive: ^4.0.9
+  battery_optimization_helper: ^0.2.0
+  screenshot: ^3.0.0
+  tflite_flutter: ^0.12.1
+
+dev_dependencies:
+  google_mlkit_text_recognition: ^0.15.0
+  flutter_html: ^3.0.0
+  camera: ^0.11.4
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  drift_dev: ^2.22.1
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/emoon/
+    - assets/emoon/models/
+    - assets/emoon/audio/
+    - assets/emoon/images/
+    - assets/images/
+    - assets/images/launcher/
+    - assets/images/meal/
+    - assets/images/water/
+    - assets/images/water_ui/
+    - assets/images/banner/
+    - assets/images/onboarding/
+    - assets/images/medal/
+    - assets/images/misc/
+    - assets/icons/
+    - assets/icons/sport/
+    - assets/icons/common/
+    - assets/lottie/
+    - assets/audio/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/images/app_icon.png"
+  android_12:
+    image: "assets/images/app_icon.png"
+    icon_background_color: "#FFFFFF"
+    color: "#FFFFFF"
