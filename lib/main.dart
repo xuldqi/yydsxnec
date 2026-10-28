@@ -20,6 +20,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
     systemNavigationBarColor: AppColors.surface,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
@@ -36,6 +37,7 @@ class StepsApp extends StatelessWidget {
         title: '微刻运动',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
+        themeMode: ThemeMode.light,
         localizationsDelegates: AppL10n.localizationsDelegates,
         supportedLocales: const [Locale('zh'), Locale('en')],
         locale: const Locale('zh'),

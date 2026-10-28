@@ -44,7 +44,7 @@ import '../../features/step_target/count_step_screen.dart';
 
 import '../../features/sport_extra/sport_extra_screens.dart';
 import '../../features/misc/misc_screens.dart';
-import '../../features/fasting/fasting_entry.dart' as fasting_entry;
+import '../../features/fasting/unified_fasting_screen.dart';
 import '../../features/mood/mood_home_screen.dart';
 import '../../features/mood/mood_stats_screen.dart';
 import '../../features/mood/mood_record_screen.dart';
@@ -172,7 +172,7 @@ final router = GoRouter(
     GoRoute(path: '/user-info', builder: (c, s) => const UserInfoScreen()),
 
     // 节食 (Fasting)
-    GoRoute(path: '/fasting', builder: (c, s) => const fasting_entry.AppInitializer()),
+    GoRoute(path: '/fasting', builder: (c, s) => const UnifiedFastingScreen()),
 
     // Period 经期
     GoRoute(path: '/period', builder: (c, s) => const PeriodHomeScreen()),

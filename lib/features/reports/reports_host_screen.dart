@@ -31,82 +31,95 @@ class _ReportsHostScreenState extends State<ReportsHostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xFFF3F4F8),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF0F0C29), Color(0xFF1A1040), Color(0xFF24243E)],
-            stops: [0.0, 0.5, 1.0],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFEFEBFA), Color(0xFFF3F4F8), Color(0xFFEBEFF9)],
           ),
         ),
-        child: Column(
-          children: [
-            // Custom App Bar with Glassmorphism
-            ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  color: Colors.white.withValues(alpha: 0.05),
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top + 10,
-                    bottom: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      if (widget.showBackButton)
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white, size: 20),
-                          onPressed: () {
-                            if (context.canPop()) {
-                              context.pop();
-                            } else {
-                              context.go('/home');
-                            }
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+            children: [
+              // Custom Header with clean Segmented Switch
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  children: [
+                    if (widget.showBackButton)
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back_ios_rounded, color: Color(0xFF1E1B4B), size: 20),
+                        onPressed: () {
+                          if (context.canPop()) {
+                            context.pop();
+                          } else {
+                            context.go('/home');
+                          }
+                        },
+                      )
+                    else
+                      const SizedBox(width: 8),
+                    Expanded(
+                      child: Center(
+                        child: CupertinoSlidingSegmentedControl<int>(
+                          backgroundColor: Colors.black.withValues(alpha: 0.05),
+                          thumbColor: Colors.white,
+                          groupValue: _currentIndex,
+                          children: {
+                            0: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 7),
+                              child: Text(
+                                '日常日报',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: _currentIndex == 0 ? const Color(0xFF1E1B4B) : const Color(0xFF64748B),
+                                ),
+                              ),
+                            ),
+                            1: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 7),
+                              child: Text(
+                                '趋势周报',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: _currentIndex == 1 ? const Color(0xFF1E1B4B) : const Color(0xFF64748B),
+                                ),
+                              ),
+                            ),
                           },
-                        )
-                      else
-                        const SizedBox(width: 16),
-                      Expanded(
-                        child: Center(
-                          child: CupertinoSegmentedControl<int>(
-                            children: const {
-                              0: Padding(padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8), child: Text('日报')),
-                              1: Padding(padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8), child: Text('周报')),
-                            },
-                            groupValue: _currentIndex,
-                            selectedColor: AppColors.primary,
-                            borderColor: AppColors.primary,
-                            pressedColor: AppColors.primary.withValues(alpha: 0.2),
-                            unselectedColor: Colors.transparent,
-                            onValueChanged: (val) {
+                          onValueChanged: (val) {
+                            if (val != null) {
                               setState(() {
                                 _currentIndex = val;
                               });
-                            },
-                          ),
+                            }
+                          },
                         ),
                       ),
-                      if (widget.showBackButton)
-                        const SizedBox(width: 48) // Balance for back button
-                      else
-                        const SizedBox(width: 16),
-                    ],
-                  ),
+                    ),
+                    if (widget.showBackButton)
+                      const SizedBox(width: 48) // Balance for back button
+                    else
+                      const SizedBox(width: 8),
+                  ],
                 ),
               ),
-            ),
-            Expanded(
-              child: IndexedStack(
-                index: _currentIndex,
-                children: const [
-                  DailyScreen(),
-                  WeekReportInnerScreen(),
-                ],
+              Expanded(
+                child: IndexedStack(
+                  index: _currentIndex,
+                  children: const [
+                    DailyScreen(),
+                    WeekReportInnerScreen(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

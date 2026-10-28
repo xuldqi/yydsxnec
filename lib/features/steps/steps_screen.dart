@@ -7,6 +7,8 @@ import '../../core/services/step_provider.dart' as step_svc;
 import '../../core/services/daily_health_provider.dart';
 import '../../core/services/health_providers.dart';
 import '../vital_signs/widgets/measure_bottom_sheet.dart';
+import '../fasting/providers/fasting_provider.dart';
+import '../fasting/providers/timer_provider.dart';
 
 class StepsScreen extends ConsumerStatefulWidget {
   const StepsScreen({super.key});
@@ -649,26 +651,37 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
 
   // ── Card: Fasting ───────────────────────────────────────────────────────────
   Widget _buildFastingCard(BuildContext context) {
+    final activeSession = ref.watch(activeFastingSessionProvider);
+    final timer = ref.watch(fastingTimerProvider);
+    final isActive = activeSession != null;
+
+    final elapsedH = timer.elapsedTime.inHours;
+    final elapsedM = timer.elapsedTime.inMinutes % 60;
+    final remainH = timer.remainingTime.inHours;
+    final remainM = timer.remainingTime.inMinutes % 60;
+
     return _buildActionCard(
-      title: '16:8 轻断食',
+      title: isActive ? '${activeSession.fastingHours}:${activeSession.eatingHours} 轻断食' : '轻断食计划',
       icon: Icons.timer_outlined,
       color: const Color(0xFFF97316),
       onTap: () => context.push('/fasting'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '断食中 · 14h 25m',
-            style: TextStyle(
+          Text(
+            isActive ? '断食中 · ${elapsedH}h ${elapsedM}m' : '准备就绪 · 待开启',
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w900,
               color: Color(0xFF1E1B4B),
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            '离进食窗口剩 1h 35m',
-            style: TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          Text(
+            isActive
+                ? (timer.isOvertime ? '已超额达成目标！🔥' : '离进食窗口剩 ${remainH}h ${remainM}m')
+                : '推荐 16:8 燃脂方案，助代谢提速',
+            style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
           ),
           const SizedBox(height: 10),
           GestureDetector(
@@ -680,10 +693,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 color: const Color(0xFFF97316).withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  '查看计时器 ⏳',
-                  style: TextStyle(
+                  isActive ? '查看计时器 ⏳' : '一键开启断食 🚀',
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w800,
                     color: Color(0xFFEA580C),

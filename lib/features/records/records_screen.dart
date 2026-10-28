@@ -1,5 +1,4 @@
-// 日常 Tab — 霓虹玻璃态风格 (OtterLife Style)
-import 'dart:ui';
+// 日常 Tab — 优雅浅色轻量风格 (OtterLife Light Unified Style)
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,11 +8,11 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/app_l10n_ext.dart';
 
 // ─── Design Tokens ────────────────────────────────────────────────────────
-const _p1    = Color(0xFF38BDF8); // Light Blue
-const _p2    = Color(0xFF8B5CF6); // Purple
-const _p3    = Color(0xFF10B981); // Emerald
-const _p4    = Color(0xFFF59E0B); // Amber
-const _water = Color(0xFF06B6D4); // Cyan
+const _p1    = Color(0xFF0EA5E9); // Sky Blue (Steps)
+const _p2    = Color(0xFF8B5CF6); // Purple (Sleep)
+const _p3    = Color(0xFF10B981); // Emerald (Activity)
+const _p4    = Color(0xFFF59E0B); // Amber (Calories)
+const _water = Color(0xFF06B6D4); // Cyan (Water)
 
 class DailyScreen extends ConsumerStatefulWidget {
   const DailyScreen({super.key});
@@ -26,40 +25,58 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent, // Background handled by ReportsHostScreen
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-        children: [
-          _OverviewCard(range: _range),
-          const SizedBox(height: 24),
-          _sectionTitle('今日四维'),
-          const SizedBox(height: 16),
-          _FourDimRow(range: _range),
-          const SizedBox(height: 24),
-          _sectionTitle('步数趋势'),
-          const SizedBox(height: 16),
-          _ChartCard(child: _StepsTrend(range: _range)),
-          const SizedBox(height: 24),
-          _sectionTitle('热量消耗'),
-          const SizedBox(height: 16),
-          _ChartCard(child: _CaloriesTrend(range: _range)),
-          const SizedBox(height: 24),
-          _sectionTitle('饮水'),
-          const SizedBox(height: 16),
-          _ChartCard(child: _WaterTrend(range: _range)),
-          const SizedBox(height: 24),
-          _sectionTitle('睡眠'),
-          const SizedBox(height: 16),
-          _ChartCard(child: _SleepTrend(range: _range)),
-        ],
-      ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 110),
+      children: [
+        _OverviewCard(range: _range),
+        const SizedBox(height: 22),
+        _sectionTitle('今日四维健康'),
+        const SizedBox(height: 12),
+        _FourDimRow(range: _range),
+        const SizedBox(height: 22),
+        _sectionTitle('步数趋势'),
+        const SizedBox(height: 12),
+        _ChartCard(child: _StepsTrend(range: _range)),
+        const SizedBox(height: 22),
+        _sectionTitle('热量消耗 (kcal)'),
+        const SizedBox(height: 12),
+        _ChartCard(child: _CaloriesTrend(range: _range)),
+        const SizedBox(height: 22),
+        _sectionTitle('饮水补水 (ml)'),
+        const SizedBox(height: 12),
+        _ChartCard(child: _WaterTrend(range: _range)),
+        const SizedBox(height: 22),
+        _sectionTitle('睡眠时长 (小时)'),
+        const SizedBox(height: 12),
+        _ChartCard(child: _SleepTrend(range: _range)),
+      ],
     );
   }
 
   Widget _sectionTitle(String t) => Padding(
     padding: const EdgeInsets.only(left: 4),
-    child: Text(t, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+    child: Row(
+      children: [
+        Container(
+          width: 4,
+          height: 16,
+          decoration: BoxDecoration(
+            color: const Color(0xFF6366F1),
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          t,
+          style: const TextStyle(
+            color: Color(0xFF1E1B4B),
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.2,
+          ),
+        ),
+      ],
+    ),
   );
 }
 
@@ -76,50 +93,95 @@ class _OverviewCard extends ConsumerWidget {
     final progress = (steps / goal).clamp(0.0, 1.0);
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFF38BDF8), Color(0xFF2563EB)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF6366F1), Color(0xFF38BDF8)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [BoxShadow(color: const Color(0xFF2563EB).withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6366F1).withValues(alpha: 0.3),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(22),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(range == 1 ? '今天' : '本周',
-          style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 13)),
-        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              range == 1 ? '今天健康总览' : '本周健康总览',
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.9),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                '目标 ${goal} 步',
+                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
         Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
           Text('$steps',
-            style: const TextStyle(color: Colors.white, fontSize: 52, fontWeight: FontWeight.w800, height: 1)),
-          const Padding(padding: EdgeInsets.only(bottom: 8, left: 6),
-            child: Text('步', style: TextStyle(color: Colors.white70, fontSize: 17))),
+            style: const TextStyle(color: Colors.white, fontSize: 46, fontWeight: FontWeight.w900, height: 1)),
+          const Padding(padding: EdgeInsets.only(bottom: 6, left: 6),
+            child: Text('步', style: TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.bold))),
           const Spacer(),
-          Text('${(progress * 100).toInt()}%',
-            style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('${(progress * 100).toInt()}%',
+                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800)),
+              const Text('完成度', style: TextStyle(color: Colors.white70, fontSize: 11)),
+            ],
+          ),
         ]),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         ClipRRect(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(6),
           child: LinearProgressIndicator(
-            value: progress, minHeight: 6,
-            backgroundColor: Colors.white.withValues(alpha: 0.2),
+            value: progress, minHeight: 8,
+            backgroundColor: Colors.white.withValues(alpha: 0.25),
             valueColor: const AlwaysStoppedAnimation(Colors.white),
           ),
         ),
         const SizedBox(height: 18),
         Row(children: [
           _pill(Icons.local_fire_department_rounded, '${stepAsync.valueOrNull?.calories.toInt() ?? 0} kcal'),
-          const SizedBox(width: 14),
+          const SizedBox(width: 10),
           _pill(Icons.water_drop_rounded, '${waterAsync.valueOrNull?.todayTotal ?? 0} ml'),
-          const SizedBox(width: 14),
+          const SizedBox(width: 10),
           _pill(Icons.directions_run_rounded, '${sportAsync.valueOrNull?.length ?? 0} 次运动'),
         ]),
       ]),
     );
   }
 
-  Widget _pill(IconData icon, String t) => Row(mainAxisSize: MainAxisSize.min, children: [
-    Icon(icon, color: Colors.white70, size: 14),
-    const SizedBox(width: 6),
-    Flexible(child: Text(t, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis)),
-  ]);
+  Widget _pill(IconData icon, String t) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+    decoration: BoxDecoration(
+      color: Colors.white.withValues(alpha: 0.18),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(mainAxisSize: MainAxisSize.min, children: [
+      Icon(icon, color: Colors.white, size: 14),
+      const SizedBox(width: 5),
+      Text(t, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
+    ]),
+  );
 }
 
 class _FourDimRow extends ConsumerWidget {
@@ -136,13 +198,13 @@ class _FourDimRow extends ConsumerWidget {
     return Row(children: [
       Expanded(child: _Tile(icon: Icons.directions_walk_rounded, color: _p1, label: l.steps,
         value: '${stepAsync.valueOrNull?.todaySteps ?? 0}', unit: '步')),
-      const SizedBox(width: 12),
+      const SizedBox(width: 10),
       Expanded(child: _Tile(icon: Icons.bedtime_rounded, color: _p2, label: l.sleep,
         value: dur > 0 ? '${dur ~/ 60}h${dur % 60}m' : '--', unit: '')),
-      const SizedBox(width: 12),
+      const SizedBox(width: 10),
       Expanded(child: _Tile(icon: Icons.water_drop_rounded, color: _water, label: l.water,
         value: '${waterAsync.valueOrNull?.todayTotal ?? 0}', unit: 'ml')),
-      const SizedBox(width: 12),
+      const SizedBox(width: 10),
       Expanded(child: _Tile(icon: Icons.local_fire_department_rounded, color: _p4, label: l.calories,
         value: '${(sportAsync.valueOrNull?.fold<double>(0, (s, e) => s + (e.caloriesBurned ?? 0)) ?? 0).round()}', unit: 'kcal')),
     ]);
@@ -155,33 +217,33 @@ class _Tile extends StatelessWidget {
   final String label, value, unit;
   const _Tile({required this.icon, required this.color, required this.label, required this.value, required this.unit});
   @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-    child: BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.08),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.15), width: 1),
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x081E1B4B),
+          blurRadius: 14,
+          offset: Offset(0, 4),
         ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Container(width: 36, height: 36,
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 8)],
-            ),
-            child: Icon(icon, color: color, size: 20)),
-          const SizedBox(height: 12),
-          Text(value, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold), maxLines: 1, overflow: TextOverflow.ellipsis),
-          if (unit.isNotEmpty) Text(unit, style: const TextStyle(color: Colors.white54, fontSize: 10)),
-          const SizedBox(height: 4),
-          Text(label, style: const TextStyle(color: Colors.white70, fontSize: 11)),
-        ]),
-      ),
+      ],
+      border: Border.all(color: const Color(0xFFF1F5F9)),
     ),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      Container(width: 38, height: 38,
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Icon(icon, color: color, size: 20)),
+      const SizedBox(height: 10),
+      Text(value, style: const TextStyle(color: Color(0xFF1E1B4B), fontSize: 15, fontWeight: FontWeight.w800), maxLines: 1, overflow: TextOverflow.ellipsis),
+      if (unit.isNotEmpty) Text(unit, style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10, fontWeight: FontWeight.w500)),
+      const SizedBox(height: 4),
+      Text(label, style: const TextStyle(color: Color(0xFF64748B), fontSize: 11, fontWeight: FontWeight.w600)),
+    ]),
   );
 }
 
@@ -189,20 +251,21 @@ class _ChartCard extends StatelessWidget {
   final Widget child;
   const _ChartCard({required this.child});
   @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(24),
-    child: BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1),
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(22),
+      border: Border.all(color: const Color(0xFFF1F5F9)),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x061E1B4B),
+          blurRadius: 16,
+          offset: Offset(0, 4),
         ),
-        padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-        child: SizedBox(height: 160, child: child),
-      ),
+      ],
     ),
+    padding: const EdgeInsets.fromLTRB(16, 20, 16, 16),
+    child: SizedBox(height: 160, child: child),
   );
 }
 
@@ -226,11 +289,11 @@ class _StepsTrend extends ConsumerWidget {
       barGroups: data.asMap().entries.map((e) => BarChartGroupData(x: e.key, barRods: [
         BarChartRodData(toY: e.value.y, width: 14,
           gradient: const LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter,
-            colors: [Color(0xFF2563EB), Color(0xFF38BDF8)]),
+            colors: [Color(0xFF6366F1), Color(0xFF38BDF8)]),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(6))),
       ])).toList(),
       gridData: FlGridData(show: true, drawVerticalLine: false,
-        getDrawingHorizontalLine: (_) => FlLine(color: Colors.white.withValues(alpha: 0.05), strokeWidth: 1)),
+        getDrawingHorizontalLine: (_) => const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1)),
       borderData: FlBorderData(show: false),
       titlesData: FlTitlesData(
         rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -242,7 +305,7 @@ class _StepsTrend extends ConsumerWidget {
             return Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(v.toInt() == range - 1 ? '今' : '${v.toInt() + 1}',
-                style: const TextStyle(color: Colors.white54, fontSize: 11)),
+                style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 11, fontWeight: FontWeight.w600)),
             );
           })),
       ),
@@ -254,7 +317,7 @@ Widget _lineChart(List<FlSpot> data, Color c, {double? maxY}) {
   return LineChart(LineChartData(
     minY: 0, maxY: maxY,
     gridData: FlGridData(show: true, drawVerticalLine: false,
-      getDrawingHorizontalLine: (_) => FlLine(color: Colors.white.withValues(alpha: 0.05), strokeWidth: 1)),
+      getDrawingHorizontalLine: (_) => const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1)),
     borderData: FlBorderData(show: false),
     titlesData: FlTitlesData(
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -265,10 +328,10 @@ Widget _lineChart(List<FlSpot> data, Color c, {double? maxY}) {
     lineBarsData: [LineChartBarData(
       spots: data, isCurved: true, curveSmoothness: 0.4, color: c, barWidth: 3,
       dotData: FlDotData(show: true, getDotPainter: (s, _, __, ___) =>
-        FlDotCirclePainter(radius: 4, color: c, strokeWidth: 2, strokeColor: Colors.white)),
+        FlDotCirclePainter(radius: 4, color: Colors.white, strokeWidth: 2.5, strokeColor: c)),
       belowBarData: BarAreaData(show: true, gradient: LinearGradient(
         begin: Alignment.topCenter, end: Alignment.bottomCenter,
-        colors: [c.withValues(alpha: 0.3), c.withValues(alpha: 0.0)])),
+        colors: [c.withValues(alpha: 0.25), c.withValues(alpha: 0.0)])),
     )],
   ));
 }

@@ -22,7 +22,11 @@ class _StartLogoScreenState extends State<StartLogoScreen>
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));
     _ctrl = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1500));
     _scale = Tween<double>(begin: 0.7, end: 1.0).animate(
@@ -76,16 +80,22 @@ class _StartLogoScreenState extends State<StartLogoScreen>
         return PopScope(
           canPop: false,
           child: Dialog(
-            backgroundColor: const Color(0xFF1E1B4B),
+            backgroundColor: Colors.white,
             insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
             child: Container(
               width: size.width * 0.88,
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: const Color(0xFF1E1B4B),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x14000000),
+                    blurRadius: 20,
+                    offset: Offset(0, 8),
+                  ),
+                ],
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -96,11 +106,11 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6366F1).withValues(alpha: 0.2),
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(Icons.shield_rounded,
-                            color: Color(0xFF38BDF8), size: 24),
+                            color: Color(0xFF6366F1), size: 24),
                       ),
                       const SizedBox(width: 12),
                       const Text(
@@ -108,7 +118,7 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
-                            color: Colors.white),
+                            color: Color(0xFF1E1B4B)),
                       ),
                     ],
                   ),
@@ -120,7 +130,7 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                       child: RichText(
                         text: TextSpan(
                           style: const TextStyle(
-                              fontSize: 14, color: Colors.white70, height: 1.6),
+                              fontSize: 14, color: Color(0xFF475569), height: 1.6),
                           children: [
                             const TextSpan(
                                 text:
@@ -128,7 +138,7 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                             TextSpan(
                               text: '《服务协议》',
                               style: const TextStyle(
-                                  color: Color(0xFF38BDF8),
+                                  color: Color(0xFF6366F1),
                                   fontWeight: FontWeight.bold),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () => _launchURL(
@@ -138,7 +148,7 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                             TextSpan(
                               text: '《隐私政策》',
                               style: const TextStyle(
-                                  color: Color(0xFF38BDF8),
+                                  color: Color(0xFF6366F1),
                                   fontWeight: FontWeight.bold),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () => _launchURL(
@@ -167,7 +177,7 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                           child: const Text(
                             '拒绝并退出',
                             style: TextStyle(
-                                color: Colors.white38,
+                                color: Color(0xFF94A3B8),
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
@@ -177,10 +187,9 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                         flex: 2,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF38BDF8),
+                            backgroundColor: const Color(0xFF6366F1),
                             foregroundColor: Colors.white,
-                            elevation: 4,
-                            shadowColor: const Color(0xFF38BDF8).withValues(alpha: 0.4),
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14)),
                             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -221,9 +230,9 @@ class _StartLogoScreenState extends State<StartLogoScreen>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF0F0C29), Color(0xFF1A1040), Color(0xFF24243E)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFEFEBFA), Color(0xFFF3F4F8), Color(0xFFEBEFF9)],
           ),
         ),
         child: Center(
@@ -235,41 +244,41 @@ class _StartLogoScreenState extends State<StartLogoScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 104,
+                    height: 104,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF6366F1), Color(0xFF38BDF8)],
+                        colors: [Color(0xFF6366F1), Color(0xFF818CF8)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(28),
+                      borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF38BDF8).withValues(alpha: 0.4),
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.35),
                           blurRadius: 24,
                           offset: const Offset(0, 10),
                         )
                       ],
                     ),
                     child: const Icon(Icons.directions_walk_rounded,
-                        size: 56, color: Colors.white),
+                        size: 58, color: Colors.white),
                   ),
                   const SizedBox(height: 24),
                   const Text(
                     '微刻运动',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
+                      color: Color(0xFF1E1B4B),
+                      fontSize: 30,
                       fontWeight: FontWeight.w900,
-                      letterSpacing: 2,
+                      letterSpacing: 1.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     '守护您的健康每一天',
                     style: TextStyle(
-                      color: Colors.white54,
+                      color: Color(0xFF64748B),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),

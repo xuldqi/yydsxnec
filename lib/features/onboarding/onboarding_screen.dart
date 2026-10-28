@@ -65,9 +65,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF0F0C29), Color(0xFF1A1040), Color(0xFF24243E)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFEFEBFA), Color(0xFFF3F4F8), Color(0xFFEBEFF9)],
           ),
         ),
         child: SafeArea(
@@ -82,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       TextButton(
                         onPressed: _finish,
                         child: const Text('跳过',
-                            style: TextStyle(color: Colors.white54, fontSize: 14)),
+                            style: TextStyle(color: Color(0xFF94A3B8), fontSize: 14)),
                       ),
                   ],
                 ),
@@ -100,27 +100,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 180,
-                            height: 180,
+                            width: 160,
+                            height: 160,
                             decoration: BoxDecoration(
-                              color: p.color.withValues(alpha: 0.15),
+                              color: Colors.white,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: p.color.withValues(alpha: 0.25),
-                                  blurRadius: 30,
+                                  color: p.color.withValues(alpha: 0.18),
+                                  blurRadius: 28,
                                   offset: const Offset(0, 10),
                                 )
                               ],
                             ),
-                            child: Icon(p.icon, size: 100, color: p.color),
+                            child: Icon(p.icon, size: 84, color: p.color),
                           ),
                           const SizedBox(height: 40),
                           Text(
                             p.title,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: Color(0xFF1E1B4B),
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
@@ -130,7 +130,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             p.desc,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
-                              color: Colors.white70,
+                              color: Color(0xFF64748B),
                               fontSize: 15,
                               height: 1.6,
                             ),
@@ -153,8 +153,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     height: 8,
                     decoration: BoxDecoration(
                       color: active
-                          ? const Color(0xFF38BDF8)
-                          : Colors.white.withValues(alpha: 0.2),
+                          ? const Color(0xFF6366F1)
+                          : const Color(0xFFCBD5E1),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   );
@@ -168,10 +168,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   height: 52,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF38BDF8),
+                      backgroundColor: const Color(0xFF6366F1),
                       foregroundColor: Colors.white,
-                      elevation: 4,
-                      shadowColor: const Color(0xFF38BDF8).withValues(alpha: 0.4),
+                      elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
                     ),
