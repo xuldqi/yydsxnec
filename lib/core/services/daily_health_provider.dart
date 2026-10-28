@@ -166,6 +166,13 @@ class DailyHealthNotifier extends StateNotifier<AsyncValue<DailyHealthRecord>> {
     final updated = current.copyWith(dietCalories: current.dietCalories + amount);
     await _saveRecord(updated);
   }
+
+  Future<void> setDietCalories(int amount) async {
+    if (state.valueOrNull == null) return;
+    final current = state.value!;
+    final updated = current.copyWith(dietCalories: amount);
+    await _saveRecord(updated);
+  }
   
   Future<void> incrementGoal() async {
     if (state.valueOrNull == null) return;

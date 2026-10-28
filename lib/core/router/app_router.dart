@@ -217,8 +217,8 @@ final router = GoRouter(
         type: s.uri.queryParameters['type'] ?? '',
       ),
     ),
-    // 卡路里
-    GoRoute(path: '/calorie', builder: (c, s) => const CalorieHomeScreen()),
+    // 卡路里与饮食
+    GoRoute(path: '/calorie', builder: (c, s) => const DietScreen()),
     GoRoute(path: '/calorie/goal', builder: (c, s) => const CalorieGoalSettingScreen()),
     GoRoute(path: '/calorie/history', builder: (c, s) => const CalorieHistoryScreen()),
 

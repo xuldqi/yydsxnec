@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +8,7 @@ import '../../core/services/health_providers.dart';
 import '../vital_signs/widgets/measure_bottom_sheet.dart';
 import '../fasting/providers/fasting_provider.dart';
 import '../fasting/providers/timer_provider.dart';
+import '../diet/diet_screen.dart';
 
 class StepsScreen extends ConsumerStatefulWidget {
   const StepsScreen({super.key});
@@ -69,8 +69,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   _buildTopHeader(context),
                   const SizedBox(height: 14),
                   _buildCalendarStrip(context),
-                  const SizedBox(height: 16),
-                  _buildPetCompanionCard(context, steps),
                   const SizedBox(height: 16),
                   _buildStepsHeroCard(context, steps, record),
                   const SizedBox(height: 18),
@@ -269,105 +267,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── 3. Pet Companion Hero Area (Otter Mascot) ──────────────────────────────
-  Widget _buildPetCompanionCard(BuildContext context, int steps) {
-    final pct = (steps / 10000 * 100).clamp(0, 100).toInt();
-
-    String speechText;
-    if (steps < 4000) {
-      speechText = '活力清晨，喝杯温水唤醒身体吧！🐾';
-    } else if (steps < 10000) {
-      speechText = '蒸蒸日上！再多走一会儿就达标啦！🏃';
-    } else {
-      speechText = '太棒了！今日运动目标圆满达成！🎉';
-    }
-
-    return Container(
-      width: double.infinity,
-      height: 230,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0D000000),
-            blurRadius: 20,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Lottie.asset(
-                'assets/lottie/new_dashboard_zh.json',
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    const Center(child: Text('🦦', style: TextStyle(fontSize: 80))),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 14,
-            left: 14,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.92),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.9)),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x0A000000),
-                    blurRadius: 8,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  const Text('💬', style: TextStyle(fontSize: 12)),
-                  const SizedBox(width: 5),
-                  Text(
-                    speechText,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF1E1B4B),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 12,
-            right: 14,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color(0xFF6366F1).withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFF6366F1).withValues(alpha: 0.25)),
-              ),
-              child: Text(
-                '进度 $pct%',
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFF6366F1),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── 4. Steps Hero Card ──────────────────────────────────────────────────────
+  // ── 3. Steps Hero Card ──────────────────────────────────────────────────────
   Widget _buildStepsHeroCard(BuildContext context, int steps, DailyHealthRecord record) {
     final progress = (steps / 10000).clamp(0.0, 1.0);
     final distanceKm = (steps * 0.0007).toStringAsFixed(2);
@@ -712,13 +612,15 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
 
   // ── Card: Diet & Calorie ────────────────────────────────────────────────────
   Widget _buildDietCard(BuildContext context, DailyHealthRecord record) {
-    final calories = record.dietCalories > 0 ? record.dietCalories : 1420;
+    final dietAsync = ref.watch(dietProvider);
+    final totalCalories = dietAsync.valueOrNull?.totalCal.round() ?? record.dietCalories;
+    final goalCalories = (dietAsync.valueOrNull?.goal ?? 2000).round();
 
     return _buildActionCard(
       title: '饮食摄入',
       icon: Icons.restaurant_rounded,
       color: const Color(0xFF10B981),
-      onTap: () => context.push('/calorie'),
+      onTap: () => context.push('/diet'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -726,10 +628,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text('$calories',
+              Text('$totalCalories',
                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              const Text(' / 2000kcal',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
+              Text(' / ${goalCalories}kcal',
+                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
             ],
           ),
           const SizedBox(height: 10),
@@ -754,7 +656,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               const SizedBox(width: 6),
               Expanded(
                 child: GestureDetector(
-                  onTap: () => context.push('/calorie'),
+                  onTap: () => context.push('/diet'),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 6),
                     decoration: BoxDecoration(
