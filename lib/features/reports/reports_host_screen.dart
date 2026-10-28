@@ -8,7 +8,12 @@ import 'week_report_screen.dart';
 
 class ReportsHostScreen extends StatefulWidget {
   final int initialIndex;
-  const ReportsHostScreen({super.key, this.initialIndex = 0});
+  final bool showBackButton;
+  const ReportsHostScreen({
+    super.key,
+    this.initialIndex = 0,
+    this.showBackButton = true,
+  });
 
   @override
   State<ReportsHostScreen> createState() => _ReportsHostScreenState();
@@ -50,16 +55,19 @@ class _ReportsHostScreenState extends State<ReportsHostScreen> {
                   ),
                   child: Row(
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white, size: 20),
-                        onPressed: () {
-                          if (context.canPop()) {
-                            context.pop();
-                          } else {
-                            context.go('/home');
-                          }
-                        },
-                      ),
+                      if (widget.showBackButton)
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white, size: 20),
+                          onPressed: () {
+                            if (context.canPop()) {
+                              context.pop();
+                            } else {
+                              context.go('/home');
+                            }
+                          },
+                        )
+                      else
+                        const SizedBox(width: 16),
                       Expanded(
                         child: Center(
                           child: CupertinoSegmentedControl<int>(
@@ -80,7 +88,10 @@ class _ReportsHostScreenState extends State<ReportsHostScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 48), // Balance for back button
+                      if (widget.showBackButton)
+                        const SizedBox(width: 48) // Balance for back button
+                      else
+                        const SizedBox(width: 16),
                     ],
                   ),
                 ),

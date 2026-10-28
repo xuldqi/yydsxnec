@@ -19,15 +19,15 @@ class MainShell extends StatelessWidget {
         iconOff: Icons.calendar_today_outlined,
         labelKey: 'tabToday'),
     _TabSpec(
-        path: '/goal',
-        icon: Icons.track_changes_rounded,
-        iconOff: Icons.track_changes_outlined,
-        labelKey: 'tabGoal'),
+        path: '/sport',
+        icon: Icons.directions_run_rounded,
+        iconOff: Icons.directions_run_outlined,
+        labelKey: 'tabSport'),
     _TabSpec(
-        path: '/relax',
-        icon: Icons.self_improvement_rounded,
-        iconOff: Icons.self_improvement_outlined,
-        labelKey: 'tabRelax'),
+        path: '/reports',
+        icon: Icons.insert_chart_rounded,
+        iconOff: Icons.insert_chart_outlined,
+        labelKey: 'tabReports'),
     _TabSpec(
         path: '/profile',
         icon: Icons.person_rounded,
@@ -50,10 +50,10 @@ class MainShell extends StatelessWidget {
     switch (key) {
       case 'tabToday':
         return '今天';
-      case 'tabGoal':
-        return '目标';
-      case 'tabRelax':
-        return '放松';
+      case 'tabSport':
+        return '运动';
+      case 'tabReports':
+        return '数据';
       case 'tabUser':
         return '我的';
     }

@@ -80,12 +80,15 @@ final router = GoRouter(
       builder: (context, state, child) => MainShell(child: child),
       routes: [
         GoRoute(path: '/home', builder: (c, s) => const StepsScreen()),
-        GoRoute(path: '/daily', builder: (c, s) => const ReportsHostScreen()),
-        GoRoute(path: '/goal', builder: (c, s) => const GoalScreen()),
-        GoRoute(path: '/relax', builder: (c, s) => const MeditationScreen()),
+        GoRoute(path: '/sport', builder: (c, s) => const SportScreen()),
+        GoRoute(path: '/reports', builder: (c, s) => const ReportsHostScreen(showBackButton: false)),
         GoRoute(path: '/profile', builder: (c, s) => const ProfileScreen()),
       ],
     ),
+
+    GoRoute(path: '/goal', builder: (c, s) => const GoalScreen()),
+    GoRoute(path: '/relax', builder: (c, s) => const MeditationScreen()),
+    GoRoute(path: '/daily', builder: (c, s) => const ReportsHostScreen()),
 
     // 健康/步数/运动/睡眠/水/体重 - 完整
     GoRoute(path: '/steps', builder: (c, s) => const StepsScreen()),
