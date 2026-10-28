@@ -176,10 +176,10 @@ class SportViewCard @JvmOverloads constructor(
                 tvTips.text = "查看身体数据"
             }
             CARD_TYPE_SPORT -> {
-                if (sportDis.isNotEmpty() || sportDis == "0") {
+                if (sportDis.isNullOrEmpty() || sportDis == "0" || sportDis == "0.0" || sportDis == "0.00") {
                     tvTips.text = "暂时还没有记录"
                 } else {
-                    tvTips.text = "今日运动距离：${sportDis} 千米"
+                    setTextValue("今日运动距离 ", sportDis, " 千米")
                 }
             }
             CARD_TYPE_WEIGHT -> {

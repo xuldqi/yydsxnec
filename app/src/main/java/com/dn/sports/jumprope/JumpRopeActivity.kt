@@ -146,13 +146,18 @@ class JumpRopeActivity : BaseActivity(), SurfaceHolder.Callback, SensorEventList
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER && viewModel.uiState.value.exerciseState == JumpRopeViewModel.ExerciseState.RUNNING) {
+            val x = event.values[0]
+            val y = event.values[1]
             val z = event.values[2]
+            // 采用三维合加速度模长计算 (Rotation-invariant 3D Acceleration Magnitude)
+            val magnitude = Math.sqrt((x * x + y * y + z * z).toDouble()).toFloat() - SensorManager.GRAVITY_EARTH
             val currentTime = System.currentTimeMillis()
 
-            if (z > JUMP_THRESHOLD && (currentTime - lastTimestamp) > MIN_INTERVAL) {
+            if (magnitude > 4.5f && (currentTime - lastTimestamp) > MIN_INTERVAL) {
                 mRealJumps++
                 lastTimestamp = currentTime
-                viewModel.updateJumpCount(mRealJumps) // 将真实传感器计次推送到 ViewModel (Push real sensor count to VM)
+                viewModel.updateJumpCount(mRealJumps) // 将真实传感器计次推送到 ViewModel
+                window.decorView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             }
         }
     }

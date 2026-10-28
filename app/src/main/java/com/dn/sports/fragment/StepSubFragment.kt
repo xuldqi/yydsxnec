@@ -96,11 +96,7 @@ class StepSubFragment() : BaseFragment() {
 
         btGo.clickDelay {
             if (activity == null) return@clickDelay
-            if (type == TYPE_RUN_INDOOR) {
-                showCountDownDialog()
-            } else {
-                "户外轨迹功能暂时下线".toast()
-            }
+            showCountDownDialog()
         }
         
         // 为 GO 按钮添加呼吸动效 (Micro-interaction: Pulse)

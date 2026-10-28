@@ -537,19 +537,30 @@ public class MainActivity extends BaseActivity {
         // Ads disabled in this build.
     }
 
+    private void animateTabSelected(View view) {
+        if (view == null) return;
+        view.setScaleX(0.9f);
+        view.setScaleY(0.9f);
+        view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200)
+            .setInterpolator(new android.view.animation.OvershootInterpolator(2.0f)).start();
+    }
+
     private void setFocusItem(int item){
         if (item == 0) {
             setBtnDrawableTop(R.mipmap.love_icon_select, mBtnHome, true);
             setBtnDrawableTop(R.mipmap.sport_icon, mBtnData, false);
             setBtnDrawableTop(R.mipmap.mine_icon, mBtnSettings, false);
+            animateTabSelected(mBtnHome);
         } else if (item == 1) {
             setBtnDrawableTop(R.mipmap.love_icon, mBtnHome, false);
             setBtnDrawableTop(R.mipmap.sport_icon_select, mBtnData, true);
             setBtnDrawableTop(R.mipmap.mine_icon, mBtnSettings, false);
+            animateTabSelected(mBtnData);
         } else if (item == 2) {
             setBtnDrawableTop(R.mipmap.love_icon, mBtnHome, false);
             setBtnDrawableTop(R.mipmap.sport_icon, mBtnData, false);
             setBtnDrawableTop(R.mipmap.mine_icon_select, mBtnSettings, true);
+            animateTabSelected(mBtnSettings);
         }
     }
 

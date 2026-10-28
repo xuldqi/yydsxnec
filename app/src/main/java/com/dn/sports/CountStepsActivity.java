@@ -188,7 +188,7 @@ public class CountStepsActivity extends BaseActivity {
                     msg = "登山";
                 }
                 
-                String prompt = "您的" + msg + "正在进行中，现在退出将不会保存本次记录。确定要退出吗？";
+                String prompt = "确定要完成本次" + msg + "并保存运动记录吗？";
                 hintDialog.setExitCountTime(prompt, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -207,6 +207,7 @@ public class CountStepsActivity extends BaseActivity {
                             stepsCountModel.useTime = timeMILLISECONDS;
                             stepsCountModel.steps = stepRecord;
                             DbHelper.INSTANCE.getDaoSession().getStepCountRecordDao().insert(stepsCountModel);
+                            android.widget.Toast.makeText(CountStepsActivity.this, "运动记录已保存，太棒了！", android.widget.Toast.LENGTH_SHORT).show();
                         }
 
                         stepRecord = 0;

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <!-- 已移除后台定位权限 (隐私合规整改) -->
     <uses-permission android:name="android.permission.BLUETOOTH" tools:node="remove"/>
@@ -61,8 +62,12 @@
         <activity android:name="com.dn.sports.activity.PrivacyInfoListActivity" android:screenOrientation="portrait"/>
         <activity android:name="com.dn.sports.activity.SdkShareListActivity" android:screenOrientation="portrait"/>
 
+        <activity android:name="com.dn.sports.activity.AchievementActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+
         <activity android:name=".AdActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:screenOrientation="portrait"/>
         <activity android:name=".WriteInviteCodeActivity"

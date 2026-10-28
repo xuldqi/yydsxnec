@@ -80,8 +80,20 @@ class HealthFragment : BaseFragment() {
     }
 
     private fun updateUI(state: HealthViewModel.HealthUiState) {
-        // Update Step Numbers & Info
-        tvTodayNums?.text = state.todaySteps.toString()
+        val targetSteps = state.todaySteps
+        if (targetSteps != lastShownSteps) {
+            val animator = android.animation.ValueAnimator.ofInt(lastShownSteps, targetSteps)
+            animator.duration = 750L
+            animator.interpolator = android.view.animation.DecelerateInterpolator()
+            animator.addUpdateListener {
+                tvTodayNums?.text = it.animatedValue.toString()
+            }
+            animator.start()
+            lastShownSteps = targetSteps
+        } else {
+            tvTodayNums?.text = targetSteps.toString()
+        }
+
         tvTodayKcal?.text = state.calories
         tvTodayDistance?.text = state.distance
         tvjump?.text = "${state.jumpRopeCount} 次"
@@ -93,8 +105,8 @@ class HealthFragment : BaseFragment() {
             tvStep?.text = "还差${state.targetSteps - state.todaySteps}步达成目标"
         }
 
-        // Update Rings (Modern Reactive Update)
-        multiRingsView?.setProgress(state.stepsRatio, state.calRatio, state.distRatio)
+        // Update Rings with smooth sweep growth animation
+        multiRingsView?.setProgressAnimated(state.stepsRatio, state.calRatio, state.distRatio)
     }
 
     override fun openEventBus(): Boolean {

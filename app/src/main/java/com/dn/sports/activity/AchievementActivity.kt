@@ -25,7 +25,19 @@ class AchievementActivity : BaseActivity() {
 
         lifecycleScope.launchWhenStarted {
             repository.getAchievementsFlow().collect { achievements ->
-                adapter.submitList(achievements)
+                if (achievements.isEmpty()) {
+                    val presets = listOf(
+                        AchievementEntity(1, "初试锋芒", "完成任意运动记录 1 次", 0, 1, System.currentTimeMillis(), "medal_start"),
+                        AchievementEntity(2, "万步达人", "单日行走超过 10,000 步", 0, 10000, 0L, "medal_10000"),
+                        AchievementEntity(3, "燃脂先锋", "单次消耗超过 300 千卡", 1, 300, 0L, "medal_cal"),
+                        AchievementEntity(4, "绳彩飞扬", "单次连续跳绳超过 500 次", 2, 500, 0L, "medal_rope"),
+                        AchievementEntity(5, "坚持不懈", "连续坚持运动 7 天", 3, 7, 0L, "medal_week"),
+                        AchievementEntity(6, "半马英雄", "单次累计跑步超 21 公里", 4, 21, 0L, "medal_half_marathon")
+                    )
+                    adapter.submitList(presets)
+                } else {
+                    adapter.submitList(achievements)
+                }
             }
         }
     }
@@ -48,8 +60,15 @@ class AchievementActivity : BaseActivity() {
             val item = items[position]
             holder.medalName.text = item.name
             holder.medalDesc.text = item.description
-            holder.achievedDate.text = "${com.dn.sports.utils.DateUtils.getYearMonthDay(item.achievedDate)} 获得"
-            // icon mapping logic could be added here
+            if (item.achievedDate > 0) {
+                holder.achievedDate.text = "${com.dn.sports.utils.DateUtils.getYearMonthDay(item.achievedDate)} 获得 🏆"
+                holder.achievedDate.setTextColor(android.graphics.Color.parseColor("#EF7437"))
+                holder.itemView.alpha = 1.0f
+            } else {
+                holder.achievedDate.text = "待解锁 🔒"
+                holder.achievedDate.setTextColor(android.graphics.Color.parseColor("#999999"))
+                holder.itemView.alpha = 0.55f
+            }
         }
 
         override fun getItemCount() = items.size

@@ -14,16 +14,13 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
-            android:text="1.高晓燃烧卡路里：跳绳是一种高强度的有氧运动，可以快速燃烧 体内的卡路里,每分钟跳绳可以 燃烧约10-16卡路里。
-         \n\n2.全身综合锻炼：通过跳绳，可以 有效锻炼和强化身体的肌肉。\n\n 3.提高心肺耐力：持续的跳绳锻炼可以增强心脏和肺部的功能，提高氧气的吸收和利 用能力，增加身体的耐力水平。\n\n 4.方便灵活：跳绳是一项简单、方便、灵活的运动，不需要大型器 械或者特殊场地。它可 以在室内或者户外进行，适合各种场合和时间。 \n\n5.增强协调性和平衡力:跳绳需要身体的协调性和平
-衡力。这对于
-改善身体的姿势和稳定性，预防运动伤害具有积极的影
-响。"
-            android:textColor="#894439"
-            android:textSize="14dp"
-            />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
+            android:lineSpacingExtra="6dp"
+            android:text="1. 高效燃烧卡路里\n跳绳是一项高强度的有氧运动，能快速燃烧体内脂肪。研究表明，每分钟跳绳可消耗约 10-16 千卡热量。\n\n2. 全身综合锻炼\n跳绳能同时调动小腿、大腿、臀部、腹肌和手臂肌肉群，塑造优美身形线条。\n\n3. 增强心肺耐力\n持续的有氧跳绳能显著提升心脏泵血能力和肺活量，增强基础代谢与日常活力。\n\n4. 随时随地方便灵活\n无需复杂器械与专业场地，居家、办公室或户外随时随地开启高效燃脂。\n\n5. 改善协调与平衡感\n手眼脚的高度协同能有效增强身体平衡性与敏捷度，降低日常运动损伤风险。"
+            android:textColor="#5D4037"
+            android:textSize="14sp" />
     </LinearLayout>
 </ScrollView>

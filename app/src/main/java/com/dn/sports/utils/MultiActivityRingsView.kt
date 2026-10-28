@@ -81,10 +81,36 @@ class MultiActivityRingsView @JvmOverloads constructor(
         }
     }
 
+    private var progressAnimator: android.animation.ValueAnimator? = null
+
+    /**
+     * Set progress with smooth growth animation.
+     */
+    fun setProgressAnimated(inner: Float, middle: Float, outer: Float, duration: Long = 900L) {
+        progressAnimator?.cancel()
+        val startInner = this.innerProgress
+        val startMiddle = this.middleProgress
+        val startOuter = this.outerProgress
+
+        progressAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
+            this.duration = duration
+            interpolator = android.view.animation.DecelerateInterpolator(1.8f)
+            addUpdateListener { animator ->
+                val fraction = animator.animatedValue as Float
+                this@MultiActivityRingsView.innerProgress = startInner + (inner - startInner) * fraction
+                this@MultiActivityRingsView.middleProgress = startMiddle + (middle - startMiddle) * fraction
+                this@MultiActivityRingsView.outerProgress = startOuter + (outer - startOuter) * fraction
+                invalidate()
+            }
+            start()
+        }
+    }
+
     /**
      * Set progress for all rings. Values are 0.0f to infinity.
      */
     fun setProgress(inner: Float, middle: Float, outer: Float) {
+        progressAnimator?.cancel()
         this.innerProgress = inner
         this.middleProgress = middle
         this.outerProgress = outer

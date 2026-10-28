@@ -76,6 +76,11 @@ override fun getViewByLayout(
         view.findViewById<TextView>(R.id.tvWeeklySteps)?.text = weeklySteps.toString()
         view.findViewById<TextView>(R.id.tvWeeklyJumps)?.text = weeklyJumps.toString()
 
+        view.findViewById<View>(R.id.btnViewAchievements)?.setOnClickListener {
+            val intent = Intent(activity, com.dn.sports.activity.AchievementActivity::class.java)
+            startActivity(intent)
+        }
+
         invite_friend.setOnClickListener(
             View.OnClickListener {
                 val intent = Intent(activity, SportRecordActivity::class.java)
@@ -114,7 +119,6 @@ override fun getViewByLayout(
         currentMoney = view.findViewById(R.id.current_money)
         userImage = view.findViewById(R.id.user_image)
         userText = view.findViewById(R.id.user_name)
-        qucickLogin = view.findViewById(R.id.quick_login)
         rate_us.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 try {
@@ -130,12 +134,6 @@ override fun getViewByLayout(
         common_problem.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 val it = Intent(activity, CommonProblemActivity::class.java)
-                startActivity(it)
-            }
-        })
-        coin_record_list .setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View) {
-                val it = Intent(activity, CoinRecordActivity::class.java)
                 startActivity(it)
             }
         })
