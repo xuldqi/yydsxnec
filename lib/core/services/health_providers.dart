@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:drift/drift.dart';
 import '../database/app_database.dart';
 import 'database_provider.dart';
+import 'daily_health_provider.dart';
 import 'step_provider.dart' as step_svc;
 
 final selectedDateProvider = StateProvider<DateTime>((ref) {
@@ -59,6 +60,15 @@ class WaterNotifier extends AsyncNotifier<WaterState> {
       amount: Value(ml),
       waterType: Value(type),
     ));
+    try {
+      ref.read(dailyHealthProvider.notifier).addWater(ml);
+    } catch (_) {}
+    state = AsyncData(await _load());
+  }
+
+  Future<void> deleteWater(int id) async {
+    final db = ref.read(databaseProvider);
+    await db.deleteWaterRecord(id);
     state = AsyncData(await _load());
   }
 

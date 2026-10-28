@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../core/services/step_provider.dart' as step_svc;
 import '../../core/services/daily_health_provider.dart';
+import '../../core/services/health_providers.dart';
 import '../vital_signs/widgets/measure_bottom_sheet.dart';
 
 class StepsScreen extends ConsumerStatefulWidget {
@@ -611,6 +612,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           GestureDetector(
             onTap: () {
               ref.read(dailyHealthProvider.notifier).addWater(250);
+              try {
+                ref.read(waterProvider.notifier).addWater(250);
+              } catch (_) {}
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('已记录饮水 +250ml 💧 记得按时喝水哦！'),

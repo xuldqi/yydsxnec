@@ -14,6 +14,8 @@ import '../../features/steps/steps_screen.dart';
 import '../../features/sport/sport_screen.dart';
 import '../../features/sleep/sleep_screen.dart';
 import '../../features/sleep/sleep_record_screen.dart';
+import '../../features/water/water_screen.dart';
+import '../../features/water/water_history_screen.dart';
 import '../../features/water/pages/home_page.dart' as water_home;
 import '../../features/poop/pages/poop_screen.dart' as poop;
 import '../../features/weight_fitness/screens/home_screen.dart' as weight_fitness;
@@ -93,7 +95,8 @@ final router = GoRouter(
     // 健康/步数/运动/睡眠/水/体重 - 完整
     GoRoute(path: '/steps', builder: (c, s) => const StepsScreen()),
     GoRoute(path: '/sleep', builder: (c, s) => const SleepScreen()),
-    GoRoute(path: '/water', builder: (c, s) => const water_home.HomePage()),
+    GoRoute(path: '/water', builder: (c, s) => const WaterScreen()),
+    GoRoute(path: '/water-history', builder: (c, s) => const WaterHistoryScreen()),
     GoRoute(path: '/poop', builder: (c, s) => const poop.PoopScreen()),
     GoRoute(path: '/weight', builder: (c, s) => const weight_fitness.HomeScreen()),
     GoRoute(path: '/count-time', builder: (c, s) => CountTimeScreen(
