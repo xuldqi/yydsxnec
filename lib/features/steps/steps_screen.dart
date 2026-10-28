@@ -62,7 +62,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 parent: BouncingScrollPhysics(),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10)
-                  .copyWith(bottom: 110),
+                  .copyWith(bottom: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,9 +70,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   const SizedBox(height: 14),
                   _buildCalendarStrip(context),
                   const SizedBox(height: 16),
-                  _buildStepsHeroCard(context, steps, record),
+                  _buildPlanBanner(context, steps),
                   const SizedBox(height: 18),
-                  _buildHabitCardsStream(context, record),
+                  _buildHabitCardsStream(context, steps, record),
                 ],
               ),
             ),
@@ -265,138 +265,100 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── 3. Steps Hero Card ──────────────────────────────────────────────────────
-  Widget _buildStepsHeroCard(BuildContext context, int steps, DailyHealthRecord record) {
+  // ── 3. Plan / Goal Hero Banner (OtterLife 目标计划横幅) ─────────────────────
+  Widget _buildPlanBanner(BuildContext context, int steps) {
     final progress = (steps / 10000).clamp(0.0, 1.0);
-    final distanceKm = (steps * 0.0007).toStringAsFixed(2);
-    final calories = (steps * 0.038).toInt();
-
     return GestureDetector(
-      onTap: () => context.push('/sport'),
+      onTap: () => context.push('/goal'),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x0A000000),
+              color: Color(0x06000000),
               blurRadius: 16,
               offset: Offset(0, 4),
             ),
           ],
         ),
-        child: Column(
+        child: Row(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF6366F1).withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Icon(Icons.directions_walk_rounded, size: 18, color: Color(0xFF6366F1)),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      '步数',
-                      style: TextStyle(
-                        color: Color(0xFF1E1B4B),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: const [
-                    Text('详情', style: TextStyle(fontSize: 12, color: Color(0xFF6366F1), fontWeight: FontWeight.w600)),
-                    Icon(Icons.chevron_right_rounded, size: 16, color: Color(0xFF6366F1)),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            NumberFormat('#,###').format(steps),
-                            style: const TextStyle(
-                              fontSize: 34,
-                              fontWeight: FontWeight.w900,
-                              color: Color(0xFF1E1B4B),
-                              letterSpacing: -1,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          const Text('步', style: TextStyle(color: Color(0xFF94A3B8), fontSize: 13, fontWeight: FontWeight.bold)),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      const Text(
-                        '目标 10,000 步',
-                        style: TextStyle(
-                          color: Color(0xFF94A3B8),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        value: progress,
-                        strokeWidth: 6,
-                        backgroundColor: const Color(0xFFF1F5F9),
-                        valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF6366F1)),
-                      ),
-                      Text(
-                        '${(progress * 100).toInt()}%',
-                        style: const TextStyle(
-                          color: Color(0xFF1E1B4B),
-                          fontSize: 13,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 14),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
-                borderRadius: BorderRadius.circular(14),
+              width: 42,
+              height: 42,
+              decoration: const BoxDecoration(
+                color: Color(0xFFDCFCE7),
+                shape: BoxShape.circle,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: const Icon(
+                Icons.track_changes_rounded,
+                color: Color(0xFF16A34A),
+                size: 22,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSubStat(Icons.route_rounded, '$distanceKm km', '公里', const Color(0xFF10B981)),
-                  Container(width: 1, height: 20, color: const Color(0xFFE2E8F0)),
-                  _buildSubStat(Icons.local_fire_department_rounded, '$calories kcal', '千卡', const Color(0xFFF97316)),
-                  Container(width: 1, height: 20, color: const Color(0xFFE2E8F0)),
-                  _buildSubStat(Icons.timer_outlined, '${steps ~/ 100} 分', '时长', const Color(0xFF0EA5E9)),
+                  const Text(
+                    '目标计划',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF1E1B4B),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    '今日步数 ${(progress * 100).toInt()}% · 剩 ${(10000 - steps).clamp(0, 10000)} 步',
+                    style: const TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF94A3B8),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(3),
+                    child: LinearProgressIndicator(
+                      value: progress,
+                      minHeight: 4,
+                      backgroundColor: const Color(0xFFF1F5F9),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Color(0xFF00C853),
+                      ),
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              height: 34,
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              decoration: BoxDecoration(
+                color: const Color(0xFF00C853),
+                borderRadius: BorderRadius.circular(17),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x3300C853),
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: const Center(
+                child: Text(
+                  '新计划',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],
@@ -405,68 +367,50 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  Widget _buildSubStat(IconData icon, String value, String label, Color color) {
-    return Row(
-      children: [
-        Icon(icon, size: 15, color: color),
-        const SizedBox(width: 5),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B))),
-            Text(label, style: const TextStyle(fontSize: 10, color: Color(0xFF94A3B8))),
-          ],
-        ),
-      ],
-    );
-  }
-
-  // ── 5. Interactive Habit Cards Flow (OtterLife Style) ───────────────────────
-  Widget _buildHabitCardsStream(BuildContext context, DailyHealthRecord record) {
+  // ── 4. Interactive Habit Cards Flow (OtterLife 大气网格卡片) ─────────────────
+  Widget _buildHabitCardsStream(BuildContext context, int steps, DailyHealthRecord record) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 10),
+          padding: EdgeInsets.only(left: 4, bottom: 12),
           child: Text(
-            '今日打卡',
+            '每日行动',
             style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w800,
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
               color: Color(0xFF1E1B4B),
+              letterSpacing: -0.3,
             ),
           ),
         ),
-        // 2-Column Grid of Action Cards
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Column(
                 children: [
-                  // 💧 喝水打卡卡片
-                  _buildWaterCard(context, record),
-                  const SizedBox(height: 12),
-                  // 🥗 饮食热量卡片
-                  _buildDietCard(context, record),
-                  const SizedBox(height: 12),
-                  // ❤️ 心率与压力卡片
-                  _buildVitalSignsCard(context, record),
+                  _buildFastingCard(context),
+                  const SizedBox(height: 14),
+                  _buildNutrientsCard(context),
+                  const SizedBox(height: 14),
+                  _buildStepsCard(context, steps),
+                  const SizedBox(height: 14),
+                  _buildSleepCard(context, record),
                 ],
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 children: [
-                  // ⏳ 轻断食卡片
-                  _buildFastingCard(context),
-                  const SizedBox(height: 12),
-                  // 😴 睡眠与助眠卡片
-                  _buildSleepCard(context, record),
-                  const SizedBox(height: 12),
-                  // 🧠 今日心情卡片
-                  _buildMoodCard(context, record),
+                  _buildDietCard(context, record),
+                  const SizedBox(height: 14),
+                  _buildWeightCard(context),
+                  const SizedBox(height: 14),
+                  _buildWaterCard(context, record),
+                  const SizedBox(height: 14),
+                  _buildVitalSignsCard(context, record),
                 ],
               ),
             ),
@@ -476,78 +420,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── Card: Water Intake ──────────────────────────────────────────────────────
-  Widget _buildWaterCard(BuildContext context, DailyHealthRecord record) {
-    final waterProgress = (record.waterMl / 2000).clamp(0.0, 1.0);
-
-    return _buildActionCard(
-      title: '喝水',
-      icon: Icons.water_drop_rounded,
-      color: const Color(0xFF0EA5E9),
-      onTap: () => context.push('/water'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text('${record.waterMl}',
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              const Text(' / 2000ml',
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(3),
-            child: LinearProgressIndicator(
-              value: waterProgress,
-              minHeight: 5,
-              backgroundColor: const Color(0xFFF1F5F9),
-              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0EA5E9)),
-            ),
-          ),
-          const SizedBox(height: 10),
-          GestureDetector(
-            onTap: () {
-              ref.read(dailyHealthProvider.notifier).addWater(250);
-              try {
-                ref.read(waterProvider.notifier).addWater(250);
-              } catch (_) {}
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('已记录饮水 +250ml'),
-                  duration: Duration(milliseconds: 1200),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color(0xFF0EA5E9).withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Center(
-                child: Text(
-                  '+250ml',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF0284C7),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Card: Fasting ───────────────────────────────────────────────────────────
+  // ── Card: Fasting (轻断食) ──────────────────────────────────────────────────
   Widget _buildFastingCard(BuildContext context) {
     final activeSession = ref.watch(activeFastingSessionProvider);
     final timer = ref.watch(fastingTimerProvider);
@@ -561,17 +434,20 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     return _buildActionCard(
       title: '轻断食',
       icon: Icons.timer_outlined,
-      color: const Color(0xFFF97316),
+      iconColor: const Color(0xFFF97316),
+      badgeBgColor: const Color(0xFFFFF7ED),
+      subtitle: '当前状态',
       onTap: () => context.push('/fasting'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            isActive ? '${elapsedH}h ${elapsedM}m' : '未开启',
+            isActive ? '${elapsedH}h ${elapsedM}m' : '未开始',
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: FontWeight.w900,
               color: Color(0xFF1E1B4B),
+              letterSpacing: -0.5,
             ),
           ),
           const SizedBox(height: 4),
@@ -579,25 +455,32 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             isActive
                 ? (timer.isOvertime ? '已达成目标' : '剩 ${remainH}h ${remainM}m')
                 : '16:8 方案',
-            style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 14),
           GestureDetector(
             onTap: () => context.push('/fasting'),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              height: 38,
               decoration: BoxDecoration(
-                color: const Color(0xFFF97316).withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
+                color: isActive ? const Color(0xFFF97316) : const Color(0xFF00C853),
+                borderRadius: BorderRadius.circular(19),
+                boxShadow: [
+                  BoxShadow(
+                    color: (isActive ? const Color(0xFFF97316) : const Color(0xFF00C853)).withValues(alpha: 0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
               child: Center(
                 child: Text(
-                  isActive ? '计时器' : '开启断食',
+                  isActive ? '计时器' : '开始断食',
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFFEA580C),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -608,17 +491,21 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── Card: Diet & Calorie ────────────────────────────────────────────────────
+  // ── Card: Diet (摄入) ───────────────────────────────────────────────────────
   Widget _buildDietCard(BuildContext context, DailyHealthRecord record) {
     final dietAsync = ref.watch(dietProvider);
     final totalCalories = dietAsync.valueOrNull?.totalCal.round() ?? record.dietCalories;
     final goalCalories = (dietAsync.valueOrNull?.goal ?? 2000).round();
+    final remaining = (goalCalories - totalCalories).clamp(0, goalCalories);
 
     return _buildActionCard(
-      title: '饮食',
+      title: '摄入',
       icon: Icons.restaurant_rounded,
-      color: const Color(0xFF10B981),
+      iconColor: const Color(0xFFEF4444),
+      badgeBgColor: const Color(0xFFFEF2F2),
+      subtitle: '还能吃',
       onTap: () => context.push('/diet'),
+      onQuickAdd: () => context.push('/diet'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -626,56 +513,308 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text('$totalCalories',
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              Text(' / ${goalCalories}kcal',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF94A3B8))),
+              Text(
+                NumberFormat('#,###').format(remaining),
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                '千卡',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => context.push('/ai-scan'),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF10B981).withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text('识图',
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF059669))),
-                    ),
+          const SizedBox(height: 4),
+          Text(
+            totalCalories > 0 ? '已摄入 $totalCalories 千卡' : '尚无记录',
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+          ),
+          const SizedBox(height: 14),
+          GestureDetector(
+            onTap: () => context.push('/diet'),
+            child: Container(
+              width: double.infinity,
+              height: 38,
+              decoration: BoxDecoration(
+                color: const Color(0xFFEF4444).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(19),
+              ),
+              child: const Center(
+                child: Text(
+                  '记一餐',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFFDC2626),
                   ),
                 ),
               ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => context.push('/diet'),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF1F5F9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text('记一餐',
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF475569))),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  // ── Card: Sleep ─────────────────────────────────────────────────────────────
+  // ── Card: Nutrients (营养素) ─────────────────────────────────────────────────
+  Widget _buildNutrientsCard(BuildContext context) {
+    return _buildActionCard(
+      title: '营养素',
+      icon: Icons.pie_chart_rounded,
+      iconColor: const Color(0xFF0284C7),
+      badgeBgColor: const Color(0xFFE0F2FE),
+      subtitle: '三项比例',
+      onTap: () => context.push('/diet'),
+      onQuickAdd: () => context.push('/diet'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildMacroRow('蛋白质', '0%', const Color(0xFF10B981)),
+          const SizedBox(height: 8),
+          _buildMacroRow('脂肪', '0%', const Color(0xFFF59E0B)),
+          const SizedBox(height: 8),
+          _buildMacroRow('碳水', '0%', const Color(0xFF38BDF8)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMacroRow(String label, String percent, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label, style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: Color(0xFF64748B))),
+            Text(percent, style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF1E1B4B))),
+          ],
+        ),
+        const SizedBox(height: 3),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(2),
+          child: Container(
+            height: 4,
+            width: double.infinity,
+            color: color.withValues(alpha: 0.2),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: 0.05,
+              child: Container(color: color),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ── Card: Weight (体重) ─────────────────────────────────────────────────────
+  Widget _buildWeightCard(BuildContext context) {
+    return _buildActionCard(
+      title: '体重',
+      icon: Icons.monitor_weight_outlined,
+      iconColor: const Color(0xFF10B981),
+      badgeBgColor: const Color(0xFFDCFCE7),
+      subtitle: '最新数据',
+      onTap: () => context.push('/goal'),
+      onQuickAdd: () => context.push('/goal'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text(
+            '--',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
+              color: Color(0xFF1E1B4B),
+              letterSpacing: -0.5,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            '暂无数据',
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+          ),
+          SizedBox(height: 18),
+        ],
+      ),
+    );
+  }
+
+  // ── Card: Steps (步数) ──────────────────────────────────────────────────────
+  Widget _buildStepsCard(BuildContext context, int steps) {
+    final progress = (steps / 10000).clamp(0.0, 1.0);
+    return _buildActionCard(
+      title: '步数',
+      icon: Icons.directions_walk_rounded,
+      iconColor: const Color(0xFFEA580C),
+      badgeBgColor: const Color(0xFFFFEDD5),
+      subtitle: '今日活动',
+      onTap: () => context.push('/sport'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                NumberFormat('#,###').format(steps),
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                '步',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '目标 ${(progress * 100).toInt()}%',
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+          ),
+          const SizedBox(height: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 5,
+              backgroundColor: const Color(0xFFF1F5F9),
+              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFEA580C)),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '${(steps * 0.0007).toStringAsFixed(1)}km · ${(steps * 0.038).toInt()}kcal',
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF64748B),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Card: Water (喝水) ──────────────────────────────────────────────────────
+  Widget _buildWaterCard(BuildContext context, DailyHealthRecord record) {
+    final waterProgress = (record.waterMl / 2000).clamp(0.0, 1.0);
+
+    return _buildActionCard(
+      title: '喝水',
+      icon: Icons.water_drop_rounded,
+      iconColor: const Color(0xFF0284C7),
+      badgeBgColor: const Color(0xFFE0F2FE),
+      subtitle: '今日饮水',
+      onTap: () => context.push('/water'),
+      onQuickAdd: () {
+        ref.read(dailyHealthProvider.notifier).addWater(250);
+        try {
+          ref.read(waterProvider.notifier).addWater(250);
+        } catch (_) {}
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                '${record.waterMl}',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF0284C7),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                '毫升',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            '/ 2,000毫升',
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+          ),
+          const SizedBox(height: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: LinearProgressIndicator(
+              value: waterProgress,
+              minHeight: 5,
+              backgroundColor: const Color(0xFFF1F5F9),
+              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0284C7)),
+            ),
+          ),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () {
+              ref.read(dailyHealthProvider.notifier).addWater(250);
+              try {
+                ref.read(waterProvider.notifier).addWater(250);
+              } catch (_) {}
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('已记录饮水 +250ml'),
+                  duration: Duration(milliseconds: 1000),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 34,
+              decoration: BoxDecoration(
+                color: const Color(0xFF0284C7).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: const Center(
+                child: Text(
+                  '+250ml',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF0284C7),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Card: Sleep (睡眠) ──────────────────────────────────────────────────────
   Widget _buildSleepCard(BuildContext context, DailyHealthRecord record) {
     final hours = record.sleepMins ~/ 60 > 0 ? record.sleepMins ~/ 60 : 7;
     final mins = record.sleepMins % 60 > 0 ? record.sleepMins % 60 : 45;
@@ -683,8 +822,11 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     return _buildActionCard(
       title: '睡眠',
       icon: Icons.nightlight_round,
-      color: const Color(0xFF6366F1),
+      iconColor: const Color(0xFF6366F1),
+      badgeBgColor: const Color(0xFFEEF2FF),
+      subtitle: '昨晚睡眠',
       onTap: () => context.push('/sleep'),
+      onQuickAdd: () => context.push('/sleep'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -692,29 +834,41 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text('$hours',
-                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              const Text('h ', style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8))),
-              Text('$mins',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              const Text('m · 优', style: TextStyle(fontSize: 12, color: Color(0xFF10B981), fontWeight: FontWeight.bold)),
+              Text(
+                '${hours}h ${mins}m',
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 4),
+          const Text(
+            '深睡 2h 10m · 优',
+            style: TextStyle(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF10B981),
+            ),
+          ),
+          const SizedBox(height: 14),
           GestureDetector(
             onTap: () => context.push('/white-noise'),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              height: 38,
               decoration: BoxDecoration(
-                color: const Color(0xFF6366F1).withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFF6366F1).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(19),
               ),
               child: const Center(
                 child: Text(
                   '助眠音',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w800,
                     color: Color(0xFF4F46E5),
                   ),
@@ -727,12 +881,14 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── Card: Vital Signs ───────────────────────────────────────────────────────
+  // ── Card: Heart / Vitals (心率) ─────────────────────────────────────────────
   Widget _buildVitalSignsCard(BuildContext context, DailyHealthRecord record) {
     return _buildActionCard(
       title: '心率',
       icon: Icons.favorite_rounded,
-      color: const Color(0xFFF43F5E),
+      iconColor: const Color(0xFFF43F5E),
+      badgeBgColor: const Color(0xFFFFE4E6),
+      subtitle: '静息心率',
       onTap: () => context.push('/vital-signs'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -740,72 +896,49 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
-            children: [
-              const Text('72',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-              const Text(' bpm · ', style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8))),
-              Text(record.stressLevel,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFF10B981))),
+            children: const [
+              Text(
+                '72',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                'bpm · 正常',
+                style: TextStyle(
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF10B981),
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 4),
+          const Text(
+            'HRV 42ms · 状态轻松',
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+          ),
+          const SizedBox(height: 14),
           GestureDetector(
             onTap: () => MeasureBottomSheet.show(context),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              height: 38,
               decoration: BoxDecoration(
-                color: const Color(0xFFF43F5E).withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
+                color: const Color(0xFFF43F5E).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(19),
               ),
               child: const Center(
                 child: Text(
                   '测量',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w800,
                     color: Color(0xFFE11D48),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ── Card: Mood Diary ────────────────────────────────────────────────────────
-  Widget _buildMoodCard(BuildContext context, DailyHealthRecord record) {
-    return _buildActionCard(
-      title: '情绪',
-      icon: Icons.mood_rounded,
-      color: const Color(0xFFF59E0B),
-      onTap: () => context.push('/mood'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            record.mood.isNotEmpty ? record.mood : '平静',
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B)),
-          ),
-          const SizedBox(height: 10),
-          GestureDetector(
-            onTap: () => context.push('/mood'),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF59E0B).withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Center(
-                child: Text(
-                  '记录',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFFD97706),
                   ),
                 ),
               ),
@@ -819,23 +952,27 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
   Widget _buildActionCard({
     required String title,
     required IconData icon,
-    required Color color,
+    required Color iconColor,
+    required Color badgeBgColor,
+    required String subtitle,
     required Widget child,
     VoidCallback? onTap,
+    VoidCallback? onQuickAdd,
   }) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(24),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x0A000000),
-              blurRadius: 12,
-              offset: Offset(0, 3),
+              color: Color(0x06000000),
+              blurRadius: 16,
+              offset: Offset(0, 4),
             ),
           ],
         ),
@@ -843,30 +980,62 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, size: 14, color: color),
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w800,
-                      color: color,
+                Row(
+                  children: [
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: badgeBgColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(icon, size: 16, color: iconColor),
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    const SizedBox(width: 8),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF1E1B4B),
+                      ),
+                    ),
+                  ],
                 ),
+                if (onQuickAdd != null)
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: onQuickAdd,
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFF1F5F9),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.add_rounded,
+                        size: 16,
+                        color: Color(0xFF64748B),
+                      ),
+                    ),
+                  ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
+            if (subtitle.isNotEmpty) ...[
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
+              const SizedBox(height: 4),
+            ],
             child,
           ],
         ),

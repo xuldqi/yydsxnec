@@ -1,9 +1,6 @@
-// 主页 Shell — OtterLife 精致轻盈悬浮玻璃态导航栏
-import 'dart:ui';
+// 主页 Shell — OtterLife 底部贴底原生质感导航栏
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../l10n/app_localizations.dart';
-import '../../l10n/app_l10n_ext.dart';
 
 const _active = Color(0xFF6366F1); // Indigo Primary
 const _inactive = Color(0xFF94A3B8); // Slate 400
@@ -49,7 +46,7 @@ class MainShell extends StatelessWidget {
   String _lookup(BuildContext context, String key) {
     switch (key) {
       case 'tabToday':
-        return '今天';
+        return '今日';
       case 'tabSport':
         return '运动';
       case 'tabReports':
@@ -65,76 +62,59 @@ class MainShell extends StatelessWidget {
     final idx = _selectedIndex(context);
     return Scaffold(
       backgroundColor: const Color(0xFFF3F4F8),
-      extendBody: true,
+      extendBody: false,
       body: child,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 24),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: Container(
-              height: 68,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.90),
-                borderRadius: BorderRadius.circular(32),
-                border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.8), width: 1.5),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x0F000000),
-                    blurRadius: 20,
-                    offset: Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(_tabs.length, (i) {
-                  final t = _tabs[i];
-                  final sel = i == idx;
-                  return GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            top: BorderSide(color: Color(0xFFE2E8F0), width: 0.6),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0x06000000),
+              blurRadius: 10,
+              offset: Offset(0, -2),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            height: 56,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(_tabs.length, (i) {
+                final t = _tabs[i];
+                final sel = i == idx;
+                return Expanded(
+                  child: InkWell(
                     onTap: () => context.go(t.path),
-                    child: SizedBox(
-                      width: 60,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOutCubic,
-                            padding: EdgeInsets.all(sel ? 6 : 4),
-                            decoration: BoxDecoration(
-                              color: sel
-                                  ? _active.withValues(alpha: 0.12)
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Icon(
-                              sel ? t.icon : t.iconOff,
-                              color: sel ? _active : _inactive,
-                              size: sel ? 24 : 22,
-                            ),
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          sel ? t.icon : t.iconOff,
+                          color: sel ? _active : _inactive,
+                          size: 23,
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          _lookup(context, t.labelKey),
+                          style: TextStyle(
+                            fontSize: 10.5,
+                            fontWeight: sel ? FontWeight.w800 : FontWeight.w500,
+                            color: sel ? _active : _inactive,
+                            letterSpacing: -0.2,
                           ),
-                          const SizedBox(height: 2),
-                          AnimatedDefaultTextStyle(
-                            duration: const Duration(milliseconds: 300),
-                            style: TextStyle(
-                              fontSize: sel ? 11 : 10,
-                              color: sel ? _active : _inactive,
-                              fontWeight:
-                                  sel ? FontWeight.w700 : FontWeight.w500,
-                            ),
-                            child: Text(_lookup(context, t.labelKey)),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                }),
-              ),
+                  ),
+                );
+              }),
             ),
           ),
         ),
