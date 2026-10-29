@@ -55,27 +55,14 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
 
   Widget _sectionTitle(String t) => Padding(
     padding: const EdgeInsets.only(left: 4),
-    child: Row(
-      children: [
-        Container(
-          width: 4,
-          height: 16,
-          decoration: BoxDecoration(
-            color: const Color(0xFF6366F1),
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(
-          t,
-          style: const TextStyle(
-            color: Color(0xFF1E1B4B),
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            letterSpacing: -0.2,
-          ),
-        ),
-      ],
+    child: Text(
+      t,
+      style: const TextStyle(
+        color: Color(0xFF2D2522),
+        fontSize: 18,
+        fontWeight: FontWeight.w900,
+        letterSpacing: -0.3,
+      ),
     ),
   );
 }
@@ -93,94 +80,161 @@ class _OverviewCard extends ConsumerWidget {
     final progress = (steps / goal).clamp(0.0, 1.0);
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF6366F1), Color(0xFF38BDF8)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xFF6366F1).withValues(alpha: 0.3),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+            color: Color(0x087A533E),
+            blurRadius: 16,
+            offset: Offset(0, 4),
           ),
         ],
       ),
-      padding: const EdgeInsets.all(22),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              range == 1 ? '今天健康总览' : '本周健康总览',
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.9),
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                '目标 ${goal} 步',
-                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text('$steps',
-            style: const TextStyle(color: Colors.white, fontSize: 46, fontWeight: FontWeight.w900, height: 1)),
-          const Padding(padding: EdgeInsets.only(bottom: 6, left: 6),
-            child: Text('步', style: TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.bold))),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('${(progress * 100).toInt()}%',
-                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800)),
-              const Text('完成度', style: TextStyle(color: Colors.white70, fontSize: 11)),
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFFF7ED),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.insights_rounded,
+                      color: Color(0xFFEA580C),
+                      size: 17,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    '健康总览',
+                    style: TextStyle(
+                      color: Color(0xFF2D2522),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF5EFEA),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '目标 $goal 步',
+                  style: const TextStyle(
+                    color: Color(0xFF7D726D),
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
             ],
           ),
-        ]),
-        const SizedBox(height: 16),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: LinearProgressIndicator(
-            value: progress, minHeight: 8,
-            backgroundColor: Colors.white.withValues(alpha: 0.25),
-            valueColor: const AlwaysStoppedAnimation(Colors.white),
+          const SizedBox(height: 16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Text(
+                '$steps',
+                style: const TextStyle(
+                  color: Color(0xFF2D2522),
+                  fontSize: 40,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                '步',
+                style: TextStyle(
+                  color: Color(0xFF7D726D),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '${(progress * 100).toInt()}%',
+                    style: const TextStyle(
+                      color: Color(0xFF2E7D5B),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const Text(
+                    '达成度',
+                    style: TextStyle(
+                      color: Color(0xFF7D726D),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 18),
-        Row(children: [
-          _pill(Icons.local_fire_department_rounded, '${stepAsync.valueOrNull?.calories.toInt() ?? 0} kcal'),
-          const SizedBox(width: 10),
-          _pill(Icons.water_drop_rounded, '${waterAsync.valueOrNull?.todayTotal ?? 0} ml'),
-          const SizedBox(width: 10),
-          _pill(Icons.directions_run_rounded, '${sportAsync.valueOrNull?.length ?? 0} 次运动'),
-        ]),
-      ]),
+          const SizedBox(height: 12),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6,
+              backgroundColor: const Color(0xFFF3EFEA),
+              valueColor: const AlwaysStoppedAnimation(Color(0xFF2E7D5B)),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              _pill(Icons.local_fire_department_rounded, const Color(0xFFEA580C), '${stepAsync.valueOrNull?.calories.toInt() ?? 0} kcal'),
+              const SizedBox(width: 8),
+              _pill(Icons.water_drop_rounded, const Color(0xFF0284C7), '${waterAsync.valueOrNull?.todayTotal ?? 0} ml'),
+              const SizedBox(width: 8),
+              _pill(Icons.directions_run_rounded, const Color(0xFF10B981), '${sportAsync.valueOrNull?.length ?? 0} 次运动'),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _pill(IconData icon, String t) => Container(
+  Widget _pill(IconData icon, Color iconColor, String t) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
     decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.18),
+      color: const Color(0xFFFAF7F2),
       borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: const Color(0xFFECE4D8)),
     ),
-    child: Row(mainAxisSize: MainAxisSize.min, children: [
-      Icon(icon, color: Colors.white, size: 14),
-      const SizedBox(width: 5),
-      Text(t, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
-    ]),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: iconColor, size: 14),
+        const SizedBox(width: 5),
+        Text(
+          t,
+          style: const TextStyle(
+            color: Color(0xFF4A3E39),
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    ),
   );
 }
 
@@ -224,12 +278,12 @@ class _Tile extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       boxShadow: const [
         BoxShadow(
-          color: Color(0x081E1B4B),
+          color: Color(0x067A533E),
           blurRadius: 14,
           offset: Offset(0, 4),
         ),
       ],
-      border: Border.all(color: const Color(0xFFF1F5F9)),
+      border: Border.all(color: const Color(0xFFECE4D8)),
     ),
     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(width: 38, height: 38,
@@ -239,10 +293,10 @@ class _Tile extends StatelessWidget {
         ),
         child: Icon(icon, color: color, size: 20)),
       const SizedBox(height: 10),
-      Text(value, style: const TextStyle(color: Color(0xFF1E1B4B), fontSize: 15, fontWeight: FontWeight.w800), maxLines: 1, overflow: TextOverflow.ellipsis),
-      if (unit.isNotEmpty) Text(unit, style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10, fontWeight: FontWeight.w500)),
+      Text(value, style: const TextStyle(color: Color(0xFF2D2522), fontSize: 15, fontWeight: FontWeight.w800), maxLines: 1, overflow: TextOverflow.ellipsis),
+      if (unit.isNotEmpty) Text(unit, style: const TextStyle(color: Color(0xFF7D726D), fontSize: 10, fontWeight: FontWeight.w500)),
       const SizedBox(height: 4),
-      Text(label, style: const TextStyle(color: Color(0xFF64748B), fontSize: 11, fontWeight: FontWeight.w600)),
+      Text(label, style: const TextStyle(color: Color(0xFF7D726D), fontSize: 11, fontWeight: FontWeight.w600)),
     ]),
   );
 }
@@ -255,10 +309,10 @@ class _ChartCard extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(22),
-      border: Border.all(color: const Color(0xFFF1F5F9)),
+      border: Border.all(color: const Color(0xFFECE4D8)),
       boxShadow: const [
         BoxShadow(
-          color: Color(0x061E1B4B),
+          color: Color(0x067A533E),
           blurRadius: 16,
           offset: Offset(0, 4),
         ),
@@ -289,7 +343,7 @@ class _StepsTrend extends ConsumerWidget {
       barGroups: data.asMap().entries.map((e) => BarChartGroupData(x: e.key, barRods: [
         BarChartRodData(toY: e.value.y, width: 14,
           gradient: const LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter,
-            colors: [Color(0xFF6366F1), Color(0xFF38BDF8)]),
+            colors: [Color(0xFF2E7D5B), Color(0xFF48A87D)]),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(6))),
       ])).toList(),
       gridData: FlGridData(show: true, drawVerticalLine: false,

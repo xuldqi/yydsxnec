@@ -51,42 +51,84 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
               children: [
                 // 头部卡片
                 Container(
-                  padding: const EdgeInsets.all(22),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft, end: Alignment.bottomRight,
-                      colors: _getGradient(),
-                    ),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
+                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+                    boxShadow: const [
                       BoxShadow(
-                        color: _getGradient().first.withValues(alpha: 0.3),
-                        blurRadius: 18,
-                        offset: const Offset(0, 8),
+                        color: Color(0x087A533E),
+                        blurRadius: 16,
+                        offset: Offset(0, 4),
                       ),
                     ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _getSummaryText(l),
-                        style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13, fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 8),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 10,
+                                height: 10,
+                                decoration: BoxDecoration(
+                                  color: _getMainColor(),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                _getSummaryText(l),
+                                style: const TextStyle(
+                                  color: Color(0xFF2D2522),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF5EFEA),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Text(
+                              '近 7 天',
+                              style: TextStyle(
+                                color: Color(0xFF7D726D),
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
                             _getMainValue(data),
-                            style: const TextStyle(color: Colors.white, fontSize: 38, fontWeight: FontWeight.w900, height: 1),
+                            style: const TextStyle(
+                              color: Color(0xFF2D2522),
+                              fontSize: 38,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: -0.5,
+                            ),
                           ),
                           const SizedBox(width: 6),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 6),
-                            child: Text(
-                              _getUnit(l),
-                              style: const TextStyle(color: Colors.white70, fontSize: 15, fontWeight: FontWeight.w600),
+                          Text(
+                            _getUnit(l),
+                            style: const TextStyle(
+                              color: Color(0xFF7D726D),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
@@ -141,13 +183,13 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
-                  height: 52,
+                  height: 50,
                   child: ElevatedButton.icon(
                     onPressed: () => context.push('/achievement-poster'),
-                    icon: const Icon(Icons.share_rounded, color: Colors.white, size: 20),
-                    label: const Text('生成成就海报', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
+                    icon: const Icon(Icons.share_rounded, color: Colors.white, size: 18),
+                    label: const Text('生成成就海报', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF6366F1),
+                      backgroundColor: const Color(0xFF8D5B4C),
                       elevation: 0,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
@@ -161,25 +203,18 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
     );
   }
 
-  List<Color> _getGradient() {
-    if (_tab == 0) return const [Color(0xFF6366F1), Color(0xFF38BDF8)]; // Steps: Indigo to Sky
-    if (_tab == 1) return const [Color(0xFFF59E0B), Color(0xFFEA580C)]; // Calories: Amber
-    if (_tab == 2) return const [Color(0xFF0EA5E9), Color(0xFF2563EB)]; // Weight: Blue
-    return const [Color(0xFF8B5CF6), Color(0xFF6D28D9)]; // Sleep: Purple
-  }
-
   Color _getMainColor() {
-    if (_tab == 0) return const Color(0xFF6366F1);
-    if (_tab == 1) return const Color(0xFFF59E0B);
-    if (_tab == 2) return const Color(0xFF0EA5E9);
-    return const Color(0xFF8B5CF6);
+    if (_tab == 0) return const Color(0xFF2E7D5B); // Forest green for steps
+    if (_tab == 1) return const Color(0xFFEA580C); // Warm orange for calories
+    if (_tab == 2) return const Color(0xFF0284C7); // Sky blue for weight
+    return const Color(0xFF6366F1); // Calm indigo for sleep
   }
 
   Color _getSecondaryColor() {
-    if (_tab == 0) return const Color(0xFF38BDF8);
-    if (_tab == 1) return const Color(0xFFEA580C);
-    if (_tab == 2) return const Color(0xFF2563EB);
-    return const Color(0xFF6D28D9);
+    if (_tab == 0) return const Color(0xFF48A87D);
+    if (_tab == 1) return const Color(0xFFF97316);
+    if (_tab == 2) return const Color(0xFF38BDF8);
+    return const Color(0xFF818CF8);
   }
 
   String _getSummaryText(dynamic l) {
@@ -234,17 +269,17 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
         decoration: BoxDecoration(
           color: sel ? _getMainColor() : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: sel ? Colors.transparent : const Color(0xFFE2E8F0)),
+          border: Border.all(color: sel ? Colors.transparent : const Color(0xFFECE4D8)),
           boxShadow: sel ? [
             BoxShadow(
-              color: _getMainColor().withValues(alpha: 0.3),
+              color: _getMainColor().withValues(alpha: 0.25),
               blurRadius: 8,
               offset: const Offset(0, 3),
             )
           ] : null,
         ),
         child: Text(label, style: TextStyle(
-          color: sel ? Colors.white : const Color(0xFF64748B),
+          color: sel ? Colors.white : const Color(0xFF7D726D),
           fontSize: 13,
           fontWeight: FontWeight.w700,
         )),
@@ -265,10 +300,10 @@ class _SectionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
+        border: Border.all(color: const Color(0xFFECE4D8)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x061E1B4B),
+            color: Color(0x067A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -284,7 +319,7 @@ class _SectionCard extends StatelessWidget {
                 decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(2)),
               ),
               const SizedBox(width: 8),
-              Text(title, style: const TextStyle(color: Color(0xFF1E1B4B), fontSize: 15, fontWeight: FontWeight.bold)),
+              Text(title, style: const TextStyle(color: Color(0xFF2D2522), fontSize: 16, fontWeight: FontWeight.w900)),
             ],
           ),
           const SizedBox(height: 16),
@@ -398,10 +433,10 @@ class _DimBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
+        border: Border.all(color: const Color(0xFFECE4D8)),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x061E1B4B),
+            color: Color(0x067A533E),
             blurRadius: 14,
             offset: Offset(0, 4),
           ),
@@ -410,7 +445,7 @@ class _DimBox extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.w600)),
+          Text(label, style: const TextStyle(color: Color(0xFF7D726D), fontSize: 12, fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
