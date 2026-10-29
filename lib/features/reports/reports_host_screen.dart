@@ -37,7 +37,7 @@ class _ReportsHostScreenState extends State<ReportsHostScreen> {
             children: [
               // Clean Header: Title on Left + Minimal Capsule Switch (日/周) on Right
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 16, 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -14,62 +14,96 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F4F8),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFFEFEBFA), Color(0xFFF3F4F8), Color(0xFFEBEFF9)],
-          ),
-        ),
+        color: const Color(0xFFF3F4F8),
         child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 110),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 4, bottom: 16),
-                  child: Text(
-                    '个人中心',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF1E1B4B),
+          bottom: false,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '我的',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF2D2522),
+                        letterSpacing: -0.5,
+                      ),
                     ),
+                    GestureDetector(
+                      onTap: () => context.push('/setting'),
+                      child: Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x0A000000),
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                          border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.9),
+                              width: 1.5),
+                        ),
+                        child: const Icon(
+                          Icons.settings_outlined,
+                          color: Color(0xFF8D5B4C),
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 110),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildUserCard(context, userProfile),
+                      const SizedBox(height: 14),
+                      _buildWeekSportReportCard(context),
+                      const SizedBox(height: 14),
+                      _buildTwinCards(context),
+                      const SizedBox(height: 24),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 4, bottom: 12),
+                        child: Text(
+                          '常用工具',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF64748B),
+                          ),
+                        ),
+                      ),
+                      _buildToolsCard(context),
+                      const SizedBox(height: 14),
+                      _buildSettingsCard(context),
+                      const SizedBox(height: 32),
+                      const Center(
+                        child: Text(
+                          '微刻运动 v1.3.0 · 守护您的健康每一天',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF94A3B8),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                _buildUserCard(context, userProfile),
-                const SizedBox(height: 14),
-                _buildWeekSportReportCard(context),
-                const SizedBox(height: 14),
-                _buildTwinCards(context),
-                const SizedBox(height: 24),
-                const Padding(
-                  padding: EdgeInsets.only(left: 4, bottom: 12),
-                  child: Text(
-                    '常用工具',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF64748B),
-                    ),
-                  ),
-                ),
-                _buildToolsCard(context),
-                const SizedBox(height: 14),
-                _buildSettingsCard(context),
-                const SizedBox(height: 32),
-                const Center(
-                  child: Text(
-                    '微刻运动 v1.3.0 · 守护您的健康每一天',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF94A3B8),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

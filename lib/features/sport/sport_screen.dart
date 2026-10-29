@@ -16,18 +16,24 @@ class _SportScreenState extends ConsumerState<SportScreen> {
       backgroundColor: const Color(0xFFF3F4F8),
       body: SafeArea(
         bottom: false,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 110),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              _buildBannerSection(),
-              _buildQuickSportSection(),
-              _buildTrainingRecommendSection(),
-              _buildSportChallengeCard(),
-            ],
-          ),
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 110),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildBannerSection(),
+                    _buildQuickSportSection(),
+                    _buildTrainingRecommendSection(),
+                    _buildSportChallengeCard(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -35,24 +41,24 @@ class _SportScreenState extends ConsumerState<SportScreen> {
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            '运动锻炼',
+            '运动',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
+              color: Color(0xFF2D2522),
               letterSpacing: -0.5,
             ),
           ),
           GestureDetector(
             onTap: () => context.push('/reports'),
             child: Container(
-              width: 40,
-              height: 40,
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -61,12 +67,13 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                     color: Color(0x0A000000),
                     blurRadius: 10,
                     offset: Offset(0, 3),
-                  )
+                  ),
                 ],
+                border: Border.all(color: Colors.white.withValues(alpha: 0.9), width: 1.5),
               ),
               child: const Icon(
-                Icons.calendar_month_rounded,
-                color: Color(0xFF6366F1),
+                Icons.insert_chart_outlined_rounded,
+                color: Color(0xFF8D5B4C),
                 size: 20,
               ),
             ),
@@ -81,17 +88,14 @@ class _SportScreenState extends ConsumerState<SportScreen> {
       margin: const EdgeInsets.only(top: 8, left: 16, right: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x286366F1),
+            color: Color(0x087A533E),
             blurRadius: 16,
-            offset: Offset(0, 8),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -104,13 +108,13 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: const Color(0xFFFFF7ED),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Text(
                     '🔥 今日燃脂挑战',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFFEA580C),
                       fontSize: 11,
                       fontWeight: FontWeight.bold,
                     ),
@@ -120,16 +124,16 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 const Text(
                   '随时随地，开启动力',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFF2D2522),
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   '运动陪伴 · 精确计时与实时卡路里消耗',
                   style: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.85),
+                    color: Color(0xFF7D726D),
                     fontSize: 12,
                   ),
                 ),
@@ -139,8 +143,8 @@ class _SportScreenState extends ConsumerState<SportScreen> {
           ElevatedButton(
             onPressed: () => context.push('/count-time?type=户外跑'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: const Color(0xFF6366F1),
+              backgroundColor: const Color(0xFF8D5B4C),
+              foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               elevation: 0,
