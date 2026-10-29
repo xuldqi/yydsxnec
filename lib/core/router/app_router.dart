@@ -62,6 +62,7 @@ import '../../features/misc/misc_sub_screens.dart';
 import '../../features/misc/misc_tail_screens.dart';
 import '../../features/diet/calorie_screens.dart';
 import '../../core/theme/app_colors.dart';
+import '../../features/capybara/screens/capybara_sanctuary_screen.dart';
 import '../shell/main_shell.dart';
 
 import '../../main.dart' show initialRoute;
@@ -106,6 +107,7 @@ final router = GoRouter(
     GoRoute(path: '/meditation', builder: (c, s) => const MeditationScreen()),
     GoRoute(path: '/white-noise', builder: (c, s) => const WhiteNoiseScreen()),
     GoRoute(path: '/diet', builder: (c, s) => const DietScreen()),
+    GoRoute(path: '/capybara', builder: (c, s) => const CapybaraSanctuaryScreen()),
 
     GoRoute(path: '/vital-signs', builder: (c, s) => const VitalSignsScreen()),
 

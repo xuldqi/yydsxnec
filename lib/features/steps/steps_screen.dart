@@ -9,6 +9,7 @@ import '../vital_signs/widgets/measure_bottom_sheet.dart';
 import '../fasting/providers/fasting_provider.dart';
 import '../fasting/providers/timer_provider.dart';
 import '../diet/diet_screen.dart';
+import '../capybara/widgets/capybara_hero_card.dart';
 
 class StepsScreen extends ConsumerStatefulWidget {
   const StepsScreen({super.key});
@@ -69,6 +70,8 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   _buildTopHeader(context),
                   const SizedBox(height: 14),
                   _buildCalendarStrip(context),
+                  const SizedBox(height: 16),
+                  const CapybaraHeroCard(),
                   const SizedBox(height: 16),
                   _buildPlanBanner(context, steps),
                   const SizedBox(height: 18),
