@@ -62,7 +62,7 @@ class _CapybaraSanctuaryScreenState
       name: '日式暖汤',
       description: '雾气氤氲，温水滋养',
       cost: 0,
-      gradientColors: [Color(0xFFE0E7FF), Color(0xFFF3E8FF)],
+      gradientColors: [Color(0xFFFAF7F2), Color(0xFFF1EAE0)],
       icon: Icons.hot_tub_rounded,
     ),
     CapybaraScene(
@@ -70,7 +70,7 @@ class _CapybaraSanctuaryScreenState
       name: '绿意草原',
       description: '微风轻抚，青草香气',
       cost: 180,
-      gradientColors: [Color(0xFFDCFCE7), Color(0xFFF0FDF4)],
+      gradientColors: [Color(0xFFF4FAF5), Color(0xFFE8F4EC)],
       icon: Icons.park_rounded,
     ),
     CapybaraScene(
@@ -78,7 +78,7 @@ class _CapybaraSanctuaryScreenState
       name: '静谧卧室',
       description: '柔和夜灯，安心沉睡',
       cost: 260,
-      gradientColors: [Color(0xFFEDE9FE), Color(0xFFF5F3FF)],
+      gradientColors: [Color(0xFFFAF7F5), Color(0xFFF2ECE6)],
       icon: Icons.bedtime_rounded,
     ),
     CapybaraScene(
@@ -86,7 +86,7 @@ class _CapybaraSanctuaryScreenState
       name: '枫叶小径',
       description: '暖金秋阳，悠然散步',
       cost: 350,
-      gradientColors: [Color(0xFFFEF3C7), Color(0xFFFFFBEB)],
+      gradientColors: [Color(0xFFFDF7F0), Color(0xFFF7ECDF)],
       icon: Icons.eco_rounded,
     ),
   ];
@@ -122,7 +122,7 @@ class _CapybaraSanctuaryScreenState
             colors: [
               currentScene.gradientColors.first,
               currentScene.gradientColors.last,
-              const Color(0xFFF3F4F8),
+              const Color(0xFFFBF9F5),
             ],
             stops: const [0.0, 0.45, 1.0],
           ),
@@ -139,24 +139,25 @@ class _CapybaraSanctuaryScreenState
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                          size: 20, color: Color(0xFF1E1B4B)),
+                          size: 20, color: Color(0xFF2D2522)),
                     ),
                     const Text(
                       '水豚小窝',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF1E1B4B),
+                        color: Color(0xFF2D2522),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.9),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: const Color(0xFFECE4D8)),
                         boxShadow: const [
                           BoxShadow(
-                            color: Color(0x08000000),
+                            color: Color(0x087A533E),
                             blurRadius: 8,
                             offset: Offset(0, 2),
                           ),
@@ -171,7 +172,7 @@ class _CapybaraSanctuaryScreenState
                             style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w900,
-                              color: Color(0xFF1E1B4B),
+                              color: Color(0xFF2D2522),
                             ),
                           ),
                         ],
@@ -211,7 +212,7 @@ class _CapybaraSanctuaryScreenState
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF334155),
+                                color: Color(0xFF2D2522),
                                 height: 1.35,
                               ),
                             ),
@@ -226,7 +227,7 @@ class _CapybaraSanctuaryScreenState
                     CapybaraPetWidget(
                       mood: capyState.mood,
                       accessoryId: capyState.currentAccessoryId,
-                      size: 155,
+                      size: 180,
                       onPet: () => ref.read(capybaraProvider.notifier).pet(),
                     ),
 
@@ -242,7 +243,7 @@ class _CapybaraSanctuaryScreenState
                             color: capyState.mood.badgeBg,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                                color: capyState.mood.badgeColor.withValues(alpha: 0.2)),
+                                color: capyState.mood.badgeColor.withValues(alpha: 0.25)),
                           ),
                           child: Text(
                             '状态：${capyState.mood.label} · ${capyState.mood.statusDesc}',
@@ -257,15 +258,16 @@ class _CapybaraSanctuaryScreenState
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.8),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: const Color(0xFFECE4D8)),
                           ),
                           child: Text(
                             '陪伴第 ${capyState.companionshipDays} 天',
                             style: const TextStyle(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xFF64748B),
+                              color: Color(0xFF7D726D),
                             ),
                           ),
                         ),
@@ -279,7 +281,7 @@ class _CapybaraSanctuaryScreenState
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE2E8F0).withValues(alpha: 0.6),
+                  color: const Color(0xFFEFE8DE),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: TabBar(
@@ -295,8 +297,8 @@ class _CapybaraSanctuaryScreenState
                       ),
                     ],
                   ),
-                  labelColor: const Color(0xFF1E1B4B),
-                  unselectedLabelColor: const Color(0xFF64748B),
+                  labelColor: const Color(0xFF2D2522),
+                  unselectedLabelColor: const Color(0xFF8C7E77),
                   labelStyle:
                       const TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
                   unselectedLabelStyle:

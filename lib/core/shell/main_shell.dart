@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-const _active = Color(0xFF6366F1); // Indigo Primary
-const _inactive = Color(0xFF94A3B8); // Slate 400
+const _active = Color(0xFF8D5B4C); // Warm Caramel Primary (Harmonized)
+const _inactive = Color(0xFFA89F99); // Warm Taupe Muted
 
 class MainShell extends StatelessWidget {
   final Widget child;
@@ -61,18 +61,18 @@ class MainShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final idx = _selectedIndex(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F8),
+      backgroundColor: const Color(0xFFFBF9F5),
       extendBody: false,
       body: child,
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
           border: Border(
-            top: BorderSide(color: Color(0xFFE2E8F0), width: 0.6),
+            top: BorderSide(color: Color(0xFFECE4D8), width: 0.6),
           ),
           boxShadow: [
             BoxShadow(
-              color: Color(0x06000000),
+              color: Color(0x087A533E),
               blurRadius: 10,
               offset: Offset(0, -2),
             ),

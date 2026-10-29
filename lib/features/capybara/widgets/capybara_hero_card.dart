@@ -12,21 +12,21 @@ class CapybaraHeroCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final capyState = ref.watch(capybaraProvider);
 
-    // Dynamic scene background gradient
+    // Warm, cohesive Finch/OtterLife aesthetic palette
     List<Color> bgGradient;
     switch (capyState.currentSceneId) {
       case 'grassland':
-        bgGradient = [const Color(0xFFECFDF5), const Color(0xFFF0FDF4)];
+        bgGradient = [const Color(0xFFF6FAF7), const Color(0xFFEAF4EC)];
         break;
       case 'bedroom':
-        bgGradient = [const Color(0xFFF5F3FF), const Color(0xFFEDE9FE)];
+        bgGradient = [const Color(0xFFFAF7F5), const Color(0xFFF1EBE5)];
         break;
       case 'autumn':
-        bgGradient = [const Color(0xFFFFFBEB), const Color(0xFFFEF3C7)];
+        bgGradient = [const Color(0xFFFDF7F1), const Color(0xFFF6ECE0)];
         break;
       case 'onsen':
       default:
-        bgGradient = [const Color(0xFFF3F0FF), const Color(0xFFEBEBFA)];
+        bgGradient = [const Color(0xFFFBF8F5), const Color(0xFFF3ECE4)];
         break;
     }
 
@@ -39,11 +39,11 @@ class CapybaraHeroCard extends ConsumerWidget {
           end: Alignment.bottomRight,
           colors: bgGradient,
         ),
-        borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.8), width: 1.5),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFECE3D7), width: 1.2),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x08000000),
+            color: Color(0x0C7A533E),
             blurRadius: 18,
             offset: Offset(0, 4),
           ),
@@ -61,7 +61,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: capyState.mood.badgeBg,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: capyState.mood.badgeColor.withValues(alpha: 0.2)),
+                  border: Border.all(color: capyState.mood.badgeColor.withValues(alpha: 0.25)),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -85,13 +85,14 @@ class CapybaraHeroCard extends ConsumerWidget {
                 onTap: () => context.push('/capybara'),
                 behavior: HitTestBehavior.opaque,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.85),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: const Color(0xFFEFE8DF)),
                     boxShadow: const [
                       BoxShadow(
-                        color: Color(0x06000000),
+                        color: Color(0x08000000),
                         blurRadius: 8,
                         offset: Offset(0, 2),
                       ),
@@ -99,28 +100,28 @@ class CapybaraHeroCard extends ConsumerWidget {
                   ),
                   child: Row(
                     children: [
-                      const Text('💛', style: TextStyle(fontSize: 13)),
+                      const Text('💛', style: TextStyle(fontSize: 12)),
                       const SizedBox(width: 4),
                       Text(
                         '${capyState.hearts}',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w900,
-                          color: Color(0xFF1E1B4B),
+                          color: Color(0xFF3D342F),
                         ),
                       ),
                       const SizedBox(width: 6),
-                      Container(width: 1, height: 10, color: const Color(0xFFCBD5E1)),
+                      Container(width: 1, height: 10, color: const Color(0xFFE5DDD5)),
                       const SizedBox(width: 6),
                       const Text(
                         '小窝',
                         style: TextStyle(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF6366F1),
+                          color: Color(0xFF8D5B4C),
                         ),
                       ),
-                      const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF6366F1)),
+                      const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF8D5B4C)),
                     ],
                   ),
                 ),
@@ -130,7 +131,7 @@ class CapybaraHeroCard extends ConsumerWidget {
 
           const SizedBox(height: 12),
 
-          // 2. Middle Row: Speech Bubble & Interactive Capybara Avatar
+          // 2. Middle Row: Speech Bubble & Interactive Multi-Frame Capybara
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -140,7 +141,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.only(
@@ -149,6 +150,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                           bottomRight: Radius.circular(18),
                           bottomLeft: Radius.circular(4),
                         ),
+                        border: Border.all(color: const Color(0xFFECE5DC)),
                         boxShadow: const [
                           BoxShadow(
                             color: Color(0x08000000),
@@ -161,9 +163,9 @@ class CapybaraHeroCard extends ConsumerWidget {
                         capyState.activeDialogue,
                         style: const TextStyle(
                           fontSize: 12.5,
-                          height: 1.4,
+                          height: 1.45,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF334155),
+                          color: Color(0xFF2D2522),
                         ),
                       ),
                     ),
@@ -172,14 +174,14 @@ class CapybaraHeroCard extends ConsumerWidget {
                       padding: const EdgeInsets.only(left: 4),
                       child: Row(
                         children: const [
-                          Icon(Icons.touch_app_rounded, size: 13, color: Color(0xFF94A3B8)),
+                          Icon(Icons.touch_app_rounded, size: 13, color: Color(0xFF9E9289)),
                           SizedBox(width: 4),
                           Text(
-                            '轻触水豚摸摸头',
+                            '轻触水豚摸摸头 · 获得爱心能量',
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xFF94A3B8),
+                              color: Color(0xFF9E9289),
                             ),
                           ),
                         ],
@@ -189,13 +191,13 @@ class CapybaraHeroCard extends ConsumerWidget {
                 ),
               ),
 
-              const SizedBox(width: 14),
+              const SizedBox(width: 12),
 
-              // Right: Capybara Pet Interactive
+              // Right: Multi-Frame Animated 2D Capybara
               CapybaraPetWidget(
                 mood: capyState.mood,
                 accessoryId: capyState.currentAccessoryId,
-                size: 110,
+                size: 125,
                 onPet: () => ref.read(capybaraProvider.notifier).pet(),
               ),
             ],

@@ -40,19 +40,19 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F8),
+      backgroundColor: const Color(0xFFFBF9F5),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFEFEBFA), Color(0xFFF3F4F8), Color(0xFFEBEFF9)],
-            stops: [0.0, 0.35, 1.0],
+            colors: [Color(0xFFFDFBF7), Color(0xFFFBF9F5), Color(0xFFF5EFE6)],
+            stops: [0.0, 0.4, 1.0],
           ),
         ),
         child: SafeArea(
           child: RefreshIndicator(
-            color: const Color(0xFF6366F1),
+            color: const Color(0xFF8D5B4C),
             backgroundColor: Colors.white,
             onRefresh: () async {
               await Future.delayed(const Duration(milliseconds: 600));
@@ -98,7 +98,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w900,
-                color: Color(0xFF1E1B4B),
+                color: Color(0xFF2D2522),
                 letterSpacing: -0.5,
               ),
             ),
@@ -107,7 +107,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF64748B),
+                color: Color(0xFF7D726D),
               ),
             ),
           ],
@@ -174,7 +174,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   ],
                   border: Border.all(color: Colors.white.withValues(alpha: 0.9), width: 1.5),
                 ),
-                child: const Icon(Icons.person_rounded, color: Color(0xFF6366F1), size: 22),
+                child: const Icon(Icons.person_rounded, color: Color(0xFF8D5B4C), size: 22),
               ),
             ),
           ],
@@ -193,9 +193,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: Color(0x087A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -220,7 +221,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               decoration: BoxDecoration(
                 gradient: isSelected
                     ? const LinearGradient(
-                        colors: [Color(0xFF6366F1), Color(0xFF818CF8)],
+                        colors: [Color(0xFF8D5B4C), Color(0xFFA26E5F)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       )
@@ -236,7 +237,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: isSelected ? Colors.white.withValues(alpha: 0.85) : const Color(0xFF94A3B8),
+                      color: isSelected ? Colors.white.withValues(alpha: 0.85) : const Color(0xFF8C7E77),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -245,7 +246,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
-                      color: isSelected ? Colors.white : const Color(0xFF1E1B4B),
+                      color: isSelected ? Colors.white : const Color(0xFF2D2522),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -256,7 +257,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                       shape: BoxShape.circle,
                       color: isSelected
                           ? Colors.white
-                          : (isToday ? const Color(0xFF6366F1) : const Color(0xFFCBD5E1)),
+                          : (isToday ? const Color(0xFF8D5B4C) : const Color(0xFFE5DDD5)),
                     ),
                   ),
                 ],
@@ -278,9 +279,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x06000000),
+              color: Color(0x087A533E),
               blurRadius: 16,
               offset: Offset(0, 4),
             ),
@@ -292,12 +294,12 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               width: 42,
               height: 42,
               decoration: const BoxDecoration(
-                color: Color(0xFFDCFCE7),
+                color: Color(0xFFEBF7EE),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.track_changes_rounded,
-                color: Color(0xFF16A34A),
+                color: Color(0xFF2E7D5B),
                 size: 22,
               ),
             ),
@@ -311,7 +313,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF1E1B4B),
+                      color: Color(0xFF2D2522),
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -320,7 +322,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     style: const TextStyle(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF94A3B8),
+                      color: Color(0xFF7D726D),
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -329,9 +331,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                     child: LinearProgressIndicator(
                       value: progress,
                       minHeight: 4,
-                      backgroundColor: const Color(0xFFF1F5F9),
+                      backgroundColor: const Color(0xFFF3EFE9),
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFF00C853),
+                        Color(0xFF2E7D5B),
                       ),
                     ),
                   ),
@@ -343,11 +345,11 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               height: 34,
               padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
-                color: const Color(0xFF00C853),
+                color: const Color(0xFF2E7D5B),
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x3300C853),
+                    color: Color(0x282E7D5B),
                     blurRadius: 8,
                     offset: Offset(0, 2),
                   ),
@@ -382,7 +384,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
+              color: Color(0xFF2D2522),
               letterSpacing: -0.3,
             ),
           ),
@@ -449,7 +451,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
+              color: Color(0xFF2D2522),
               letterSpacing: -0.5,
             ),
           ),
@@ -458,7 +460,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             isActive
                 ? (timer.isOvertime ? '已达成目标' : '剩 ${remainH}h ${remainM}m')
                 : '16:8 方案',
-            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF7D726D)),
           ),
           const SizedBox(height: 14),
           GestureDetector(
@@ -467,11 +469,11 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               width: double.infinity,
               height: 38,
               decoration: BoxDecoration(
-                color: isActive ? const Color(0xFFF97316) : const Color(0xFF00C853),
+                color: isActive ? const Color(0xFFD97706) : const Color(0xFF2E7D5B),
                 borderRadius: BorderRadius.circular(19),
                 boxShadow: [
                   BoxShadow(
-                    color: (isActive ? const Color(0xFFF97316) : const Color(0xFF00C853)).withValues(alpha: 0.3),
+                    color: (isActive ? const Color(0xFFD97706) : const Color(0xFF2E7D5B)).withValues(alpha: 0.25),
                     blurRadius: 8,
                     offset: const Offset(0, 3),
                   ),
@@ -971,11 +973,12 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x06000000),
-              blurRadius: 16,
-              offset: Offset(0, 4),
+              color: Color(0x087A533E),
+              blurRadius: 14,
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -1002,7 +1005,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF1E1B4B),
+                        color: Color(0xFF2D2522),
                       ),
                     ),
                   ],
@@ -1015,13 +1018,13 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                       width: 28,
                       height: 28,
                       decoration: const BoxDecoration(
-                        color: Color(0xFFF1F5F9),
+                        color: Color(0xFFF6F2EB),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.add_rounded,
                         size: 16,
-                        color: Color(0xFF64748B),
+                        color: Color(0xFF7D726D),
                       ),
                     ),
                   ),
@@ -1034,7 +1037,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF7D726D),
                 ),
               ),
               const SizedBox(height: 4),

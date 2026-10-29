@@ -7,8 +7,8 @@ enum CapybaraMood {
     label: '打瞌睡',
     statusDesc: '正在养精蓄锐',
     defaultQuote: '呼噜... 今天还没怎么动呢，带我去散散步吧~',
-    badgeColor: Color(0xFF64748B),
-    badgeBg: Color(0xFFF1F5F9),
+    badgeColor: Color(0xFF8D7B74),
+    badgeBg: Color(0xFFF3ECE7),
   ),
 
   /// 泡温泉：今日喝水充足，暖融融滋养
@@ -16,8 +16,8 @@ enum CapybaraMood {
     label: '泡温泉',
     statusDesc: '水分充足超舒服',
     defaultQuote: '咕嘟咕嘟，温水泡澡最舒服了~ 皮肤水润润！',
-    badgeColor: Color(0xFF0284C7),
-    badgeBg: Color(0xFFE0F2FE),
+    badgeColor: Color(0xFF2E7D9E),
+    badgeBg: Color(0xFFE8F4F8),
   ),
 
   /// 顶橘子：断食进行中或沉浸专注运动中，心如止水
@@ -25,8 +25,8 @@ enum CapybaraMood {
     label: '顶橘子',
     statusDesc: '专注自律沉浸中',
     defaultQuote: '保持专注，心如止水... 头顶的橘子一动不动~',
-    badgeColor: Color(0xFFEA580C),
-    badgeBg: Color(0xFFFFF7ED),
+    badgeColor: Color(0xFFD97706),
+    badgeBg: Color(0xFFFFF4EB),
   ),
 
   /// 神采奕奕：步数达标或今日目标达成，活力绽放
@@ -34,8 +34,8 @@ enum CapybaraMood {
     label: '神采奕奕',
     statusDesc: '元气满满状态佳',
     defaultQuote: '哇！今天的你超级自律，水豚为你感到骄傲！',
-    badgeColor: Color(0xFF16A34A),
-    badgeBg: Color(0xFFDCFCE7),
+    badgeColor: Color(0xFF2E7D5B),
+    badgeBg: Color(0xFFEBF7EE),
   );
 
   final String label;
