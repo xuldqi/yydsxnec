@@ -11,6 +11,9 @@ import '../fasting/providers/timer_provider.dart';
 import '../diet/diet_screen.dart';
 import '../capybara/widgets/capybara_hero_card.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+import '../agreement/privacy_dialog.dart';
+
 class StepsScreen extends ConsumerStatefulWidget {
   const StepsScreen({super.key});
 
@@ -20,6 +23,22 @@ class StepsScreen extends ConsumerStatefulWidget {
 
 class _StepsScreenState extends ConsumerState<StepsScreen> {
   int _selectedDayIndex = 6; // 0..6, 6 is today
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkPrivacyAgreement();
+    });
+  }
+
+  Future<void> _checkPrivacyAgreement() async {
+    final prefs = await SharedPreferences.getInstance();
+    final agreed = prefs.getBool('privacy_agreed') ?? false;
+    if (!agreed && mounted) {
+      await showAppPrivacyDialog(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +59,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         );
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFBF9F5),
+      backgroundColor: const Color(0xFFF3F4F8),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFFFDFBF7), Color(0xFFFBF9F5), Color(0xFFF5EFE6)],
-            stops: [0.0, 0.4, 1.0],
-          ),
-        ),
+        color: const Color(0xFFF3F4F8),
         child: SafeArea(
           child: RefreshIndicator(
             color: const Color(0xFF8D5B4C),
@@ -318,7 +330,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '今日步数 ${(progress * 100).toInt()}% · 剩 ${(10000 - steps).clamp(0, 10000)} 步',
+                    '${(progress * 100).toInt()}% · 还差 ${(10000 - steps).clamp(0, 10000)} 步',
                     style: const TextStyle(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w500,
@@ -380,7 +392,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         const Padding(
           padding: EdgeInsets.only(left: 4, bottom: 12),
           child: Text(
-            '每日行动',
+            '日常',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w900,
@@ -441,7 +453,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.timer_outlined,
       iconColor: const Color(0xFFF97316),
       badgeBgColor: const Color(0xFFFFF7ED),
-      subtitle: '当前状态',
       onTap: () => context.push('/fasting'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -458,7 +469,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           Text(
             isActive
-                ? (timer.isOvertime ? '已达成目标' : '剩 ${remainH}h ${remainM}m')
+                ? (timer.isOvertime ? '已达成目标' : '剩余 ${remainH}h ${remainM}m')
                 : '16:8 方案',
             style: const TextStyle(fontSize: 11.5, color: Color(0xFF7D726D)),
           ),
@@ -481,7 +492,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: Center(
                 child: Text(
-                  isActive ? '计时器' : '开始断食',
+                  isActive ? '计时中' : '开始',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w800,
@@ -508,7 +519,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.restaurant_rounded,
       iconColor: const Color(0xFFEF4444),
       badgeBgColor: const Color(0xFFFEF2F2),
-      subtitle: '还能吃',
       onTap: () => context.push('/diet'),
       onQuickAdd: () => context.push('/diet'),
       child: Column(
@@ -540,7 +550,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            totalCalories > 0 ? '已摄入 $totalCalories 千卡' : '尚无记录',
+            totalCalories > 0 ? '已摄入 $totalCalories 千卡' : '目标 $goalCalories 千卡',
             style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 14),
@@ -577,7 +587,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.pie_chart_rounded,
       iconColor: const Color(0xFF0284C7),
       badgeBgColor: const Color(0xFFE0F2FE),
-      subtitle: '三项比例',
       onTap: () => context.push('/diet'),
       onQuickAdd: () => context.push('/diet'),
       child: Column(
@@ -629,27 +638,62 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.monitor_weight_outlined,
       iconColor: const Color(0xFF10B981),
       badgeBgColor: const Color(0xFFDCFCE7),
-      subtitle: '最新数据',
       onTap: () => context.push('/goal'),
       onQuickAdd: () => context.push('/goal'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            '--',
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
-              letterSpacing: -0.5,
-            ),
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: const [
+              Text(
+                '--',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                'kg',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF94A3B8),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 4),
-          Text(
-            '暂无数据',
+          const SizedBox(height: 4),
+          const Text(
+            '目标 60.0 kg',
             style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
           ),
-          SizedBox(height: 18),
+          const SizedBox(height: 14),
+          GestureDetector(
+            onTap: () => context.push('/goal'),
+            child: Container(
+              width: double.infinity,
+              height: 38,
+              decoration: BoxDecoration(
+                color: const Color(0xFF10B981).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(19),
+              ),
+              child: const Center(
+                child: Text(
+                  '记录',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF059669),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -663,7 +707,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.directions_walk_rounded,
       iconColor: const Color(0xFFEA580C),
       badgeBgColor: const Color(0xFFFFEDD5),
-      subtitle: '今日活动',
       onTap: () => context.push('/sport'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -709,7 +752,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '${(steps * 0.0007).toStringAsFixed(1)}km · ${(steps * 0.038).toInt()}kcal',
+            '${(steps * 0.0007).toStringAsFixed(1)} km · ${(steps * 0.038).toInt()} kcal',
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
@@ -730,7 +773,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.water_drop_rounded,
       iconColor: const Color(0xFF0284C7),
       badgeBgColor: const Color(0xFFE0F2FE),
-      subtitle: '今日饮水',
       onTap: () => context.push('/water'),
       onQuickAdd: () {
         ref.read(dailyHealthProvider.notifier).addWater(250);
@@ -756,7 +798,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               const SizedBox(width: 4),
               const Text(
-                '毫升',
+                'ml',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -767,7 +809,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 4),
           const Text(
-            '/ 2,000毫升',
+            '/ 2,000 ml',
             style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 10),
@@ -829,7 +871,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.nightlight_round,
       iconColor: const Color(0xFF6366F1),
       badgeBgColor: const Color(0xFFEEF2FF),
-      subtitle: '昨晚睡眠',
       onTap: () => context.push('/sleep'),
       onQuickAdd: () => context.push('/sleep'),
       child: Column(
@@ -893,7 +934,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       icon: Icons.favorite_rounded,
       iconColor: const Color(0xFFF43F5E),
       badgeBgColor: const Color(0xFFFFE4E6),
-      subtitle: '静息心率',
       onTap: () => context.push('/vital-signs'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -924,7 +964,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 4),
           const Text(
-            'HRV 42ms · 状态轻松',
+            'HRV 42ms · 轻松',
             style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 14),
@@ -959,7 +999,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     required IconData icon,
     required Color iconColor,
     required Color badgeBgColor,
-    required String subtitle,
+    String? subtitle,
     required Widget child,
     VoidCallback? onTap,
     VoidCallback? onQuickAdd,
@@ -1031,7 +1071,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            if (subtitle.isNotEmpty) ...[
+            if (subtitle != null && subtitle.isNotEmpty) ...[
               Text(
                 subtitle,
                 style: const TextStyle(

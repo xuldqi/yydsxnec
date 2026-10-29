@@ -65,10 +65,8 @@ import '../../core/theme/app_colors.dart';
 import '../../features/capybara/screens/capybara_sanctuary_screen.dart';
 import '../shell/main_shell.dart';
 
-import '../../main.dart' show initialRoute;
-
 final router = GoRouter(
-  initialLocation: initialRoute,
+  initialLocation: '/home',
   routes: [
     GoRoute(path: '/start-logo', builder: (c, s) => const StartLogoScreen()),
     GoRoute(path: '/onboarding', builder: (c, s) => const OnboardingScreen()),

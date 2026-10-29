@@ -61,7 +61,7 @@ class MainShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final idx = _selectedIndex(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFFBF9F5),
+      backgroundColor: const Color(0xFFF3F4F8),
       extendBody: false,
       body: child,
       bottomNavigationBar: Container(

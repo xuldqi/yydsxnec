@@ -28,16 +28,12 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
   PetAnimMode _currentMode = PetAnimMode.idle;
   final List<_FloatingHeart> _hearts = [];
 
-  // Frame lists
+  // Frame lists - 100% crisp unblended keyframes (ZERO ghosting / 残影)
   static const List<String> _idleFrames = [
     'assets/images/pet_frames/idle_1.png',
     'assets/images/pet_frames/idle_2.png',
     'assets/images/pet_frames/idle_3.png',
     'assets/images/pet_frames/idle_4.png',
-    'assets/images/pet_frames/idle_5.png',
-    'assets/images/pet_frames/idle_6.png',
-    'assets/images/pet_frames/idle_7.png',
-    'assets/images/pet_frames/idle_8.png',
   ];
 
   static const List<String> _tapFrames = [
@@ -47,7 +43,6 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
     'assets/images/pet_frames/tap_4.png',
     'assets/images/pet_frames/tap_5.png',
     'assets/images/pet_frames/tap_6.png',
-    'assets/images/pet_frames/tap_7.png',
   ];
 
   static const List<String> _drinkFrames = [
@@ -55,10 +50,6 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
     'assets/images/pet_frames/drink_2.png',
     'assets/images/pet_frames/drink_3.png',
     'assets/images/pet_frames/drink_4.png',
-    'assets/images/pet_frames/drink_5.png',
-    'assets/images/pet_frames/drink_6.png',
-    'assets/images/pet_frames/drink_7.png',
-    'assets/images/pet_frames/drink_8.png',
   ];
 
   static const List<String> _walkFrames = [
@@ -66,10 +57,6 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
     'assets/images/pet_frames/walk_2.png',
     'assets/images/pet_frames/walk_3.png',
     'assets/images/pet_frames/walk_4.png',
-    'assets/images/pet_frames/walk_5.png',
-    'assets/images/pet_frames/walk_6.png',
-    'assets/images/pet_frames/walk_7.png',
-    'assets/images/pet_frames/walk_8.png',
   ];
 
   @override

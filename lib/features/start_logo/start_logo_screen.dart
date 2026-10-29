@@ -40,28 +40,24 @@ class _StartLogoScreenState extends State<StartLogoScreen>
   }
 
   Future<void> _navigate() async {
-    await Future.delayed(const Duration(milliseconds: 1800));
-    if (!mounted) return;
-
     final prefs = await SharedPreferences.getInstance();
     final privacyAgreed = prefs.getBool('privacy_agreed') ?? false;
 
     if (!privacyAgreed) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      if (!mounted) return;
       await _showPrivacyDialog();
     } else {
-      _proceedToNext();
+      if (!mounted) return;
+      context.go('/home');
     }
   }
 
   void _proceedToNext() async {
     final prefs = await SharedPreferences.getInstance();
-    final onboarded = prefs.getBool('onboarded') ?? false;
+    await prefs.setBool('onboarded', true);
     if (!mounted) return;
-    if (!onboarded) {
-      context.go('/onboarding');
-    } else {
-      context.go('/home');
-    }
+    context.go('/home');
   }
 
   Future<void> _launchURL(String url) async {
