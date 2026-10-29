@@ -23,6 +23,8 @@ class StepsScreen extends ConsumerStatefulWidget {
 
 class _StepsScreenState extends ConsumerState<StepsScreen> {
   int _selectedDayIndex = 6; // 0..6, 6 is today
+  int _selectedMonth = DateTime.now().month;
+  int _selectedYear = DateTime.now().year;
 
   @override
   void initState() {
@@ -85,6 +87,8 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   const SizedBox(height: 16),
                   const CapybaraHeroCard(),
                   const SizedBox(height: 16),
+                  _buildPresetScenesCard(context),
+                  const SizedBox(height: 16),
                   _buildPlanBanner(context, steps),
                   const SizedBox(height: 18),
                   _buildHabitCardsStream(context, steps, record),
@@ -97,101 +101,306 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── 1. Top Header (OtterLife Header with Streak & Avatar) ───────────────────
+  // ── 1. Top Header (OtterLife Month Dropdown + Quick Timer) ───────────────────
   Widget _buildTopHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '今天',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w900,
+        GestureDetector(
+          onTap: () => _showMonthPickerSheet(context),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '$_selectedMonth月',
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF2D2522),
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                size: 26,
                 color: Color(0xFF2D2522),
-                letterSpacing: -0.5,
               ),
-            ),
-            Text(
-              DateFormat('M月d日 EEEE', 'zh').format(DateTime.now()),
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF7D726D),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-        Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('🔥 已连续打卡 7 天！状态绝佳，保持住哦~'),
-                    duration: Duration(seconds: 2),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFFF7ED), Color(0xFFFFEDD5)],
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFFDBA74)),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x0A000000),
-                      blurRadius: 8,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
+        GestureDetector(
+          onTap: () => context.push('/count-time'),
+          child: Container(
+            height: 38,
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x087A533E),
+                  blurRadius: 10,
+                  offset: Offset(0, 2),
                 ),
-                child: Row(
-                  children: const [
-                    Icon(Icons.local_fire_department_rounded, size: 15, color: Color(0xFFEA580C)),
-                    SizedBox(width: 4),
-                    Text(
-                      '连续 7 天',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFFC2410C),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: () => context.push('/profile'),
-              child: Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x0F000000),
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    )
-                  ],
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.9), width: 1.5),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(
+                  Icons.timer_outlined,
+                  color: Color(0xFF8D5B4C),
+                  size: 18,
                 ),
-                child: const Icon(Icons.person_rounded, color: Color(0xFF8D5B4C), size: 22),
-              ),
+                SizedBox(width: 5),
+                Text(
+                  '计时',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF2D2522),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ],
+    );
+  }
+
+  void _showMonthPickerSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+          ),
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE5DDD5),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '$_selectedYear 年选择月份',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF2D2522),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedMonth = DateTime.now().month;
+                        _selectedYear = DateTime.now().year;
+                      });
+                      Navigator.pop(ctx);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF3F4F8),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Text(
+                        '回到当月',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF8D5B4C),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 12,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 2.0,
+                ),
+                itemBuilder: (c, idx) {
+                  final m = idx + 1;
+                  final isSelected = m == _selectedMonth;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedMonth = m;
+                      });
+                      Navigator.pop(ctx);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isSelected ? const Color(0xFF8D5B4C) : const Color(0xFFF3F4F8),
+                        borderRadius: BorderRadius.circular(14),
+                        border: isSelected
+                            ? null
+                            : Border.all(color: const Color(0xFFECE4D8), width: 0.8),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '$m月',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
+                          color: isSelected ? Colors.white : const Color(0xFF2D2522),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPresetScenesCard(BuildContext context) {
+    final presets = [
+      {'name': '煮面', 'desc': '5分钟', 'icon': Icons.ramen_dining_rounded, 'color': const Color(0xFFEA580C)},
+      {'name': '呼吸放松', 'desc': '3分钟', 'icon': Icons.self_improvement_rounded, 'color': const Color(0xFF10B981)},
+      {'name': '训练组歇', 'desc': '90秒', 'icon': Icons.fitness_center_rounded, 'color': const Color(0xFF8D5B4C)},
+      {'name': '敷面膜', 'desc': '15分钟', 'icon': Icons.face_retouching_natural_rounded, 'color': const Color(0xFFEC4899)},
+      {'name': '午间小憩', 'desc': '30分钟', 'icon': Icons.bedtime_rounded, 'color': const Color(0xFF6366F1)},
+    ];
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x087A533E),
+            blurRadius: 16,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: const [
+                  Icon(Icons.schedule_rounded, size: 18, color: Color(0xFF8D5B4C)),
+                  SizedBox(width: 6),
+                  Text(
+                    '日常预设场景',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF2D2522),
+                    ),
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: () => context.push('/count-time'),
+                child: Row(
+                  children: const [
+                    Text(
+                      '秒表/计时',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF8D5B4C),
+                      ),
+                    ),
+                    SizedBox(width: 2),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 15,
+                      color: Color(0xFF8D5B4C),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: presets.map((p) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: GestureDetector(
+                    onTap: () => context.push('/count-time?type=${p['name']}'),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAF7F5),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: const Color(0xFFECE4D8), width: 0.8),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(p['icon'] as IconData, size: 16, color: p['color'] as Color),
+                          const SizedBox(width: 6),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                p['name'] as String,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2D2522),
+                                ),
+                              ),
+                              Text(
+                                p['desc'] as String,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF8C7E77),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

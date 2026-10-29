@@ -5,7 +5,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/theme/app_colors.dart';
 
 class CountTimeScreen extends ConsumerStatefulWidget {
   final String? type;
@@ -45,6 +44,22 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    if (widget.type != null) {
+      final match = _presets.firstWhere(
+        (p) => p['name'] == widget.type,
+        orElse: () => {},
+      );
+      if (match.isNotEmpty) {
+        _currentPresetName = match['name'] as String;
+        _totalCountdownSeconds = match['seconds'] as int;
+        _remainingSeconds = _totalCountdownSeconds;
+        _tabController.index = 0;
+      } else if (widget.type == 'stopwatch' ||
+          widget.type == '秒表' ||
+          widget.type == '户外跑') {
+        _tabController.index = 1;
+      }
+    }
   }
 
   @override
@@ -133,17 +148,31 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Row(
-          children: [
-            const Icon(Icons.alarm_on, color: AppColors.primary, size: 28),
-            const SizedBox(width: 8),
-            Text('「$_currentPresetName」时间到！'),
+          children: const [
+            Icon(Icons.alarm_on_rounded, color: Color(0xFF8D5B4C), size: 28),
+            SizedBox(width: 8),
+            Text(
+              '计时完成',
+              style: TextStyle(fontWeight: FontWeight.w900, color: Color(0xFF2D2522)),
+            ),
           ],
         ),
-        content: const Text('倒计时已顺利结束，请进行下一步安排~'),
+        content: Text(
+          '「$_currentPresetName」倒计时已结束，请进行下一步安排~',
+          style: const TextStyle(color: Color(0xFF7D726D), fontSize: 14),
+        ),
         actions: [
-          TextButton(
+          ElevatedButton(
             onPressed: () => Navigator.of(ctx).pop(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF8D5B4C),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              elevation: 0,
+            ),
             child: const Text('好的', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
@@ -167,22 +196,38 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF3F4F8),
       appBar: AppBar(
-        title: const Text('多功能计时器', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          '计时器',
+          style: TextStyle(
+            fontWeight: FontWeight.w900,
+            fontSize: 18,
+            color: Color(0xFF2D2522),
+          ),
+        ),
+        centerTitle: true,
         backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF111827),
+        foregroundColor: const Color(0xFF2D2522),
         elevation: 0,
-        bottom: TabBar(
-          controller: _tabController,
-          labelColor: AppColors.primary,
-          unselectedLabelColor: const Color(0xFF6B7280),
-          indicatorColor: AppColors.primary,
-          labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          tabs: const [
-            Tab(text: '倒计时 (煮面/放松等)'),
-            Tab(text: '秒表计时'),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Container(
+            color: Colors.white,
+            child: TabBar(
+              controller: _tabController,
+              labelColor: const Color(0xFF8D5B4C),
+              unselectedLabelColor: const Color(0xFF7D726D),
+              indicatorColor: const Color(0xFF8D5B4C),
+              indicatorWeight: 3,
+              labelStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15),
+              unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+              tabs: const [
+                Tab(text: '日常预设倒计时'),
+                Tab(text: '运动秒表'),
+              ],
+            ),
+          ),
         ),
       ),
       body: TabBarView(
@@ -223,18 +268,25 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(p['icon'] as IconData, size: 16, color: isSelected ? Colors.white : AppColors.primary),
+                    Icon(p['icon'] as IconData, size: 16, color: isSelected ? Colors.white : const Color(0xFF8D5B4C)),
                     const SizedBox(width: 6),
                     Text(p['name'] as String),
                   ],
                 ),
                 selected: isSelected,
-                selectedColor: AppColors.primary,
+                selectedColor: const Color(0xFF8D5B4C),
                 labelStyle: TextStyle(
-                  color: isSelected ? Colors.white : const Color(0xFF374151),
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  color: isSelected ? Colors.white : const Color(0xFF2D2522),
+                  fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
                 ),
                 backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: isSelected ? const Color(0xFF8D5B4C) : const Color(0xFFECE4D8),
+                    width: 1.0,
+                  ),
+                ),
                 onSelected: (_) => _selectPreset(p['name'] as String, p['seconds'] as int),
               );
             }).toList(),
@@ -252,8 +304,8 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                 child: CircularProgressIndicator(
                   value: progress,
                   strokeWidth: 10,
-                  backgroundColor: const Color(0xFFE5E7EB),
-                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  backgroundColor: const Color(0xFFE5DDD5),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF8D5B4C)),
                 ),
               ),
               Column(
@@ -261,7 +313,7 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                 children: [
                   Text(
                     _currentPresetName,
-                    style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
+                    style: const TextStyle(fontSize: 14, color: Color(0xFF7D726D), fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 6),
                   Text(
@@ -270,7 +322,7 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
                       fontFeatures: [FontFeature.tabularFigures()],
-                      color: Color(0xFF111827),
+                      color: Color(0xFF2D2522),
                     ),
                   ),
                 ],
@@ -286,24 +338,29 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             children: [
               ElevatedButton.icon(
                 onPressed: _resetCountdown,
-                icon: const Icon(Icons.refresh),
+                icon: const Icon(Icons.refresh_rounded),
                 label: const Text('重置'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  foregroundColor: const Color(0xFF374151),
+                  foregroundColor: const Color(0xFF2D2522),
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                    side: const BorderSide(color: Color(0xFFECE4D8)),
+                  ),
                 ),
               ),
               const SizedBox(width: 20),
               ElevatedButton.icon(
                 onPressed: _toggleCountdown,
-                icon: Icon(_countdownRunning ? Icons.pause : Icons.play_arrow),
+                icon: Icon(_countdownRunning ? Icons.pause_rounded : Icons.play_arrow_rounded),
                 label: Text(_countdownRunning ? '暂停' : '开始'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: const Color(0xFF8D5B4C),
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 14),
+                  elevation: 0,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
                 ),
               ),
@@ -325,7 +382,7 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             fontSize: 54,
             fontWeight: FontWeight.bold,
             fontFeatures: [FontFeature.tabularFigures()],
-            color: Color(0xFF111827),
+            color: Color(0xFF2D2522),
           ),
         ),
         const SizedBox(height: 28),
@@ -338,21 +395,26 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
               onPressed: _stopwatchRunning ? _recordLap : _resetStopwatch,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFF374151),
+                foregroundColor: const Color(0xFF2D2522),
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: const BorderSide(color: Color(0xFFECE4D8)),
+                ),
               ),
               child: Text(_stopwatchRunning ? '计次' : '复位'),
             ),
             const SizedBox(width: 24),
             ElevatedButton.icon(
               onPressed: _toggleStopwatch,
-              icon: Icon(_stopwatchRunning ? Icons.pause : Icons.play_arrow),
+              icon: Icon(_stopwatchRunning ? Icons.pause_rounded : Icons.play_arrow_rounded),
               label: Text(_stopwatchRunning ? '暂停' : '开始'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: _stopwatchRunning ? const Color(0xFFEF4444) : AppColors.primary,
+                backgroundColor: _stopwatchRunning ? const Color(0xFFDC2626) : const Color(0xFF8D5B4C),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                elevation: 0,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
@@ -360,30 +422,31 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
         ),
 
         const SizedBox(height: 24),
-        const Divider(height: 1),
+        const Divider(height: 1, color: Color(0xFFECE4D8)),
 
         // 计次记录列表
         Expanded(
           child: _laps.isEmpty
-              ? const Center(child: Text('暂无计次记录', style: TextStyle(color: Colors.grey)))
+              ? const Center(child: Text('暂无计次记录', style: TextStyle(color: Color(0xFF7D726D))))
               : ListView.separated(
                   padding: const EdgeInsets.all(16),
                   itemCount: _laps.length,
-                  separatorBuilder: (context, idx) => const Divider(height: 1),
+                  separatorBuilder: (context, idx) => const Divider(height: 1, color: Color(0xFFECE4D8)),
                   itemBuilder: (context, idx) {
                     final lapIndex = _laps.length - idx;
                     return ListTile(
                       leading: CircleAvatar(
                         radius: 14,
-                        backgroundColor: AppColors.primary.withValues(alpha: 0.1),
-                        child: Text('$lapIndex', style: const TextStyle(fontSize: 12, color: AppColors.primary)),
+                        backgroundColor: const Color(0xFF8D5B4C).withValues(alpha: 0.1),
+                        child: Text('$lapIndex', style: const TextStyle(fontSize: 12, color: Color(0xFF8D5B4C), fontWeight: FontWeight.bold)),
                       ),
-                      title: Text('第 $lapIndex 次记录'),
+                      title: Text('第 $lapIndex 次记录', style: const TextStyle(color: Color(0xFF2D2522))),
                       trailing: Text(
                         _formatDuration(_laps[idx]),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFeatures: [FontFeature.tabularFigures()],
+                          color: Color(0xFF2D2522),
                         ),
                       ),
                     );
