@@ -294,9 +294,10 @@ class ProfileScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x0A000000),
+                    color: Color(0x087A533E),
                     blurRadius: 14,
                     offset: Offset(0, 4),
                   ),
@@ -309,8 +310,8 @@ class ProfileScreen extends ConsumerWidget {
                     '健康周报',
                     style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E1B4B),
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF2D2522),
                     ),
                   ),
                   SizedBox(height: 6),
@@ -318,7 +319,7 @@ class ProfileScreen extends ConsumerWidget {
                     '查看本周睡眠、心情与身体指标洞察',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Color(0xFF64748B),
+                      color: Color(0xFF7D726D),
                       height: 1.3,
                     ),
                     maxLines: 3,
@@ -339,9 +340,10 @@ class ProfileScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x0A000000),
+                    color: Color(0x087A533E),
                     blurRadius: 14,
                     offset: Offset(0, 4),
                   ),
@@ -354,8 +356,8 @@ class ProfileScreen extends ConsumerWidget {
                     '目标管理',
                     style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E1B4B),
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF2D2522),
                     ),
                   ),
                   SizedBox(height: 6),
@@ -363,7 +365,7 @@ class ProfileScreen extends ConsumerWidget {
                     '管理步数、饮水、睡眠等健康目标',
                     style: TextStyle(
                       fontSize: 11,
-                      color: Color(0xFF64748B),
+                      color: Color(0xFF7D726D),
                       height: 1.3,
                     ),
                     maxLines: 3,

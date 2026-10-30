@@ -10,6 +10,7 @@ import '../fasting/providers/fasting_provider.dart';
 import '../fasting/providers/timer_provider.dart';
 import '../diet/diet_screen.dart';
 import '../capybara/widgets/capybara_hero_card.dart';
+import '../capybara/providers/capybara_provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../agreement/privacy_dialog.dart';
@@ -85,11 +86,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   const SizedBox(height: 14),
                   _buildCalendarStrip(context),
                   const SizedBox(height: 16),
-                  const CapybaraHeroCard(),
+                  const CapybaraHeroCard(showHeader: false),
                   const SizedBox(height: 16),
                   _buildPresetScenesCard(context),
-                  const SizedBox(height: 16),
-                  _buildPlanBanner(context, steps),
                   const SizedBox(height: 18),
                   _buildHabitCardsStream(context, steps, record),
                 ],
@@ -101,8 +100,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── 1. Top Header (OtterLife Month Dropdown + Quick Timer) ───────────────────
+  // ── 1. Top Header (OtterLife Month Dropdown + Hearts & Sanctuary) ──────────
   Widget _buildTopHeader(BuildContext context) {
+    final capyState = ref.watch(capybaraProvider);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -130,10 +131,11 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
         ),
         GestureDetector(
-          onTap: () => context.push('/count-time'),
+          onTap: () => context.push('/capybara'),
+          behavior: HitTestBehavior.opaque,
           child: Container(
             height: 38,
-            padding: const EdgeInsets.symmetric(horizontal: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -148,21 +150,29 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(
-                  Icons.timer_outlined,
-                  color: Color(0xFF8D5B4C),
-                  size: 18,
-                ),
-                SizedBox(width: 5),
+              children: [
+                const Text('💛', style: TextStyle(fontSize: 13)),
+                const SizedBox(width: 4),
                 Text(
-                  '计时',
-                  style: TextStyle(
+                  '${capyState.hearts}',
+                  style: const TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF2D2522),
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF3D342F),
                   ),
                 ),
+                const SizedBox(width: 6),
+                Container(width: 1, height: 10, color: const Color(0xFFE5DDD5)),
+                const SizedBox(width: 6),
+                const Text(
+                  '小窝',
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF8D5B4C),
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF8D5B4C)),
               ],
             ),
           ),
@@ -292,115 +302,107 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       {'name': '午间小憩', 'desc': '30分钟', 'icon': Icons.bedtime_rounded, 'color': const Color(0xFF6366F1)},
     ];
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x087A533E),
-            blurRadius: 16,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(Icons.schedule_rounded, size: 17, color: Color(0xFF8D5B4C)),
+                SizedBox(width: 6),
+                Text(
+                  '日常预设场景',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF2D2522),
+                  ),
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () => context.push('/count-time'),
+              child: Row(
                 children: const [
-                  Icon(Icons.schedule_rounded, size: 18, color: Color(0xFF8D5B4C)),
-                  SizedBox(width: 6),
                   Text(
-                    '日常预设场景',
+                    '秒表/计时',
                     style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2D2522),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF8D5B4C),
                     ),
+                  ),
+                  SizedBox(width: 2),
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    size: 15,
+                    color: Color(0xFF8D5B4C),
                   ),
                 ],
               ),
-              GestureDetector(
-                onTap: () => context.push('/count-time'),
-                child: Row(
-                  children: const [
-                    Text(
-                      '秒表/计时',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF8D5B4C),
-                      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: presets.map((p) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: GestureDetector(
+                  onTap: () => context.push('/count-time?type=${p['name']}'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: const Color(0xFFECE4D8), width: 0.8),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x067A533E),
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 2),
-                    Icon(
-                      Icons.chevron_right_rounded,
-                      size: 15,
-                      color: Color(0xFF8D5B4C),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            child: Row(
-              children: presets.map((p) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: GestureDetector(
-                    onTap: () => context.push('/count-time?type=${p['name']}'),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFAF7F5),
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFFECE4D8), width: 0.8),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(p['icon'] as IconData, size: 16, color: p['color'] as Color),
-                          const SizedBox(width: 6),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                p['name'] as String,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color(0xFF2D2522),
-                                ),
+                    child: Row(
+                      children: [
+                        Icon(p['icon'] as IconData, size: 16, color: p['color'] as Color),
+                        const SizedBox(width: 6),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              p['name'] as String,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF2D2522),
                               ),
-                              Text(
-                                p['desc'] as String,
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF8C7E77),
-                                ),
+                            ),
+                            Text(
+                              p['desc'] as String,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF8C7E77),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                );
-              }).toList(),
-            ),
+                ),
+              );
+            }).toList(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -486,109 +488,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             ),
           );
         }),
-      ),
-    );
-  }
-
-  // ── 3. Plan / Goal Hero Banner (OtterLife 目标计划横幅) ─────────────────────
-  Widget _buildPlanBanner(BuildContext context, int steps) {
-    final progress = (steps / 10000).clamp(0.0, 1.0);
-    return GestureDetector(
-      onTap: () => context.push('/goal'),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x087A533E),
-              blurRadius: 16,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: const BoxDecoration(
-                color: Color(0xFFEBF7EE),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.track_changes_rounded,
-                color: Color(0xFF2E7D5B),
-                size: 22,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    '目标计划',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2D2522),
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${(progress * 100).toInt()}% · 还差 ${(10000 - steps).clamp(0, 10000)} 步',
-                    style: const TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF7D726D),
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(3),
-                    child: LinearProgressIndicator(
-                      value: progress,
-                      minHeight: 4,
-                      backgroundColor: const Color(0xFFF3EFE9),
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFF2E7D5B),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 12),
-            Container(
-              height: 34,
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              decoration: BoxDecoration(
-                color: const Color(0xFF2E7D5B),
-                borderRadius: BorderRadius.circular(17),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x282E7D5B),
-                    blurRadius: 8,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: const Center(
-                child: Text(
-                  '新计划',
-                  style: TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

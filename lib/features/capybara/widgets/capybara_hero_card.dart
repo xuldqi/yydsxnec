@@ -6,7 +6,8 @@ import '../models/capybara_state.dart';
 import 'capybara_pet_widget.dart';
 
 class CapybaraHeroCard extends ConsumerWidget {
-  const CapybaraHeroCard({super.key});
+  final bool showHeader;
+  const CapybaraHeroCard({super.key, this.showHeader = true});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,162 +33,112 @@ class CapybaraHeroCard extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: bgGradient,
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFECE3D7), width: 1.2),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0C7A533E),
-            blurRadius: 18,
-            offset: Offset(0, 4),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(22),
       ),
       child: Column(
         children: [
-          // 1. Top row: Status Badge & Hearts Balance + Sanctuary Jump
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Mood Tag
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: capyState.mood.badgeBg,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: capyState.mood.badgeColor.withValues(alpha: 0.25)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildMoodIcon(capyState.mood),
-                    const SizedBox(width: 5),
-                    Text(
-                      capyState.mood.label,
-                      style: TextStyle(
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w800,
-                        color: capyState.mood.badgeColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Hearts Counter & Wardrobe
-              GestureDetector(
-                onTap: () => context.push('/capybara'),
-                behavior: HitTestBehavior.opaque,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          if (showHeader) ...[
+            // Top row: Status Badge & Hearts Balance + Sanctuary Jump
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFEFE8DF)),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x08000000),
-                        blurRadius: 8,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
+                    color: capyState.mood.badgeBg,
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text('💛', style: TextStyle(fontSize: 12)),
+                      _buildMoodIcon(capyState.mood),
                       const SizedBox(width: 4),
                       Text(
-                        '${capyState.hearts}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFF3D342F),
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Container(width: 1, height: 10, color: const Color(0xFFE5DDD5)),
-                      const SizedBox(width: 6),
-                      const Text(
-                        '小窝',
+                        capyState.mood.label,
                         style: TextStyle(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF8D5B4C),
+                          color: capyState.mood.badgeColor,
                         ),
                       ),
-                      const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF8D5B4C)),
                     ],
                   ),
                 ),
-              ),
-            ],
-          ),
+                GestureDetector(
+                  onTap: () => context.push('/capybara'),
+                  behavior: HitTestBehavior.opaque,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.8),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Row(
+                      children: [
+                        const Text('💛', style: TextStyle(fontSize: 11)),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${capyState.hearts}',
+                          style: const TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFF3D342F),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Container(width: 1, height: 9, color: const Color(0xFFE5DDD5)),
+                        const SizedBox(width: 6),
+                        const Text(
+                          '小窝',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF8D5B4C),
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right_rounded, size: 13, color: Color(0xFF8D5B4C)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+          ],
 
-          const SizedBox(height: 12),
-
-          // 2. Middle Row: Speech Bubble & Interactive Multi-Frame Capybara
+          // Middle Row: Speech Bubble & Interactive Multi-Frame Capybara
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Left: Speech Bubble & Interactive hint
+              // Left: Speech Bubble (clean, compact)
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          topRight: Radius.circular(18),
-                          bottomRight: Radius.circular(18),
-                          bottomLeft: Radius.circular(4),
-                        ),
-                        border: Border.all(color: const Color(0xFFECE5DC)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x08000000),
-                            blurRadius: 10,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        capyState.activeDialogue,
-                        style: const TextStyle(
-                          fontSize: 12.5,
-                          height: 1.45,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF2D2522),
-                        ),
-                      ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                      bottomLeft: Radius.circular(4),
                     ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4),
-                      child: Row(
-                        children: const [
-                          Icon(Icons.touch_app_rounded, size: 13, color: Color(0xFF9E9289)),
-                          SizedBox(width: 4),
-                          Text(
-                            '轻触水豚摸摸头 · 获得爱心能量',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF9E9289),
-                            ),
-                          ),
-                        ],
-                      ),
+                  ),
+                  child: Text(
+                    capyState.activeDialogue,
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      height: 1.45,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF2D2522),
                     ),
-                  ],
+                  ),
                 ),
               ),
 
@@ -197,7 +148,7 @@ class CapybaraHeroCard extends ConsumerWidget {
               CapybaraPetWidget(
                 mood: capyState.mood,
                 accessoryId: capyState.currentAccessoryId,
-                size: 125,
+                size: 115,
                 onPet: () => ref.read(capybaraProvider.notifier).pet(),
               ),
             ],
