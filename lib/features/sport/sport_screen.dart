@@ -124,32 +124,42 @@ class _SportScreenState extends ConsumerState<SportScreen> {
           ),
         ),
         Container(
+          width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(22),
+            borderRadius: BorderRadius.circular(24),
             border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x087A533E),
-                blurRadius: 14,
+                blurRadius: 16,
                 offset: Offset(0, 4),
               ),
             ],
           ),
-          child: Wrap(
-            spacing: 0,
-            runSpacing: 16,
+          child: Column(
             children: [
-              _buildQuickSportIcon(Icons.directions_run_rounded, '户外跑', const Color(0xFFF97316)),
-              _buildQuickSportIcon(Icons.directions_walk_rounded, '健走', const Color(0xFF10B981)),
-              _buildQuickSportIcon(Icons.directions_bike_rounded, '骑行', const Color(0xFF0EA5E9)),
-              _buildQuickSportIcon(Icons.fitness_center_rounded, '力量训练', const Color(0xFF6366F1)),
-              _buildQuickSportIcon(Icons.straighten_rounded, '跳绳', const Color(0xFFEC4899)),
-              _buildQuickSportIcon(Icons.self_improvement_rounded, '瑜伽', const Color(0xFF8B5CF6)),
-              _buildQuickSportIcon(Icons.terrain_rounded, '登山', const Color(0xFFEAB308)),
-              _buildQuickSportIcon(Icons.apps_rounded, '更多运动', const Color(0xFF64748B), isMore: true),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildQuickSportIcon(Icons.directions_run_rounded, '户外跑', const Color(0xFFF97316)),
+                  _buildQuickSportIcon(Icons.directions_walk_rounded, '健走', const Color(0xFF10B981)),
+                  _buildQuickSportIcon(Icons.directions_bike_rounded, '骑行', const Color(0xFF0EA5E9)),
+                  _buildQuickSportIcon(Icons.fitness_center_rounded, '力量训练', const Color(0xFF6366F1)),
+                ],
+              ),
+              const SizedBox(height: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildQuickSportIcon(Icons.straighten_rounded, '跳绳', const Color(0xFFEC4899)),
+                  _buildQuickSportIcon(Icons.self_improvement_rounded, '瑜伽', const Color(0xFF8B5CF6)),
+                  _buildQuickSportIcon(Icons.terrain_rounded, '登山', const Color(0xFFEAB308)),
+                  _buildQuickSportIcon(Icons.apps_rounded, '更多运动', const Color(0xFF64748B), isMore: true),
+                ],
+              ),
             ],
           ),
         ),
@@ -158,35 +168,35 @@ class _SportScreenState extends ConsumerState<SportScreen> {
   }
 
   Widget _buildQuickSportIcon(IconData icon, String label, Color bgColor, {bool isMore = false}) {
-    return GestureDetector(
-      onTap: () {
-        if (isMore) {
-          context.push('/movement-library');
-        } else {
-          context.push('/count-time?type=$label');
-        }
-      },
-      child: SizedBox(
-        width: (MediaQuery.of(context).size.width - 48) / 4,
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          if (isMore) {
+            context.push('/movement-library');
+          } else {
+            context.push('/count-time?type=$label');
+          }
+        },
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 50,
-              height: 50,
+              width: 52,
+              height: 52,
               decoration: BoxDecoration(
                 color: bgColor.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: bgColor, size: 24),
+              child: Icon(icon, color: bgColor, size: 26),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 8),
             Text(
               label,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 12.5,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF334155),
+                color: Color(0xFF2D2522),
               ),
             ),
           ],
@@ -198,7 +208,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
   Widget _buildTrainingRecommendSection() {
     final recommends = [
       {'title': '减脂全身激活', 'time': '20分钟', 'cal': '160 kcal', 'tag': '燃脂塑形', 'color': const Color(0xFFF97316)},
-      {'title': '核心力量强化', 'time': '15分钟', 'cal': '120 kcal', 'tag': '腹部核心', 'color': const Color(0xFF6366F1)},
+      {'title': '核心力量强化', 'time': '15分钟', 'cal': '120 kcal', 'tag': '腹部核心', 'color': const Color(0xFF8D5B4C)},
       {'title': '全身放松拉伸', 'time': '10分钟', 'cal': '50 kcal', 'tag': '运动后恢复', 'color': const Color(0xFF10B981)},
     ];
 
@@ -215,18 +225,28 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                 ),
               ),
               GestureDetector(
                 onTap: () => context.push('/training-plan'),
-                child: const Text(
-                  '查看全部',
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Color(0xFF6366F1),
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Row(
+                  children: const [
+                    Text(
+                      '查看全部',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF8D5B4C),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: 2),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 16,
+                      color: Color(0xFF8D5B4C),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -250,9 +270,10 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                     boxShadow: const [
                       BoxShadow(
-                        color: Color(0x0A000000),
+                        color: Color(0x087A533E),
                         blurRadius: 12,
                         offset: Offset(0, 4),
                       ),
@@ -284,18 +305,18 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF1E1B4B),
+                          color: Color(0xFF2D2522),
                         ),
                       ),
                       Row(
                         children: [
-                          Icon(Icons.timer_outlined, size: 14, color: Colors.grey.shade600),
+                          Icon(Icons.timer_outlined, size: 14, color: const Color(0xFF7D726D)),
                           const SizedBox(width: 4),
-                          Text(r['time'] as String, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                          Text(r['time'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF7D726D))),
                           const SizedBox(width: 12),
-                          Icon(Icons.local_fire_department_outlined, size: 14, color: Colors.grey.shade600),
+                          Icon(Icons.local_fire_department_outlined, size: 14, color: const Color(0xFF7D726D)),
                           const SizedBox(width: 4),
-                          Text(r['cal'] as String, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                          Text(r['cal'] as String, style: const TextStyle(fontSize: 12, color: Color(0xFF7D726D))),
                         ],
                       ),
                     ],
@@ -316,9 +337,10 @@ class _SportScreenState extends ConsumerState<SportScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: Color(0x087A533E),
             blurRadius: 14,
             offset: Offset(0, 4),
           ),
@@ -345,13 +367,13 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF1E1B4B),
+                    color: Color(0xFF2D2522),
                   ),
                 ),
                 const SizedBox(height: 4),
                 const Text(
                   '完成今日运动打卡，解锁专属徽章',
-                  style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+                  style: TextStyle(fontSize: 12, color: Color(0xFF7D726D)),
                 ),
                 const SizedBox(height: 10),
                 ClipRRect(
@@ -359,7 +381,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                   child: const LinearProgressIndicator(
                     value: 0.5,
                     minHeight: 6,
-                    backgroundColor: Color(0xFFF1F5F9),
+                    backgroundColor: Color(0xFFE5DDD5),
                     valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF10B981)),
                   ),
                 ),
@@ -372,11 +394,11 @@ class _SportScreenState extends ConsumerState<SportScreen> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
+                color: const Color(0xFFFAF7F5),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
+                border: Border.all(color: const Color(0xFFECE4D8)),
               ),
-              child: const Text('勋章馆', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF475569))),
+              child: const Text('勋章馆', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF8D5B4C))),
             ),
           ),
         ],
