@@ -1,8 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/services/user_profile_provider.dart';
+import '../capybara/providers/capybara_provider.dart';
+import '../capybara/models/capybara_state.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -10,115 +11,133 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userProfile = ref.watch(userProfileProvider);
+    final capyState = ref.watch(capybaraProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F4F8),
-      body: Container(
-        color: const Color(0xFFF3F4F8),
-        child: SafeArea(
-          bottom: false,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      '我的',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xFF2D2522),
-                        letterSpacing: -0.5,
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 顶部大标题 + 设置入口
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    '我的',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      color: Color(0xFF2D2522),
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => context.push('/setting'),
+                    child: Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x087A533E),
+                            blurRadius: 10,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: const Color(0xFFECE4D8),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.settings_outlined,
+                        color: Color(0xFF8D5B4C),
+                        size: 20,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => context.push('/setting'),
-                      child: Container(
-                        width: 42,
-                        height: 42,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x0A000000),
-                              blurRadius: 10,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                          border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.9),
-                              width: 1.5),
+                  ),
+                ],
+              ),
+            ),
+
+            // 主滚动内容区
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 110),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 用户资料卡片 (治愈水豚伴侣风)
+                    _buildUserCard(context, userProfile, capyState),
+                    const SizedBox(height: 14),
+
+                    // 运动周报海报卡片 (温润焦糖风)
+                    _buildWeekSportReportCard(context),
+                    const SizedBox(height: 14),
+
+                    // 双子卡片：健康周报 & 目标管理
+                    _buildTwinCards(context),
+                    const SizedBox(height: 24),
+
+                    // 常用工具
+                    const Padding(
+                      padding: EdgeInsets.only(left: 4, bottom: 12),
+                      child: Text(
+                        '常用工具',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF2D2522),
                         ),
-                        child: const Icon(
-                          Icons.settings_outlined,
-                          color: Color(0xFF8D5B4C),
-                          size: 20,
+                      ),
+                    ),
+                    _buildToolsCard(context),
+                    const SizedBox(height: 14),
+
+                    // 系统设置卡片
+                    _buildSettingsCard(context),
+                    const SizedBox(height: 32),
+
+                    // 底部品牌文字
+                    const Center(
+                      child: Text(
+                        '微刻运动 · 守护您的健康每一天',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFFB8ACA4),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 110),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildUserCard(context, userProfile),
-                      const SizedBox(height: 14),
-                      _buildWeekSportReportCard(context),
-                      const SizedBox(height: 14),
-                      _buildTwinCards(context),
-                      const SizedBox(height: 24),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 4, bottom: 12),
-                        child: Text(
-                          '常用工具',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF64748B),
-                          ),
-                        ),
-                      ),
-                      _buildToolsCard(context),
-                      const SizedBox(height: 14),
-                      _buildSettingsCard(context),
-                      const SizedBox(height: 32),
-                      const Center(
-                        child: Text(
-                          '微刻运动 v1.3.0 · 守护您的健康每一天',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFF94A3B8),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildUserCard(BuildContext context, UserProfile profile) {
+  // ── 1. 用户资料卡片 ────────────────────────────────────────────────────
+  Widget _buildUserCard(
+      BuildContext context, UserProfile profile, CapybaraState capyState) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(26),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: Color(0x087A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -126,28 +145,34 @@ class ProfileScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
+          // 治愈圆形头像 (水豚伴侣或人物)
           Container(
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF6366F1), Color(0xFF818CF8)],
-              ),
+              color: const Color(0xFFFAF3EE),
               shape: BoxShape.circle,
-              boxShadow: [
+              border: Border.all(color: const Color(0xFFEADFD5), width: 2.0),
+              boxShadow: const [
                 BoxShadow(
-                  color: const Color(0xFF6366F1).withValues(alpha: 0.3),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  color: Color(0x0A8D5B4C),
+                  blurRadius: 10,
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
-            child: Icon(
-              profile.gender == 'female'
-                  ? Icons.face_3_rounded
-                  : Icons.face_rounded,
-              color: Colors.white,
-              size: 32,
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/capybara_mascot.png',
+                fit: BoxFit.cover,
+                errorBuilder: (_, _, _) => Icon(
+                  profile.gender == 'female'
+                      ? Icons.face_3_rounded
+                      : Icons.face_rounded,
+                  color: const Color(0xFF8D5B4C),
+                  size: 32,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 16),
@@ -155,38 +180,97 @@ class ProfileScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  profile.nickname,
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E1B4B),
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      profile.nickname.isEmpty ? '微刻旅人' : profile.nickname,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF2D2522),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    GestureDetector(
+                      onTap: () => context.push('/user-info'),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFAF7F5),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                              color: const Color(0xFFECE4D8), width: 0.8),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              '编辑',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF8D5B4C),
+                              ),
+                            ),
+                            SizedBox(width: 1),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              size: 13,
+                              color: Color(0xFF8D5B4C),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
+                // 陪伴徽章胶囊
                 GestureDetector(
-                  onTap: () => context.push('/user-info'),
+                  onTap: () => context.push('/capybara'),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF1F5F9),
+                      color: const Color(0xFFFAF3EE),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '编辑个人资料',
-                          style: TextStyle(
+                          '陪伴水豚 ${capyState.companionshipDays} 天',
+                          style: const TextStyle(
                             fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF64748B),
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF8D5B4C),
                           ),
                         ),
-                        SizedBox(width: 4),
-                        Icon(Icons.chevron_right,
-                            size: 12, color: Color(0xFF64748B)),
+                        const SizedBox(width: 6),
+                        const Text(
+                          '·',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFC7B8AF),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '💛 ${capyState.hearts}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF8D5B4C),
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        const Icon(
+                          Icons.chevron_right_rounded,
+                          size: 13,
+                          color: Color(0xFF8D5B4C),
+                        ),
                       ],
                     ),
                   ),
@@ -199,131 +283,180 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
+  // ── 2. 运动周报海报卡片 (温润温暖色系) ──────────────────────────────────
   Widget _buildWeekSportReportCard(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            const Color(0xFF6366F1).withValues(alpha: 0.1),
-            const Color(0xFF0EA5E9).withValues(alpha: 0.05),
+    return GestureDetector(
+      onTap: () => context.push('/achievement-poster'),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x087A533E),
+              blurRadius: 16,
+              offset: Offset(0, 4),
+            ),
           ],
         ),
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A000000),
-            blurRadius: 16,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Row(
-                children: [
-                  Icon(Icons.insights, size: 18, color: Color(0xFF6366F1)),
-                  SizedBox(width: 6),
-                  Text(
-                    '运动周报',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF6366F1),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF8D5B4C).withValues(alpha: 0.12),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.insights_rounded,
+                        size: 16,
+                        color: Color(0xFF8D5B4C),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () => context.push('/achievement-poster'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 4),
+                    const SizedBox(width: 8),
+                    const Text(
+                      '运动周报',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF8D5B4C),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6366F1),
-                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xFF8D5B4C),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x188D5B4C),
+                        blurRadius: 6,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: const Text(
                     '生成海报',
                     style: TextStyle(
                       fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            const Text(
+              '查看数据分析',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w900,
+                letterSpacing: -0.5,
+                color: Color(0xFF2D2522),
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            '查看数据分析',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1E1B4B),
             ),
-          ),
-          const SizedBox(height: 4),
-          const Text(
-            '点击查看本周步数、热量与习惯对比分析',
-            style: TextStyle(
-              fontSize: 12,
-              color: Color(0xFF64748B),
+            const SizedBox(height: 4),
+            const Text(
+              '点击查看本周步数、热量与习惯对比分析',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF8C7E77),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
+  // ── 3. 双子卡片：健康周报 & 目标管理 ────────────────────────────────────
   Widget _buildTwinCards(BuildContext context) {
     return Row(
       children: [
+        // 健康周报
         Expanded(
           child: GestureDetector(
             onTap: () => context.push('/daily'),
             child: Container(
               padding: const EdgeInsets.all(16),
-              height: 112,
+              height: 120,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x087A533E),
+                    color: Color(0x067A533E),
                     blurRadius: 14,
                     offset: Offset(0, 4),
                   ),
                 ],
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '健康周报',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2D2522),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF10B981)
+                              .withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.auto_graph_rounded,
+                          size: 17,
+                          color: Color(0xFF10B981),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        size: 18,
+                        color: Color(0xFFC7B8AF),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    '查看本周睡眠、心情与身体指标洞察',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF7D726D),
-                      height: 1.3,
-                    ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        '健康周报',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF2D2522),
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        '睡眠、心情与身体洞察',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF8C7E77),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -331,45 +464,76 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 12),
+        // 目标管理
         Expanded(
           child: GestureDetector(
             onTap: () => context.push('/goal'),
             child: Container(
               padding: const EdgeInsets.all(16),
-              height: 112,
+              height: 120,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x087A533E),
+                    color: Color(0x067A533E),
                     blurRadius: 14,
                     offset: Offset(0, 4),
                   ),
                 ],
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '目标管理',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF2D2522),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF8D5B4C)
+                              .withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.track_changes_rounded,
+                          size: 17,
+                          color: Color(0xFF8D5B4C),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.chevron_right_rounded,
+                        size: 18,
+                        color: Color(0xFFC7B8AF),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    '管理步数、饮水、睡眠等健康目标',
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Color(0xFF7D726D),
-                      height: 1.3,
-                    ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        '目标管理',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF2D2522),
+                        ),
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        '管理步数、饮水与睡眠',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF8C7E77),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -380,14 +544,16 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
+  // ── 4. 常用工具卡片 ────────────────────────────────────────────────────
   Widget _buildToolsCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: Color(0x067A533E),
             blurRadius: 14,
             offset: Offset(0, 4),
           ),
@@ -395,61 +561,125 @@ class ProfileScreen extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          _buildNavRow(context, '权限中心',
-              icon: Icons.shield_outlined, route: '/permission'),
-          const Divider(height: 1, color: Color(0xFFF1F5F9)),
-          _buildNavRow(context, '数据导出与管理',
-              icon: Icons.download_rounded, route: '/data-export'),
-          const Divider(height: 1, color: Color(0xFFF1F5F9)),
-          _buildNavRow(context, '勋章成就库',
-              icon: Icons.emoji_events_outlined, route: '/achievements'),
+          _buildNavRow(
+            context,
+            '水豚小窝与装扮',
+            subtitle: '查看宠物状态、装扮与治愈互动',
+            icon: Icons.home_rounded,
+            iconColor: const Color(0xFF8D5B4C),
+            route: '/capybara',
+          ),
+          const Divider(height: 1, color: Color(0xFFF5EFE9)),
+          _buildNavRow(
+            context,
+            '勋章成就库',
+            subtitle: '收集运动徽章与里程碑荣誉',
+            icon: Icons.military_tech_rounded,
+            iconColor: const Color(0xFFF59E0B),
+            route: '/achievements',
+          ),
+          const Divider(height: 1, color: Color(0xFFF5EFE9)),
+          _buildNavRow(
+            context,
+            '数据导出与管理',
+            subtitle: '个人健康与运动数据安全备份',
+            icon: Icons.file_download_outlined,
+            iconColor: const Color(0xFF0EA5E9),
+            route: '/data-export',
+          ),
+          const Divider(height: 1, color: Color(0xFFF5EFE9)),
+          _buildNavRow(
+            context,
+            '权限与后台守护',
+            subtitle: '计步自启动与传感器保活设置',
+            icon: Icons.shield_outlined,
+            iconColor: const Color(0xFF10B981),
+            route: '/permission',
+          ),
         ],
       ),
     );
   }
 
+  // ── 5. 设置卡片 ────────────────────────────────────────────────────────
   Widget _buildSettingsCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x0A000000),
+            color: Color(0x067A533E),
             blurRadius: 14,
             offset: Offset(0, 4),
           ),
         ],
       ),
-      child: _buildNavRow(context, '设置与隐私协议',
-          icon: Icons.settings_outlined, route: '/setting'),
+      child: _buildNavRow(
+        context,
+        '设置与隐私协议',
+        subtitle: '偏好设置、账户安全与关于我们',
+        icon: Icons.settings_outlined,
+        iconColor: const Color(0xFF7D726D),
+        route: '/setting',
+      ),
     );
   }
 
-  Widget _buildNavRow(BuildContext context, String title,
-      {required IconData icon, String? route}) {
+  // ── 统一暖色导航行组件 ─────────────────────────────────────────────────
+  Widget _buildNavRow(
+    BuildContext context,
+    String title, {
+    required String subtitle,
+    required IconData icon,
+    required Color iconColor,
+    String? route,
+  }) {
     return InkWell(
       onTap: route != null ? () => context.push(route) : null,
-      child: Container(
-        height: 56,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      borderRadius: BorderRadius.circular(24),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: const Color(0xFF6366F1)),
-            const SizedBox(width: 12),
+            Container(
+              width: 38,
+              height: 38,
+              decoration: BoxDecoration(
+                color: iconColor.withValues(alpha: 0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, size: 20, color: iconColor),
+            ),
+            const SizedBox(width: 14),
             Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF1E1B4B),
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF2D2522),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF8C7E77),
+                    ),
+                  ),
+                ],
               ),
             ),
             const Icon(
               Icons.chevron_right_rounded,
-              color: Color(0xFFCBD5E1),
+              color: Color(0xFFC7B8AF),
               size: 20,
             ),
           ],
