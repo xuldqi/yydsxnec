@@ -114,6 +114,7 @@ flutter:
     - assets/emoon/
     - assets/emoon/models/
     - assets/emoon/audio/
+    - assets/emoon/audio/noise/
     - assets/emoon/images/
     - assets/images/
     - assets/images/launcher/
