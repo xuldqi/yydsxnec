@@ -1,6 +1,6 @@
 // 计时器页 (OtterLife 治愈极简温润风格)
 // 包含:
-// 1. 倒计时 (场景选择: 煮面、呼吸放松、训练组歇、敷面膜、午间小憩、专注番茄 + 快速增减时长)
+// 1. 倒计时 (场景选择: 内置预设 + 自定义创建计时、快速增减时长)
 // 2. 运动秒表 (分段计次、最佳圈速标记、重置复位)
 
 import 'dart:async';
@@ -8,6 +8,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'count_time_presets_provider.dart';
 
 class CountTimeScreen extends ConsumerStatefulWidget {
   final String? type;
@@ -33,78 +34,40 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
   int _totalCountdownSeconds = 300; // 默认 5分钟 (煮面)
   int _remainingSeconds = 300;
   bool _countdownRunning = false;
+  String _currentPresetId = 'default_noodle';
   String _currentPresetName = '煮面';
   Color _currentPresetColor = const Color(0xFFEA580C);
   IconData _currentPresetIcon = Icons.ramen_dining_rounded;
-
-  final List<Map<String, dynamic>> _presets = [
-    {
-      'name': '煮面',
-      'desc': '5分钟',
-      'seconds': 300,
-      'icon': Icons.ramen_dining_rounded,
-      'color': const Color(0xFFEA580C),
-    },
-    {
-      'name': '呼吸放松',
-      'desc': '3分钟',
-      'seconds': 180,
-      'icon': Icons.self_improvement_rounded,
-      'color': const Color(0xFF10B981),
-    },
-    {
-      'name': '训练组歇',
-      'desc': '90秒',
-      'seconds': 90,
-      'icon': Icons.fitness_center_rounded,
-      'color': const Color(0xFF8D5B4C),
-    },
-    {
-      'name': '敷面膜',
-      'desc': '15分钟',
-      'seconds': 900,
-      'icon': Icons.face_retouching_natural_rounded,
-      'color': const Color(0xFFEC4899),
-    },
-    {
-      'name': '午间小憩',
-      'desc': '30分钟',
-      'seconds': 1800,
-      'icon': Icons.bedtime_rounded,
-      'color': const Color(0xFF6366F1),
-    },
-    {
-      'name': '专注番茄',
-      'desc': '25分钟',
-      'seconds': 1500,
-      'icon': Icons.timer_rounded,
-      'color': const Color(0xFFE11D48),
-    },
-  ];
 
   @override
   void initState() {
     super.initState();
     if (widget.type != null) {
       final query = widget.type!;
-      final match = _presets.firstWhere(
-        (p) => p['name'] == query,
-        orElse: () => {},
-      );
-      if (match.isNotEmpty) {
-        _currentPresetName = match['name'] as String;
-        _totalCountdownSeconds = match['seconds'] as int;
-        _remainingSeconds = _totalCountdownSeconds;
-        _currentPresetColor = match['color'] as Color;
-        _currentPresetIcon = match['icon'] as IconData;
-        _selectedTabIndex = 0;
-      } else if (query == 'stopwatch' ||
+      if (query == 'stopwatch' ||
           query == '秒表' ||
           query == '户外跑' ||
           query == 'running' ||
           query == 'sport') {
         _selectedTabIndex = 1;
       }
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _applyInitialType();
+      if (widget.type == 'create') {
+        _showCreateCustomPresetSheet(context);
+      }
+    });
+  }
+
+  void _applyInitialType() {
+    if (widget.type == null) return;
+    final query = widget.type!;
+    final presets = ref.read(countTimePresetsProvider);
+    final match = presets.where((p) => p.name == query || p.id == query).firstOrNull;
+    if (match != null) {
+      _selectPreset(match);
     }
   }
 
@@ -149,14 +112,15 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
   }
 
   // ── 倒计时控制逻辑 ────────────────────────────────────────────────────
-  void _selectPreset(Map<String, dynamic> p) {
+  void _selectPreset(CountTimePreset p) {
     _countdownTimer?.cancel();
     setState(() {
-      _currentPresetName = p['name'] as String;
-      _totalCountdownSeconds = p['seconds'] as int;
+      _currentPresetId = p.id;
+      _currentPresetName = p.name;
+      _totalCountdownSeconds = p.seconds;
       _remainingSeconds = _totalCountdownSeconds;
-      _currentPresetColor = p['color'] as Color;
-      _currentPresetIcon = p['icon'] as IconData;
+      _currentPresetColor = p.color;
+      _currentPresetIcon = p.iconData;
       _countdownRunning = false;
     });
   }
@@ -268,6 +232,512 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // ── 创建自定义计时 BottomSheet ──────────────────────────────────────
+  void _showCreateCustomPresetSheet(BuildContext context) {
+    final nameController = TextEditingController(text: '');
+    int selectedMinutes = 10;
+    String selectedIconKey = 'timer';
+    Color selectedColor = const Color(0xFF8D5B4C);
+
+    final iconOptions = [
+      {'key': 'timer', 'icon': Icons.timer_rounded, 'label': '计时'},
+      {'key': 'coffee', 'icon': Icons.coffee_rounded, 'label': '咖啡'},
+      {'key': 'book', 'icon': Icons.menu_book_rounded, 'label': '阅读'},
+      {'key': 'fitness', 'icon': Icons.fitness_center_rounded, 'label': '健身'},
+      {'key': 'run', 'icon': Icons.directions_run_rounded, 'label': '跑步'},
+      {'key': 'relax', 'icon': Icons.self_improvement_rounded, 'label': '冥想'},
+      {'key': 'spa', 'icon': Icons.spa_rounded, 'label': '护肤'},
+      {'key': 'nap', 'icon': Icons.bedtime_rounded, 'label': '小憩'},
+      {'key': 'fire', 'icon': Icons.local_fire_department_rounded, 'label': '燃脂'},
+      {'key': 'music', 'icon': Icons.music_note_rounded, 'label': '音乐'},
+    ];
+
+    final colorOptions = [
+      const Color(0xFF8D5B4C), // 暖焦糖
+      const Color(0xFFEA580C), // 落日橙
+      const Color(0xFF10B981), // 清新绿
+      const Color(0xFF0EA5E9), // 晴空蓝
+      const Color(0xFF6366F1), // 丁香紫
+      const Color(0xFFEC4899), // 柔和粉
+      const Color(0xFFF59E0B), // 活力琥珀
+    ];
+
+    final quickNameSuggestions = [
+      '冥想拉伸',
+      '平板支撑',
+      '自律阅读',
+      '眼部休息',
+      '背单词',
+      '泡茶',
+      'HIIT间歇',
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetCtx) {
+        return StatefulBuilder(
+          builder: (ctx, setSheetState) {
+            return Container(
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 24,
+              ),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+              ),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 顶部抓手与标题
+                    Center(
+                      child: Container(
+                        width: 36,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE2D9D0),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          '创建自定义计时',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            color: Color(0xFF2D2522),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => Navigator.of(sheetCtx).pop(),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFF3EFEA),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.close_rounded,
+                                size: 18, color: Color(0xFF7D726D)),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 18),
+
+                    // 1. 计时名称输入
+                    const Text(
+                      '计时名称',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF7D726D),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFAF7F5),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                            color: const Color(0xFFECE4D8), width: 1.0),
+                      ),
+                      child: TextField(
+                        controller: nameController,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF2D2522),
+                        ),
+                        decoration: const InputDecoration(
+                          hintText: '如：冥想、平板支撑、背单词...',
+                          hintStyle: TextStyle(
+                              fontSize: 14, color: Color(0xFFB8ACA4)),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(vertical: 12),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // 快速灵感标签
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 6,
+                      children: quickNameSuggestions.map((tag) {
+                        return GestureDetector(
+                          onTap: () {
+                            setSheetState(() {
+                              nameController.text = tag;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF6F2ED),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  color: const Color(0xFFECE4D8), width: 0.8),
+                            ),
+                            child: Text(
+                              tag,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF7D726D),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // 2. 计时时长设定
+                    const Text(
+                      '计时时长 (分钟)',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF7D726D),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        // 减按钮
+                        GestureDetector(
+                          onTap: () {
+                            if (selectedMinutes > 1) {
+                              setSheetState(() => selectedMinutes--);
+                            }
+                          },
+                          child: Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFAF7F5),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                  color: const Color(0xFFECE4D8), width: 1.0),
+                            ),
+                            child: const Icon(Icons.remove_rounded,
+                                color: Color(0xFF2D2522)),
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        // 当前数值大字
+                        Expanded(
+                          child: Container(
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFAF3EE),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                  color: const Color(0xFF8D5B4C)
+                                      .withValues(alpha: 0.3),
+                                  width: 1.0),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '$selectedMinutes 分钟',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF8D5B4C),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        // 加按钮
+                        GestureDetector(
+                          onTap: () {
+                            if (selectedMinutes < 120) {
+                              setSheetState(() => selectedMinutes++);
+                            }
+                          },
+                          child: Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFAF7F5),
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(
+                                  color: const Color(0xFFECE4D8), width: 1.0),
+                            ),
+                            child: const Icon(Icons.add_rounded,
+                                color: Color(0xFF2D2522)),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // 常用时长快捷选
+                    Wrap(
+                      spacing: 8,
+                      children: [1, 3, 5, 10, 15, 20, 30, 45, 60].map((m) {
+                        final isAct = selectedMinutes == m;
+                        return GestureDetector(
+                          onTap: () => setSheetState(() => selectedMinutes = m),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                              color: isAct
+                                  ? const Color(0xFF8D5B4C)
+                                  : const Color(0xFFFAF7F5),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: isAct
+                                    ? const Color(0xFF8D5B4C)
+                                    : const Color(0xFFECE4D8),
+                                width: 0.8,
+                              ),
+                            ),
+                            child: Text(
+                              '$m分',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: isAct
+                                    ? Colors.white
+                                    : const Color(0xFF7D726D),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // 3. 图标选择
+                    const Text(
+                      '场景图标',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF7D726D),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 52,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: iconOptions.length,
+                        separatorBuilder: (_, _) => const SizedBox(width: 8),
+                        itemBuilder: (ctx, idx) {
+                          final opt = iconOptions[idx];
+                          final isSel = selectedIconKey == opt['key'];
+                          return GestureDetector(
+                            onTap: () => setSheetState(() =>
+                                selectedIconKey = opt['key'] as String),
+                            child: Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: isSel
+                                    ? selectedColor.withValues(alpha: 0.15)
+                                    : const Color(0xFFFAF7F5),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSel
+                                      ? selectedColor
+                                      : const Color(0xFFECE4D8),
+                                  width: isSel ? 1.8 : 1.0,
+                                ),
+                              ),
+                              child: Icon(
+                                opt['icon'] as IconData,
+                                size: 22,
+                                color: isSel
+                                    ? selectedColor
+                                    : const Color(0xFF7D726D),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 18),
+
+                    // 4. 颜色选择
+                    const Text(
+                      '主题颜色',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF7D726D),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: colorOptions.map((c) {
+                        final isSel = selectedColor == c;
+                        return GestureDetector(
+                          onTap: () => setSheetState(() => selectedColor = c),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: c,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSel ? Colors.white : Colors.transparent,
+                                width: 2.5,
+                              ),
+                              boxShadow: [
+                                if (isSel)
+                                  BoxShadow(
+                                    color: c.withValues(alpha: 0.4),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                              ],
+                            ),
+                            child: isSel
+                                ? const Icon(Icons.check_rounded,
+                                    size: 18, color: Colors.white)
+                                : null,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
+                    const SizedBox(height: 26),
+
+                    // 保存并应用
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          final name = nameController.text.trim().isEmpty
+                              ? '$selectedMinutes分钟计时'
+                              : nameController.text.trim();
+                          final totalSecs = selectedMinutes * 60;
+
+                          final newPreset = await ref
+                              .read(countTimePresetsProvider.notifier)
+                              .addPreset(
+                                name: name,
+                                seconds: totalSecs,
+                                iconKey: selectedIconKey,
+                                color: selectedColor,
+                              );
+
+                          if (sheetCtx.mounted) {
+                            Navigator.of(sheetCtx).pop();
+                          }
+
+                          _selectPreset(newPreset);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF8D5B4C),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: const Text(
+                          '保存并开始计时',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // ── 删除自定义预设确认框 ──────────────────────────────────────────────
+  void _confirmDeleteCustomPreset(CountTimePreset preset) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: const Text(
+          '删除计时预设',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+            color: Color(0xFF2D2522),
+          ),
+        ),
+        content: Text(
+          '确定要删除自定义计时「${preset.name}」吗？',
+          style: const TextStyle(fontSize: 14, color: Color(0xFF7D726D)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text(
+              '取消',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF7D726D),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.of(ctx).pop();
+              await ref
+                  .read(countTimePresetsProvider.notifier)
+                  .deletePreset(preset.id);
+              final remaining = ref.read(countTimePresetsProvider);
+              if (_currentPresetId == preset.id && remaining.isNotEmpty) {
+                _selectPreset(remaining.first);
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFDC2626),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              elevation: 0,
+            ),
+            child: const Text('删除', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+        ],
       ),
     );
   }
@@ -393,7 +863,9 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
           style: TextStyle(
             fontSize: 13,
             fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-            color: isSelected ? const Color(0xFF8D5B4C) : const Color(0xFF7D726D),
+            color: isSelected
+                ? const Color(0xFF8D5B4C)
+                : const Color(0xFF7D726D),
           ),
         ),
       ),
@@ -402,6 +874,8 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
 
   // ── 1. 倒计时视图 ─────────────────────────────────────────────────────
   Widget _buildCountdownView() {
+    final presets = ref.watch(countTimePresetsProvider);
+
     final progress = _totalCountdownSeconds > 0
         ? (_remainingSeconds / _totalCountdownSeconds).clamp(0.0, 1.0)
         : 0.0;
@@ -412,19 +886,42 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // 计时场景列表 (横向卡片)
+          // 计时场景列表 (横向卡片，支持左右滑动 + 自定义新建)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 4, bottom: 10),
-                child: Text(
-                  '选择计时场景',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF2D2522),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(left: 4, bottom: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '选择计时场景',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF2D2522),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => _showCreateCustomPresetSheet(context),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.add_circle_outline_rounded,
+                              size: 15, color: Color(0xFF8D5B4C)),
+                          SizedBox(width: 3),
+                          Text(
+                            '自定义',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF8D5B4C),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -432,13 +929,87 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: _presets.length,
+                  itemCount: presets.length + 1, // +1 for the "+ 自定义" tile
                   separatorBuilder: (_, _) => const SizedBox(width: 10),
                   itemBuilder: (context, index) {
-                    final p = _presets[index];
-                    final isSelected = _currentPresetName == p['name'];
+                    // 最后一个展示 "+ 自定义"
+                    if (index == presets.length) {
+                      return GestureDetector(
+                        onTap: () => _showCreateCustomPresetSheet(context),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(
+                              color: const Color(0xFF8D5B4C)
+                                  .withValues(alpha: 0.4),
+                              width: 1.0,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x067A533E),
+                                blurRadius: 6,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF8D5B4C)
+                                      .withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.add_rounded,
+                                  size: 22,
+                                  color: Color(0xFF8D5B4C),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    '自定义',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFF8D5B4C),
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    '新建计时',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF8C7E77),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+
+                    final p = presets[index];
+                    final isSelected =
+                        _currentPresetId == p.id || _currentPresetName == p.name;
                     return GestureDetector(
                       onTap: () => _selectPreset(p),
+                      onLongPress: p.isCustom
+                          ? () => _confirmDeleteCustomPreset(p)
+                          : null,
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 180),
                         padding: const EdgeInsets.symmetric(
@@ -471,14 +1042,14 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                               width: 38,
                               height: 38,
                               decoration: BoxDecoration(
-                                color: (p['color'] as Color)
+                                color: p.color
                                     .withValues(alpha: isSelected ? 0.2 : 0.1),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
-                                p['icon'] as IconData,
+                                p.iconData,
                                 size: 20,
-                                color: p['color'] as Color,
+                                color: p.color,
                               ),
                             ),
                             const SizedBox(width: 10),
@@ -486,21 +1057,46 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  p['name'] as String,
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: isSelected
-                                        ? FontWeight.w800
-                                        : FontWeight.w600,
-                                    color: isSelected
-                                        ? const Color(0xFF8D5B4C)
-                                        : const Color(0xFF2D2522),
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      p.name,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: isSelected
+                                            ? FontWeight.w800
+                                            : FontWeight.w600,
+                                        color: isSelected
+                                            ? const Color(0xFF8D5B4C)
+                                            : const Color(0xFF2D2522),
+                                      ),
+                                    ),
+                                    if (p.isCustom) ...[
+                                      const SizedBox(width: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 1),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF8D5B4C)
+                                              .withValues(alpha: 0.12),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                        child: const Text(
+                                          '自定',
+                                          style: TextStyle(
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xFF8D5B4C),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  p['desc'] as String,
+                                  p.desc,
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w500,
@@ -512,6 +1108,20 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                                 ),
                               ],
                             ),
+                            if (p.isCustom) ...[
+                              const SizedBox(width: 4),
+                              GestureDetector(
+                                onTap: () => _confirmDeleteCustomPreset(p),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 4),
+                                  child: Icon(
+                                    Icons.close_rounded,
+                                    size: 14,
+                                    color: const Color(0xFFB8ACA4),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ],
                         ),
                       ),

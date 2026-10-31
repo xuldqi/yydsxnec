@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../count_time/count_time_presets_provider.dart';
 
 class SportScreen extends ConsumerStatefulWidget {
   const SportScreen({super.key});
@@ -84,14 +85,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
   }
 
   Widget _buildTimingScenesSection() {
-    final presets = [
-      {'name': '煮面', 'desc': '5分钟', 'icon': Icons.ramen_dining_rounded, 'color': const Color(0xFFEA580C)},
-      {'name': '呼吸放松', 'desc': '3分钟', 'icon': Icons.self_improvement_rounded, 'color': const Color(0xFF10B981)},
-      {'name': '训练组歇', 'desc': '90秒', 'icon': Icons.fitness_center_rounded, 'color': const Color(0xFF8D5B4C)},
-      {'name': '敷面膜', 'desc': '15分钟', 'icon': Icons.face_retouching_natural_rounded, 'color': const Color(0xFFEC4899)},
-      {'name': '午间小憩', 'desc': '30分钟', 'icon': Icons.bedtime_rounded, 'color': const Color(0xFF6366F1)},
-      {'name': '专注番茄', 'desc': '25分钟', 'icon': Icons.timer_rounded, 'color': const Color(0xFFE11D48)},
-    ];
+    final presets = ref.watch(countTimePresetsProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,12 +133,79 @@ class _SportScreenState extends ConsumerState<SportScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            itemCount: presets.length,
+            itemCount: presets.length + 1,
             separatorBuilder: (_, _) => const SizedBox(width: 10),
             itemBuilder: (context, index) {
+              // 最后一项是自定义新建
+              if (index == presets.length) {
+                return GestureDetector(
+                  onTap: () => context.push('/count-time?type=create'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: const Color(0xFF8D5B4C).withValues(alpha: 0.35),
+                        width: 1.0,
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x067A533E),
+                          blurRadius: 10,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 38,
+                          height: 38,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF8D5B4C).withValues(alpha: 0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.add_rounded,
+                            size: 22,
+                            color: Color(0xFF8D5B4C),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              '自定义',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF8D5B4C),
+                              ),
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              '新建计时',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF8C7E77),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
               final p = presets[index];
               return GestureDetector(
-                onTap: () => context.push('/count-time?type=${p['name']}'),
+                onTap: () => context.push('/count-time?type=${p.id}'),
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
@@ -166,13 +227,13 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                         width: 38,
                         height: 38,
                         decoration: BoxDecoration(
-                          color: (p['color'] as Color).withValues(alpha: 0.12),
+                          color: p.color.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                          p['icon'] as IconData,
+                          p.iconData,
                           size: 20,
-                          color: p['color'] as Color,
+                          color: p.color,
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -180,17 +241,41 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            p['name'] as String,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xFF2D2522),
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                p.name,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF2D2522),
+                                ),
+                              ),
+                              if (p.isCustom) ...[
+                                const SizedBox(width: 4),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4, vertical: 1),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF8D5B4C)
+                                        .withValues(alpha: 0.12),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: const Text(
+                                    '自定',
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0xFF8D5B4C),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ],
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            p['desc'] as String,
+                            p.desc,
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
