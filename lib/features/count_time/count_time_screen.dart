@@ -797,11 +797,10 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             child: Container(
               width: 42,
               height: 42,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
                     color: Color(0x067A533E),
                     blurRadius: 8,
@@ -942,11 +941,6 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18),
-                            border: Border.all(
-                              color: const Color(0xFF8D5B4C)
-                                  .withValues(alpha: 0.4),
-                              width: 1.0,
-                            ),
                             boxShadow: const [
                               BoxShadow(
                                 color: Color(0x067A533E),
@@ -1019,16 +1013,10 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                               ? const Color(0xFFFAF3EE)
                               : Colors.white,
                           borderRadius: BorderRadius.circular(18),
-                          border: Border.all(
-                            color: isSelected
-                                ? const Color(0xFF8D5B4C)
-                                : const Color(0xFFECE4D8),
-                            width: isSelected ? 1.6 : 1.0,
-                          ),
                           boxShadow: [
                             BoxShadow(
                               color: isSelected
-                                  ? const Color(0x128D5B4C)
+                                  ? const Color(0x188D5B4C)
                                   : const Color(0x067A533E),
                               blurRadius: isSelected ? 10 : 6,
                               offset: const Offset(0, 2),
@@ -1141,10 +1129,9 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x087A533E),
+                  color: Color(0x067A533E),
                   blurRadius: 18,
                   offset: Offset(0, 4),
                 ),
@@ -1274,7 +1261,6 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(22),
-                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                     boxShadow: const [
                       BoxShadow(
                         color: Color(0x067A533E),
@@ -1356,11 +1342,10 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
         decoration: BoxDecoration(
           color: const Color(0xFFFAF7F5),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFECE4D8), width: 0.8),
         ),
         child: Text(
           label,
@@ -1386,10 +1371,9 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x087A533E),
+                  color: Color(0x067A533E),
                   blurRadius: 18,
                   offset: Offset(0, 4),
                 ),
@@ -1454,8 +1438,6 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                         decoration: BoxDecoration(
                           color: const Color(0xFFFAF7F5),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                              color: const Color(0xFFECE4D8), width: 1.0),
                         ),
                         child: Center(
                           child: Text(
@@ -1536,7 +1518,6 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
               boxShadow: const [
                 BoxShadow(
                   color: Color(0x067A533E),
@@ -1578,24 +1559,21 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                 : ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemCount: _laps.length,
-                    separatorBuilder: (_, _) =>
-                        const Divider(height: 1, color: Color(0xFFF1EBE4)),
+                    separatorBuilder: (_, _) => const SizedBox(height: 6),
                     itemBuilder: (context, idx) {
                       final lapNum = _laps.length - idx;
                       final lapTime = _laps[idx];
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
                           children: [
                             Container(
                               width: 32,
                               height: 32,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFFAF3EE),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFFAF3EE),
                                 shape: BoxShape.circle,
-                                border: Border.all(
-                                    color: const Color(0xFFECE4D8), width: 0.8),
                               ),
                               child: Center(
                                 child: Text(

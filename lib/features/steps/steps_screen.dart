@@ -137,10 +137,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x087A533E),
+                  color: Color(0x067A533E),
                   blurRadius: 10,
                   offset: Offset(0, 2),
                 ),
@@ -301,10 +300,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x087A533E),
+            color: Color(0x067A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -1006,10 +1004,9 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x087A533E),
+              color: Color(0x067A533E),
               blurRadius: 14,
               offset: Offset(0, 3),
             ),

@@ -40,20 +40,16 @@ class ProfileScreen extends ConsumerWidget {
                     child: Container(
                       width: 42,
                       height: 42,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                             color: Color(0x087A533E),
                             blurRadius: 10,
                             offset: Offset(0, 3),
                           ),
                         ],
-                        border: Border.all(
-                          color: const Color(0xFFECE4D8),
-                          width: 1.0,
-                        ),
                       ),
                       child: const Icon(
                         Icons.settings_outlined,
@@ -74,15 +70,15 @@ class ProfileScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // 用户资料卡片 (治愈水豚伴侣风)
+                    // 用户资料卡片 (去框化轻盈设计)
                     _buildUserCard(context, userProfile, capyState),
                     const SizedBox(height: 14),
 
-                    // 运动周报海报卡片 (温润焦糖风)
+                    // 运动周报海报卡片 (无框温润浮动卡)
                     _buildWeekSportReportCard(context),
                     const SizedBox(height: 14),
 
-                    // 双子卡片：健康周报 & 目标管理
+                    // 双子卡片：健康周报 & 目标管理 (无框化)
                     _buildTwinCards(context),
                     const SizedBox(height: 24),
 
@@ -101,7 +97,7 @@ class ProfileScreen extends ConsumerWidget {
                     _buildToolsCard(context),
                     const SizedBox(height: 14),
 
-                    // 系统设置卡片
+                    // 系统设置卡片 (无框化)
                     _buildSettingsCard(context),
                     const SizedBox(height: 32),
 
@@ -134,10 +130,9 @@ class ProfileScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x087A533E),
+            color: Color(0x067A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -149,11 +144,10 @@ class ProfileScreen extends ConsumerWidget {
           Container(
             width: 64,
             height: 64,
-            decoration: BoxDecoration(
-              color: const Color(0xFFFAF3EE),
+            decoration: const BoxDecoration(
+              color: Color(0xFFFAF3EE),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFEADFD5), width: 2.0),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   color: Color(0x0A8D5B4C),
                   blurRadius: 10,
@@ -195,12 +189,10 @@ class ProfileScreen extends ConsumerWidget {
                       onTap: () => context.push('/user-info'),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
+                            horizontal: 9, vertical: 3),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFAF7F5),
+                          color: const Color(0xFFFAF3EE),
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: const Color(0xFFECE4D8), width: 0.8),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -209,7 +201,7 @@ class ProfileScreen extends ConsumerWidget {
                               '编辑',
                               style: TextStyle(
                                 fontSize: 11,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                                 color: Color(0xFF8D5B4C),
                               ),
                             ),
@@ -226,12 +218,12 @@ class ProfileScreen extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                // 陪伴徽章胶囊
+                // 陪伴徽章胶囊 (无边框，采用温润浅底)
                 GestureDetector(
                   onTap: () => context.push('/capybara'),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                        horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFAF3EE),
                       borderRadius: BorderRadius.circular(12),
@@ -283,7 +275,7 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  // ── 2. 运动周报海报卡片 (温润温暖色系) ──────────────────────────────────
+  // ── 2. 运动周报海报卡片 (无框温润浮动卡) ──────────────────────────────────
   Widget _buildWeekSportReportCard(BuildContext context) {
     return GestureDetector(
       onTap: () => context.push('/achievement-poster'),
@@ -292,10 +284,9 @@ class ProfileScreen extends ConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x087A533E),
+              color: Color(0x067A533E),
               blurRadius: 16,
               offset: Offset(0, 4),
             ),
@@ -335,7 +326,7 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                      const EdgeInsets.symmetric(horizontal: 13, vertical: 5),
                   decoration: BoxDecoration(
                     color: const Color(0xFF8D5B4C),
                     borderRadius: BorderRadius.circular(14),
@@ -383,7 +374,7 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  // ── 3. 双子卡片：健康周报 & 目标管理 ────────────────────────────────────
+  // ── 3. 双子卡片：健康周报 & 目标管理 (无框化) ────────────────────────────
   Widget _buildTwinCards(BuildContext context) {
     return Row(
       children: [
@@ -397,7 +388,6 @@ class ProfileScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0x067A533E),
@@ -474,7 +464,6 @@ class ProfileScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0x067A533E),
@@ -544,13 +533,13 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  // ── 4. 常用工具卡片 ────────────────────────────────────────────────────
+  // ── 4. 常用工具卡片 (移除所有内部硬分割线，由呼吸留白自然分隔) ──────────
   Widget _buildToolsCard(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
             color: Color(0x067A533E),
@@ -569,7 +558,6 @@ class ProfileScreen extends ConsumerWidget {
             iconColor: const Color(0xFF8D5B4C),
             route: '/capybara',
           ),
-          const Divider(height: 1, color: Color(0xFFF5EFE9)),
           _buildNavRow(
             context,
             '勋章成就库',
@@ -578,7 +566,6 @@ class ProfileScreen extends ConsumerWidget {
             iconColor: const Color(0xFFF59E0B),
             route: '/achievements',
           ),
-          const Divider(height: 1, color: Color(0xFFF5EFE9)),
           _buildNavRow(
             context,
             '数据导出与管理',
@@ -587,7 +574,6 @@ class ProfileScreen extends ConsumerWidget {
             iconColor: const Color(0xFF0EA5E9),
             route: '/data-export',
           ),
-          const Divider(height: 1, color: Color(0xFFF5EFE9)),
           _buildNavRow(
             context,
             '权限与后台守护',
@@ -601,13 +587,13 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  // ── 5. 设置卡片 ────────────────────────────────────────────────────────
+  // ── 5. 设置卡片 (无框化) ────────────────────────────────────────────────
   Widget _buildSettingsCard(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
             color: Color(0x067A533E),
@@ -627,7 +613,7 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  // ── 统一暖色导航行组件 ─────────────────────────────────────────────────
+  // ── 统一暖色无界导航行组件 ─────────────────────────────────────────────
   Widget _buildNavRow(
     BuildContext context,
     String title, {
@@ -638,9 +624,9 @@ class ProfileScreen extends ConsumerWidget {
   }) {
     return InkWell(
       onTap: route != null ? () => context.push(route) : null,
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(20),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
             Container(

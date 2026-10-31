@@ -186,13 +186,12 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
                     child: Container(
                       width: 42,
                       height: 42,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
-                            color: Color(0x087A533E),
+                            color: Color(0x067A533E),
                             blurRadius: 10,
                             offset: Offset(0, 3),
                           ),
@@ -491,10 +490,9 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
     return ListTile(
       leading: Container(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: const Color(0xFFFAF7F5),
+        decoration: const BoxDecoration(
+          color: Color(0xFFFAF7F5),
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xFFECE4D8)),
         ),
         child: Icon(icon, color: const Color(0xFF8D5B4C), size: 18),
       ),
@@ -521,10 +519,9 @@ class _WhiteWidgetCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x087A533E),
+            color: Color(0x067A533E),
             blurRadius: 16,
             offset: Offset(0, 4),
           ),
@@ -559,10 +556,9 @@ class _MiniGoalCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x087A533E),
+              color: Color(0x067A533E),
               blurRadius: 12,
               offset: Offset(0, 4),
             ),

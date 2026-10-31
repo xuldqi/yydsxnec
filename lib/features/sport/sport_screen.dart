@@ -60,17 +60,16 @@ class _SportScreenState extends ConsumerState<SportScreen> {
             child: Container(
               width: 42,
               height: 42,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color(0x0A000000),
+                    color: Color(0x087A533E),
                     blurRadius: 10,
                     offset: Offset(0, 3),
                   ),
                 ],
-                border: Border.all(color: Colors.white.withValues(alpha: 0.9), width: 1.5),
               ),
               child: const Icon(
                 Icons.insert_chart_outlined_rounded,
@@ -145,10 +144,6 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(
-                        color: const Color(0xFF8D5B4C).withValues(alpha: 0.35),
-                        width: 1.0,
-                      ),
                       boxShadow: const [
                         BoxShadow(
                           color: Color(0x067A533E),
@@ -211,7 +206,6 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                     boxShadow: const [
                       BoxShadow(
                         color: Color(0x067A533E),
@@ -344,10 +338,9 @@ class _SportScreenState extends ConsumerState<SportScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x087A533E),
+                color: Color(0x067A533E),
                 blurRadius: 16,
                 offset: Offset(0, 4),
               ),
@@ -484,10 +477,9 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                     boxShadow: const [
                       BoxShadow(
-                        color: Color(0x087A533E),
+                        color: Color(0x067A533E),
                         blurRadius: 12,
                         offset: Offset(0, 4),
                       ),
@@ -551,10 +543,9 @@ class _SportScreenState extends ConsumerState<SportScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x087A533E),
+            color: Color(0x067A533E),
             blurRadius: 14,
             offset: Offset(0, 4),
           ),
@@ -606,11 +597,10 @@ class _SportScreenState extends ConsumerState<SportScreen> {
           GestureDetector(
             onTap: () => context.push('/achievements'),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: const Color(0xFFFAF7F5),
+                color: const Color(0xFFFAF3EE),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFECE4D8)),
               ),
               child: const Text('勋章馆', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF8D5B4C))),
             ),
