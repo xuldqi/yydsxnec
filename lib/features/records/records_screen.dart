@@ -10,7 +10,6 @@ import '../../l10n/app_l10n_ext.dart';
 // ─── Design Tokens ────────────────────────────────────────────────────────
 const _p1    = Color(0xFF0EA5E9); // Sky Blue (Steps)
 const _p2    = Color(0xFF8B5CF6); // Purple (Sleep)
-const _p3    = Color(0xFF10B981); // Emerald (Activity)
 const _p4    = Color(0xFFF59E0B); // Amber (Calories)
 const _water = Color(0xFF06B6D4); // Cyan (Water)
 
@@ -30,7 +29,7 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
       children: [
         _OverviewCard(range: _range),
         const SizedBox(height: 22),
-        _sectionTitle('今日四维健康'),
+        _sectionTitle('健康指标'),
         const SizedBox(height: 12),
         _FourDimRow(range: _range),
         const SizedBox(height: 22),
@@ -82,7 +81,6 @@ class _OverviewCard extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
         boxShadow: const [
           BoxShadow(
             color: Color(0x087A533E),
@@ -218,7 +216,6 @@ class _OverviewCard extends ConsumerWidget {
     decoration: BoxDecoration(
       color: const Color(0xFFFAF7F2),
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: const Color(0xFFECE4D8)),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -283,7 +280,6 @@ class _Tile extends StatelessWidget {
           offset: Offset(0, 4),
         ),
       ],
-      border: Border.all(color: const Color(0xFFECE4D8)),
     ),
     child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Container(width: 38, height: 38,
@@ -309,7 +305,6 @@ class _ChartCard extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(22),
-      border: Border.all(color: const Color(0xFFECE4D8)),
       boxShadow: const [
         BoxShadow(
           color: Color(0x067A533E),
@@ -381,7 +376,7 @@ Widget _lineChart(List<FlSpot> data, Color c, {double? maxY}) {
     ),
     lineBarsData: [LineChartBarData(
       spots: data, isCurved: true, curveSmoothness: 0.4, color: c, barWidth: 3,
-      dotData: FlDotData(show: true, getDotPainter: (s, _, __, ___) =>
+      dotData: FlDotData(show: true, getDotPainter: (s, _, _, _) =>
         FlDotCirclePainter(radius: 4, color: Colors.white, strokeWidth: 2.5, strokeColor: c)),
       belowBarData: BarAreaData(show: true, gradient: LinearGradient(
         begin: Alignment.topCenter, end: Alignment.bottomCenter,

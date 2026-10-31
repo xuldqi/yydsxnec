@@ -28,9 +28,9 @@ class _ReportsHostScreenState extends State<ReportsHostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F8),
+      backgroundColor: const Color(0xFFF8F5F0),
       body: Container(
-        color: const Color(0xFFF3F4F8),
+        color: const Color(0xFFF8F5F0),
         child: SafeArea(
           bottom: false,
           child: Column(

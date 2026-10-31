@@ -6,7 +6,7 @@ enum CapybaraMood {
   sleepy(
     label: '打瞌睡',
     statusDesc: '正在养精蓄锐',
-    defaultQuote: '呼噜... 今天还没怎么动呢，带我去散散步吧~',
+    defaultQuote: '呼噜... 今天还没怎么动呢，一起去散散步吧~',
     badgeColor: Color(0xFF8D7B74),
     badgeBg: Color(0xFFF3ECE7),
   ),
@@ -33,7 +33,7 @@ enum CapybaraMood {
   energetic(
     label: '神采奕奕',
     statusDesc: '元气满满状态佳',
-    defaultQuote: '哇！今天的你超级自律，卡皮巴拉为你感到骄傲！',
+    defaultQuote: '哇！今天的你超级自律，为你感到骄傲！',
     badgeColor: Color(0xFF2E7D5B),
     badgeBg: Color(0xFFEBF7EE),
   );

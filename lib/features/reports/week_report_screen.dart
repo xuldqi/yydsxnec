@@ -55,7 +55,6 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
                     boxShadow: const [
                       BoxShadow(
                         color: Color(0x087A533E),
@@ -269,14 +268,19 @@ class _WeekReportInnerScreenState extends ConsumerState<WeekReportInnerScreen> {
         decoration: BoxDecoration(
           color: sel ? _getMainColor() : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: sel ? Colors.transparent : const Color(0xFFECE4D8)),
           boxShadow: sel ? [
             BoxShadow(
               color: _getMainColor().withValues(alpha: 0.25),
               blurRadius: 8,
               offset: const Offset(0, 3),
             )
-          ] : null,
+          ] : const [
+            BoxShadow(
+              color: Color(0x067A533E),
+              blurRadius: 8,
+              offset: Offset(0, 2),
+            )
+          ],
         ),
         child: Text(label, style: TextStyle(
           color: sel ? Colors.white : const Color(0xFF7D726D),
@@ -300,7 +304,6 @@ class _SectionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFECE4D8)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x067A533E),
@@ -411,7 +414,7 @@ class _TrendChart extends StatelessWidget {
       ),
       lineBarsData: [LineChartBarData(
         spots: spots, isCurved: true, color: color, barWidth: 3,
-        dotData: FlDotData(show: true, getDotPainter: (s, _, __, ___) =>
+        dotData: FlDotData(show: true, getDotPainter: (s, _, _, _) =>
           FlDotCirclePainter(radius: 4, color: Colors.white, strokeWidth: 2.5, strokeColor: color)),
         belowBarData: BarAreaData(show: true, gradient: LinearGradient(
           begin: Alignment.topCenter, end: Alignment.bottomCenter,
@@ -433,7 +436,6 @@ class _DimBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFECE4D8)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x067A533E),

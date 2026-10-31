@@ -24,7 +24,7 @@ class CapybaraNotifier extends StateNotifier<CapybaraState> {
   static const List<String> _petQuotes = [
     '呼噜呼噜... 好舒服呀~ (满意眯眼)',
     '摸摸头，今天也要心平气和、健康自律哦~',
-    '卡皮巴拉最喜欢你了！继续保持好状态！',
+    '最喜欢你了！继续保持好状态！',
     '咕噜噜，有你的陪伴，今天又是治愈的一天。',
     '大大的拥抱！记得按时喝水多走动哦~',
     '心如止水，波澜不惊... 诶，被你摸笑了！',
