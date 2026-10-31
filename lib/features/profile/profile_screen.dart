@@ -104,7 +104,7 @@ class ProfileScreen extends ConsumerWidget {
                     // 底部品牌文字
                     const Center(
                       child: Text(
-                        '微刻运动 · 守护您的健康每一天',
+                        '微刻运动',
                         style: TextStyle(
                           fontSize: 12,
                           color: Color(0xFFB8ACA4),
@@ -239,16 +239,7 @@ class ProfileScreen extends ConsumerWidget {
                             color: Color(0xFF8D5B4C),
                           ),
                         ),
-                        const SizedBox(width: 6),
-                        const Text(
-                          '·',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFC7B8AF),
-                          ),
-                        ),
-                        const SizedBox(width: 6),
+                        const SizedBox(width: 8),
                         Text(
                           '💛 ${capyState.hearts}',
                           style: const TextStyle(
@@ -257,7 +248,7 @@ class ProfileScreen extends ConsumerWidget {
                             color: Color(0xFF8D5B4C),
                           ),
                         ),
-                        const SizedBox(width: 2),
+                        const SizedBox(width: 4),
                         const Icon(
                           Icons.chevron_right_rounded,
                           size: 13,

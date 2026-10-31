@@ -895,7 +895,7 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      '选择计时场景',
+                      '计时场景',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,

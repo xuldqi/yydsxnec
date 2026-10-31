@@ -690,7 +690,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '${(steps * 0.0007).toStringAsFixed(1)} km · ${(steps * 0.038).toInt()} kcal',
+            '${(steps * 0.0007).toStringAsFixed(1)} km   ${(steps * 0.038).toInt()} kcal',
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
@@ -831,7 +831,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 4),
           const Text(
-            '深睡 2h 10m · 优',
+            '深睡 2h 10m',
             style: TextStyle(
               fontSize: 11.5,
               fontWeight: FontWeight.w700,
@@ -891,7 +891,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               SizedBox(width: 4),
               Text(
-                'bpm · 正常',
+                'bpm',
                 style: TextStyle(
                   fontSize: 11.5,
                   fontWeight: FontWeight.w700,
@@ -902,7 +902,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 4),
           const Text(
-            'HRV 42ms · 轻松',
+            'HRV 42ms',
             style: TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 14),

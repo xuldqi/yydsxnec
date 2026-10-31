@@ -169,7 +169,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '目标 ${(progress * 100).toInt()}% · 消耗 ${(steps * 0.038).toInt()} kcal',
+                      '目标 ${(progress * 100).toInt()}%   消耗 ${(steps * 0.038).toInt()} kcal',
                       style: const TextStyle(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w500,
@@ -177,7 +177,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    // 「去走路」快捷入口胶囊按键
+                    // 「去走路」快捷入口胶囊按键（去掉前后双图标包裹，仅保留简洁文字与单向右箭头）
                     GestureDetector(
                       onTap: () => context.push('/count-time?type=健走'),
                       child: Container(
@@ -197,9 +197,6 @@ class CapybaraHeroCard extends ConsumerWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: const [
-                            Icon(Icons.directions_walk_rounded,
-                                size: 15, color: Colors.white),
-                            SizedBox(width: 4),
                             Text(
                               '去走路',
                               style: TextStyle(
@@ -210,7 +207,7 @@ class CapybaraHeroCard extends ConsumerWidget {
                             ),
                             SizedBox(width: 2),
                             Icon(Icons.chevron_right_rounded,
-                                size: 13, color: Colors.white),
+                                size: 14, color: Colors.white),
                           ],
                         ),
                       ),

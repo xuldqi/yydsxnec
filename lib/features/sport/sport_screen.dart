@@ -577,7 +577,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  '完成今日运动打卡，解锁专属徽章',
+                  '今日打卡进展与专属荣誉',
                   style: TextStyle(fontSize: 12, color: Color(0xFF7D726D)),
                 ),
                 const SizedBox(height: 10),
