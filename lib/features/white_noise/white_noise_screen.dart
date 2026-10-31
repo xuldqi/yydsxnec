@@ -35,13 +35,13 @@ class _WhiteNoiseScreenState extends State<WhiteNoiseScreen> {
   bool _expanded = false;
 
   static const _noises = <WhiteNoise>[
-    WhiteNoise(id: 'rain', name: '雨声', asset: 'audio/noise_rain.wav',
+    WhiteNoise(id: 'rain', name: '雨声', asset: 'audio/noise_rain.mp3',
       description: '柔和雨滴声，助眠放松', color: AppColors.info, icon: Icons.umbrella_rounded),
-    WhiteNoise(id: 'fire', name: '壁炉', asset: 'audio/noise_fire.wav',
+    WhiteNoise(id: 'fire', name: '壁炉', asset: 'audio/noise_fire.mp3',
       description: '篝火燃烧的温暖声音', color: AppColors.warning, icon: Icons.local_fire_department_rounded),
-    WhiteNoise(id: 'waves', name: '海浪', asset: 'audio/noise_waves.wav',
+    WhiteNoise(id: 'waves', name: '海浪', asset: 'audio/noise_waves.mp3',
       description: '轻柔海浪拍岸声', color: AppColors.sportOther, icon: Icons.waves_rounded),
-    WhiteNoise(id: 'wind', name: '风声', asset: 'audio/noise_wind.wav',
+    WhiteNoise(id: 'wind', name: '风声', asset: 'audio/noise_wind.mp3',
       description: '微风轻拂的白噪音', color: AppColors.sportOther, icon: Icons.air_rounded),
   ];
 
