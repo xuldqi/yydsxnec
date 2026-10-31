@@ -56,7 +56,7 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '可输入或点击按钮调节 ($min ~ $max $unit)',
+                    '范围：$min ~ $max $unit',
                     style: const TextStyle(fontSize: 12, color: Color(0xFF7D726D)),
                   ),
                   const SizedBox(height: 16),
