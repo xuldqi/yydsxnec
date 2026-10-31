@@ -1547,7 +1547,7 @@ class _CountTimeScreenState extends ConsumerState<CountTimeScreen>
                         ),
                         SizedBox(height: 4),
                         Text(
-                          '启动秒表后点击「分段计次」记录圈速',
+                          '启动秒表后可记录分段圈速',
                           style: TextStyle(
                             fontSize: 12,
                             color: Color(0xFFB8ACA4),

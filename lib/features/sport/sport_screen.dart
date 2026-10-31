@@ -107,7 +107,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 child: Row(
                   children: const [
                     Text(
-                      '全部计时',
+                      '全部',
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xFF8D5B4C),
@@ -312,7 +312,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 child: Row(
                   children: const [
                     Text(
-                      '全部运动库',
+                      '运动库',
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xFF8D5B4C),
@@ -428,7 +428,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                '推荐训练计划',
+                '推荐训练',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w800,
@@ -440,7 +440,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 child: Row(
                   children: const [
                     Text(
-                      '查看全部',
+                      '全部',
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xFF8D5B4C),
@@ -568,7 +568,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  '运动成就挑战',
+                  '运动成就',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,

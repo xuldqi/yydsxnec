@@ -338,7 +338,7 @@ class _CapybaraSanctuaryScreenState
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       itemCount: _allAccessories.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
         final item = _allAccessories[index];
         final isUnlocked = capyState.unlockedAccessories.contains(item.id);
@@ -437,7 +437,7 @@ class _CapybaraSanctuaryScreenState
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       itemCount: _allScenes.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
         final scene = _allScenes[index];
         final isUnlocked = capyState.unlockedScenes.contains(scene.id);
@@ -573,7 +573,7 @@ class _CapybaraSanctuaryScreenState
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       itemCount: tasks.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, _) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
         final t = tasks[index];
         return Container(

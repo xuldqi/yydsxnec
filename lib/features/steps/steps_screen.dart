@@ -400,8 +400,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 children: [
                   _buildFastingCard(context),
                   const SizedBox(height: 14),
-                  _buildNutrientsCard(context),
-                  const SizedBox(height: 14),
                   _buildStepsCard(context, steps),
                   const SizedBox(height: 14),
                   _buildSleepCard(context, record),
@@ -524,7 +522,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                   letterSpacing: -0.5,
                 ),
               ),
@@ -534,7 +532,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF8C7E77),
                 ),
               ),
             ],
@@ -542,7 +540,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           Text(
             totalCalories > 0 ? '已摄入 $totalCalories 千卡' : '目标 $goalCalories 千卡',
-            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 14),
           GestureDetector(
@@ -571,57 +569,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── Card: Nutrients (营养素) ─────────────────────────────────────────────────
-  Widget _buildNutrientsCard(BuildContext context) {
-    return _buildActionCard(
-      title: '营养素',
-      icon: Icons.pie_chart_rounded,
-      iconColor: const Color(0xFF0284C7),
-      badgeBgColor: const Color(0xFFE0F2FE),
-      onTap: () => context.push('/diet'),
-      onQuickAdd: () => context.push('/diet'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildMacroRow('蛋白质', '0%', const Color(0xFF10B981)),
-          const SizedBox(height: 8),
-          _buildMacroRow('脂肪', '0%', const Color(0xFFF59E0B)),
-          const SizedBox(height: 8),
-          _buildMacroRow('碳水', '0%', const Color(0xFF38BDF8)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMacroRow(String label, String percent, Color color) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: Color(0xFF64748B))),
-            Text(percent, style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xFF1E1B4B))),
-          ],
-        ),
-        const SizedBox(height: 3),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(2),
-          child: Container(
-            height: 4,
-            width: double.infinity,
-            color: color.withValues(alpha: 0.2),
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: 0.05,
-              child: Container(color: color),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   // ── Card: Weight (体重) ─────────────────────────────────────────────────────
   Widget _buildWeightCard(BuildContext context) {
     return _buildActionCard(
@@ -643,7 +590,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                   letterSpacing: -0.5,
                 ),
               ),
@@ -653,7 +600,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF8C7E77),
                 ),
               ),
             ],
@@ -661,7 +608,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           const Text(
             '目标 60.0 kg',
-            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 14),
           GestureDetector(
@@ -711,7 +658,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                   letterSpacing: -0.5,
                 ),
               ),
@@ -721,7 +668,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF8C7E77),
                 ),
               ),
             ],
@@ -729,7 +676,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           Text(
             '目标 ${(progress * 100).toInt()}%',
-            style: const TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: const TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 10),
           ClipRRect(
@@ -747,7 +694,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF64748B),
+              color: Color(0xFF8C7E77),
             ),
           ),
         ],
@@ -793,7 +740,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF94A3B8),
+                  color: Color(0xFF8C7E77),
                 ),
               ),
             ],
@@ -801,7 +748,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           const Text(
             '/ 2,000 ml',
-            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 10),
           ClipRRect(
@@ -876,7 +823,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                   letterSpacing: -0.5,
                 ),
               ),
@@ -938,7 +885,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E1B4B),
+                  color: Color(0xFF2D2522),
                   letterSpacing: -0.5,
                 ),
               ),
@@ -956,7 +903,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           const SizedBox(height: 4),
           const Text(
             'HRV 42ms · 轻松',
-            style: TextStyle(fontSize: 11.5, color: Color(0xFF94A3B8)),
+            style: TextStyle(fontSize: 11.5, color: Color(0xFF8C7E77)),
           ),
           const SizedBox(height: 14),
           GestureDetector(

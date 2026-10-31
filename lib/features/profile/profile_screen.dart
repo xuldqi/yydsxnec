@@ -351,7 +351,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 14),
             const Text(
-              '查看数据分析',
+              '数据洞察与趋势',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
@@ -361,7 +361,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 4),
             const Text(
-              '点击查看本周步数、热量与习惯对比分析',
+              '本周步数、消耗与生活习惯对比',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -553,7 +553,7 @@ class ProfileScreen extends ConsumerWidget {
           _buildNavRow(
             context,
             '水豚小窝与装扮',
-            subtitle: '查看宠物状态、装扮与治愈互动',
+            subtitle: '专属宠物装扮与治愈互动',
             icon: Icons.home_rounded,
             iconColor: const Color(0xFF8D5B4C),
             route: '/capybara',

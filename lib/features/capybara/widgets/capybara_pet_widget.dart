@@ -64,7 +64,7 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
     super.initState();
     _animController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1400),
+      duration: const Duration(milliseconds: 2200),
     )..repeat();
 
     _syncModeWithMood();
@@ -79,19 +79,10 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
   }
 
   void _syncModeWithMood() {
-    if (widget.mood == CapybaraMood.onsen) {
-      _currentMode = PetAnimMode.drink;
-      _animController.duration = const Duration(milliseconds: 1200);
-      _animController.repeat();
-    } else if (widget.mood == CapybaraMood.energetic) {
-      _currentMode = PetAnimMode.walk;
-      _animController.duration = const Duration(milliseconds: 1000);
-      _animController.repeat();
-    } else {
-      _currentMode = PetAnimMode.idle;
-      _animController.duration = const Duration(milliseconds: 1400);
-      _animController.repeat();
-    }
+    // 站立待机作为默认主态，安静温润治愈
+    _currentMode = PetAnimMode.idle;
+    _animController.duration = const Duration(milliseconds: 2200);
+    _animController.repeat();
   }
 
   @override
@@ -157,7 +148,6 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
       case PetAnimMode.walk:
         return _walkFrames;
       case PetAnimMode.idle:
-      default:
         return _idleFrames;
     }
   }
@@ -201,16 +191,14 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
                 final frameIndex = (_animController.value * frames.length).floor().clamp(0, frames.length - 1);
                 final currentFrameAsset = frames[frameIndex];
 
-                // Disney-style micro squash & stretch for life-like softness
+                // Gentle breathing micro-animation (purely vertical, zero horizontal displacement)
                 final t = _animController.value * 2 * pi;
-                final scaleY = 1.0 + sin(t) * 0.02;
-                final scaleX = 1.0 - sin(t) * 0.015;
-                final bobY = -sin(t).abs() * 2.5;
+                final scaleY = 1.0 + sin(t) * 0.015;
+                final bobY = -sin(t).abs() * 1.5;
 
                 return Transform.translate(
                   offset: Offset(0, bobY),
                   child: Transform.scale(
-                    scaleX: scaleX,
                     scaleY: scaleY,
                     alignment: Alignment.bottomCenter,
                     child: Image.asset(
@@ -220,7 +208,7 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
                       fit: BoxFit.contain,
                       gaplessPlayback: true,
                       filterQuality: FilterQuality.medium,
-                      errorBuilder: (_, __, ___) => _buildFallback(),
+                      errorBuilder: (_, _, _) => _buildFallback(),
                     ),
                   ),
                 );
@@ -247,82 +235,7 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
   }
 
   Widget _buildMoodIndicator() {
-    switch (widget.mood) {
-      case CapybaraMood.sleepy:
-        return Positioned(
-          top: 0,
-          right: widget.size * 0.08,
-          child: AnimatedBuilder(
-            animation: _animController,
-            builder: (context, _) {
-              final opacity = (0.35 + _animController.value * 0.65).clamp(0.0, 1.0);
-              return Opacity(
-                opacity: opacity,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF3EEEA),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xFFE5DDD5)),
-                  ),
-                  child: const Text(
-                    '💤 zZz',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF8C7E77),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      case CapybaraMood.onsen:
-        return Positioned(
-          top: 2,
-          right: widget.size * 0.06,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-            decoration: BoxDecoration(
-              color: const Color(0xFFE8F4F8),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFFCFE5ED)),
-            ),
-            child: const Text(
-              '💧 润喉中',
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w800,
-                color: Color(0xFF2E7D9E),
-              ),
-            ),
-          ),
-        );
-      case CapybaraMood.energetic:
-        return Positioned(
-          top: 2,
-          right: widget.size * 0.06,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-            decoration: BoxDecoration(
-              color: const Color(0xFFEDF7ED),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFFD3EAD3)),
-            ),
-            child: const Text(
-              '🐾 漫步中',
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w800,
-                color: Color(0xFF388E3C),
-              ),
-            ),
-          ),
-        );
-      case CapybaraMood.orange:
-        return const SizedBox.shrink();
-    }
+    return const SizedBox.shrink();
   }
 
   Widget _buildAccessoryBadge(String accId) {

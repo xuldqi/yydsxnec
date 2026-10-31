@@ -247,7 +247,7 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
                                   Row(
                                     children: const [
                                       Text(
-                                        '点击修改目标',
+                                        '修改',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
@@ -314,10 +314,14 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 14),
                               Text(
-                                '建议每日保持 ${_stepGoal - 2000 > 0 ? _stepGoal - 2000 : 2000}~${_stepGoal + 2000} 步',
-                                style: const TextStyle(fontSize: 12, color: Color(0xFF7D726D)),
+                                '每日目标 $_stepGoal 步',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF8C7E77),
+                                ),
                               ),
                             ],
                           ),
@@ -444,7 +448,7 @@ class _GoalScreenState extends ConsumerState<GoalScreen> {
                           const Padding(
                             padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
                             child: Text(
-                              '目标中心',
+                              '相关服务',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
