@@ -87,8 +87,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                   _buildCalendarStrip(context),
                   const SizedBox(height: 16),
                   const CapybaraHeroCard(showHeader: false),
-                  const SizedBox(height: 16),
-                  _buildPresetScenesCard(context),
                   const SizedBox(height: 18),
                   _buildHabitCardsStream(context, steps, record),
                 ],
@@ -290,119 +288,6 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildPresetScenesCard(BuildContext context) {
-    final presets = [
-      {'name': '煮面', 'desc': '5分钟', 'icon': Icons.ramen_dining_rounded, 'color': const Color(0xFFEA580C)},
-      {'name': '呼吸放松', 'desc': '3分钟', 'icon': Icons.self_improvement_rounded, 'color': const Color(0xFF10B981)},
-      {'name': '训练组歇', 'desc': '90秒', 'icon': Icons.fitness_center_rounded, 'color': const Color(0xFF8D5B4C)},
-      {'name': '敷面膜', 'desc': '15分钟', 'icon': Icons.face_retouching_natural_rounded, 'color': const Color(0xFFEC4899)},
-      {'name': '午间小憩', 'desc': '30分钟', 'icon': Icons.bedtime_rounded, 'color': const Color(0xFF6366F1)},
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: const [
-                Icon(Icons.schedule_rounded, size: 17, color: Color(0xFF8D5B4C)),
-                SizedBox(width: 6),
-                Text(
-                  '日常预设场景',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF2D2522),
-                  ),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () => context.push('/count-time'),
-              child: Row(
-                children: const [
-                  Text(
-                    '秒表/计时',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF8D5B4C),
-                    ),
-                  ),
-                  SizedBox(width: 2),
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    size: 15,
-                    color: Color(0xFF8D5B4C),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          child: Row(
-            children: presets.map((p) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: GestureDetector(
-                  onTap: () => context.push('/count-time?type=${p['name']}'),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: const Color(0xFFECE4D8), width: 0.8),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x067A533E),
-                          blurRadius: 8,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(p['icon'] as IconData, size: 16, color: p['color'] as Color),
-                        const SizedBox(width: 6),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              p['name'] as String,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF2D2522),
-                              ),
-                            ),
-                            Text(
-                              p['desc'] as String,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF8C7E77),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      ],
     );
   }
 

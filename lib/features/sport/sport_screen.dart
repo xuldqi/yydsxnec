@@ -25,6 +25,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    _buildTimingScenesSection(),
                     _buildQuickSportSection(),
                     _buildTrainingRecommendSection(),
                     _buildSportChallengeCard(),
@@ -79,6 +80,134 @@ class _SportScreenState extends ConsumerState<SportScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildTimingScenesSection() {
+    final presets = [
+      {'name': '煮面', 'desc': '5分钟', 'icon': Icons.ramen_dining_rounded, 'color': const Color(0xFFEA580C)},
+      {'name': '呼吸放松', 'desc': '3分钟', 'icon': Icons.self_improvement_rounded, 'color': const Color(0xFF10B981)},
+      {'name': '训练组歇', 'desc': '90秒', 'icon': Icons.fitness_center_rounded, 'color': const Color(0xFF8D5B4C)},
+      {'name': '敷面膜', 'desc': '15分钟', 'icon': Icons.face_retouching_natural_rounded, 'color': const Color(0xFFEC4899)},
+      {'name': '午间小憩', 'desc': '30分钟', 'icon': Icons.bedtime_rounded, 'color': const Color(0xFF6366F1)},
+      {'name': '专注番茄', 'desc': '25分钟', 'icon': Icons.timer_rounded, 'color': const Color(0xFFE11D48)},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '计时场景',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF2D2522),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => context.push('/count-time'),
+                child: Row(
+                  children: const [
+                    Text(
+                      '全部计时',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xFF8D5B4C),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: 2),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 16,
+                      color: Color(0xFF8D5B4C),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 64,
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: presets.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              final p = presets[index];
+              return GestureDetector(
+                onTap: () => context.push('/count-time?type=${p['name']}'),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: const Color(0xFFECE4D8), width: 1.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x067A533E),
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          color: (p['color'] as Color).withValues(alpha: 0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          p['icon'] as IconData,
+                          size: 20,
+                          color: p['color'] as Color,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            p['name'] as String,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF2D2522),
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            p['desc'] as String,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF8C7E77),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 
@@ -258,7 +387,7 @@ class _SportScreenState extends ConsumerState<SportScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: recommends.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
               final r = recommends[index];
               final color = r['color'] as Color;
