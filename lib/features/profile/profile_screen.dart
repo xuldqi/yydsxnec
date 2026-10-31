@@ -232,7 +232,7 @@ class ProfileScreen extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '陪伴水豚 ${capyState.companionshipDays} 天',
+                          '陪伴卡皮巴拉 ${capyState.companionshipDays} 天',
                           style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
@@ -543,7 +543,7 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           _buildNavRow(
             context,
-            '水豚小窝与装扮',
+            '卡皮巴拉小窝与装扮',
             subtitle: '专属宠物装扮与治愈互动',
             icon: Icons.home_rounded,
             iconColor: const Color(0xFF8D5B4C),

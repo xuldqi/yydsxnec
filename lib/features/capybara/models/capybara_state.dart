@@ -33,7 +33,7 @@ enum CapybaraMood {
   energetic(
     label: '神采奕奕',
     statusDesc: '元气满满状态佳',
-    defaultQuote: '哇！今天的你超级自律，水豚为你感到骄傲！',
+    defaultQuote: '哇！今天的你超级自律，卡皮巴拉为你感到骄傲！',
     badgeColor: Color(0xFF2E7D5B),
     badgeBg: Color(0xFFEBF7EE),
   );

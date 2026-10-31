@@ -142,7 +142,7 @@ class _CapybaraSanctuaryScreenState
                           size: 20, color: Color(0xFF2D2522)),
                     ),
                     const Text(
-                      '水豚小窝',
+                      '卡皮巴拉小窝',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w900,
