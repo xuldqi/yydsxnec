@@ -75,8 +75,6 @@ class _UnifiedFastingScreenState extends ConsumerState<UnifiedFastingScreen> {
                     ],
                     _buildBiologicalStagesCard(activeSession, timer),
                     const SizedBox(height: 20),
-                    _buildWaterAndDrinkCompanionCard(),
-                    const SizedBox(height: 20),
                     _buildStreakAndStatsCard(),
                   ],
                 ),
@@ -206,22 +204,22 @@ class _UnifiedFastingScreenState extends ConsumerState<UnifiedFastingScreen> {
       statusTitle = '准备就绪 · 待开启';
       statusColor = const Color(0xFF64748B);
     } else if (isEatingWindow) {
-      statusTitle = '🍽️ 进食窗口开放中';
+      statusTitle = '进食窗口开放中';
       statusColor = const Color(0xFF10B981);
     } else if (isOvertime) {
-      statusTitle = '🔥 超额燃脂阶段';
+      statusTitle = '超额燃脂阶段';
       statusColor = const Color(0xFFF59E0B);
     } else if (elapsedHours >= 16) {
-      statusTitle = '✨ 细胞自噬巅峰期';
+      statusTitle = '细胞自噬巅峰期';
       statusColor = const Color(0xFF8B5CF6);
     } else if (elapsedHours >= 12) {
-      statusTitle = '🔥 深度燃脂生酮期';
+      statusTitle = '深度燃脂生酮期';
       statusColor = const Color(0xFFF97316);
     } else if (elapsedHours >= 8) {
-      statusTitle = '⚡ 糖原快速消耗期';
+      statusTitle = '糖原快速消耗期';
       statusColor = const Color(0xFF0EA5E9);
     } else {
-      statusTitle = '⏳ 消化系统休整中';
+      statusTitle = '消化系统休整中';
       statusColor = const Color(0xFF6366F1);
     }
 
@@ -730,101 +728,6 @@ class _UnifiedFastingScreenState extends ConsumerState<UnifiedFastingScreen> {
     );
   }
 
-  // ── Drink & Water Companion Card ──────────────────────────────────────────
-  Widget _buildWaterAndDrinkCompanionCard() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(color: Color(0x061E1B4B), blurRadius: 16, offset: Offset(0, 4)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Row(
-                children: [
-                  Icon(Icons.water_drop_rounded, color: Color(0xFF06B6D4), size: 20),
-                  SizedBox(width: 8),
-                  Text(
-                    '断食伴侣 & 补水打卡',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B)),
-                  ),
-                ],
-              ),
-              InkWell(
-                onTap: _quickLogWater,
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF06B6D4).withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.add_rounded, size: 14, color: Color(0xFF0891B2)),
-                      SizedBox(width: 2),
-                      Text(
-                        '+250ml 纯水',
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Color(0xFF0891B2)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          const Text(
-            '断食期间充分饮水能缓解假性饥饿，并协助排泄体内酮体代谢废物。',
-            style: TextStyle(fontSize: 12, color: Color(0xFF64748B), height: 1.4),
-          ),
-          const SizedBox(height: 14),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('🟢 允许饮用 (0卡不破断食):', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF10B981))),
-                  ],
-                ),
-                SizedBox(height: 4),
-                Text(
-                  '• 白开水 / 纯净水 · 纯黑咖啡(促进自噬) · 绿茶/普洱 · 淡盐水/电解质水',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF475569)),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('🔴 破坏断食 (严禁碰触):', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFFEF4444))),
-                  ],
-                ),
-                SizedBox(height: 4),
-                Text(
-                  '• 含糖奶茶 · 牛奶/拿铁 · 代糖/无糖可乐 · 果汁/椰子水 · 饼干零食',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF475569)),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   // ── Streak and Stats ──────────────────────────────────────────────────────
   Widget _buildStreakAndStatsCard() {
     final sessionsAsync = ref.watch(fastingSessionsProvider);
@@ -847,23 +750,21 @@ class _UnifiedFastingScreenState extends ConsumerState<UnifiedFastingScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStatItem('累计达标', '$completedCount 次', Icons.emoji_events_rounded, const Color(0xFFF59E0B)),
-          Container(width: 1, height: 36, color: const Color(0xFFF1F5F9)),
-          _buildStatItem('累计时长', '${totalHours.toInt()} 小时', Icons.timelapse_rounded, const Color(0xFF6366F1)),
-          Container(width: 1, height: 36, color: const Color(0xFFF1F5F9)),
-          _buildStatItem('本周状态', '良好 🔥', Icons.local_fire_department_rounded, const Color(0xFFF97316)),
+          _buildStatItem('累计达标', '$completedCount 次', const Color(0xFF1E1B4B)),
+          Container(width: 1, height: 28, color: const Color(0xFFF1F5F9)),
+          _buildStatItem('累计时长', '${totalHours.toInt()} 小时', const Color(0xFF6366F1)),
+          Container(width: 1, height: 28, color: const Color(0xFFF1F5F9)),
+          _buildStatItem('本周状态', '良好', const Color(0xFF10B981)),
         ],
       ),
     );
   }
 
-  Widget _buildStatItem(String label, String value, IconData icon, Color color) {
+  Widget _buildStatItem(String label, String value, Color color) {
     return Column(
       children: [
-        Icon(icon, color: color, size: 22),
-        const SizedBox(height: 6),
-        Text(value, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
-        const SizedBox(height: 2),
+        Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: color)),
+        const SizedBox(height: 4),
         Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600)),
       ],
     );
@@ -963,16 +864,7 @@ class _UnifiedFastingScreenState extends ConsumerState<UnifiedFastingScreen> {
     }
   }
 
-  void _quickLogWater() {
-    ref.read(waterProvider.notifier).addWater(250, type: '纯水');
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('💧 已补水 250ml，健康又减脂！'),
-        duration: Duration(seconds: 1),
-        backgroundColor: Color(0xFF06B6D4),
-      ),
-    );
-  }
+
 
   void _showCannotSwitchPlanDialog() {
     showCupertinoDialog(

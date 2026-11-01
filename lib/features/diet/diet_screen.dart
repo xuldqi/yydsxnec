@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +10,6 @@ import '../../core/services/database_provider.dart';
 import '../../core/services/daily_health_provider.dart';
 import '../../core/services/step_provider.dart' as step_svc;
 import '../../core/database/app_database.dart';
-import '../../core/theme/app_colors.dart';
 
 // ─── Food Item Model ────────────────────────────────────────────────────────
 class FoodItem {
@@ -208,8 +206,8 @@ class DietNotifier extends AsyncNotifier<DietState> {
 
   Future<DietState> _loadFromDb() async {
     final db = ref.read(databaseProvider);
-    final today = DateTime.now();
-    final start = DateTime(today.year, today.month, today.day);
+    final now = DateTime.now();
+    final start = DateTime(now.year, now.month, now.day).subtract(const Duration(days: 30));
     final records = await (db.select(db.dietRecords)
           ..where((t) => t.time.isBiggerOrEqualValue(start))
           ..orderBy([(t) => OrderingTerm(expression: t.time, mode: OrderingMode.asc)]))
@@ -298,15 +296,35 @@ class DietNotifier extends AsyncNotifier<DietState> {
 final dietProvider = AsyncNotifierProvider<DietNotifier, DietState>(DietNotifier.new);
 
 // ─── Main Diet Screen (OtterLife Light Unified) ──────────────────────────────
-class DietScreen extends ConsumerWidget {
+class DietScreen extends ConsumerStatefulWidget {
   const DietScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DietScreen> createState() => _DietScreenState();
+}
+
+class _DietScreenState extends ConsumerState<DietScreen> {
+  DateTime _selectedDate = DateTime.now();
+
+  bool _isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final stateAsync = ref.watch(dietProvider);
     final state = stateAsync.valueOrNull ?? DietState();
     final stepAsync = ref.watch(step_svc.stepProvider);
-    final burnedCal = stepAsync.valueOrNull?.calories ?? 0.0;
+
+    // 过滤出选中日期的饮食记录
+    final dayEntries = state.entries.where((e) => _isSameDay(e.time, _selectedDate)).toList();
+    final dayCal = dayEntries.fold(0.0, (s, e) => s + e.cal);
+    final dayCarbs = dayEntries.fold(0.0, (s, e) => s + e.carbs);
+    final dayProtein = dayEntries.fold(0.0, (s, e) => s + e.protein);
+    final dayFat = dayEntries.fold(0.0, (s, e) => s + e.fat);
+
+    final isToday = _isSameDay(DateTime.now(), _selectedDate);
+    final burnedCal = isToday ? (stepAsync.valueOrNull?.calories ?? 0.0) : 0.0;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F4F8),
@@ -323,23 +341,26 @@ class DietScreen extends ConsumerWidget {
           child: Column(
             children: [
               _buildHeader(context, ref, state),
+              _buildWeekCalendarStrip(),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.fromLTRB(16, 6, 16, 110),
                   children: [
-                    _buildCalorieBudgetHero(state, burnedCal),
+                    _buildCalorieBudgetHero(state.goal, dayCal, burnedCal),
                     const SizedBox(height: 18),
-                    _buildMacroNutrientCards(state),
+                    _buildMacroNutrientCards(state.goal, dayCarbs, dayProtein, dayFat),
                     const SizedBox(height: 22),
-                    _buildSectionHeader('今日四餐记录'),
+                    _buildSectionHeader('四餐记录'),
                     const SizedBox(height: 12),
-                    ...MealType.values.map((meal) => _MealCard(
-                          meal: meal,
-                          entries: state.byMeal(meal),
-                          onAdd: () => _showFoodPicker(context, ref, meal),
-                          onAiScan: () => context.push('/ai-scan'),
-                          onRemove: (id) => ref.read(dietProvider.notifier).removeEntry(id),
-                        )),
+                    ...MealType.values.map((meal) {
+                      final mealEntries = dayEntries.where((e) => e.meal == meal).toList();
+                      return _MealCard(
+                        meal: meal,
+                        entries: mealEntries,
+                        onAdd: () => _showFoodPicker(context, ref, meal),
+                        onRemove: (id) => ref.read(dietProvider.notifier).removeEntry(id),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -347,13 +368,17 @@ class DietScreen extends ConsumerWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showMealTypeSelector(context, ref),
+        backgroundColor: const Color(0xFF6366F1),
+        elevation: 4,
+        child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
+      ),
     );
   }
 
-  // ── Header ──────────────────────────────────────────────────────────────────
+  // ── Header (纯净标题，移除日期副标题、AI扫码与多余图标) ────────────────────────
   Widget _buildHeader(BuildContext context, WidgetRef ref, DietState state) {
-    final todayStr = DateFormat('MM月dd日 EEEE', 'zh_CN').format(DateTime.now());
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -371,144 +396,182 @@ class DietScreen extends ConsumerWidget {
                   }
                 },
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    '饮食与热量',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF1E1B4B),
-                      letterSpacing: -0.5,
-                    ),
-                  ),
-                  Text(
-                    todayStr,
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF64748B), fontWeight: FontWeight.w600),
-                  ),
-                ],
+              const Text(
+                '饮食与热量',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E1B4B),
+                  letterSpacing: -0.5,
+                ),
               ),
             ],
           ),
-          Row(
-            children: [
-              // AI Scan Shortcut Button
-              GestureDetector(
-                onTap: () => context.push('/ai-scan'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF10B981).withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.camera_alt_rounded, size: 16, color: Color(0xFF059669)),
-                      SizedBox(width: 4),
-                      Text('AI识图', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Color(0xFF059669))),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Target Goal Setting
-              IconButton(
-                icon: const Icon(Icons.tune_rounded, color: Color(0xFF1E1B4B), size: 22),
-                tooltip: '热量目标设置',
-                onPressed: () => _showGoalSettingDialog(context, ref, state.goal),
-              ),
-            ],
+          IconButton(
+            icon: const Icon(Icons.tune_rounded, color: Color(0xFF64748B), size: 20),
+            tooltip: '热量目标设置',
+            onPressed: () => _showGoalSettingDialog(context, ref, state.goal),
           ),
         ],
       ),
     );
   }
 
+  // ── 7天水平日历条 (左右滑动/点击切换查看不同日期的四餐与热量) ───────────────────
+  Widget _buildWeekCalendarStrip() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final days = List.generate(7, (i) => today.subtract(Duration(days: 6 - i)));
+
+    return Container(
+      height: 64,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: days.map((date) {
+          final isSelected = _isSameDay(date, _selectedDate);
+          final isToday = _isSameDay(date, today);
+          final weekdayStr = ['一', '二', '三', '四', '五', '六', '日'][date.weekday - 1];
+
+          return GestureDetector(
+            onTap: () => setState(() => _selectedDate = date),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              width: 42,
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? const Color(0xFF6366F1)
+                    : (isToday ? const Color(0xFF6366F1).withValues(alpha: 0.12) : Colors.white),
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: isSelected
+                    ? [
+                        BoxShadow(
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.30),
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
+                        )
+                      ]
+                    : [
+                        const BoxShadow(
+                          color: Color(0x06000000),
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
+                        )
+                      ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    weekdayStr,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: isSelected ? Colors.white70 : const Color(0xFF94A3B8),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    '${date.day}',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      color: isSelected
+                          ? Colors.white
+                          : (isToday ? const Color(0xFF6366F1) : const Color(0xFF1E1B4B)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   // ── Hero Calorie Budget Card ────────────────────────────────────────────────
-  Widget _buildCalorieBudgetHero(DietState state, double burnedCal) {
-    final remaining = (state.goal - state.totalCal + burnedCal).round();
-    final progress = (state.totalCal / (state.goal > 0 ? state.goal : 2000)).clamp(0.0, 1.0);
+  Widget _buildCalorieBudgetHero(double goal, double dayCal, double burnedCal) {
+    final remaining = (goal - dayCal + burnedCal).round();
+    final progress = (dayCal / (goal > 0 ? goal : 2000)).clamp(0.0, 1.0);
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0A1E1B4B),
-            blurRadius: 20,
-            offset: Offset(0, 6),
+            blurRadius: 18,
+            offset: Offset(0, 4),
           ),
         ],
       ),
-      child: Column(
+      child: Row(
         children: [
-          Row(
-            children: [
-              // Circular Indicator
-              SizedBox(
-                width: 120,
-                height: 120,
-                child: Stack(
-                  alignment: Alignment.center,
+          // Circular Indicator
+          SizedBox(
+            width: 110,
+            height: 110,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                CircularPercentIndicator(
+                  radius: 52.0,
+                  lineWidth: 9.0,
+                  animation: true,
+                  percent: progress,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  progressColor: remaining >= 0 ? const Color(0xFF6366F1) : const Color(0xFFEF4444),
+                  backgroundColor: const Color(0xFFF1F5F9),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularPercentIndicator(
-                      radius: 56.0,
-                      lineWidth: 10.0,
-                      animation: true,
-                      percent: progress,
-                      circularStrokeCap: CircularStrokeCap.round,
-                      progressColor: remaining >= 0 ? const Color(0xFF6366F1) : const Color(0xFFEF4444),
-                      backgroundColor: const Color(0xFFF1F5F9),
+                    Text(
+                      remaining >= 0 ? '还可摄入' : '已超标',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: remaining >= 0 ? const Color(0xFF64748B) : const Color(0xFFEF4444),
+                      ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          remaining >= 0 ? '还可摄入' : '已超标',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: remaining >= 0 ? const Color(0xFF64748B) : const Color(0xFFEF4444),
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          '${remaining.abs()}',
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w900,
-                            color: remaining >= 0 ? const Color(0xFF1E1B4B) : const Color(0xFFEF4444),
-                            height: 1.1,
-                          ),
-                        ),
-                        const Text(
-                          'kcal',
-                          style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                    const SizedBox(height: 2),
+                    Text(
+                      '${remaining.abs()}',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        color: remaining >= 0 ? const Color(0xFF1E1B4B) : const Color(0xFFEF4444),
+                        height: 1.1,
+                      ),
+                    ),
+                    const Text(
+                      'kcal',
+                      style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(width: 22),
-              // Right Column Breakdown
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildBudgetMetricRow('🎯 预算目标', '${state.goal.toInt()} kcal', const Color(0xFF1E1B4B)),
-                    const SizedBox(height: 10),
-                    _buildBudgetMetricRow('🍽️ 今日已摄入', '${state.totalCal.toInt()} kcal', const Color(0xFF6366F1)),
-                    const SizedBox(height: 10),
-                    _buildBudgetMetricRow('🔥 运动消耗', '${burnedCal.toInt()} kcal', const Color(0xFFF97316)),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 20),
+          // Right Column Breakdown (克制无乱用图标)
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildBudgetMetricRow('预算目标', '${goal.toInt()} kcal', const Color(0xFF1E1B4B)),
+                const SizedBox(height: 10),
+                _buildBudgetMetricRow('已摄入', '${dayCal.toInt()} kcal', const Color(0xFF6366F1)),
+                const SizedBox(height: 10),
+                _buildBudgetMetricRow('运动消耗', '${burnedCal.toInt()} kcal', const Color(0xFFF97316)),
+              ],
+            ),
           ),
         ],
       ),
@@ -525,11 +588,15 @@ class DietScreen extends ConsumerWidget {
     );
   }
 
-  // ── Macronutrient Triad Breakdown ──────────────────────────────────────────
-  Widget _buildMacroNutrientCards(DietState state) {
-    final carbsProgress = (state.totalCarbs / (state.targetCarbs > 0 ? state.targetCarbs : 1)).clamp(0.0, 1.0);
-    final proteinProgress = (state.totalProtein / (state.targetProtein > 0 ? state.targetProtein : 1)).clamp(0.0, 1.0);
-    final fatProgress = (state.totalFat / (state.targetFat > 0 ? state.targetFat : 1)).clamp(0.0, 1.0);
+  // ── Macronutrient Triad Breakdown (真实数据计算，无记录真实为0g，无花哨emoji) ─────────
+  Widget _buildMacroNutrientCards(double goal, double dayCarbs, double dayProtein, double dayFat) {
+    final targetCarbs = (goal * 0.50) / 4.0;
+    final targetProtein = (goal * 0.25) / 4.0;
+    final targetFat = (goal * 0.25) / 9.0;
+
+    final carbsProgress = (dayCarbs / (targetCarbs > 0 ? targetCarbs : 1)).clamp(0.0, 1.0);
+    final proteinProgress = (dayProtein / (targetProtein > 0 ? targetProtein : 1)).clamp(0.0, 1.0);
+    final fatProgress = (dayFat / (targetFat > 0 ? targetFat : 1)).clamp(0.0, 1.0);
 
     return Container(
       padding: const EdgeInsets.all(18),
@@ -546,8 +613,8 @@ class DietScreen extends ConsumerWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('三大宏量营养素', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B))),
-              Text('科学能量配比 50:25:25', style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600)),
+              Text('三大营养素', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B))),
+              Text('推荐配比 50:25:25', style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600)),
             ],
           ),
           const SizedBox(height: 14),
@@ -555,9 +622,9 @@ class DietScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: _buildMacroItem(
-                  '🥖 碳水',
-                  '${state.totalCarbs.toInt()}g',
-                  '目标 ${state.targetCarbs.toInt()}g',
+                  '碳水化合物',
+                  '${dayCarbs.toInt()}g',
+                  '目标 ${targetCarbs.toInt()}g',
                   carbsProgress,
                   const Color(0xFFF59E0B),
                 ),
@@ -565,9 +632,9 @@ class DietScreen extends ConsumerWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: _buildMacroItem(
-                  '🥩 蛋白质',
-                  '${state.totalProtein.toInt()}g',
-                  '目标 ${state.targetProtein.toInt()}g',
+                  '蛋白质',
+                  '${dayProtein.toInt()}g',
+                  '目标 ${targetProtein.toInt()}g',
                   proteinProgress,
                   const Color(0xFF6366F1),
                 ),
@@ -575,9 +642,9 @@ class DietScreen extends ConsumerWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: _buildMacroItem(
-                  '🥑 脂肪',
-                  '${state.totalFat.toInt()}g',
-                  '目标 ${state.targetFat.toInt()}g',
+                  '脂肪',
+                  '${dayFat.toInt()}g',
+                  '目标 ${targetFat.toInt()}g',
                   fatProgress,
                   const Color(0xFF10B981),
                 ),
@@ -600,7 +667,7 @@ class DietScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(name, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color)),
+          Text(name, style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.bold, color: color)),
           const SizedBox(height: 6),
           Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFF1E1B4B))),
           const SizedBox(height: 2),
@@ -647,7 +714,7 @@ class DietScreen extends ConsumerWidget {
     );
   }
 
-  // ── Food Picker & Goal Dialog ─────────────────────────────────────────────
+  // ── Food Picker & Meal Selector ───────────────────────────────────────────
   void _showFoodPicker(BuildContext context, WidgetRef ref, MealType meal) {
     showModalBottomSheet(
       context: context,
@@ -658,7 +725,62 @@ class DietScreen extends ConsumerWidget {
         initialChildSize: 0.85,
         minChildSize: 0.5,
         maxChildSize: 0.95,
-        builder: (ctx, scroll) => _FoodPickerSheet(meal: meal, scroll: scroll),
+        builder: (ctx, scroll) => _FoodPickerSheet(meal: meal, scroll: scroll, defaultDate: _selectedDate),
+      ),
+    );
+  }
+
+  void _showMealTypeSelector(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+        padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(width: 40, height: 4, decoration: BoxDecoration(color: const Color(0xFFE2E8F0), borderRadius: BorderRadius.circular(2))),
+              const SizedBox(height: 16),
+              const Text('选择记录餐别', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B))),
+              const SizedBox(height: 16),
+              Row(
+                children: MealType.values.map((meal) {
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(sheetContext);
+                        _showFoodPicker(context, ref, meal);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: meal.color.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: meal.color.withValues(alpha: 0.2)),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              meal.label,
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: meal.color),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -737,14 +859,12 @@ class _MealCard extends StatelessWidget {
   final MealType meal;
   final List<DietEntry> entries;
   final VoidCallback onAdd;
-  final VoidCallback onAiScan;
   final ValueChanged<String> onRemove;
 
   const _MealCard({
     required this.meal,
     required this.entries,
     required this.onAdd,
-    required this.onAiScan,
     required this.onRemove,
   });
 
@@ -767,39 +887,19 @@ class _MealCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: meal.color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(meal.icon, color: meal.color, size: 22),
+              Text(
+                meal.label,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B)),
               ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    meal.label,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Color(0xFF1E1B4B)),
-                  ),
-                  Text(
-                    meal.suggestion,
-                    style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w500),
-                  ),
-                ],
+              const SizedBox(width: 8),
+              Text(
+                meal.suggestion,
+                style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w500),
               ),
               const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '${mealTotal.toInt()}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: meal.color),
-                  ),
-                  const Text('kcal', style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
-                ],
+              Text(
+                '${mealTotal.toInt()} kcal',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: meal.color),
               ),
             ],
           ),
@@ -807,6 +907,7 @@ class _MealCard extends StatelessWidget {
           // Food Entries List
           if (entries.isEmpty)
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
                 color: const Color(0xFFF8FAFC),
@@ -814,15 +915,15 @@ class _MealCard extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  '尚未记录${meal.label}，吃点健康的吧 🥗',
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8), fontWeight: FontWeight.w600),
+                  '尚未记录${meal.label}',
+                  style: const TextStyle(fontSize: 12, color: Color(0xFF94A3B8), fontWeight: FontWeight.w500),
                 ),
               ),
             )
           else
             ...entries.map((entry) => Container(
                   margin: const EdgeInsets.only(bottom: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF8FAFC),
                     borderRadius: BorderRadius.circular(14),
@@ -830,15 +931,6 @@ class _MealCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(7),
-                        decoration: BoxDecoration(
-                          color: meal.color.withValues(alpha: 0.1),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(entry.food.icon, size: 16, color: meal.color),
-                      ),
-                      const SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -875,39 +967,22 @@ class _MealCard extends StatelessWidget {
                   ),
                 )),
           const SizedBox(height: 12),
-          // Action Buttons: + 记饮食, 📷 AI识图
-          Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 40,
-                  child: OutlinedButton.icon(
-                    onPressed: onAdd,
-                    icon: Icon(Icons.add_rounded, size: 18, color: meal.color),
-                    label: Text('+ 记录${meal.label}', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: meal.color)),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: meal.color.withValues(alpha: 0.4)),
-                      backgroundColor: meal.color.withValues(alpha: 0.05),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                  ),
-                ),
+          // Full-width Add Button (无截断、无多余相机)
+          SizedBox(
+            width: double.infinity,
+            height: 42,
+            child: OutlinedButton(
+              onPressed: onAdd,
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: meal.color.withValues(alpha: 0.35)),
+                backgroundColor: meal.color.withValues(alpha: 0.04),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              const SizedBox(width: 8),
-              SizedBox(
-                height: 40,
-                child: IconButton.outlined(
-                  onPressed: onAiScan,
-                  icon: const Icon(Icons.camera_alt_outlined, size: 18, color: Color(0xFF10B981)),
-                  tooltip: '拍照识图',
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: const Color(0xFF10B981).withValues(alpha: 0.4)),
-                    backgroundColor: const Color(0xFF10B981).withValues(alpha: 0.05),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                ),
+              child: Text(
+                '+ 添加${meal.label}',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: meal.color),
               ),
-            ],
+            ),
           ),
         ],
       ),
@@ -919,7 +994,8 @@ class _MealCard extends StatelessWidget {
 class _FoodPickerSheet extends ConsumerStatefulWidget {
   final MealType meal;
   final ScrollController scroll;
-  const _FoodPickerSheet({required this.meal, required this.scroll});
+  final DateTime? defaultDate;
+  const _FoodPickerSheet({required this.meal, required this.scroll, this.defaultDate});
 
   @override
   ConsumerState<_FoodPickerSheet> createState() => _FoodPickerSheetState();
@@ -1042,7 +1118,9 @@ class _FoodPickerSheetState extends ConsumerState<_FoodPickerSheet> {
 
   Future<void> _addWithServingsModal(FoodItem food) async {
     double servings = 1.0;
-    DateTime selectedTime = DateTime.now();
+    final now = DateTime.now();
+    final baseDate = widget.defaultDate ?? now;
+    final selectedTime = DateTime(baseDate.year, baseDate.month, baseDate.day, now.hour, now.minute);
 
     final result = await showModalBottomSheet<Map<String, dynamic>>(
       context: context,
@@ -1068,15 +1146,17 @@ class _FoodPickerSheetState extends ConsumerState<_FoodPickerSheet> {
               Row(
                 children: [
                   Container(
-                    width: 44,
-                    height: 44,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: widget.meal.color.withValues(alpha: 0.12),
-                      borderRadius: BorderRadius.circular(14),
+                      color: widget.meal.color.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(food.icon, color: widget.meal.color, size: 24),
+                    child: Text(
+                      food.category,
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: widget.meal.color),
+                    ),
                   ),
-                  const SizedBox(width: 14),
+                  const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1167,7 +1247,7 @@ class _FoodPickerSheetState extends ConsumerState<_FoodPickerSheet> {
                     backgroundColor: widget.meal.color,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
-                  child: const Text('加入餐食记录 🚀', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
+                  child: const Text('加入餐食记录', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w800)),
                 ),
               ),
             ],
@@ -1200,24 +1280,26 @@ class _FoodItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(14),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           border: Border.all(color: const Color(0xFFF1F5F9)),
         ),
         child: Row(
           children: [
             Container(
-              width: 42,
-              height: 42,
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(12),
+                color: color.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(6),
               ),
-              child: Icon(food.icon, color: color, size: 22),
+              child: Text(
+                food.category,
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: color),
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -1226,9 +1308,9 @@ class _FoodItemTile extends StatelessWidget {
                 children: [
                   Text(
                     food.name,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF1E1B4B)),
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF1E1B4B)),
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 2),
                   Text(
                     '${food.unitDesc} · 碳水 ${food.carbs}g · 蛋白 ${food.protein}g · 脂肪 ${food.fat}g',
                     style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
@@ -1236,18 +1318,12 @@ class _FoodItemTile extends StatelessWidget {
                 ],
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  '${food.cal.round()}',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: color),
-                ),
-                const Text('kcal', style: TextStyle(fontSize: 10, color: Color(0xFF94A3B8), fontWeight: FontWeight.bold)),
-              ],
+            Text(
+              '${food.cal.round()} kcal',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: color),
             ),
-            const SizedBox(width: 6),
-            const Icon(Icons.add_circle_outline_rounded, color: Color(0xFFCBD5E1), size: 20),
+            const SizedBox(width: 8),
+            Icon(Icons.add_circle_outline_rounded, color: color, size: 20),
           ],
         ),
       ),

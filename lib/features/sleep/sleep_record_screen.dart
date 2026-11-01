@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:drift/drift.dart' hide Column;
 
+import '../../core/services/database_provider.dart';
+import '../../core/services/daily_health_provider.dart';
+import '../../core/services/health_providers.dart';
+import '../../core/database/app_database.dart';
 import '../../core/theme/app_colors.dart';
 
 class SleepRecordScreen extends ConsumerStatefulWidget {
@@ -325,8 +330,45 @@ class _SleepRecordScreenState extends ConsumerState<SleepRecordScreen> {
     );
   }
 
-  void _save() {
-    // Save functionality
-    context.pop();
+  Future<void> _save() async {
+    final diff = _wakeTime.difference(_sleepTime);
+    if (diff.isNegative || diff.inMinutes == 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('入睡时间不能晚于醒来时间'), behavior: SnackBarBehavior.floating),
+      );
+      return;
+    }
+
+    final durationMins = diff.inMinutes;
+    // 计算睡眠分数 (时长满分50 + 质量满分50)
+    final durationScore = (durationMins / 480.0 * 50).clamp(0, 50);
+    final qualityScore = (_quality / 5.0 * 50).clamp(0, 50);
+    final totalScore = (durationScore + qualityScore).round().clamp(10, 100);
+
+    final db = ref.read(databaseProvider);
+    await db.insertSleepRecord(SleepRecordsCompanion.insert(
+      sleepTime: _sleepTime,
+      wakeTime: _wakeTime,
+      duration: Value(durationMins),
+      quality: Value(_quality),
+      sleepScore: Value(totalScore),
+      tags: Value(_factors.join(',')),
+      note: Value(_noteCtrl.text.trim()),
+    ));
+
+    // 立即刷新睡眠数据提供者与日常健康数据
+    ref.invalidate(sleepProvider);
+    ref.invalidate(aggregatedSleepProvider);
+    await ref.read(dailyHealthProvider.notifier).setSleep(durationMins);
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('已保存睡眠记录：${durationMins ~/ 60}小时${durationMins % 60}分钟，得分 $totalScore 分'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      context.pop();
+    }
   }
 }

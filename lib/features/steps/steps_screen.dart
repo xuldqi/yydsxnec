@@ -94,50 +94,33 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
 
   // ── 4. Interactive Habit Cards Flow (OtterLife 大气网格卡片) ─────────────────
   Widget _buildHabitCardsStream(BuildContext context, int steps, DailyHealthRecord record) {
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
-            '日常',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w900,
-              color: Color(0xFF2D2522),
-              letterSpacing: -0.3,
-            ),
+        Expanded(
+          child: Column(
+            children: [
+              _buildFastingCard(context),
+              const SizedBox(height: 14),
+              _buildStepsCard(context, steps),
+              const SizedBox(height: 14),
+              _buildSleepCard(context, record),
+            ],
           ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  _buildFastingCard(context),
-                  const SizedBox(height: 14),
-                  _buildStepsCard(context, steps),
-                  const SizedBox(height: 14),
-                  _buildSleepCard(context, record),
-                ],
-              ),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                children: [
-                  _buildDietCard(context, record),
-                  const SizedBox(height: 14),
-                  _buildWeightCard(context),
-                  const SizedBox(height: 14),
-                  _buildWaterCard(context, record),
-                  const SizedBox(height: 14),
-                  _buildVitalSignsCard(context, record),
-                ],
-              ),
-            ),
-          ],
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            children: [
+              _buildDietCard(context, record),
+              const SizedBox(height: 14),
+              _buildWeightCard(context),
+              const SizedBox(height: 14),
+              _buildWaterCard(context, record),
+              const SizedBox(height: 14),
+              _buildVitalSignsCard(context, record),
+            ],
+          ),
         ),
       ],
     );
@@ -479,19 +462,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           ),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: () {
-              ref.read(dailyHealthProvider.notifier).addWater(250);
-              try {
-                ref.read(waterProvider.notifier).addWater(250);
-              } catch (_) {}
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('已记录饮水 +250ml'),
-                  duration: Duration(milliseconds: 1000),
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            },
+            onTap: () => _showWaterPicker(context),
             child: Container(
               width: double.infinity,
               height: 34,
@@ -501,7 +472,7 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
               ),
               child: const Center(
                 child: Text(
-                  '+250ml',
+                  '记录饮水',
                   style: TextStyle(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w800,
@@ -512,6 +483,126 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showWaterPicker(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) => Container(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        ),
+        child: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    '记录饮水',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFF2D2522),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(sheetContext);
+                      context.push('/water');
+                    },
+                    child: const Text(
+                      '饮水详情 >',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF0284C7),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  _buildWaterCupOption(sheetContext, 100, '小杯'),
+                  const SizedBox(width: 8),
+                  _buildWaterCupOption(sheetContext, 200, '中杯'),
+                  const SizedBox(width: 8),
+                  _buildWaterCupOption(sheetContext, 250, '经典'),
+                  const SizedBox(width: 8),
+                  _buildWaterCupOption(sheetContext, 350, '大杯'),
+                  const SizedBox(width: 8),
+                  _buildWaterCupOption(sheetContext, 500, '水壶'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWaterCupOption(BuildContext sheetContext, int ml, String label) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pop(sheetContext);
+          ref.read(dailyHealthProvider.notifier).addWater(ml);
+          try {
+            ref.read(waterProvider.notifier).addWater(ml);
+          } catch (_) {}
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('已记录饮水 +${ml}ml'),
+              duration: const Duration(milliseconds: 1200),
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            color: const Color(0xFF0284C7).withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: const Color(0xFF0284C7).withValues(alpha: 0.15)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.water_drop_rounded, color: Color(0xFF0284C7), size: 20),
+              const SizedBox(height: 4),
+              Text(
+                '${ml}ml',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF0284C7),
+                ),
+              ),
+              Text(
+                label,
+                style: const TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -582,10 +673,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
     );
   }
 
-  // ── Card: Heart / Vitals (心率) ─────────────────────────────────────────────
+  // ── Card: Heart / Vitals (生命体征) ─────────────────────────────────────────────
   Widget _buildVitalSignsCard(BuildContext context, DailyHealthRecord record) {
     return _buildActionCard(
-      title: '心率',
+      title: '生命体征',
       icon: Icons.favorite_rounded,
       iconColor: const Color(0xFFF43F5E),
       badgeBgColor: const Color(0xFFFFE4E6),
@@ -680,48 +771,25 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: badgeBgColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(icon, size: 16, color: iconColor),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFF2D2522),
-                      ),
-                    ),
-                  ],
-                ),
-                if (onQuickAdd != null)
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: onQuickAdd,
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFFF6F2EB),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.add_rounded,
-                        size: 16,
-                        color: Color(0xFF7D726D),
-                      ),
-                    ),
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: badgeBgColor,
+                    shape: BoxShape.circle,
                   ),
+                  child: Icon(icon, size: 16, color: iconColor),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF2D2522),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 12),

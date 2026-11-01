@@ -123,17 +123,19 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
               children: [
                 _buildHeroProgressCard(total, goal, percent, waterState.records.length),
                 const SizedBox(height: 16),
-                _buildBeverageLibrarySection(),
-                const SizedBox(height: 16),
                 _buildQuickCupSection(context),
                 const SizedBox(height: 16),
                 _buildTodayLogSection(context, waterState.records),
-                const SizedBox(height: 16),
-                _buildHydrationTipsSection(),
               ],
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showCustomLogSheet(context),
+        backgroundColor: const Color(0xFF0EA5E9),
+        elevation: 4,
+        child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
       ),
     );
   }
@@ -216,7 +218,7 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  isDone ? '🎉 达标' : '${(percent * 100).toInt()}%',
+                  isDone ? '已达标' : '${(percent * 100).toInt()}%',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w900,
@@ -293,109 +295,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
         const SizedBox(height: 2),
         Text(label, style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8), fontWeight: FontWeight.w500)),
       ],
-    );
-  }
-
-  // ── 2. Beverage Library (饮品库选择器) ──────────────────────────────────────
-  Widget _buildBeverageLibrarySection() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A000000),
-            blurRadius: 14,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                '选择饮品种类',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xFF1E1B4B),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: _selectedDrink.color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  _selectedDrink.desc,
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: _selectedDrink.color,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          SizedBox(
-            height: 76,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: _beverageTypes.length,
-              separatorBuilder: (_, _) => const SizedBox(width: 10),
-              itemBuilder: (context, index) {
-                final drink = _beverageTypes[index];
-                final isSelected = drink.name == _selectedDrink.name;
-
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _selectedDrink = drink;
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    width: 74,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isSelected ? drink.color.withValues(alpha: 0.15) : const Color(0xFFF8FAFC),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: isSelected ? drink.color : const Color(0xFFE2E8F0),
-                        width: isSelected ? 2 : 1,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(drink.icon, color: drink.color, size: 22),
-                        const SizedBox(height: 6),
-                        Text(
-                          drink.name,
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
-                            color: isSelected ? drink.color : const Color(0xFF475569),
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -628,75 +527,6 @@ class _WaterScreenState extends ConsumerState<WaterScreen> {
                 );
               },
             ),
-        ],
-      ),
-    );
-  }
-
-  // ── 5. Scientific Hydration Tips ────────────────────────────────────────────
-  Widget _buildHydrationTipsSection() {
-    final tips = [
-      {'time': '07:00 晨起温水', 'desc': '唤醒肠道与代谢，降低血液黏稠度', 'icon': Icons.wb_sunny_rounded},
-      {'time': '10:30 上午工间', 'desc': '及时补充脑力代谢水分，预防疲劳', 'icon': Icons.work_outline_rounded},
-      {'time': '14:30 午后活力', 'desc': '来杯清茶或柠檬水，提神促消化', 'icon': Icons.local_cafe_outlined},
-      {'time': '20:00 晚间小饮', 'desc': '分次小口微量补水，避免起夜', 'icon': Icons.nightlight_outlined},
-    ];
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A000000),
-            blurRadius: 14,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            '💡 科学饮水黄金时段',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w800,
-              color: Color(0xFF1E1B4B),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Column(
-            children: tips.map((t) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Row(
-                  children: [
-                    Icon(t['icon'] as IconData, size: 16, color: const Color(0xFF0EA5E9)),
-                    const SizedBox(width: 8),
-                    Text(
-                      t['time'] as String,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E1B4B),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        t['desc'] as String,
-                        style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
         ],
       ),
     );
