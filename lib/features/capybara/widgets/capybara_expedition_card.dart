@@ -111,18 +111,25 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // 左侧：固定显示今日日期（几月几号，不弹选择窗）
+                // 左侧：固定显示今日日期（白色大字 + 柔和投影）
                 Text(
                   dateText,
                   style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF2D2522),
+                    color: Colors.white,
                     letterSpacing: -0.5,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black38,
+                        blurRadius: 6,
+                        offset: Offset(0, 1.5),
+                      ),
+                    ],
                   ),
                 ),
 
-                // 右侧：爱心金币 + 前往小窝入口
+                // 右侧：爱心金币 + 前往小窝入口（磨砂玻璃白字）
                 GestureDetector(
                   onTap: () => context.push('/capybara'),
                   behavior: HitTestBehavior.opaque,
@@ -130,11 +137,15 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
                     height: 34,
                     padding: const EdgeInsets.symmetric(horizontal: 11),
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.85),
+                      color: Colors.black.withValues(alpha: 0.28),
                       borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.25),
+                        width: 0.8,
+                      ),
                       boxShadow: const [
                         BoxShadow(
-                          color: Color(0x0C000000),
+                          color: Color(0x18000000),
                           blurRadius: 8,
                           offset: Offset(0, 2),
                         ),
@@ -150,21 +161,21 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
-                            color: Color(0xFF3D342F),
+                            color: Colors.white,
                           ),
                         ),
                         const SizedBox(width: 6),
-                        Container(width: 1, height: 9, color: const Color(0xFFD1C7BD)),
+                        Container(width: 1, height: 9, color: Colors.white30),
                         const SizedBox(width: 6),
                         const Text(
                           '小窝',
                           style: TextStyle(
                             fontSize: 11.5,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF8D5B4C),
+                            color: Colors.white,
                           ),
                         ),
-                        const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF8D5B4C)),
+                        const Icon(Icons.chevron_right_rounded, size: 14, color: Colors.white),
                       ],
                     ),
                   ),
@@ -258,51 +269,82 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
             ),
           ),
 
-          // ── 4. 底部渐变浅色过渡区：居中大字公里数与步数 ─────────────────
+          // ── 4. 居中大字公里数与步数（白色文字 + 向上微调） ─────────────────
           Positioned(
             left: 20,
             right: 20,
-            bottom: 18,
+            bottom: 64,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // 居中大字公里数与单位
+                // 居中大字公里数（数字绝对水平居中，km 附着右侧不影响居中重心）
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
+                    // 左侧镜像不可见占位，确保纯数字处于绝对水平中心
+                    Opacity(
+                      opacity: 0.0,
+                      child: Text(
+                        ' km',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
                     Text(
                       distanceKm,
                       style: const TextStyle(
-                        fontSize: 44,
+                        fontSize: 48,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF1E293B),
+                        color: Colors.white,
                         height: 1.0,
                         letterSpacing: -1.2,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black45,
+                            blurRadius: 10,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 5),
-                    const Text(
-                      'km',
+                    Text(
+                      ' km',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF64748B),
+                        color: Colors.white.withValues(alpha: 0.90),
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black38,
+                            blurRadius: 6,
+                            offset: Offset(0, 1.5),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 6),
-                // 居中步数：今日步行 当前步数 / 目标步数 步
+                // 居中步数：今日步行 当前步数 / 目标步数 步（纯白文字）
                 Text(
                   '今日步行 $steps / $goalSteps 步',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF475569),
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white.withValues(alpha: 0.95),
                     letterSpacing: 0.2,
+                    shadows: const [
+                      Shadow(
+                        color: Colors.black38,
+                        blurRadius: 6,
+                        offset: Offset(0, 1.5),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -635,19 +677,19 @@ class _ParallaxExpeditionPainter extends CustomPainter {
     }
   }
 
-  // ── 6. 底部平滑过渡淡出 ("下半部分逐渐变浅") ───────────────────────────
+  // ── 6. 底部平滑过渡淡出 ("下面是底色灰色的渐变，渐变再多点") ────────────
   void _drawBottomFadeGradient(Canvas canvas, Size size) {
-    // 从山路底端（y ≈ 0.63）向下平滑渐变淡出到应用主背景色 #F3F4F8
-    final fadeRect = Rect.fromLTWH(0, size.height * 0.62, size.width, size.height * 0.38);
+    // 从山路下方大跨度平滑渐变淡出到应用主背景灰色 #F3F4F8
+    final fadeRect = Rect.fromLTWH(0, size.height * 0.70, size.width, size.height * 0.30);
     final fadePaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        stops: const [0.0, 0.35, 0.75, 1.0],
+        stops: const [0.0, 0.35, 0.70, 1.0],
         colors: [
-          stage.groundColor.withValues(alpha: 0.0),
-          stage.groundColor.withValues(alpha: 0.40),
-          const Color(0xFFF3F4F8).withValues(alpha: 0.90),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.0),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.35),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.85),
           const Color(0xFFF3F4F8),
         ],
       ).createShader(fadeRect);
