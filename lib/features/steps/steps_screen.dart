@@ -83,10 +83,10 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTopHeader(context),
+                  const SizedBox(height: 12),
+                  const CapybaraHeroCard(showHeader: false),
                   const SizedBox(height: 14),
                   _buildCalendarStrip(context),
-                  const SizedBox(height: 16),
-                  const CapybaraHeroCard(showHeader: false),
                   const SizedBox(height: 18),
                   _buildHabitCardsStream(context, steps, record),
                 ],

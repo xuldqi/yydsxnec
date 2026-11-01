@@ -2,14 +2,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import '../../../core/services/step_provider.dart' as step_svc;
 import '../providers/capybara_provider.dart';
 import '../models/expedition_stage.dart';
 import 'capybara_pet_widget.dart';
 
-/// 动态山景漫步探索卡片（灵感源于 Yoomy 探险之旅架构）
-/// 随步数和里程阶梯式动态蜕变场景：晨光原野 -> 阳光林道 -> 落日山脊 -> 巅峰星空
+/// 动态山景漫步探索卡片（复刻 Yoomy 2D 横版卷轴视差探险世界）
+/// 上半部分为 3 层横版游戏卷轴视差森林背景，水豚在屏幕中央沿山路持续迈步向前，
+/// 下半部分平滑向浅色背景渐变淡出，并呈现超大公里数与探索赛段指标。
 class CapybaraExpeditionCard extends ConsumerStatefulWidget {
   final bool showHeader;
   const CapybaraExpeditionCard({super.key, this.showHeader = true});
@@ -20,22 +20,23 @@ class CapybaraExpeditionCard extends ConsumerStatefulWidget {
 
 class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
     with SingleTickerProviderStateMixin {
-  late AnimationController _ambientController;
+  late AnimationController _walkController;
   String? _temporaryQuote;
   DateTime? _quoteExpireTime;
 
   @override
   void initState() {
     super.initState();
-    _ambientController = AnimationController(
+    // 持续滚动的横版视差控制器（14秒为一个卷轴主循环）
+    _walkController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 8),
+      duration: const Duration(seconds: 14),
     )..repeat();
   }
 
   @override
   void dispose() {
-    _ambientController.dispose();
+    _walkController.dispose();
     super.dispose();
   }
 
@@ -59,21 +60,31 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
     final capyState = ref.watch(capybaraProvider);
     final stepAsync = ref.watch(step_svc.stepProvider);
     final steps = stepAsync.valueOrNull?.todaySteps ?? 6820;
-    final km = (steps * 0.0007).clamp(0.0, 999.0);
-    const stepGoal = 8000;
-    final progress = (steps / stepGoal).clamp(0.0, 1.0);
+
     final stage = ExpeditionStage.fromSteps(steps);
+    final progress = ExpeditionStage.stageProgress(steps);
+    final remainingSteps = ExpeditionStage.stepsToNextStage(steps);
+    final nextStage = ExpeditionStage.nextStage(steps);
+    final distanceKm = (steps * 0.00075).toStringAsFixed(1);
+
+    // 默认探索随行台词
+    final defaultQuote = _temporaryQuote ??
+        (stage == ExpeditionStage.summit
+            ? '登顶成功！今晚营地星空格外璀璨✨'
+            : '正迈步穿过${stage.name}，微风真舒服～');
+
+    const cardHeight = 390.0;
 
     return Container(
       width: double.infinity,
-      height: 250,
+      height: cardHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.12),
+            color: Color(0x0C3E2723),
             blurRadius: 20,
-            offset: const Offset(0, 8),
+            offset: Offset(0, 8),
           ),
         ],
       ),
@@ -81,23 +92,23 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
         borderRadius: BorderRadius.circular(28),
         child: Stack(
           children: [
-            // 1. 动态层级视差山林风景画布 (CustomPainter)
+            // ── 1. 三层横版卷轴视差森林与山径画布 ──────────────────────────
             Positioned.fill(
               child: AnimatedBuilder(
-                animation: _ambientController,
+                animation: _walkController,
                 builder: (context, _) {
                   return CustomPaint(
-                    painter: _ExpeditionLandscapePainter(
+                    painter: _ParallaxExpeditionPainter(
                       stage: stage,
                       progress: progress,
-                      ambientTime: _ambientController.value,
+                      walkTime: _walkController.value,
                     ),
                   );
                 },
               ),
             ),
 
-            // 2. 顶部状态栏：阶段标签 + 爱心金币与小窝入口
+            // ── 2. 顶部工具栏：阶段胶囊 + 小窝金币入口 ───────────────────────
             Positioned(
               top: 14,
               left: 16,
@@ -105,12 +116,12 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // 左侧：阶段胶囊徽章（点击可查看漫步里程图谱）
+                  // 左侧：阶段胶囊徽章（点击可弹出 4 阶段地图底单）
                   GestureDetector(
                     onTap: () => _showStagesBottomSheet(context, steps),
                     behavior: HitTestBehavior.opaque,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.28),
                         borderRadius: BorderRadius.circular(20),
@@ -127,21 +138,21 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
                             size: 13,
                             color: stage.isNight ? const Color(0xFFFBBF24) : Colors.white,
                           ),
-                          const SizedBox(width: 4),
+                          const SizedBox(width: 5),
                           Text(
                             stage.name,
                             style: const TextStyle(
-                              fontSize: 11.5,
+                              fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
                               letterSpacing: 0.2,
                             ),
                           ),
-                          const SizedBox(width: 3),
-                          Icon(
+                          const SizedBox(width: 4),
+                          const Icon(
                             Icons.keyboard_arrow_down_rounded,
                             size: 14,
-                            color: Colors.white.withValues(alpha: 0.8),
+                            color: Colors.white70,
                           ),
                         ],
                       ),
@@ -149,206 +160,229 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
                   ),
 
                   // 右侧：爱心金币 + 前往小窝入口
-                  GestureDetector(
-                    onTap: () => context.push('/capybara'),
-                    behavior: HitTestBehavior.opaque,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.28),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.25),
-                          width: 0.8,
+                  if (widget.showHeader)
+                    GestureDetector(
+                      onTap: () => context.push('/capybara'),
+                      behavior: HitTestBehavior.opaque,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.28),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.25),
+                            width: 0.8,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text('💛', style: TextStyle(fontSize: 11)),
+                            const SizedBox(width: 4),
+                            Text(
+                              '${capyState.hearts}',
+                              style: const TextStyle(
+                                fontSize: 11.5,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Container(width: 1, height: 9, color: Colors.white30),
+                            const SizedBox(width: 6),
+                            const Text(
+                              '小窝',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const Icon(Icons.chevron_right_rounded, size: 13, color: Colors.white),
+                          ],
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('💛', style: TextStyle(fontSize: 11)),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${capyState.hearts}',
-                            style: const TextStyle(
-                              fontSize: 11.5,
-                              fontWeight: FontWeight.w900,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Container(width: 1, height: 9, color: Colors.white30),
-                          const SizedBox(width: 6),
-                          const Text(
-                            '小窝',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded, size: 13, color: Colors.white),
-                        ],
-                      ),
                     ),
-                  ),
                 ],
               ),
             ),
 
-            // 3. 漫步主角：卡皮巴拉站立在山脊小道上
+            // ── 3. 屏幕正中央：水豚在山路持续迈步向前 ───────────────────────
             Positioned(
-              right: 18,
-              bottom: 48,
-              child: CapybaraPetWidget(
-                mood: capyState.mood,
-                accessoryId: capyState.currentAccessoryId,
-                size: 115,
-                onPet: () {
-                  ref.read(capybaraProvider.notifier).pet();
-                  _showPetQuote(capyState.activeDialogue);
-                },
-              ),
-            ),
-
-            // 4. 摸头或互动时弹出的元气对白气泡
-            if (_temporaryQuote != null)
-              Positioned(
-                right: 30,
-                bottom: 165,
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 190),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.95),
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x26000000),
-                        blurRadius: 10,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    _temporaryQuote!,
-                    style: const TextStyle(
-                      fontSize: 11.5,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF2D2522),
-                      height: 1.3,
-                    ),
-                  ),
-                ),
-              ),
-
-            // 5. 底部 HUD 探索进度面板
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 14,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // 左侧：大数字里程与探索目标
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(
-                              km.toStringAsFixed(1),
-                              style: const TextStyle(
-                                fontSize: 34,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                                letterSpacing: -1.2,
-                                height: 1.0,
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.black45,
-                                    blurRadius: 8,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            const Text(
-                              'km',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white70,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              '${NumberFormat('#,###').format(steps)} 步',
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white70,
-                              ),
+              left: 0,
+              right: 0,
+              top: cardHeight * 0.36,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // 水豚头顶治愈对白气泡
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      child: Container(
+                        key: ValueKey(defaultQuote),
+                        margin: const EdgeInsets.only(bottom: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.94),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x18000000),
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          stage.nextCheckpointInfo(steps),
-                          style: TextStyle(
-                            fontSize: 11.5,
+                        child: Text(
+                          defaultQuote,
+                          style: const TextStyle(
+                            fontSize: 11,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white.withValues(alpha: 0.85),
-                            shadows: const [
-                              Shadow(
-                                color: Colors.black54,
-                                blurRadius: 6,
-                                offset: Offset(0, 1),
-                              ),
-                            ],
+                            color: Color(0xFF2D2522),
                           ),
                         ),
-                      ],
+                      ),
                     ),
+
+                    // 水豚角色本体（走步动作模式，中央站立且迈步）
+                    GestureDetector(
+                      onTap: () {
+                        final quotes = [
+                          '大步流星，正在翻越山峦！',
+                          '深呼吸～山林里的空气好清新！',
+                          '一步一个脚印，很快就要登顶啦！',
+                          '最喜欢和你一起在路上探索了！',
+                        ];
+                        final pick = quotes[Random().nextInt(quotes.length)];
+                        _showPetQuote(pick);
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // 脚底与道路贴合的柔和接触阴影
+                          Positioned(
+                            bottom: 6,
+                            child: Container(
+                              width: 68,
+                              height: 12,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: RadialGradient(
+                                  colors: [
+                                    Colors.black.withValues(alpha: 0.32),
+                                    Colors.black.withValues(alpha: 0.0),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          // 水豚连续迈步行走动画
+                          CapybaraPetWidget(
+                            mood: capyState.mood,
+                            accessoryId: capyState.currentAccessoryId,
+                            size: 112,
+                            forceMode: PetAnimMode.walk,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // ── 4. 底部渐变浅色过渡区：大字公里数与赛段进度 ─────────────────
+            Positioned(
+              left: 20,
+              right: 20,
+              bottom: 18,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  // 左侧：Yoomy 式大字公里数与步数说明
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // 大字公里数与单位
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            distanceKm,
+                            style: const TextStyle(
+                              fontSize: 38,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF1E293B),
+                              height: 1.0,
+                              letterSpacing: -1.2,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          const Text(
+                            'km',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: Color(0xFF64748B),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      // 步数与下个赛段差额
+                      Text(
+                        stage == ExpeditionStage.summit
+                            ? '今日达成 $steps 步 · 已登顶巅峰营地 ⚑'
+                            : '今日 $steps 步 · 距「${nextStage?.name ?? '巅峰'}」还差 $remainingSteps 步',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF475569),
+                        ),
+                      ),
+                    ],
                   ),
 
-                  // 右侧：「去走路」快捷入口胶囊按钮
+                  // 右侧：去运动行动按钮
                   GestureDetector(
-                    onTap: () => context.push('/count-time?type=健走'),
+                    onTap: () => context.go('/sport'),
+                    behavior: HitTestBehavior.opaque,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF8D5B4C),
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.35),
-                          width: 1.0,
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF2D3748), Color(0xFF1A202C)],
                         ),
+                        borderRadius: BorderRadius.circular(22),
                         boxShadow: const [
                           BoxShadow(
-                            color: Color(0x35000000),
+                            color: Color(0x1F000000),
                             blurRadius: 10,
                             offset: Offset(0, 3),
                           ),
                         ],
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           Text(
                             '去走路',
                             style: TextStyle(
-                              fontSize: 12.5,
+                              fontSize: 13,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 2),
-                          Icon(Icons.chevron_right_rounded, size: 14, color: Colors.white),
+                          SizedBox(width: 4),
+                          Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 14,
+                            color: Colors.white,
+                          ),
                         ],
                       ),
                     ),
@@ -362,346 +396,477 @@ class _CapybaraExpeditionCardState extends ConsumerState<CapybaraExpeditionCard>
     );
   }
 
+  // ── 5. 探险赛段图谱弹窗 ──────────────────────────────────────────
   void _showStagesBottomSheet(BuildContext context, int currentSteps) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
-          decoration: const BoxDecoration(
-            color: Color(0xFF26201D),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.white24,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                '卡皮巴拉漫步探索图谱',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                '每日步数将推进漫步画卷，陪它看遍四季山河',
-                style: TextStyle(fontSize: 12, color: Colors.white70),
-              ),
-              const SizedBox(height: 16),
-              ...ExpeditionStage.values.map((s) {
-                final isCurrent = s == ExpeditionStage.fromSteps(currentSteps);
-                final isReached = currentSteps >= s.minSteps;
-
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: isCurrent
-                        ? const Color(0xFF8D5B4C).withValues(alpha: 0.35)
-                        : Colors.white.withValues(alpha: 0.06),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: isCurrent ? const Color(0xFF8D5B4C) : Colors.transparent,
-                      width: 1.2,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        s.badgeIcon,
-                        size: 20,
-                        color: isReached ? const Color(0xFFE5A93C) : Colors.white38,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  s.name,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700,
-                                    color: isReached ? Colors.white : Colors.white60,
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  s.stepRange,
-                                  style: const TextStyle(fontSize: 11, color: Colors.white54),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              s.subtitle,
-                              style: const TextStyle(fontSize: 11, color: Colors.white70),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (isCurrent)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF8D5B4C),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Text(
-                            '当前阶段',
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
-                          ),
-                        )
-                      else if (isReached)
-                        const Icon(Icons.check_circle_rounded, size: 16, color: Color(0xFF52B788)),
-                    ],
-                  ),
-                );
-              }),
-            ],
-          ),
-        );
-      },
+      isScrollControlled: true,
+      builder: (ctx) => _ExpeditionRoadmapSheet(currentSteps: currentSteps),
     );
   }
 }
 
-/// 绘制北欧高质感多层视差山林风景
-class _ExpeditionLandscapePainter extends CustomPainter {
+// ═════════════════════════════════════════════════════════════════════════════
+// 3 层横版卷轴游戏视差渲染器 (Parallax 2D Side-Scroller)
+// ═════════════════════════════════════════════════════════════════════════════
+class _ParallaxExpeditionPainter extends CustomPainter {
   final ExpeditionStage stage;
   final double progress;
-  final double ambientTime;
+  final double walkTime; // 0.0 -> 1.0
 
-  _ExpeditionLandscapePainter({
+  _ParallaxExpeditionPainter({
     required this.stage,
     required this.progress,
-    required this.ambientTime,
+    required this.walkTime,
   });
+
+  static const double cycleWidth = 480.0;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 1. 天空渐变背景
-    final skyRect = Offset.zero & size;
-    final skyGradient = LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: stage.skyColors,
-    );
-    final skyPaint = Paint()..shader = skyGradient.createShader(skyRect);
-    canvas.drawRect(skyRect, skyPaint);
+    // 1. 天空渐变
+    _drawSkyGradient(canvas, size);
 
-    // 2. 天空中的天体（太阳 / 月亮 / 星空）
+    // 2. 天文元素（朝阳、日落或繁星明月）
     _drawCelestial(canvas, size);
 
-    // 3. 远方雪山剪影层 (Distant Mountains with Parallax)
+    // 3. 【第 1 层：远景】远雪山峰（视差滚动速度：0.10x）
     _drawFarMountains(canvas, size);
 
-    // 4. 中景高耸松林层 (Alpine Fir & Pine Trees)
-    _drawPineTrees(canvas, size);
+    // 4. 【第 2 层：中景】中景山脊与云杉林道（视差滚动速度：0.35x）
+    _drawMidForest(canvas, size);
 
-    // 5. 前景蜿蜒山脊小路 (Foreground Ridge Path)
-    _drawForegroundPath(canvas, size);
+    // 5. 【第 3 层：前景】前行山路、地表植被与近景大松树（视差滚动速度：1.0x）
+    _drawForegroundTrail(canvas, size);
 
-    // 6. 巅峰营地篝火与胜利旗帜 (如果达成目标)
-    if (stage == ExpeditionStage.summit) {
-      _drawCampfireAndFlag(canvas, size);
-    }
+    // 6. 底部渐变平滑过渡浅色背景 ("逐渐的变浅")
+    _drawBottomFadeGradient(canvas, size);
   }
 
+  // ── 天空底色 ────────────────────────────────────────────────────────
+  void _drawSkyGradient(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final paint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: stage.skyColors,
+      ).createShader(rect);
+    canvas.drawRect(rect, paint);
+  }
+
+  // ── 天文背景 ────────────────────────────────────────────────────────
   void _drawCelestial(Canvas canvas, Size size) {
     if (stage.isNight) {
-      // 绘制璀璨星辰
-      final starRandom = Random(42);
-      final starPaint = Paint()..color = Colors.white;
-      for (int i = 0; i < 28; i++) {
-        final x = starRandom.nextDouble() * size.width;
-        final y = starRandom.nextDouble() * (size.height * 0.45);
-        final radius = 0.8 + starRandom.nextDouble() * 1.5;
-        // 星星轻微呼吸闪烁
-        final twinkle = (sin(ambientTime * 2 * pi * 2 + i) + 1) / 2;
-        starPaint.color = Colors.white.withValues(alpha: 0.3 + 0.6 * twinkle);
-        canvas.drawCircle(Offset(x, y), radius, starPaint);
-      }
+      // 繁星与月亮
+      _drawStarsAndMoon(canvas, size);
+    } else if (stage == ExpeditionStage.dusk) {
+      // 晚霞大落日
+      final sunCenter = Offset(size.width * 0.76, size.height * 0.28);
+      final auraPaint = Paint()
+        ..color = const Color(0x33FFB347)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 28);
+      canvas.drawCircle(sunCenter, 38, auraPaint);
 
-      // 银色月牙
-      final moonCenter = Offset(size.width * 0.28, size.height * 0.22);
-      final moonPaint = Paint()..color = const Color(0xFFFDE68A).withValues(alpha: 0.9);
-      canvas.drawCircle(moonCenter, 13, moonPaint);
-      final shadowPaint = Paint()..color = stage.skyColors.first;
-      canvas.drawCircle(moonCenter.translate(5, -2), 11, shadowPaint);
+      final sunPaint = Paint()..color = const Color(0xFFFFD180);
+      canvas.drawCircle(sunCenter, 22, sunPaint);
     } else {
-      // 白昼/黄昏太阳
-      final isDusk = stage == ExpeditionStage.dusk;
-      final sunCenter = isDusk
-          ? Offset(size.width * 0.45, size.height * 0.38)
-          : Offset(size.width * 0.35, size.height * 0.20);
-      final sunColor = isDusk ? const Color(0xFFFF9E64) : const Color(0xFFFFF3D4);
+      // 朝阳 / 暖日与微光晕
+      final sunCenter = Offset(size.width * 0.72, size.height * 0.20);
+      final auraPaint = Paint()
+        ..color = Colors.white.withValues(alpha: 0.22)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 22);
+      canvas.drawCircle(sunCenter, 36, auraPaint);
 
-      // 光晕
-      canvas.drawCircle(
-        sunCenter,
-        28,
-        Paint()..color = sunColor.withValues(alpha: 0.25),
-      );
-      // 太阳本体
-      canvas.drawCircle(
-        sunCenter,
-        14,
-        Paint()..color = sunColor.withValues(alpha: 0.95),
-      );
+      final sunPaint = Paint()..color = Colors.white.withValues(alpha: 0.90);
+      canvas.drawCircle(sunCenter, 18, sunPaint);
     }
   }
 
+  void _drawStarsAndMoon(Canvas canvas, Size size) {
+    // 弯月
+    final moonCenter = Offset(size.width * 0.78, size.height * 0.18);
+    final moonPaint = Paint()..color = const Color(0xFFFDE68A);
+    canvas.drawCircle(moonCenter, 17, moonPaint);
+
+    final shadowPaint = Paint()..color = const Color(0xFF0F172A);
+    canvas.drawCircle(moonCenter.translate(-5, -4), 14, shadowPaint);
+
+    // 闪烁繁星
+    final rand = Random(42);
+    final starPaint = Paint()..color = Colors.white;
+    for (int i = 0; i < 28; i++) {
+      final sx = rand.nextDouble() * size.width;
+      final sy = rand.nextDouble() * (size.height * 0.40);
+      final twinkle = (sin(walkTime * 2 * pi * 2 + i) + 1) / 2;
+      final radius = 0.8 + rand.nextDouble() * 1.4;
+      starPaint.color = Colors.white.withValues(alpha: 0.35 + twinkle * 0.65);
+      canvas.drawCircle(Offset(sx, sy), radius, starPaint);
+    }
+  }
+
+  // ── 【第 1 层：远景】远雪山峰（视差滚动：0.10x）───────────────────────
   void _drawFarMountains(Canvas canvas, Size size) {
-    // 第一层：极远黛色山峦
-    final farPath = Path();
-    farPath.moveTo(0, size.height * 0.52);
-    farPath.lineTo(size.width * 0.22, size.height * 0.32);
-    farPath.lineTo(size.width * 0.48, size.height * 0.46);
-    farPath.lineTo(size.width * 0.76, size.height * 0.28);
-    farPath.lineTo(size.width, size.height * 0.45);
-    farPath.lineTo(size.width, size.height);
-    farPath.lineTo(0, size.height);
-    farPath.close();
+    final offset = (walkTime * cycleWidth * 0.10) % cycleWidth;
+    final paint = Paint()..color = stage.mountainFarColor.withValues(alpha: 0.65);
+    final snowPaint = Paint()..color = Colors.white.withValues(alpha: 0.45);
 
-    final farPaint = Paint()..color = stage.mountainFarColor.withValues(alpha: 0.65);
-    canvas.drawPath(farPath, farPaint);
+    // 绘制循环连接的尖锐阿尔卑斯雪山群
+    for (double startX = -cycleWidth; startX < size.width + cycleWidth; startX += cycleWidth) {
+      final x = startX - offset;
 
-    // 第二层：中远景尖峰雪山
-    final midMountainPath = Path();
-    midMountainPath.moveTo(0, size.height * 0.60);
-    midMountainPath.lineTo(size.width * 0.16, size.height * 0.44);
-    midMountainPath.lineTo(size.width * 0.36, size.height * 0.58);
-    midMountainPath.lineTo(size.width * 0.62, size.height * 0.36);
-    midMountainPath.lineTo(size.width * 0.88, size.height * 0.54);
-    midMountainPath.lineTo(size.width, size.height * 0.48);
-    midMountainPath.lineTo(size.width, size.height);
-    midMountainPath.lineTo(0, size.height);
-    midMountainPath.close();
+      // 峰 1
+      _drawSingleMountain(canvas, x + 60, size.height * 0.42, 180, 110, paint, snowPaint);
+      // 峰 2 (最高主峰)
+      _drawSingleMountain(canvas, x + 230, size.height * 0.45, 230, 145, paint, snowPaint);
+      // 峰 3
+      _drawSingleMountain(canvas, x + 390, size.height * 0.44, 190, 120, paint, snowPaint);
+    }
+  }
 
+  void _drawSingleMountain(
+    Canvas canvas,
+    double peakX,
+    double baseGroundY,
+    double width,
+    double peakHeight,
+    Paint mountainPaint,
+    Paint snowPaint,
+  ) {
+    final topY = baseGroundY - peakHeight;
+    final p = Path();
+    p.moveTo(peakX - width / 2, baseGroundY);
+    p.lineTo(peakX, topY);
+    p.lineTo(peakX + width / 2, baseGroundY);
+    p.close();
+    canvas.drawPath(p, mountainPaint);
+
+    // 峰顶雪盖
+    final snowH = peakHeight * 0.28;
+    final snowW = width * 0.28;
+    final sp = Path();
+    sp.moveTo(peakX - snowW / 2, topY + snowH);
+    sp.lineTo(peakX, topY);
+    sp.lineTo(peakX + snowW / 2, topY + snowH);
+    sp.lineTo(peakX + snowW * 0.15, topY + snowH * 0.8);
+    sp.lineTo(peakX - snowW * 0.15, topY + snowH * 1.1);
+    sp.close();
+    canvas.drawPath(sp, snowPaint);
+  }
+
+  // ── 【第 2 层：中景】中景山脊与云杉林道（视差滚动：0.35x）──────────────
+  void _drawMidForest(Canvas canvas, Size size) {
+    final offset = (walkTime * cycleWidth * 0.35) % cycleWidth;
     final midMountainPaint = Paint()..color = stage.mountainColor;
-    canvas.drawPath(midMountainPath, midMountainPaint);
+    final midTreePaint = Paint()..color = stage.mountainColor.withValues(alpha: 0.90);
+
+    // 绵延起伏的中景山坡
+    for (double startX = -cycleWidth; startX < size.width + cycleWidth; startX += cycleWidth) {
+      final x = startX - offset;
+
+      final path = Path();
+      path.moveTo(x, size.height * 0.52);
+      path.quadraticBezierTo(
+        x + cycleWidth * 0.5,
+        size.height * 0.44,
+        x + cycleWidth,
+        size.height * 0.52,
+      );
+      path.lineTo(x + cycleWidth, size.height);
+      path.lineTo(x, size.height);
+      path.close();
+      canvas.drawPath(path, midMountainPaint);
+
+      // 中景密集小松树群
+      _drawPineTree(canvas, Offset(x + 50, size.height * 0.48), 52, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 95, size.height * 0.47), 64, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 140, size.height * 0.49), 48, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 220, size.height * 0.45), 70, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 270, size.height * 0.46), 56, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 350, size.height * 0.48), 62, midTreePaint);
+      _drawPineTree(canvas, Offset(x + 410, size.height * 0.50), 50, midTreePaint);
+    }
   }
 
-  void _drawPineTrees(Canvas canvas, Size size) {
-    // 绘制几棵高耸挺拔的针叶松树（复刻 Yoomy 标志性的北欧森林剪影）
-    final treePaint = Paint()..color = stage.treeColor;
+  // ── 【第 3 层：前景】前行山路与近景大松树（视差滚动：1.0x）──────────────
+  void _drawForegroundTrail(Canvas canvas, Size size) {
+    final offset = (walkTime * cycleWidth * 1.0) % cycleWidth;
 
-    // 左侧第一棵大松树
-    _drawSinglePine(canvas, Offset(size.width * 0.10, size.height * 0.68), 95, treePaint);
-    // 左中第二棵较高松树
-    _drawSinglePine(canvas, Offset(size.width * 0.28, size.height * 0.64), 115, treePaint);
-    // 中景细长冷杉
-    _drawSinglePine(canvas, Offset(size.width * 0.45, size.height * 0.66), 85, treePaint);
-    // 右侧中景松树
-    _drawSinglePine(canvas, Offset(size.width * 0.60, size.height * 0.70), 75, treePaint);
+    // 1. 随着卷轴移动的大松树（在路边后方掠过）
+    final fgTreePaint = Paint()..color = stage.treeColor;
+    for (double startX = -cycleWidth; startX < size.width + cycleWidth; startX += cycleWidth) {
+      final x = startX - offset;
+      // 树 1
+      _drawPineTree(canvas, Offset(x + 70, size.height * 0.58), 125, fgTreePaint);
+      // 树 2
+      _drawPineTree(canvas, Offset(x + 280, size.height * 0.57), 140, fgTreePaint);
+      // 树 3
+      _drawPineTree(canvas, Offset(x + 430, size.height * 0.59), 110, fgTreePaint);
+    }
+
+    // 2. 前景山体底座
+    final groundPath = Path();
+    groundPath.moveTo(0, size.height * 0.56);
+    groundPath.cubicTo(
+      size.width * 0.35,
+      size.height * 0.59,
+      size.width * 0.70,
+      size.height * 0.55,
+      size.width,
+      size.height * 0.57,
+    );
+    groundPath.lineTo(size.width, size.height);
+    groundPath.lineTo(0, size.height);
+    groundPath.close();
+
+    final groundPaint = Paint()..color = stage.groundColor;
+    canvas.drawPath(groundPath, groundPaint);
+
+    // 3. 【清晰的山间漫步小路】（横跨屏幕，有路面纹理与边缘高光）
+    _drawTrailRibbon(canvas, size, offset);
   }
 
-  void _drawSinglePine(Canvas canvas, Offset base, double height, Paint paint) {
-    final width = height * 0.48;
-    final trunkWidth = width * 0.14;
+  // 绘制山径路面（凸显正在路上前行）
+  void _drawTrailRibbon(Canvas canvas, Size size, double offset) {
+    // 道路上沿高光线
+    final trailLinePaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.22)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.2;
+
+    final trailPath = Path();
+    trailPath.moveTo(0, size.height * 0.56);
+    trailPath.cubicTo(
+      size.width * 0.35,
+      size.height * 0.59,
+      size.width * 0.70,
+      size.height * 0.55,
+      size.width,
+      size.height * 0.57,
+    );
+    canvas.drawPath(trailPath, trailLinePaint);
+
+    // 道路路面虚线/石子质感纹理（随步速滚动）
+    final stonePaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.18)
+      ..strokeWidth = 2.0
+      ..strokeCap = StrokeCap.round;
+
+    for (double sx = -cycleWidth; sx < size.width + cycleWidth; sx += 48) {
+      final x = sx - offset;
+      if (x < -20 || x > size.width + 20) continue;
+
+      // 根据贝塞尔近似估算 Y 高度
+      final t = (x / size.width).clamp(0.0, 1.0);
+      final y = size.height * (0.56 + sin(t * pi) * 0.025);
+
+      canvas.drawLine(Offset(x, y + 6), Offset(x + 12, y + 6.5), stonePaint);
+    }
+  }
+
+  // 绘制单棵松树（三层几何三角冠与树干）
+  void _drawPineTree(Canvas canvas, Offset base, double height, Paint paint) {
+    final width = height * 0.46;
+    final trunkW = width * 0.14;
 
     // 树干
     canvas.drawRect(
       Rect.fromCenter(
-        center: Offset(base.dx, base.dy - height * 0.15),
-        width: trunkWidth,
-        height: height * 0.3,
+        center: Offset(base.dx, base.dy - height * 0.12),
+        width: trunkW,
+        height: height * 0.24,
       ),
       paint,
     );
 
-    // 三层重叠齿状三角树冠
+    // 三层齿状重叠树冠
     for (int i = 0; i < 3; i++) {
-      final tierY = base.dy - height * 0.25 - (i * height * 0.24);
-      final tierWidth = width * (1.0 - i * 0.22);
-      final tierHeight = height * 0.38;
+      final tierY = base.dy - height * 0.22 - (i * height * 0.24);
+      final tierW = width * (1.0 - i * 0.22);
+      final tierH = height * 0.36;
 
       final p = Path();
-      p.moveTo(base.dx - tierWidth / 2, tierY);
-      p.lineTo(base.dx, tierY - tierHeight);
-      p.lineTo(base.dx + tierWidth / 2, tierY);
+      p.moveTo(base.dx - tierW / 2, tierY);
+      p.lineTo(base.dx, tierY - tierH);
+      p.lineTo(base.dx + tierW / 2, tierY);
       p.close();
       canvas.drawPath(p, paint);
     }
   }
 
-  void _drawForegroundPath(Canvas canvas, Size size) {
-    // 前景平缓上升的山脊道路（水豚站立其上）
-    final path = Path();
-    path.moveTo(0, size.height * 0.72);
-    // 优美的贝塞尔自然微坡
-    path.quadraticBezierTo(
-      size.width * 0.50,
-      size.height * 0.75,
-      size.width,
-      size.height * 0.66,
-    );
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-
-    final groundPaint = Paint()..color = stage.groundColor;
-    canvas.drawPath(path, groundPaint);
-
-    // 绘制山体底部暗色渐变阴影，突出底部文字清晰度
-    final shadowRect = Rect.fromLTWH(0, size.height * 0.60, size.width, size.height * 0.40);
-    final shadowPaint = Paint()
+  // ── 6. 底部平滑过渡淡出 ("下半部分逐渐变浅") ───────────────────────────
+  void _drawBottomFadeGradient(Canvas canvas, Size size) {
+    // 从道路底端（y ≈ 0.58）向底部平滑渐变到应用主背景色 #F3F4F8
+    final fadeRect = Rect.fromLTWH(0, size.height * 0.54, size.width, size.height * 0.46);
+    final fadePaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
+        stops: const [0.0, 0.40, 0.85, 1.0],
         colors: [
-          Colors.transparent,
-          Colors.black.withValues(alpha: 0.65),
+          stage.groundColor.withValues(alpha: 0.0),
+          stage.groundColor.withValues(alpha: 0.45),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.92),
+          const Color(0xFFF3F4F8),
         ],
-      ).createShader(shadowRect);
-    canvas.drawRect(shadowRect, shadowPaint);
-  }
+      ).createShader(fadeRect);
 
-  void _drawCampfireAndFlag(Canvas canvas, Size size) {
-    // 达成目标的营地小篝火与胜利旗帜
-    final fireX = size.width * 0.56;
-    final fireY = size.height * 0.71;
-
-    // 小篝火火光
-    final flicker = sin(ambientTime * 2 * pi * 4) * 2;
-    final flamePaint = Paint()..color = const Color(0xFFF97316);
-    final flameCorePaint = Paint()..color = const Color(0xFFFDE047);
-
-    canvas.drawCircle(Offset(fireX, fireY), 6 + flicker, flamePaint);
-    canvas.drawCircle(Offset(fireX, fireY + 1), 3, flameCorePaint);
-
-    // 胜利小旗杆
-    final flagPaint = Paint()
-      ..color = Colors.white70
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-    canvas.drawLine(Offset(fireX - 16, fireY + 8), Offset(fireX - 16, fireY - 14), flagPaint);
-
-    final flagCloth = Path()
-      ..moveTo(fireX - 16, fireY - 14)
-      ..lineTo(fireX - 7, fireY - 9)
-      ..lineTo(fireX - 16, fireY - 4)
-      ..close();
-    canvas.drawPath(flagCloth, Paint()..color = const Color(0xFFEF4444));
+    canvas.drawRect(fadeRect, fadePaint);
   }
 
   @override
-  bool shouldRepaint(covariant _ExpeditionLandscapePainter old) {
-    return old.stage != stage ||
-        old.progress != progress ||
-        old.ambientTime != ambientTime;
+  bool shouldRepaint(covariant _ParallaxExpeditionPainter oldDelegate) {
+    return oldDelegate.stage != stage ||
+        oldDelegate.progress != progress ||
+        oldDelegate.walkTime != walkTime;
+  }
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// 探险赛段总览底单 (Roadmap Bottom Sheet)
+// ═════════════════════════════════════════════════════════════════════════════
+class _ExpeditionRoadmapSheet extends StatelessWidget {
+  final int currentSteps;
+  const _ExpeditionRoadmapSheet({required this.currentSteps});
+
+  @override
+  Widget build(BuildContext context) {
+    final stages = ExpeditionStage.values;
+    final currentStage = ExpeditionStage.fromSteps(currentSteps);
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      padding: const EdgeInsets.fromLTRB(20, 14, 20, 32),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 顶部手柄
+          Center(
+            child: Container(
+              width: 38,
+              height: 4,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE2E8F0),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          // 标题与说明
+          const Row(
+            children: [
+              Text(
+                '🏔️ 漫步登山探险图谱',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF1E293B),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            '随着今日步数推移，山林画卷将动态展现晨曦、烈日、晚霞与营火',
+            style: TextStyle(fontSize: 12.5, color: Color(0xFF64748B)),
+          ),
+          const SizedBox(height: 20),
+
+          // 4 个阶段时间轴
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: stages.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            itemBuilder: (ctx, i) {
+              final s = stages[i];
+              final isPassed = currentSteps >= s.maxSteps;
+              final isCurrent = s == currentStage;
+
+              return Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isCurrent ? const Color(0xFFF1F5F9) : const Color(0xFFF8FAFC),
+                  borderRadius: BorderRadius.circular(16),
+                  border: isCurrent
+                      ? Border.all(color: const Color(0xFF2D3748), width: 1.5)
+                      : null,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: s.badgeColor.withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(s.badgeIcon, color: s.badgeColor, size: 20),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                s.name,
+                                style: const TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w800,
+                                  color: Color(0xFF1E293B),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                s.stepRange,
+                                style: const TextStyle(
+                                  fontSize: 11.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF64748B),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            s.subtitle,
+                            style: const TextStyle(fontSize: 11.5, color: Color(0xFF64748B)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (isPassed)
+                      const Icon(Icons.check_circle_rounded, color: Color(0xFF10B981), size: 20)
+                    else if (isCurrent)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF2D3748),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Text(
+                          '进行中',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

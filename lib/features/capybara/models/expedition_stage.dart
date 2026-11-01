@@ -116,6 +116,30 @@ enum ExpeditionStage {
     return ExpeditionStage.morning;
   }
 
+  /// 计算当前赛段内的百分比进度 (0.0 ~ 1.0)
+  static double stageProgress(int steps) {
+    if (steps >= 8000) return 1.0;
+    if (steps >= 5000) return (steps - 5000) / 3000;
+    if (steps >= 2000) return (steps - 2000) / 3000;
+    return (steps / 2000).clamp(0.0, 1.0);
+  }
+
+  /// 距离下一赛段还差多少步
+  static int stepsToNextStage(int steps) {
+    if (steps >= 8000) return 0;
+    if (steps >= 5000) return 8000 - steps;
+    if (steps >= 2000) return 5000 - steps;
+    return 2000 - steps;
+  }
+
+  /// 获取下一赛段
+  static ExpeditionStage? nextStage(int steps) {
+    if (steps >= 8000) return null;
+    if (steps >= 5000) return ExpeditionStage.summit;
+    if (steps >= 2000) return ExpeditionStage.dusk;
+    return ExpeditionStage.noon;
+  }
+
   /// 获取下一阶段目标名称及剩余步数
   String nextCheckpointInfo(int steps) {
     switch (this) {

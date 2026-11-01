@@ -9,6 +9,7 @@ class CapybaraPetWidget extends StatefulWidget {
   final String accessoryId;
   final double size;
   final VoidCallback? onPet;
+  final PetAnimMode? forceMode;
 
   const CapybaraPetWidget({
     super.key,
@@ -16,6 +17,7 @@ class CapybaraPetWidget extends StatefulWidget {
     required this.accessoryId,
     this.size = 140,
     this.onPet,
+    this.forceMode,
   });
 
   @override
@@ -73,15 +75,17 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
   @override
   void didUpdateWidget(covariant CapybaraPetWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.mood != oldWidget.mood && _currentMode != PetAnimMode.tap) {
+    if ((widget.forceMode != oldWidget.forceMode || widget.mood != oldWidget.mood) &&
+        _currentMode != PetAnimMode.tap) {
       _syncModeWithMood();
     }
   }
 
   void _syncModeWithMood() {
-    // 站立待机作为默认主态，安静温润治愈
-    _currentMode = PetAnimMode.idle;
-    _animController.duration = const Duration(milliseconds: 2200);
+    _currentMode = widget.forceMode ?? PetAnimMode.idle;
+    _animController.duration = _currentMode == PetAnimMode.walk
+        ? const Duration(milliseconds: 950)
+        : const Duration(milliseconds: 2200);
     _animController.repeat();
   }
 
