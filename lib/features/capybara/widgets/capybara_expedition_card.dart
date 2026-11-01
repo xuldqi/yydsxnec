@@ -598,12 +598,12 @@ class _ParallaxExpeditionPainter extends CustomPainter {
     );
     roadPath.close();
 
-    // 步道路面颜色（比草地稍深/偏泥土或山石质感）
+    // 步道路面颜色（高品质岩板山道质感，深石板灰与山脊相得益彰）
     final roadColor = stage.isNight
-        ? const Color(0xFF1E293B).withValues(alpha: 0.85)
+        ? const Color(0xFF1B2333).withValues(alpha: 0.90)
         : (stage == ExpeditionStage.dusk
-            ? const Color(0xFF4A2B20).withValues(alpha: 0.78)
-            : const Color(0xFF384D35).withValues(alpha: 0.68));
+            ? const Color(0xFF2E2031).withValues(alpha: 0.88)
+            : const Color(0xFF2B3542).withValues(alpha: 0.88));
     final roadPaint = Paint()..color = roadColor;
     canvas.drawPath(roadPath, roadPaint);
 
@@ -680,16 +680,16 @@ class _ParallaxExpeditionPainter extends CustomPainter {
   // ── 6. 底部平滑过渡淡出 ("下面是底色灰色的渐变，渐变再多点") ────────────
   void _drawBottomFadeGradient(Canvas canvas, Size size) {
     // 从山路下方大跨度平滑渐变淡出到应用主背景灰色 #F3F4F8
-    final fadeRect = Rect.fromLTWH(0, size.height * 0.70, size.width, size.height * 0.30);
+    final fadeRect = Rect.fromLTWH(0, size.height * 0.67, size.width, size.height * 0.33);
     final fadePaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        stops: const [0.0, 0.35, 0.70, 1.0],
+        stops: const [0.0, 0.32, 0.68, 1.0],
         colors: [
           const Color(0xFFF3F4F8).withValues(alpha: 0.0),
-          const Color(0xFFF3F4F8).withValues(alpha: 0.35),
-          const Color(0xFFF3F4F8).withValues(alpha: 0.85),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.45),
+          const Color(0xFFF3F4F8).withValues(alpha: 0.88),
           const Color(0xFFF3F4F8),
         ],
       ).createShader(fadeRect);

@@ -59,6 +59,8 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
     'assets/images/pet_frames/walk_2.png',
     'assets/images/pet_frames/walk_3.png',
     'assets/images/pet_frames/walk_4.png',
+    'assets/images/pet_frames/walk_5.png',
+    'assets/images/pet_frames/walk_6.png',
   ];
 
   @override
@@ -195,10 +197,11 @@ class _CapybaraPetWidgetState extends State<CapybaraPetWidget>
                 final frameIndex = (_animController.value * frames.length).floor().clamp(0, frames.length - 1);
                 final currentFrameAsset = frames[frameIndex];
 
-                // Gentle breathing micro-animation (purely vertical, zero horizontal displacement)
+                // 自然灵动的步态与呼吸微动 (行走时随左右两步产生轻盈的垂直起伏)
+                final isWalking = _currentMode == PetAnimMode.walk;
                 final t = _animController.value * 2 * pi;
-                final scaleY = 1.0 + sin(t) * 0.015;
-                final bobY = -sin(t).abs() * 1.5;
+                final scaleY = isWalking ? (1.0 + sin(t * 2) * 0.015) : (1.0 + sin(t) * 0.015);
+                final bobY = isWalking ? (-sin(t * 2).abs() * 2.2) : (-sin(t).abs() * 1.5);
 
                 return Transform.translate(
                   offset: Offset(0, bobY),
