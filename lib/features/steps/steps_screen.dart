@@ -10,7 +10,6 @@ import '../fasting/providers/fasting_provider.dart';
 import '../fasting/providers/timer_provider.dart';
 import '../diet/diet_screen.dart';
 import '../capybara/widgets/capybara_hero_card.dart';
-import '../capybara/providers/capybara_provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../agreement/privacy_dialog.dart';
@@ -23,9 +22,6 @@ class StepsScreen extends ConsumerStatefulWidget {
 }
 
 class _StepsScreenState extends ConsumerState<StepsScreen> {
-  int _selectedDayIndex = 6; // 0..6, 6 is today
-  int _selectedMonth = DateTime.now().month;
-  int _selectedYear = DateTime.now().year;
 
   @override
   void initState() {
@@ -63,317 +59,38 @@ class _StepsScreenState extends ConsumerState<StepsScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F4F8),
-      body: Container(
-        color: const Color(0xFFF3F4F8),
-        child: SafeArea(
-          child: RefreshIndicator(
-            color: const Color(0xFF8D5B4C),
-            backgroundColor: Colors.white,
-            onRefresh: () async {
-              await Future.delayed(const Duration(milliseconds: 600));
-              setState(() {});
-            },
-            child: SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(
-                parent: BouncingScrollPhysics(),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10)
-                  .copyWith(bottom: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTopHeader(context),
-                  const SizedBox(height: 12),
-                  const CapybaraHeroCard(showHeader: false),
-                  const SizedBox(height: 14),
-                  _buildCalendarStrip(context),
-                  const SizedBox(height: 18),
-                  _buildHabitCardsStream(context, steps, record),
-                ],
-              ),
-            ),
+      body: RefreshIndicator(
+        color: const Color(0xFF8D5B4C),
+        backgroundColor: Colors.white,
+        onRefresh: () async {
+          await Future.delayed(const Duration(milliseconds: 600));
+          setState(() {});
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
           ),
-        ),
-      ),
-    );
-  }
-
-  // ── 1. Top Header (OtterLife Month Dropdown + Hearts & Sanctuary) ──────────
-  Widget _buildTopHeader(BuildContext context) {
-    final capyState = ref.watch(capybaraProvider);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GestureDetector(
-          onTap: () => _showMonthPickerSheet(context),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '$_selectedMonth月',
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFF2D2522),
-                  letterSpacing: -0.5,
-                ),
-              ),
-              const SizedBox(width: 4),
-              const Icon(
-                Icons.keyboard_arrow_down_rounded,
-                size: 26,
-                color: Color(0xFF2D2522),
-              ),
-            ],
-          ),
-        ),
-        GestureDetector(
-          onTap: () => context.push('/capybara'),
-          behavior: HitTestBehavior.opaque,
-          child: Container(
-            height: 38,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x067A533E),
-                  blurRadius: 10,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('💛', style: TextStyle(fontSize: 13)),
-                const SizedBox(width: 4),
-                Text(
-                  '${capyState.hearts}',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF3D342F),
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Container(width: 1, height: 10, color: const Color(0xFFE5DDD5)),
-                const SizedBox(width: 6),
-                const Text(
-                  '小窝',
-                  style: TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w800,
-                    color: Color(0xFF8D5B4C),
-                  ),
-                ),
-                const Icon(Icons.chevron_right_rounded, size: 14, color: Color(0xFF8D5B4C)),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _showMonthPickerSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-          ),
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+          padding: const EdgeInsets.only(bottom: 24),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Container(
-                  width: 36,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE5DDD5),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '$_selectedYear 年选择月份',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      color: Color(0xFF2D2522),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedMonth = DateTime.now().month;
-                        _selectedYear = DateTime.now().year;
-                      });
-                      Navigator.pop(ctx);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF3F4F8),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Text(
-                        '回到当月',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF8D5B4C),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 12,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 2.0,
-                ),
-                itemBuilder: (c, idx) {
-                  final m = idx + 1;
-                  final isSelected = m == _selectedMonth;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedMonth = m;
-                      });
-                      Navigator.pop(ctx);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isSelected ? const Color(0xFF8D5B4C) : const Color(0xFFF3F4F8),
-                        borderRadius: BorderRadius.circular(14),
-                        border: isSelected
-                            ? null
-                            : Border.all(color: const Color(0xFFECE4D8), width: 0.8),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        '$m月',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: isSelected ? FontWeight.w900 : FontWeight.w600,
-                          color: isSelected ? Colors.white : const Color(0xFF2D2522),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+              // 1. 顶满状态栏与两侧全宽的 3 层横版卷轴视差风景
+              const CapybaraHeroCard(),
+              const SizedBox(height: 6),
+
+              // 2. 日常健康习惯卡片流（原日历横条已彻底移除）
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: _buildHabitCardsStream(context, steps, record),
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-
-  // ── 2. Calendar Strip (Week View) ───────────────────────────────────────────
-  Widget _buildCalendarStrip(BuildContext context) {
-    final now = DateTime.now();
-    final weekDays = ['一', '二', '三', '四', '五', '六', '日'];
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-      height: 86,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x067A533E),
-            blurRadius: 16,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(7, (index) {
-          final date = now.subtract(Duration(days: 6 - index));
-          final isSelected = index == _selectedDayIndex;
-          final isToday = index == 6;
-
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedDayIndex = index;
-              });
-            },
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: 42,
-              decoration: BoxDecoration(
-                gradient: isSelected
-                    ? const LinearGradient(
-                        colors: [Color(0xFF8D5B4C), Color(0xFFA26E5F)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      )
-                    : null,
-                color: isSelected ? null : Colors.transparent,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '周${weekDays[date.weekday - 1]}',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: isSelected ? Colors.white.withValues(alpha: 0.85) : const Color(0xFF8C7E77),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${date.day}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      color: isSelected ? Colors.white : const Color(0xFF2D2522),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    width: 5,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isSelected
-                          ? Colors.white
-                          : (isToday ? const Color(0xFF8D5B4C) : const Color(0xFFE5DDD5)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }),
+        ),
       ),
     );
   }
+
+  // ── 日常打卡与健康数据流 ─────────────────
 
   // ── 4. Interactive Habit Cards Flow (OtterLife 大气网格卡片) ─────────────────
   Widget _buildHabitCardsStream(BuildContext context, int steps, DailyHealthRecord record) {
